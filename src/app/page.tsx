@@ -1,6 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { FileText, FolderKanban, Globe, LayoutDashboard } from 'lucide-react';
 import { FiltersBar } from '@/components/FiltersBar';
 import { ProjectCard } from '@/components/ProjectCard';
 import { DashboardCV } from '@/components/DashboardCV';
@@ -17,7 +19,7 @@ export default function HomePage() {
     return projects
       .filter((project) => {
         const matchesCategory = category === 'All' ? true : project.category === category;
-        const text = [project.title, project.oneLiner, ...project.tags].join(' ').toLowerCase();
+        const text = [project.title, project.category, ...project.roles].join(' ').toLowerCase();
         const matchesQuery = normalizedQuery ? text.includes(normalizedQuery) : true;
         return matchesCategory && matchesQuery;
       })
@@ -39,8 +41,8 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="mx-auto grid w-full max-w-7xl gap-6 p-6 lg:grid-cols-[240px_1fr]">
-      <aside className="h-fit rounded-xl border bg-card p-4 text-card-foreground lg:sticky lg:top-6">
+    <main className="mx-auto grid w-full max-w-7xl gap-6 p-6 md:grid-cols-[240px_1fr]">
+      <aside className="hidden h-fit rounded-xl border bg-card p-4 text-card-foreground md:flex md:flex-col md:sticky md:top-6">
         <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Portfolio Dashboard</p>
         <h1 className="mt-2 text-xl font-semibold">Product + Engineering</h1>
         <p className="mt-2 text-sm text-muted-foreground">CV style overview with project outcomes, methods, and links.</p>
@@ -77,6 +79,32 @@ export default function HomePage() {
           onCategoryChange={setCategory}
           onSortChange={setSort}
         />
+
+        <section className="rounded-xl border bg-card p-4" aria-labelledby="projects-table">
+          <h3 id="projects-table" className="text-xl font-semibold">
+            Projects table
+          </h3>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full min-w-[640px] text-left text-sm">
+              <thead>
+                <tr className="border-b text-muted-foreground">
+                  <th className="px-2 py-2 font-medium">Name</th>
+                  <th className="px-2 py-2 font-medium">Type</th>
+                  <th className="px-2 py-2 font-medium">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredProjects.map((project) => (
+                  <tr key={`${project.id}-row`} className="border-b last:border-b-0">
+                    <td className="px-2 py-2">{project.title}</td>
+                    <td className="px-2 py-2">{project.category}</td>
+                    <td className="px-2 py-2">{project.roles.join(', ')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         <section aria-labelledby="enterprise-projects">
           <h3 id="enterprise-projects" className="mb-4 text-2xl font-semibold">
