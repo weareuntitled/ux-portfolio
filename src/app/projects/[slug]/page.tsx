@@ -4,13 +4,23 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
 import { findProjectBySlug, projects } from '@/content/projects';
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
-export default function ProjectDetailPage({ params }: Props) {
-  const project = findProjectBySlug(params.slug);
+export default async function ProjectDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const project = findProjectBySlug(slug);
   if (!project) notFound();
 
   const related = projects.filter((item) => item.slug !== project.slug && item.category === project.category).slice(0, 2);
+  const isPrototypeFeaturedProject = ['kovon', 'failure-fingerprint-dashboard-ffp'].includes(project.slug);
+  const orderedArtifactLinks = isPrototypeFeaturedProject
+    ? [
+        ...(['Live demo', 'Case study'] as const)
+          .map((label) => project.links?.find((link) => link.label === label))
+          .filter((link): link is NonNullable<typeof link> => Boolean(link)),
+        ...(project.links?.filter((link) => !['Live demo', 'Case study'].includes(link.label)) ?? [])
+      ]
+    : (project.links ?? []);
 
   return (
     <main className="mx-auto max-w-6xl space-y-6 p-6">
@@ -87,13 +97,17 @@ export default function ProjectDetailPage({ params }: Props) {
       <section className="rounded-xl border bg-white p-6">
         <h2 className="mb-3 text-xl font-semibold">Artifacts</h2>
         <div className="flex flex-wrap gap-2">
-          {project.links?.map((link) => (
+          {orderedArtifactLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-              className="rounded-md border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`rounded-md border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                isPrototypeFeaturedProject && ['Live demo', 'Case study'].includes(link.label)
+                  ? 'border-blue-600 bg-blue-600 text-white'
+                  : ''
+              }`}
             >
               {link.label}
             </a>
