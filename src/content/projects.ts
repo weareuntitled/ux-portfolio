@@ -70,7 +70,7 @@ export const projects: Project[] = [
     tools: ['TypeScript', 'React', 'Figma', 'SQL'],
     methods: ['Workflow mapping', 'Shadowing sessions', 'Usability tests'],
     links: [
-      { label: 'Live demo', href: '/prototypes/kovon' },
+      { label: 'Live demo', href: '/prototypes/kovon/queues' },
       { label: 'Case study', href: '/projects/kovon' }
     ],
     prototype: {
