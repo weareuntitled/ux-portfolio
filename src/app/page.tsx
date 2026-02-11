@@ -1,84 +1,71 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { useMemo, useState } from 'react';
+import { FiltersBar } from '@/components/FiltersBar';
+import { ProjectCard } from '@/components/ProjectCard';
+import { projects } from '@/content/projects';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+export default function HomePage() {
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState<'All' | 'Enterprise' | 'Side'>('All');
+  const [sort, setSort] = useState<'newest' | 'oldest' | 'title'>('newest');
 
-export default function Home() {
+  const filteredProjects = useMemo(() => {
+    const normalizedQuery = query.toLowerCase().trim();
+
+    return projects
+      .filter((project) => {
+        const matchesCategory = category === 'All' ? true : project.category === category;
+        const text = [project.title, project.oneLiner, ...project.tags].join(' ').toLowerCase();
+        const matchesQuery = normalizedQuery ? text.includes(normalizedQuery) : true;
+        return matchesCategory && matchesQuery;
+      })
+      .sort((a, b) => {
+        if (sort === 'title') return a.title.localeCompare(b.title);
+        return sort === 'newest' ? Number(b.year) - Number(a.year) : Number(a.year) - Number(b.year);
+      });
+  }, [category, query, sort]);
+
+  const enterprise = filteredProjects.filter((project) => project.category === 'Enterprise');
+  const side = filteredProjects.filter((project) => project.category === 'Side');
+
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-3xl items-center justify-center p-6">
-      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="w-full">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl">
-              <Sparkles className="size-5" />
-              Next.js App Router Ready
-            </CardTitle>
-            <CardDescription>Configured with Tailwind, shadcn/ui, lucide-react, and framer-motion.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Badge variant="secondary">src/app + src/components + src/content</Badge>
-            <Separator />
-            <Tabs defaultValue="components">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="components">Components</TabsTrigger>
-                <TabsTrigger value="inputs">Inputs</TabsTrigger>
-              </TabsList>
-              <TabsContent value="components" className="pt-3 text-sm text-muted-foreground">
-                Button, Card, Badge, Dialog, Tabs, Input, Select, and Separator are initialized.
-              </TabsContent>
-              <TabsContent value="inputs" className="space-y-3 pt-3">
-                <Input placeholder="Project name" />
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Pick an option" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="starter">Starter</SelectItem>
-                    <SelectItem value="portfolio">Portfolio</SelectItem>
-                  </SelectContent>
-                </Select>
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-          <CardFooter className="gap-2">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline">Open dialog</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>shadcn/ui initialized</DialogTitle>
-                  <DialogDescription>All requested base components are added under src/components/ui.</DialogDescription>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
-            <Button>Continue</Button>
-          </CardFooter>
-        </Card>
-      </motion.div>
+    <main className="mx-auto max-w-6xl space-y-8 p-6">
+      <header className="space-y-2">
+        <h1 className="text-3xl font-bold">Product + Engineering Portfolio</h1>
+        <p className="text-slate-600">Enterprise products and engineering-led side projects.</p>
+      </header>
+
+      <FiltersBar
+        query={query}
+        category={category}
+        sort={sort}
+        onQueryChange={setQuery}
+        onCategoryChange={setCategory}
+        onSortChange={setSort}
+      />
+
+      <section aria-labelledby="enterprise-projects">
+        <h2 id="enterprise-projects" className="mb-4 text-2xl font-semibold">
+          Enterprise Products
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {enterprise.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="side-projects">
+        <h2 id="side-projects" className="mb-4 text-2xl font-semibold">
+          Side Projects
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {side.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
