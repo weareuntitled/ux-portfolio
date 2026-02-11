@@ -1,6 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { FileText, FolderKanban, Globe, LayoutDashboard } from 'lucide-react';
 import { FiltersBar } from '@/components/FiltersBar';
 import { ProjectCard } from '@/components/ProjectCard';
 import { projects } from '@/content/projects';
@@ -38,8 +40,8 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="mx-auto grid w-full max-w-7xl gap-6 p-6 lg:grid-cols-[240px_1fr]">
-      <aside className="h-fit rounded-xl border bg-card p-4 text-card-foreground lg:sticky lg:top-6">
+    <main className="mx-auto grid w-full max-w-7xl gap-6 p-6 md:grid-cols-[240px_1fr]">
+      <aside className="hidden h-fit rounded-xl border bg-card p-4 text-card-foreground md:flex md:flex-col md:sticky md:top-6">
         <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Portfolio Dashboard</p>
         <h1 className="mt-2 text-xl font-semibold">Product + Engineering</h1>
         <p className="mt-2 text-sm text-muted-foreground">CV style overview with project outcomes, methods, and links.</p>
@@ -57,7 +59,39 @@ export default function HomePage() {
       </aside>
 
       <section className="space-y-6" id="overview">
-        <header className="rounded-xl border bg-card p-6">
+        <nav
+          className="md:hidden rounded-xl border border-zinc-200 bg-zinc-50 p-2 text-zinc-800"
+          aria-label="Mobile dashboard navigation"
+        >
+          <ul className="grid grid-cols-2 gap-2 text-sm">
+            <li>
+              <a href="#overview" className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-zinc-100">
+                <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#resume-cv" className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-zinc-100">
+                <FileText className="h-4 w-4" aria-hidden="true" />
+                Resume / CV
+              </a>
+            </li>
+            <li>
+              <a href="#enterprise-projects" className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-zinc-100">
+                <FolderKanban className="h-4 w-4" aria-hidden="true" />
+                Projects
+              </a>
+            </li>
+            <li>
+              <Link href="/" className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-zinc-100">
+                <Globe className="h-4 w-4" aria-hidden="true" />
+                Portfolio Site
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <header className="rounded-xl border bg-card p-6" id="resume-cv">
           <p className="text-sm font-medium text-muted-foreground">Dashboard resume</p>
           <h2 className="mt-1 text-3xl font-bold tracking-tight">Building reliable digital products end to end</h2>
           <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
