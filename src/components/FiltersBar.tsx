@@ -15,16 +15,18 @@ export function FiltersBar({ query, category, sort, onQueryChange, onCategoryCha
   return (
     <section className="rounded-xl border bg-card p-4" aria-label="Project filters">
       <div className="grid gap-3 md:grid-cols-[1fr_auto]">
-        <label className="flex flex-col gap-1 text-sm">
-          Search
+        <div className="flex flex-col gap-1 text-sm">
+          <label htmlFor="project-search" className="sr-only">
+            Search projects
+          </label>
           <input
+            id="project-search"
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Search projects"
             className="rounded-md border bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-ring"
-            aria-label="Search projects"
           />
-        </label>
+        </div>
 
         <label className="flex flex-col gap-1 text-sm">
           Sort
@@ -48,7 +50,7 @@ export function FiltersBar({ query, category, sort, onQueryChange, onCategoryCha
             role="tab"
             aria-selected={category === item}
             onClick={() => onCategoryChange(item)}
-            className={`rounded-full border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring ${
+            className={`rounded-full border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
               category === item ? 'bg-primary text-primary-foreground' : 'bg-background'
             }`}
           >

@@ -9,9 +9,12 @@ type ProjectCardProps = {
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="flex h-full flex-col rounded-xl border bg-card p-5 shadow-sm">
-      <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
-        {project.category} · {project.year}
-      </p>
+      <div className="mb-2 flex items-start justify-between gap-2">
+        <p className="text-xs uppercase tracking-wide text-muted-foreground">
+          {project.category} · {project.year}
+        </p>
+        <ProjectQuickViewDialog project={project} triggerLabel={`Open quick actions for ${project.title}`} iconOnly />
+      </div>
       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
       <p className="mb-4 text-muted-foreground">{project.oneLiner}</p>
       <ul className="mb-4 flex flex-wrap gap-2">
@@ -28,7 +31,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         >
           View details
         </Link>
-        <ProjectQuickViewDialog project={project} />
       </div>
     </article>
   );

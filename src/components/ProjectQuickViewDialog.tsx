@@ -7,9 +7,10 @@ import { PrototypeShell } from './PrototypeShell';
 type ProjectQuickViewDialogProps = {
   project: Project;
   triggerLabel?: string;
+  iconOnly?: boolean;
 };
 
-export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view' }: ProjectQuickViewDialogProps) {
+export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view', iconOnly = false }: ProjectQuickViewDialogProps) {
   const [open, setOpen] = useState(false);
   const [showPrototype, setShowPrototype] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
@@ -19,10 +20,19 @@ export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view' }:
     <>
       <button
         onClick={() => setOpen(true)}
-        className="rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={`rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+          iconOnly ? 'px-2 py-2' : 'px-3 py-2'
+        }`}
         aria-haspopup="dialog"
+        aria-label={iconOnly ? triggerLabel : undefined}
       >
-        {triggerLabel}
+        {iconOnly ? (
+          <span aria-hidden="true" className="block leading-none">
+            ⋯
+          </span>
+        ) : (
+          triggerLabel
+        )}
       </button>
 
       {open ? (
