@@ -16,7 +16,7 @@ export default function HomePage() {
     return projects
       .filter((project) => {
         const matchesCategory = category === 'All' ? true : project.category === category;
-        const text = [project.title, project.oneLiner, ...project.tags].join(' ').toLowerCase();
+        const text = [project.title, project.category, ...project.roles].join(' ').toLowerCase();
         const matchesQuery = normalizedQuery ? text.includes(normalizedQuery) : true;
         return matchesCategory && matchesQuery;
       })
@@ -62,8 +62,23 @@ export default function HomePage() {
           <h2 className="mt-1 text-3xl font-bold tracking-tight">Building reliable digital products end to end</h2>
           <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
             I design and ship enterprise dashboards, then apply the same product rigor to side projects. Use filters below to
-            browse by category, year, or keyword.
+            browse by category and search by project name, type, or role.
           </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a
+              href="mailto:hello@portfolio.dev"
+              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+            >
+              Contact Me
+            </a>
+            <a
+              href="/cv.pdf"
+              download
+              className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
+            >
+              Download Full CV
+            </a>
+          </div>
         </header>
 
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4" aria-label="Profile statistics">
@@ -83,6 +98,32 @@ export default function HomePage() {
           onCategoryChange={setCategory}
           onSortChange={setSort}
         />
+
+        <section className="rounded-xl border bg-card p-4" aria-labelledby="projects-table">
+          <h3 id="projects-table" className="text-xl font-semibold">
+            Projects table
+          </h3>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full min-w-[640px] text-left text-sm">
+              <thead>
+                <tr className="border-b text-muted-foreground">
+                  <th className="px-2 py-2 font-medium">Name</th>
+                  <th className="px-2 py-2 font-medium">Type</th>
+                  <th className="px-2 py-2 font-medium">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredProjects.map((project) => (
+                  <tr key={`${project.id}-row`} className="border-b last:border-b-0">
+                    <td className="px-2 py-2">{project.title}</td>
+                    <td className="px-2 py-2">{project.category}</td>
+                    <td className="px-2 py-2">{project.roles.join(', ')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         <section aria-labelledby="enterprise-projects">
           <h3 id="enterprise-projects" className="mb-4 text-2xl font-semibold">
