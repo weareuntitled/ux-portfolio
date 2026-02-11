@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { FiltersBar } from '@/components/FiltersBar';
 import { ProjectCard } from '@/components/ProjectCard';
+import { DashboardCV } from '@/components/DashboardCV';
 import { projects } from '@/content/projects';
 
 export default function HomePage() {
@@ -57,14 +58,7 @@ export default function HomePage() {
       </aside>
 
       <section className="space-y-6" id="overview">
-        <header className="rounded-xl border bg-card p-6">
-          <p className="text-sm font-medium text-muted-foreground">Dashboard resume</p>
-          <h2 className="mt-1 text-3xl font-bold tracking-tight">Building reliable digital products end to end</h2>
-          <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
-            I design and ship enterprise dashboards, then apply the same product rigor to side projects. Use filters below to
-            browse by category, year, or keyword.
-          </p>
-        </header>
+        <DashboardCV />
 
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4" aria-label="Profile statistics">
           {stats.map((item) => (
