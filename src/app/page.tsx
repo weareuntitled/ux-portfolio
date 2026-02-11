@@ -1,7 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { BriefcaseBusiness, FileText, FolderKanban, Github, LayoutDashboard, Mail } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { FileText, FolderKanban, Globe, LayoutDashboard } from 'lucide-react';
+import { FiltersBar } from '@/components/FiltersBar';
+import { ProjectCard } from '@/components/ProjectCard';
+import { DashboardCV } from '@/components/DashboardCV';
+import { projects } from '@/content/projects';
 
 const navItems = [
   { label: 'Dashboard', href: '#', icon: LayoutDashboard },
@@ -66,29 +71,26 @@ function RadarChartMock() {
     .join(' ');
 
   return (
-    <svg viewBox="0 0 320 320" className="h-full w-full">
-      {[30, 55, 80, 110].map((ring) => (
-        <circle key={ring} cx={center} cy={center} r={ring} fill="none" stroke="#3f3f46" strokeWidth="1" />
-      ))}
-      {skillLevels.map((skill, index) => {
-        const angle = (Math.PI * 2 * index) / skillLevels.length - Math.PI / 2;
-        const x = center + Math.cos(angle) * radius;
-        const y = center + Math.sin(angle) * radius;
-        const tx = center + Math.cos(angle) * (radius + 22);
-        const ty = center + Math.sin(angle) * (radius + 22);
-        return (
-          <g key={skill.label}>
-            <line x1={center} y1={center} x2={x} y2={y} stroke="#3f3f46" strokeWidth="1" />
-            <text x={tx} y={ty} textAnchor="middle" fill="#a1a1aa" fontSize="11">
-              {skill.label}
-            </text>
-          </g>
-        );
-      })}
-      <polygon points={points} fill="#71717a" fillOpacity="0.45" stroke="#d4d4d8" strokeWidth="2" />
-    </svg>
-  );
-}
+    <main className="mx-auto grid w-full max-w-7xl gap-6 p-6 md:grid-cols-[240px_1fr]">
+      <aside className="hidden h-fit rounded-xl border bg-card p-4 text-card-foreground md:flex md:flex-col md:sticky md:top-6">
+        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Portfolio Dashboard</p>
+        <h1 className="mt-2 text-xl font-semibold">Product + Engineering</h1>
+        <p className="mt-2 text-sm text-muted-foreground">CV style overview with project outcomes, methods, and links.</p>
+        <nav className="mt-6 space-y-1 text-sm" aria-label="Dashboard sections">
+          <a href="#overview" className="block rounded-md px-3 py-2 hover:bg-accent">
+            Overview
+          </a>
+          <a href="#enterprise-projects" className="block rounded-md px-3 py-2 hover:bg-accent">
+            Enterprise
+          </a>
+          <a href="#side-projects" className="block rounded-md px-3 py-2 hover:bg-accent">
+            Side projects
+          </a>
+        </nav>
+      </aside>
+
+      <section className="space-y-6" id="overview">
+        <DashboardCV />
 
 function RadialBarsMock() {
   return (
