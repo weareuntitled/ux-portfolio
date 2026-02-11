@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ProjectCard } from '@/components/ProjectCard';
+import { FfpDashboardMock } from '@/components/FfpDashboardMock';
+import { KovonOperationsMock } from '@/components/KovonOperationsMock';
 import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
 import { findProjectBySlug, projects } from '@/content/projects';
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
-export default function ProjectDetailPage({ params }: Props) {
-  const project = findProjectBySlug(params.slug);
+export default async function ProjectDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const project = findProjectBySlug(slug);
   if (!project) notFound();
 
   const related = projects.filter((item) => item.slug !== project.slug && item.category === project.category).slice(0, 2);
@@ -115,6 +118,10 @@ export default function ProjectDetailPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+
+      {project.slug === 'kovon' ? <KovonOperationsMock /> : null}
+      {project.slug === 'failure-fingerprint-dashboard-ffp' ? <FfpDashboardMock /> : null}
 
       <ProjectPrototypePanel project={project} />
 
