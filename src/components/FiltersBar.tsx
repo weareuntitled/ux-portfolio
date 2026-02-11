@@ -13,7 +13,7 @@ const categories: Array<FiltersBarProps['category']> = ['All', 'Enterprise', 'Si
 
 export function FiltersBar({ query, category, sort, onQueryChange, onCategoryChange, onSortChange }: FiltersBarProps) {
   return (
-    <section className="rounded-lg border bg-white p-4" aria-label="Project filters">
+    <section className="rounded-xl border bg-card p-4" aria-label="Project filters">
       <div className="grid gap-3 md:grid-cols-[1fr_auto]">
         <label className="flex flex-col gap-1 text-sm">
           Search
@@ -21,7 +21,7 @@ export function FiltersBar({ query, category, sort, onQueryChange, onCategoryCha
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Search projects"
-            className="rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-ring"
             aria-label="Search projects"
           />
         </label>
@@ -31,7 +31,7 @@ export function FiltersBar({ query, category, sort, onQueryChange, onCategoryCha
           <select
             value={sort}
             onChange={(event) => onSortChange(event.target.value as FiltersBarProps['sort'])}
-            className="rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-ring"
             aria-label="Sort projects"
           >
             <option value="newest">Newest</option>
@@ -48,8 +48,8 @@ export function FiltersBar({ query, category, sort, onQueryChange, onCategoryCha
             role="tab"
             aria-selected={category === item}
             onClick={() => onCategoryChange(item)}
-            className={`rounded-full border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              category === item ? 'bg-slate-900 text-white' : 'bg-white'
+            className={`rounded-full border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring ${
+              category === item ? 'bg-primary text-primary-foreground' : 'bg-background'
             }`}
           >
             {item}
