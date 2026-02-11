@@ -7,6 +7,8 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const liveDemoLink = project.links?.find((link) => link.label === 'Live demo');
+
   return (
     <article className="flex h-full flex-col rounded-xl border bg-card p-5 shadow-sm">
       <div className="mb-2 flex items-start justify-between gap-2">

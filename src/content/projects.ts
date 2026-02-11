@@ -69,7 +69,10 @@ export const projects: Project[] = [
     ],
     tools: ['TypeScript', 'React', 'Figma', 'SQL'],
     methods: ['Workflow mapping', 'Shadowing sessions', 'Usability tests'],
-    links: [{ label: 'Case study', href: '/projects/kovon' }],
+    links: [
+      { label: 'Live demo', href: '/prototypes/kovon' },
+      { label: 'Case study', href: '/projects/kovon' }
+    ],
     prototype: {
       figmaEmbedUrl:
         'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/KoVoNEnterprisePrototype',
@@ -115,7 +118,7 @@ export const projects: Project[] = [
     tools: ['Next.js', 'D3', 'Figma', 'Python'],
     methods: ['Data interviews', 'Dashboard prototyping', 'A/B chart evaluations'],
     links: [
-      { label: 'Live demo', href: 'https://example.com/ffp-demo' },
+      { label: 'Live demo', href: '/prototypes/ffp' },
       { label: 'Case study', href: '/projects/failure-fingerprint-dashboard-ffp' }
     ],
     prototype: {
