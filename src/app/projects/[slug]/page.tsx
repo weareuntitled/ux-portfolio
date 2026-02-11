@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ProjectCard } from '@/components/ProjectCard';
+import { FfpDashboardMock } from '@/components/FfpDashboardMock';
+import { KovonOperationsMock } from '@/components/KovonOperationsMock';
 import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
 import { findProjectBySlug, projects } from '@/content/projects';
 
@@ -129,6 +131,10 @@ export default async function ProjectDetailPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+
+      {project.slug === 'kovon' ? <KovonOperationsMock /> : null}
+      {project.slug === 'failure-fingerprint-dashboard-ffp' ? <FfpDashboardMock /> : null}
 
       <ProjectPrototypePanel project={project} />
 
