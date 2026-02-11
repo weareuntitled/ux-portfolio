@@ -46,13 +46,22 @@ export default function HomePage() {
         <h1 className="mt-2 text-xl font-semibold">Product + Engineering</h1>
         <p className="mt-2 text-sm text-muted-foreground">CV style overview with project outcomes, methods, and links.</p>
         <nav className="mt-6 space-y-1 text-sm" aria-label="Dashboard sections">
-          <a href="#overview" className="block rounded-md px-3 py-2 hover:bg-accent">
+          <a
+            href="#overview"
+            className="block rounded-md px-3 py-2 hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          >
             Overview
           </a>
-          <a href="#enterprise-projects" className="block rounded-md px-3 py-2 hover:bg-accent">
+          <a
+            href="#enterprise-projects"
+            className="block rounded-md px-3 py-2 hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          >
             Enterprise
           </a>
-          <a href="#side-projects" className="block rounded-md px-3 py-2 hover:bg-accent">
+          <a
+            href="#side-projects"
+            className="block rounded-md px-3 py-2 hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          >
             Side projects
           </a>
         </nav>
