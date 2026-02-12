@@ -33,6 +33,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
         >
           View details
         </Link>
+        {liveDemoLink?.href && (
+          <Link
+            href={liveDemoLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-input bg-background px-4 py-2 text-sm hover:bg-accent"
+          >
+            Try prototype
+          </Link>
+        )}
       </div>
     </article>
   );

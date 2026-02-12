@@ -270,3 +270,12 @@ export const projects: Project[] = [
 ];
 
 export const findProjectBySlug = (slug: string) => projects.find((project) => project.slug === slug);
+
+/** Home page: main 3 enterprise product cards (KoVoN, FFP, CESA). Centus is "additional delivery" chip only. */
+export const enterpriseProjectSlugs = ['kovon', 'failure-fingerprint-dashboard-ffp', 'cesa-dashboard'] as const;
+
+export function getEnterpriseProjects(): Project[] {
+  return enterpriseProjectSlugs
+    .map((slug) => findProjectBySlug(slug))
+    .filter((p): p is Project => p != null);
+}

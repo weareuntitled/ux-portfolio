@@ -1,7 +1,11 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { DashboardCV } from '@/components/DashboardCV';
+
+export const metadata: Metadata = {
+  title: 'CV | Daniel Peters',
+  description: 'CV and resume for Daniel Peters, Product Designer (UX/UI), enterprise workflow tools.',
+};
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -27,37 +31,37 @@ import {
 } from '@/content/home';
 import { getEnterpriseProjects } from '@/content/projects';
 
-export default function HomePage() {
+export default function CVPage() {
   const enterpriseProjects = getEnterpriseProjects();
 
   return (
     <DashboardCV>
-      {/* 1) Role + 2) Proof (above the fold) */}
+      {/* Same order as Home — proof-first */}
       <section className="space-y-4 rounded-xl border border-border bg-card p-6">
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           {roleHeadline}
         </h1>
         <p className="text-muted-foreground">{proofLine}</p>
+        <p className="text-sm text-muted-foreground">{experienceLine}</p>
         <div className="flex flex-wrap gap-3">
-          <Button asChild>
+          <Button asChild size="sm">
             <Link href={ctaPrimary.href}>{ctaPrimary.label}</Link>
           </Button>
           {ctaSecondary.map((cta) => (
-            <Button key={cta.href} variant="outline" asChild>
+            <Button key={cta.href} variant="outline" size="sm" asChild>
               <Link href={cta.href}>{cta.label}</Link>
             </Button>
           ))}
         </div>
       </section>
 
-      {/* Proof strip — 5 tiles */}
       <section
         className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
         aria-label="Proof metrics"
       >
         {proofStrip.map((tile) => (
           <Card key={tile.label} className="border-border bg-card p-4">
-            <p className="text-2xl font-semibold tabular-nums text-foreground">
+            <p className="text-xl font-semibold tabular-nums text-foreground">
               {tile.value}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">{tile.label}</p>
@@ -65,10 +69,9 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* 3) Experience */}
       <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle className="text-lg">Experience</CardTitle>
+          <CardTitle>Experience</CardTitle>
           <p className="text-sm text-muted-foreground">{experienceLine}</p>
           <div className="flex flex-wrap gap-2 pt-2">
             {experienceChips.map((chip) => (
@@ -88,15 +91,13 @@ export default function HomePage() {
         </CardHeader>
       </Card>
 
-      {/* 4) Products — 3 cards + Centus chip */}
       <section>
         <h2 className="mb-4 text-lg font-semibold text-foreground">Products</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {enterpriseProjects.map((project) => {
-            const tryLink = project.links?.find((l) => l.label === 'Live demo');
             const highlights = project.metrics.slice(0, 3);
             return (
-              <Card key={project.slug} className="flex flex-col border-border bg-card">
+              <Card key={project.slug} className="border-border bg-card">
                 <CardHeader className="pb-2">
                   <div className="flex flex-wrap gap-1">
                     {productCardBadges.map((b) => (
@@ -107,22 +108,12 @@ export default function HomePage() {
                   </div>
                   <CardTitle className="mt-2 text-base">{project.title}</CardTitle>
                   <p className="text-sm text-muted-foreground">{project.oneLiner}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {project.roles.join(', ')} · {project.year}
-                  </p>
-                </CardHeader>
-                <CardContent className="flex-1 space-y-2 pt-0">
                   <ul className="list-inside list-disc text-sm text-muted-foreground">
                     {highlights.map((h) => (
                       <li key={h}>{h}</li>
                     ))}
                   </ul>
-                  {tryLink && (
-                    <Button asChild size="sm" className="mt-2 w-full sm:w-auto">
-                      <Link href={tryLink.href}>Try prototype</Link>
-                    </Button>
-                  )}
-                </CardContent>
+                </CardHeader>
               </Card>
             );
           })}
@@ -133,10 +124,9 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* 5) AI and Automation */}
       <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle className="text-lg">{aiAutomationCard.title}</CardTitle>
+          <CardTitle>{aiAutomationCard.title}</CardTitle>
           <p className="text-sm text-muted-foreground">{aiAutomationCard.oneLiner}</p>
           <Badge variant="secondary" className="mt-2 w-fit">
             {aiAutomationCard.badge}
@@ -158,17 +148,16 @@ export default function HomePage() {
         </CardContent>
       </Card>
 
-      {/* 6) Leadership */}
       <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle className="text-lg">{leadershipCard.title}</CardTitle>
+          <CardTitle>{leadershipCard.title}</CardTitle>
           <p className="text-sm text-muted-foreground">{leadershipCard.shortCopy}</p>
         </CardHeader>
         <CardContent className="pt-0">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {leadershipCard.metrics.map((m) => (
               <div key={m.label}>
-                <p className="text-xl font-semibold tabular-nums text-foreground">
+                <p className="text-lg font-semibold tabular-nums text-foreground">
                   {m.value}
                 </p>
                 <p className="text-xs text-muted-foreground">{m.label}</p>
@@ -178,7 +167,6 @@ export default function HomePage() {
         </CardContent>
       </Card>
 
-      {/* 7) Publication and Certification */}
       <section className="flex flex-wrap gap-3">
         <Badge variant="secondary" className="px-3 py-1">
           {publication.title}
@@ -188,59 +176,30 @@ export default function HomePage() {
         </Badge>
       </section>
 
-      {/* 8) Skills — chips only */}
       <section>
         <h2 className="mb-3 text-lg font-semibold text-foreground">Skills</h2>
-        <div className="space-y-3">
-          <div className="flex flex-wrap gap-2">
-            {skillsGroups.productDesign.map((s) => (
-              <Badge key={s} variant="outline">
-                {s}
-              </Badge>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {skillsGroups.tools.map((s) => (
-              <Badge key={s} variant="outline">
-                {s}
-              </Badge>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {skillsGroups.techBasics.map((s) => (
-              <Badge key={s} variant="outline">
-                {s}
-              </Badge>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {skillsGroups.aiWorkflows.map((s) => (
-              <Badge key={s} variant="outline">
-                {s}
-              </Badge>
-            ))}
-          </div>
+        <div className="flex flex-wrap gap-2">
+          {[...skillsGroups.productDesign, ...skillsGroups.tools, ...skillsGroups.techBasics, ...skillsGroups.aiWorkflows].map((s) => (
+            <Badge key={s} variant="outline">
+              {s}
+            </Badge>
+          ))}
         </div>
       </section>
 
       <Separator className="my-4" />
 
-      {/* 9) Practical */}
       <section className="text-sm text-muted-foreground">
         <p>{practical.location}</p>
         <p>{practical.languages}</p>
       </section>
 
-      {/* 10) Contact */}
       <Card className="border-border bg-card">
         <CardContent className="p-6">
           <p className="font-semibold text-foreground">{contact.name}</p>
           <p className="text-sm text-muted-foreground">{contact.tagline}</p>
           <p className="mt-2">
-            <a
-              href={`mailto:${contact.email}`}
-              className="text-primary hover:underline"
-            >
+            <a href={`mailto:${contact.email}`} className="text-primary hover:underline">
               {contact.email}
             </a>
           </p>
@@ -251,6 +210,12 @@ export default function HomePage() {
           </p>
         </CardContent>
       </Card>
+
+      <p className="pt-4">
+        <Link href="/" className="text-sm font-medium text-primary hover:underline">
+          Back to Home
+        </Link>
+      </p>
     </DashboardCV>
   );
 }
