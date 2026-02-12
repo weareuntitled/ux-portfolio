@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { DashboardCV } from '@/components/DashboardCV';
 import { Badge } from '@/components/ui/badge';
