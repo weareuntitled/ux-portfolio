@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    env_file:
+      - .env.production
+    environment:
+      DEBUG_LOG_HOST: host.docker.internal
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      - app_data:/data
+      - app_uploads:/uploads
+
+  caddy:
+    image: caddy:latest
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - web
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+  # postgres:
+  #   image: postgres:16
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: payload
+  #     POSTGRES_PASSWORD: change-me
+  #     POSTGRES_DB: payload
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - web
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  app_data:
+  app_uploads:
+  caddy_data:
+  caddy_config:
+  postgres_data:
+

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import type { Project } from '@/content/projects';
+import type { ResolvedProject } from '@/lib/cms/types';
 import { ProjectQuickViewDialog } from './ProjectQuickViewDialog';
 
 type ProjectCardProps = {
-  project: Project;
+  project: ResolvedProject;
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
@@ -12,7 +12,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="flex h-full flex-col rounded-xl border bg-card p-5 shadow-sm">
       <div className="mb-2 flex items-start justify-between gap-2">
-        <p className="text-xs uppercase tracking-wide text-muted-foreground">
+        <p className="py-3.5 text-xs uppercase tracking-wide text-muted-foreground">
           {project.category} · {project.year}
         </p>
         <ProjectQuickViewDialog project={project} triggerLabel={`Open quick actions for ${project.title}`} iconOnly />
@@ -36,8 +36,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {liveDemoLink?.href && (
           <Link
             href={liveDemoLink.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(liveDemoLink.href.startsWith('http')
+              ? { target: '_blank' as const, rel: 'noopener noreferrer' }
+              : {})}
             className="rounded-md border border-input bg-background px-4 py-2 text-sm hover:bg-accent"
           >
             Try prototype

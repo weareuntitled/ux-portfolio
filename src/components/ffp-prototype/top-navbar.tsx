@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react"
-
+import React from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Bell, LayoutGrid, Fingerprint, Activity, Shield, MessageCircle, BarChart3, Users } from "lucide-react";
+import { Search, Bell, LayoutGrid, Fingerprint, Activity, Shield, MessageCircle, BarChart3, Users, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -30,6 +30,14 @@ export function TopNavbar({ onGridToggle, showLogo }: TopNavbarProps) {
   return (
     <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background px-4">
       <div className="flex items-center gap-3">
+        <Link
+          href="/projects/ffp-dashboard"
+          className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+          aria-label="Back to portfolio"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span className="hidden sm:inline">Back to portfolio</span>
+        </Link>
         {showLogo && (
           <div className="flex items-center gap-2">
             <LogoIcon />

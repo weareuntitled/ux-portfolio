@@ -1,10 +1,9 @@
 import Link from 'next/link';
 
 const prototypes = [
-  { href: '/prototypes/kovon/queues', label: 'KoVoN · Queues' },
-  { href: '/prototypes/kovon/escalations', label: 'KoVoN · Escalations' },
-  { href: '/prototypes/ffp', label: 'FFP · Clusters' },
-  { href: '/prototypes/ffp-review', label: 'FFP · Comparison' }
+  { href: '/prototypes/ffp', label: 'FFP · Workflow Selection Dashboard' },
+  { href: '/prototypes/ffp-review', label: 'FFP · Comparison' },
+  { href: '/prototypes/kovon', label: 'KoVoN' }
 ];
 
 export default function PrototypesIndexPage() {

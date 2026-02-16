@@ -11,7 +11,7 @@ import { Plus } from "lucide-react";
 
 export default function ReportingPage() {
   return (
-    <DashboardShell showLeftSidebar>
+    <DashboardShell>
       <main className="px-6 py-8 lg:px-10">
         {/* Header */}
         <div className="mb-8 flex items-start justify-between">

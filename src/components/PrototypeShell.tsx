@@ -46,7 +46,7 @@ export function PrototypeShell({ project, onBack, onToggleFullscreen, isFullscre
       </header>
 
       <div className="flex flex-wrap gap-2 border-b bg-slate-50 p-3">
-        {project.prototype?.hints.map((hint) => (
+        {project.prototype?.hints?.map((hint) => (
           <span key={hint} className="rounded-full bg-slate-200 px-3 py-1 text-xs" role="note">
             {hint}
           </span>

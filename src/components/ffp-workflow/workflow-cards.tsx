@@ -10,22 +10,24 @@ interface GlassCardProps {
   href?: string;
 }
 
+const cardClassName =
+  "group relative flex h-44 cursor-pointer items-center justify-center rounded-2xl border border-foreground/[0.06] bg-background/50 shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] ring-1 ring-foreground/[0.03] backdrop-blur-xl transition-all hover:bg-background/70 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]";
+
 function GlassCard({ icon, title, starred, badge, href }: GlassCardProps) {
-  const Wrapper = href ? Link : "div";
-  const wrapperProps = href ? { href } : {};
-  return (
-    <Wrapper
-      {...(wrapperProps as Record<string, string>)}
-      className="group relative flex h-44 cursor-pointer items-center justify-center rounded-2xl border border-foreground/[0.06] bg-background/50 shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] ring-1 ring-foreground/[0.03] backdrop-blur-xl transition-all hover:bg-background/70 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
-    >
+  const content = (
+    <>
       {starred && <Star className="absolute left-3 top-3 h-4 w-4 fill-accent text-accent" aria-label="Favorisiert" />}
       {badge && <span className="absolute right-3 top-3 h-2.5 w-2.5 rounded-full bg-accent" aria-hidden="true" />}
       <div className="flex flex-col items-center gap-3">
         <div className="text-primary/80">{icon}</div>
         <span className="text-xs font-semibold text-primary/80">{title}</span>
       </div>
-    </Wrapper>
+    </>
   );
+  if (href) {
+    return <Link href={href} className={cardClassName}>{content}</Link>;
+  }
+  return <div className={cardClassName}>{content}</div>;
 }
 
 export function WorkflowCards() {

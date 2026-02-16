@@ -1,0 +1,8 @@
+{
+  email {$EMAIL_FOR_ACME}
+}
+
+{$APP_DOMAIN} {
+  reverse_proxy app:3000
+}
+

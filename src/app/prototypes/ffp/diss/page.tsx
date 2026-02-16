@@ -106,7 +106,7 @@ function DissTagBadge({ tag }: { tag: DissTag }) {
 
 export default function DissPage() {
   return (
-    <DashboardShell showLeftSidebar>
+    <DashboardShell>
       <main className="px-6 py-8 lg:px-10">
         {/* Header */}
         <div className="mb-8 flex items-start justify-between">

@@ -1,26 +1,75 @@
 /**
  * Single source of truth for Home and CV.
- * Safe, defensible wording. Use ~, approx., "based on stakeholder estimates" where needed.
+ * Daniel Peters — Design Strategist, UX/UI & Motion.
  */
 
 export const roleHeadline =
-  'Product Designer (UX/UI). Enterprise workflow tools. Data-heavy interfaces. Design systems.';
+  'Daniel Peters. product design - UX/UI - AI - Automation';
 
 export const proofLine =
-  'Shipped 3 enterprise tools used by ~500–1000 users. Reduced recurring ops effort from ~2–4h/week to near zero. POC ~6 weeks → MVP ~12 months → production-ready +~6 months.';
+  'Welcome to my sneak peek online portfolio. I work with awesome people for a greater vision of design aesthetics & art. Selected works 2019–2025. Available for work.';
 
 export const experienceLine =
-  '3+ years in tech consulting (since Oct 2022). 8–9+ years designing digital products (incl. academic and freelance work).';
+  '9+ years of experience. Certified SAFe 6.0 Scrum Master. Design Management, Product Management, Strategic design, User Journeys, Workshops.';
 
 export const proofStrip = [
-  { label: 'Enterprise tools shipped', value: '3' },
-  { label: 'Users', value: '500–1000' },
-  { label: 'Ops effort', value: '2–4h/week → ~0' },
-  { label: 'Delivery', value: 'POC 6 weeks' },
-  { label: 'Tenure', value: '3+ years consulting (since Oct 2022)' },
+  { label: 'Projects done', value: '45+' },
+  { label: 'Years of experience', value: '9+' },
+  { label: 'Scientific recognitions', value: '1' },
+  { label: 'Selected works', value: '2019–2025' },
+  { label: 'Available for work', value: 'Yes' },
 ] as const;
 
-export const ctaPrimary = { label: 'Try prototype', href: '/prototypes/kovon' };
+export const visionStatement =
+  'I work with awesome people for a greater vision of design aesthetics & art. My 3 key principles are:';
+
+export const principles = [
+  {
+    number: '01',
+    title: 'Empathy',
+    body: 'Finding the root of problems and why people hire you is not easy! I dive deep into understanding the people and the context before jumping into the process. By getting to know the users, their working context and their needs, we can team up with them to find the best spectrum of solutions together. Empathy is key.',
+  },
+  {
+    number: '02',
+    title: 'Quality with focus',
+    body: 'High quality overall is easy to recognize. As a Design Strategist, I use data to gather insights and transform it into a clear, actionable proposal that not only explores a range of possibilities but also keeps KPIs and metrics in center. It\'s about balancing creativity with strategic thinking—understanding what\'s truly important and identifying the ultimate goal to align on.',
+  },
+  {
+    number: '03',
+    title: 'Test often, fail fast!',
+    body: 'Clear communication to keep the team on track and with me is my base. I guide everyone through the process, help them to understand, plan ahead, anticipate obstacles, and navigate the ship when they appear. I always embrace a "fail fast, test early" mentality. Thinking pragmatic and asking the right questions. We all don\'t want to waste our time in endless feedback iterations.',
+  },
+] as const;
+
+export const whatIDo = [
+  {
+    number: '01',
+    title: 'Management',
+    body: 'Certified SAFe 6.0 SCRUM Master: Led Scrum teams up to 4 persons. Held several Jira & Confluence trainings for agile projects. I never worked not agile.',
+  },
+  {
+    number: '02',
+    title: 'UX design',
+    body: 'Design Management, Product Management; Strategic design, User Journeys, Workshops—and many more. I implemented lots of websites, conceptualized several app ideas, processes and workshops.',
+  },
+  {
+    number: '03',
+    title: '3D Design / VR AR',
+    body: 'Art Renderings, Product Renderings, Animation & Sound Design, Virtual Reality / Augmented Reality Studies & Games. I\'m completely hooked on 3D and the combination of motion and AI (Comfy UI).',
+  },
+  {
+    number: '04',
+    title: 'Motion Design',
+    body: 'Educational Videos, Content, Ad Creatives, Storyboards, Pitch Videos, Cutter. You need creatives—I can help you!',
+  },
+  {
+    number: '05',
+    title: 'Automation Consultant',
+    body: 'LLM/ML AI Concepts, Big Data analysis, Bot Automation Consulting. I have a broad knowledge on AI concepts and how to setup custom LLM and automation concepts.',
+  },
+] as const;
+
+export const ctaPrimary = { label: 'Try prototype', href: '/prototypes/ffp' };
 export const ctaSecondary = [
   { label: 'Case studies', href: '/projects' },
   { label: 'Contact', href: '/contact' },
@@ -33,8 +82,7 @@ export const clients = [
   'Porsche',
   'Volkswagen',
   'MAN',
-  'Centus',
-  'Ensinger',
+  'Sentus',
 ] as const;
 
 export const leadershipCard = {
@@ -83,10 +131,12 @@ export const practical = {
 } as const;
 
 export const contact = {
-  name: 'Daniel P.',
+  name: 'Daniel Peters',
   email: 'djdanep@gmail.com',
   phone: '+173 523 1109',
-  tagline: 'holla at me',
+  tagline: 'Hi There — Selected works 2019–2025. Available for work.',
+  /** Profile photo path (place your image in public/, e.g. profile.jpg) */
+  profileImage: '/profile.jpg',
 } as const;
 
 export const additionalDelivery = {
@@ -95,3 +145,57 @@ export const additionalDelivery = {
 } as const;
 
 export const productCardBadges = ['Research', 'Design System', 'Enterprise workflows'] as const;
+
+// ——— Chart data (proof strip micro charts, range bar, stepper, leadership trend, radar) ———
+
+/** Spark bars: 3 filled = 3 enterprise tools shipped */
+export const proofToolsBars = [1, 1, 1] as const;
+
+/** Users range: track 0–1000, filled 500–1000 */
+export const usersRange = { min: 500, max: 1000, trackMax: 1000 } as const;
+
+/** Ops effort before/after (hours per week, stakeholder estimate) */
+export const opsBeforeAfter = { before: 3, after: 0, unit: 'h/week' } as const;
+
+/** Delivery stepper: POC → MVP → Production */
+export const deliveryStepperSteps = [
+  { label: 'POC', value: '~6 weeks' },
+  { label: 'MVP', value: '~12 months' },
+  { label: 'Production', value: '+~6 months' },
+] as const;
+
+/** Tenure: 3+ years consulting since Oct 2022 — progress 0–100 (e.g. ~75 for “3+”) */
+export const tenureProgress = 75;
+
+/** Leadership margin trend (Kontrast): year → k€ */
+export const marginTrendPoints = [
+  { year: 'Y1', margin: -5 },
+  { year: 'Y2', margin: 15 },
+  { year: 'Y3', margin: 40 },
+] as const;
+
+/** Skills radar: 5 axes, honest labels (index 0–100) */
+export const skillsRadarData = [
+  { subject: 'Product Design', value: 85, fullMark: 100 },
+  { subject: 'Enterprise UX', value: 80, fullMark: 100 },
+  { subject: 'Research & Testing', value: 75, fullMark: 100 },
+  { subject: 'Design Systems', value: 82, fullMark: 100 },
+  { subject: 'AI workflows', value: 70, fullMark: 100 },
+] as const;
+
+/** KoVoN only: usability findings reduction (index, not absolute counts) */
+export const kovonUsabilityWaterfall = [
+  { stage: 'POC baseline', value: 100 },
+  { stage: 'MVP', value: 20 },
+  { stage: 'Later testing', value: 8 },
+] as const;
+
+/** Career transition area chart: focus shift from graphic design to now (relative % per phase) */
+export const careerAreaData = [
+  { phase: '2016', graphicDesign: 70, motionWeb: 20, productUx: 5, aiSystems: 0 },
+  { phase: '2018', graphicDesign: 50, motionWeb: 40, productUx: 8, aiSystems: 0 },
+  { phase: '2020', graphicDesign: 30, motionWeb: 45, productUx: 20, aiSystems: 5 },
+  { phase: '2022', graphicDesign: 15, motionWeb: 35, productUx: 40, aiSystems: 10 },
+  { phase: '2024', graphicDesign: 5, motionWeb: 25, productUx: 45, aiSystems: 25 },
+  { phase: 'Now', graphicDesign: 0, motionWeb: 20, productUx: 50, aiSystems: 30 },
+] as const;

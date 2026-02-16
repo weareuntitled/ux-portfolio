@@ -42,6 +42,8 @@ const ChartContainer = React.forwardRef<
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -49,15 +51,19 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+          "flex min-w-0 min-h-[120px] aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
           className,
         )}
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
-          {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        {mounted ? (
+          <RechartsPrimitive.ResponsiveContainer width="100%" height="100%">
+            {children}
+          </RechartsPrimitive.ResponsiveContainer>
+        ) : (
+          <div className="min-h-[120px] w-full" aria-hidden />
+        )}
       </div>
     </ChartContext.Provider>
   );
@@ -196,9 +202,103 @@ const ChartLegendContent = React.forwardRef<
 );
 ChartLegendContent.displayName = 'ChartLegend';
 
+type TooltipPayloadItem = {
+  name?: string;
+  value?: number | string;
+  dataKey?: string;
+  color?: string;
+  payload?: Record<string, unknown>;
+};
+
+const ChartTooltipContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'> & {
+    active?: boolean;
+    payload?: TooltipPayloadItem[];
+    label?: string;
+    hideLabel?: boolean;
+    indicator?: 'line' | 'dot';
+    nameKey?: string;
+  }
+>(
+  (
+    {
+      active,
+      payload,
+      label,
+      hideLabel = false,
+      indicator = 'dot',
+      nameKey,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const { config } = useChart();
+
+    if (!active || !payload?.length) {
+      return null;
+    }
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'rounded-lg border border-border bg-popover px-3 py-2 text-sm shadow-md',
+          className,
+        )}
+        {...props}
+      >
+        {!hideLabel && label != null && (
+          <div className="mb-1.5 font-medium text-foreground">{label}</div>
+        )}
+        <div className="flex flex-col gap-1.5">
+          {payload.map((item, index) => {
+            const key = nameKey || item.dataKey || item.name || `payload-${index}`;
+            const itemConfig = getPayloadConfigFromPayload(config, item, key);
+            const displayLabel = itemConfig?.label ?? item.name ?? key;
+            const displayValue = item.value;
+
+            return (
+              <div
+                key={index}
+                className="flex items-center gap-2 text-muted-foreground"
+              >
+                {indicator === 'line' ? (
+                  <div
+                    className="h-0.5 w-3 shrink-0 rounded-full"
+                    style={{ backgroundColor: item.color }}
+                  />
+                ) : (
+                  <div
+                    className="h-2 w-2 shrink-0 rounded-[2px]"
+                    style={{ backgroundColor: item.color }}
+                  />
+                )}
+                <span className="flex-1 capitalize text-foreground">
+                  {displayLabel}
+                </span>
+                {displayValue != null && (
+                  <span className="font-medium tabular-nums text-foreground">
+                    {typeof displayValue === 'number'
+                      ? displayValue.toLocaleString()
+                      : String(displayValue)}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  },
+);
+ChartTooltipContent.displayName = 'ChartTooltipContent';
+
 export {
   ChartContainer,
   ChartTooltip,
+  ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
   ChartStyle,

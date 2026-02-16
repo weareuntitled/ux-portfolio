@@ -1,16 +1,30 @@
 import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
 import { DashboardCV } from '@/components/DashboardCV';
+import { Card, CardContent } from '@/components/ui/card';
+import { contact } from '@/content/home';
+import { getEnterpriseProjectsForNav } from '@/lib/cms/projects-nav';
 
 export const metadata: Metadata = {
   title: 'Contact | Daniel Peters',
   description: 'Contact Daniel Peters for product design, UX strategy, and enterprise workflows.',
 };
-import { Card, CardContent } from '@/components/ui/card';
-import { contact } from '@/content/home';
 
-export default function ContactPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function ContactPage() {
+  const draft = await draftMode();
+  const enterpriseProjects = await getEnterpriseProjectsForNav({ draftMode: draft.isEnabled });
+
   return (
-    <DashboardCV>
+    <DashboardCV
+      enterpriseProjects={enterpriseProjects}
+      breadcrumbs={[
+        { label: 'Daniel Peters', href: '/' },
+        { label: 'Contact' },
+      ]}
+      pageTitle="Contact"
+    >
       <section className="space-y-6">
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
           Contact

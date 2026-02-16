@@ -4,17 +4,14 @@ export type ProjectLink = {
 };
 
 export type ProjectPrototype = {
+  prototypeType?: 'in-app' | 'figma';
+  inAppPrototypeHref?: string;
   figmaEmbedUrl?: string;
   figmaFileUrl?: string;
   hints: string[];
 };
 
-export type ProjectMedia = {
-  type: 'image' | 'video';
-  title: string;
-  description: string;
-  src: string;
-};
+export type ProjectImpactItem = { label: string; value: string };
 
 export type Project = {
   id: string;
@@ -35,111 +32,98 @@ export type Project = {
   methods: string[];
   links?: ProjectLink[];
   prototype?: ProjectPrototype;
+  prototypeButtonLabel?: string;
+  moodImageUrl?: string;
+  teamSize?: string;
+  customerAbout?: string;
+  workflow?: string;
+  notes?: string;
+  impact?: ProjectImpactItem[];
+  galleryUrls?: string[];
   tags: string[];
-  media: ProjectMedia[];
 };
 
+class BaseProject implements Project {
+  id!: string;
+  slug!: string;
+  title!: string;
+  oneLiner!: string;
+  category!: 'Enterprise' | 'Side';
+  year!: string;
+  client?: string | undefined;
+  roles!: string[];
+  context!: string;
+  problem!: string;
+  solution!: string;
+  outcomes!: string[];
+  metrics!: string[];
+  highlights!: string[];
+  tools!: string[];
+  methods!: string[];
+  links?: ProjectLink[] | undefined;
+  prototype?: ProjectPrototype | undefined;
+  tags!: string[];
+
+  constructor(config: Project) {
+    Object.assign(this, config);
+  }
+}
+
+class EnterpriseProject extends BaseProject {
+  constructor(config: Omit<Project, 'category'>) {
+    super({ ...config, category: 'Enterprise' });
+  }
+}
+
+class SideProject extends BaseProject {
+  constructor(config: Omit<Project, 'category'>) {
+    super({ ...config, category: 'Side' });
+  }
+}
+
 export const projects: Project[] = [
-  {
+  new EnterpriseProject({
     id: '1',
     slug: 'kovon',
-    title: 'KoVoN',
+    title: 'KoVoN Compliance Tool',
     oneLiner:
-      'Enterprise service operations cockpit used by cross-functional quality and logistics teams.',
-    category: 'Enterprise',
+      'Online tool for mapping and assessing legal requirements in vehicle projects (UN ECE regulations, COP verification).',
     year: '2024',
-    client: 'Automotive (internal)',
-    roles: ['Product Engineer', 'UX Lead'],
+    client: 'Automotive (Konzern)',
+    roles: ['Product Manager'],
+    teamSize: '7+',
+    customerAbout: 'Konzern (corporate). Product development, automotive.',
     context:
-      'KoVoN replaced fragmented tools with one internal product for warranty triage and supplier escalation.',
+      'KoVoN was planned as a central verification online tool for legal requirements, based on UN ECE regulations and COP tests that vehicles must pass before market release. In reality, this information was scattered across departments, vehicle projects, and documents—with no shared view on which regulations applied to which project, which evidence existed, or who was responsible. Ownership was often implicit and historically grown; a structured standard process for assessment and documentation was missing.',
     problem:
-      'Operators switched between disconnected spreadsheets and legacy portals, causing delayed decisions and duplicate updates.',
+      'Regulations can be assessed at chapter level or at fine-grained detail; responsibility ranged from whole departments to single persons; evidence and documents lived in different systems and folders. The first MVP closely mirrored the existing database—it represented the data correctly but did not address the core pain: assigning regulations to projects and owners, surfacing gaps, and establishing a consistent way of working. In the corporate context we had to work within a given Angular stack, strict security policies, and internal toolchains, which limited design freedom and kept the solution deliberately functional and pragmatic.',
+    workflow:
+      '1) Define a standard process for handling regulations and how KoVoN supports it (steps from identification to documented assessment, document storage, role responsibilities). 2) Involve stakeholders in vehicle projects in detail—managers, responsible persons, document creators, system owners. 3) MVP, user tests (e.g. at Audi with end users and managers), and course correction: focus on multi-assignment of regulations/chapters, better views on projects/regulations/evidence, clearer status and gap visualization. 4) Role model and views (project view with regulation status, regulation view with project/department/owner assignment, management view with reporting). 5) Product management and Scrum over several years: backlog, roadmapping, sprint and capacity planning, risk awareness (acceptance, budget, training).',
     solution:
-      'Built a role-aware dashboard flow with alert prioritization, inline audit trails, and guided issue handoff between plants and quality engineering.',
+      'A role model and multiple views tailored to user tasks: project view with regulation status and evidence; regulation view with assignment to projects, departments, and owners; management view with reporting on progress against COP requirements. Assessment logic supports both coarse chapter-level and detailed requirements. Despite beta maturity, KoVoN was not rolled out group-wide due to budget cuts, day-to-day workload, and limited uptake of training—risks that were raised early and openly with the client.',
     outcomes: [
-      'Reduced time-to-resolution for high priority incidents.',
-      'Improved traceability for escalation ownership.',
-      'Increased confidence in daily operations reporting.'
+      'Shared view on projects, regulations, and evidence.',
+      'Role model with aligned views for management, departments, and documentation owners.',
+      'Gaps in responsibility and documentation became visible so departments could act on missing assessments, unclear ownership, and missing evidence.'
     ],
-    metrics: ['-29% incident resolution time', '+34% weekly active users', '96% handoff completeness'],
+    metrics: [],
     highlights: [
-      'Rule-based alert scoring surfaced top-risk cases first.',
-      'Bulk actions reduced repetitive triage work.',
-      'Audit timeline simplified compliance reviews.'
+      'Standard process for regulation handling defined with the client.',
+      'User tests and feedback drove focus on multi-assignment, views, and gap visualization.',
+      'Retrospectives after each milestone to improve process; learned how budget cycles and corporate constraints affect product development.'
     ],
-    tools: ['TypeScript', 'React', 'Figma', 'SQL'],
-    methods: ['Workflow mapping', 'Shadowing sessions', 'Usability tests'],
+    tools: ['Angular', 'Figma', 'SQL'],
+    methods: ['Process definition with client', 'Stakeholder interviews', 'User tests', 'Scrum and product management'],
     links: [
-      { label: 'Live demo', href: '/prototypes/kovon/queues' },
       { label: 'Case study', href: '/projects/kovon' }
     ],
-    prototype: {
-      figmaEmbedUrl:
-        'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/KoVoNEnterprisePrototype',
-      figmaFileUrl: 'https://www.figma.com/file/KoVoNEnterprisePrototype',
-      hints: ['Use left nav to switch queues', 'Open any row for escalation details']
-    },
-    tags: ['operations', 'enterprise', 'quality'],
-    media: [
-      {
-        type: 'image',
-        title: 'KoVoN Operations Dashboard',
-        description: 'Queue health and SLA status by plant.',
-        src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80'
-      }
-    ]
-  },
-  {
-    id: '2',
-    slug: 'failure-fingerprint-dashboard-ffp',
-    title: 'Failure Fingerprint Dashboard (FFP)',
-    oneLiner: 'Enterprise analytics workspace for root-cause clustering across production failures.',
-    category: 'Enterprise',
-    year: '2023',
-    client: 'Manufacturing Analytics (internal)',
-    roles: ['Frontend Engineer', 'Data UX'],
-    context:
-      'FFP translated machine telemetry and incident logs into an investigation view shared by engineering and leadership.',
-    problem:
-      'Root-cause meetings relied on static reports; analysts spent more time preparing data than investigating patterns.',
-    solution:
-      'Created interactive clustering and comparative trend panels with saved investigation presets and shareable snapshots.',
-    outcomes: [
-      'Shortened preparation time for review meetings.',
-      'Enabled recurring pattern detection before line-level incidents scaled.',
-      'Standardized decision narratives across teams.'
-    ],
-    metrics: ['-41% prep time per review', '+22% early pattern detection', '4 teams onboarded in 6 weeks'],
-    highlights: [
-      'Linked cluster map to event timeline drill-down.',
-      'Snapshot links improved async collaboration.',
-      'Accessible color scale handled dense heatmaps.'
-    ],
-    tools: ['Next.js', 'D3', 'Figma', 'Python'],
-    methods: ['Data interviews', 'Dashboard prototyping', 'A/B chart evaluations'],
-    links: [
-      { label: 'Live demo', href: '/prototypes/ffp' },
-      { label: 'Case study', href: '/projects/failure-fingerprint-dashboard-ffp' }
-    ],
-    prototype: {
-      hints: ['Prototype available on request']
-    },
-    tags: ['analytics', 'dashboard', 'enterprise'],
-    media: [
-      {
-        type: 'image',
-        title: 'FFP Cluster Explorer',
-        description: 'Failure clusters with severity overlay.',
-        src: 'https://images.unsplash.com/photo-1551281044-8b9226f22a55?auto=format&fit=crop&w=1400&q=80'
-      }
-    ]
-  },
-  {
+    tags: ['compliance', 'enterprise', 'automotive', 'product-management']
+  }),
+  new EnterpriseProject({
     id: '3',
     slug: 'cesa-dashboard',
     title: 'CESA Dashboard',
     oneLiner: 'Enterprise executive cockpit for cross-entity service agreement performance.',
-    category: 'Enterprise',
     year: '2022',
     client: 'Mobility Services (internal)',
     roles: ['Product Engineer'],
@@ -169,22 +153,13 @@ export const projects: Project[] = [
       figmaFileUrl: 'https://www.figma.com/file/CESAExecutivePrototype',
       hints: ['Toggle between region and entity views', 'Try the monthly summary export']
     },
-    tags: ['executive', 'sla', 'enterprise'],
-    media: [
-      {
-        type: 'image',
-        title: 'CESA Regional Scorecards',
-        description: 'SLA trends by region and service domain.',
-        src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80'
-      }
-    ]
-  },
-  {
+    tags: ['executive', 'sla', 'enterprise']
+  }),
+  new SideProject({
     id: '4',
     slug: 'tracklistify',
     title: 'Tracklistify',
     oneLiner: 'Engineering-focused side project that converts playlist metadata into printable set planning cards.',
-    category: 'Side',
     year: '2024',
     roles: ['Indie Maker', 'Full-stack Engineer'],
     context:
@@ -216,22 +191,13 @@ export const projects: Project[] = [
       figmaFileUrl: 'https://www.figma.com/file/TracklistifyPrototype',
       hints: ['Upload CSV sample', 'Inspect tempo flow chart']
     },
-    tags: ['side-project', 'audio', 'engineering'],
-    media: [
-      {
-        type: 'image',
-        title: 'Tracklistify Analyzer',
-        description: 'Track grouping and transition recommendations.',
-        src: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1400&q=80'
-      }
-    ]
-  },
-  {
+    tags: ['side-project', 'audio', 'engineering']
+  }),
+  new SideProject({
     id: '5',
     slug: 'fixundfertig',
     title: 'FixundFertig',
     oneLiner: 'Engineering side project for tracking household repairs with lightweight issue management.',
-    category: 'Side',
     year: '2023',
     roles: ['Indie Maker', 'Frontend Engineer'],
     context:
@@ -257,22 +223,124 @@ export const projects: Project[] = [
     prototype: {
       hints: ['Prototype available on request']
     },
-    tags: ['side-project', 'ops', 'engineering'],
-    media: [
-      {
-        type: 'image',
-        title: 'FixundFertig Task Board',
-        description: 'Repair ticket lanes with ownership and due dates.',
-        src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80'
-      }
-    ]
-  }
+    tags: ['side-project', 'ops', 'engineering']
+  }),
+  new EnterpriseProject({
+    id: '6',
+    slug: 'automation',
+    title: 'Automation & Ops',
+    oneLiner:
+      'Process automation, AI/LLM consulting, and ops tooling for enterprise and product teams.',
+    year: '2023',
+    client: 'Internal & 8020',
+    roles: ['Automation Consultant', 'Product Engineer'],
+    context:
+      'Automation and ops work spanned workflow automation, LLM/AI integration, and tooling to reduce manual effort and improve delivery predictability.',
+    problem:
+      'Teams spent too much time on repetitive tasks, ad-hoc reporting, and handoffs between systems without clear audit trails.',
+    solution:
+      'Designed and delivered automation pipelines, AI-assisted workflows, and ops dashboards that cut manual effort and improved traceability.',
+    outcomes: [
+      'Reduced manual effort for recurring reporting and handoffs.',
+      'Improved delivery predictability with clearer status and SLA visibility.',
+      'Enabled self-service ops for teams via dashboards and automation.'
+    ],
+    metrics: ['-40% manual ops effort', '+50% delivery predictability', '3 teams onboarded'],
+    highlights: [
+      'Workflow automation and LLM integration for triage and summarization.',
+      'Before/after ops visibility with shared dashboards.',
+      'Design systems and patterns reused across automation projects.'
+    ],
+    tools: ['TypeScript', 'Python', 'LLM APIs', 'React', 'Figma'],
+    methods: ['Process mapping', 'Automation design', 'Stakeholder workshops'],
+    links: [{ label: 'Case study', href: '/projects/automation' }],
+    tags: ['automation', 'ops', 'enterprise', 'ai']
+  }),
+  new EnterpriseProject({
+    id: '7',
+    slug: 'ffp-dashboard',
+    title: 'Automotive Failure Fingerprint Dashboard',
+    oneLiner: 'Internal dashboard app for diagnosis and problem management in the automotive sector.',
+    year: '2024',
+    client: 'Automotive (Konzern)',
+    roles: ['UX & UI Designer'],
+    teamSize: '2–3',
+    customerAbout: 'Konzern. Product development, automotive.',
+    context:
+      'In the existing Fingerprint Dashboard, a lot of information was packed into a single view. Users had to click through long tables and many columns and open each fingerprint to understand a case. Multiple data sources fed in—diagnosis data, unordered errors from the DISS environment, and internally created fingerprints—yet it was unclear what was relevant at which step.',
+    problem:
+      'Shadowing showed that information overload made it hard to get started; users had to open each case to see content, relevance, and status; similar cases were tagged differently with no clear support for merging; processing status and ownership per case were hard to see. There was no clear structure along the tasks of tagging, diagnosis, and reporting, although roles and process steps were already established in the organisation.',
+    workflow:
+      '1) Understand context via UX shadowing: how staff work with returns, diagnosis data, and fingerprints; which systems they use; document roles, process steps, and where dashboards helped or hindered. 2) Align tasks and role model with functionality: who assesses incoming cases and tags, who merges similar cases and maintains fingerprints, who prepares information for problem management; compare with existing dashboard features to find gaps and redundancy. 3) Prioritize and structure dashboards with the department so each role has a clear entry point, key fields are visible on overview, and tagging/merging/reporting are supported by filters and states—resulting in specialized dashboards (e.g. Diagnosis, DISS, split FFP views). 4) Screen concepts and modular building blocks in Figma: variants for tables, filters, status, detail views; reuse consistent table headers, status areas, and detail blocks. 5) Navigation concept and handover: process from tagging via diagnosis to reporting; overview-to-detail flow; Figma package to development.',
+    solution:
+      'A structure with role-specific entry points, key fields visible on overview pages, and tagging, merging, and reporting supported by filters and states. Multiple specialized dashboards (e.g. Diagnosis dashboard, DISS dashboard, split FFP dashboards for different task areas). Modular UI building blocks. Seven central dashboard screens plus an exemplary Failure Fingerprinting detail screen (case data and reproduction steps above; market and stock impact below for problem management).',
+    outcomes: [
+      'Clearer information hierarchy and focus on the most important fields per role.',
+      'Users found their way around the new structure; they could see which cases were relevant, current status, and how items related.',
+      'Qualitative feedback from the department was positive and led to further commissions for the team.'
+    ],
+    metrics: [],
+    highlights: [
+      'Diagnosis dashboard with focus on assessing and grouping cases.',
+      'DISS dashboard as source for untagged errors to be classified.',
+      'Split FFP dashboards making case status, tags, and merges transparent; detail screen combining diagnosis and market impact.'
+    ],
+    tools: ['Figma', 'Miro', 'PowerPoint', 'Jira', 'Confluence'],
+    methods: ['UX shadowing', 'Task and role model', 'Screen variants and reviews', 'Modular design system', 'Handover to development'],
+    links: [{ label: 'Live demo', href: '/prototypes/ffp' }],
+    prototype: {
+      prototypeType: 'in-app',
+      inAppPrototypeHref: '/prototypes/ffp',
+      hints: [
+        'Diagnosis dashboard: assess and group cases',
+        'DISS: untagged errors to be classified',
+        'FFP dashboards: case status, tags, merges',
+        'Detail screen: case data and market impact'
+      ]
+    },
+    prototypeButtonLabel: 'Live demo',
+    tags: ['enterprise', 'automotive', 'diagnostics', 'problem-management']
+  }),
+  new EnterpriseProject({
+    id: '8',
+    slug: 'emission-compliance',
+    title: 'Car Emission Compliance Dashboard',
+    oneLiner: 'Internal web tool for emission data and verification planning in the automotive sector.',
+    year: '2024',
+    client: 'Automotive (Konzern)',
+    roles: ['UX & UI Designer'],
+    teamSize: '2–3',
+    customerAbout: 'Konzern. Internal tool, automotive.',
+    context:
+      'Emission data, verification status, and model year information were mainly maintained in extensive Excel master tables. These tables supported Model Year Planning, Dauerlaufgruppierung, Deterioration Factors, Verified Parts, and OBD evaluations. The new interface had to stay within a narrow technical and design frame and remain strongly table-oriented and easy to implement.',
+    problem:
+      'Users had to open multiple tables, filter, and compare manually to see which engine variants, drivetrains, and transmissions were relevant in a model year, which configurations met emission limits, and how far individual verifications and tests had progressed. Limits and normal ranges were in the tables but not visually emphasized—it was not immediately clear which values were uncritical or critical, where approvals were missing, or what overall progress looked like across configurations.',
+    workflow:
+      '1) Capture workflows with the department (no direct shadowing): for model year planning, Verified Parts, emission assessment, and data management, describe typical flows, happy paths, and important exceptions so it was clear which information was needed at which step and where Excel fell short. 2) Translate tasks, data fields, and states into UI views: tables remained central but gained clearer hierarchy—e.g. visible limits and normal ranges in the table, consistent status for tests and approvals, better grouping and filtering. 3) Full screen designs in Figma for main tables and detail views; clickable prototypes for flows such as checking and rating emission data, adjusting a configuration, uploading and assigning approvals. 4) Reviews, refinement, and handover: check-ins with stakeholders, iterative refinement of modals, accordions, filters, toasts; stable screen sets and flows handed over as a Figma package.',
+    solution:
+      'An interface concept that turns the existing Excel master tables into structured web interfaces. In tables and detail views, users see which configurations were tested, which emission values occur in which drive cycles, and whether values are within limits or critical. Limits, normal ranges, and exceedances are visually highlighted. Status displays and modals support daily assessment of configurations. The concept stays close to the familiar table logic but reduces cognitive load by sorting and marking important information clearly.',
+    outcomes: [
+      'Clearer view on emission and verification data; critical values and missing approvals are easier to spot.',
+      'Better support for daily evaluation of configurations; users can see test and approval status and progress per configuration.',
+      'Feedback from the department was very positive; the project ended when budget limits led to a search for follow-up projects.'
+    ],
+    metrics: [],
+    highlights: [
+      'Visible limits and normal ranges in tables; consistent status for tests and approvals.',
+      'Clickable Figma prototypes for checking emission data, adjusting configurations, uploading approvals.',
+      'Modals, accordions, filters, and toasts refined iteratively with stakeholders.'
+    ],
+    tools: ['Figma'],
+    methods: ['Structured workflow capture', 'Task and data translation to UI', 'Screen designs and prototypes', 'Reviews and handover'],
+    links: [{ label: 'Case study', href: '/projects/emission-compliance' }],
+    tags: ['enterprise', 'automotive', 'emission', 'compliance', 'verification']
+  })
 ];
 
 export const findProjectBySlug = (slug: string) => projects.find((project) => project.slug === slug);
 
-/** Home page: main 3 enterprise product cards (KoVoN, FFP, CESA). Centus is "additional delivery" chip only. */
-export const enterpriseProjectSlugs = ['kovon', 'failure-fingerprint-dashboard-ffp', 'cesa-dashboard'] as const;
+/** Home page: main enterprise product cards (KoVoN, CESA). */
+export const enterpriseProjectSlugs = ['kovon', 'cesa-dashboard'] as const;
 
 export function getEnterpriseProjects(): Project[] {
   return enterpriseProjectSlugs

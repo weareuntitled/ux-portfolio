@@ -1,202 +1,189 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { DashboardCV } from '@/components/DashboardCV';
-
-export const metadata: Metadata = {
-  title: 'CV | Daniel Peters',
-  description: 'CV and resume for Daniel Peters, Product Designer (UX/UI), enterprise workflow tools.',
-};
+import { ProofStripWithCharts } from '@/components/ProofStripWithCharts';
+import { CelonisSkillsPresentation } from '@/components/CelonisSkillsPresentation';
+import { LeadershipCardWithTrend } from '@/components/LeadershipCardWithTrend';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import {
   roleHeadline,
   proofLine,
   experienceLine,
-  proofStrip,
   ctaPrimary,
   ctaSecondary,
   experienceChips,
   clients,
-  leadershipCard,
   publication,
   certification,
   aiAutomationCard,
-  skillsGroups,
   practical,
   contact,
   additionalDelivery,
   productCardBadges,
 } from '@/content/home';
-import { getEnterpriseProjects } from '@/content/projects';
+import { getEnterpriseProjectsForNav, getEnterpriseProjectsResolved } from '@/lib/cms/projects-nav';
+import { draftMode } from 'next/headers';
 
-export default function CVPage() {
-  const enterpriseProjects = getEnterpriseProjects();
+export const metadata: Metadata = {
+  title: 'CV | Daniel Peters',
+  description:
+    'CV and resume for Daniel Peters, Product Designer (UX/UI), enterprise workflow tools.',
+};
+
+export const dynamic = 'force-dynamic';
+
+export default async function CVPage() {
+  const draft = await draftMode();
+  const isDraft = draft.isEnabled;
+  const [enterpriseProjectsNav, enterpriseProjects] = await Promise.all([
+    getEnterpriseProjectsForNav({ draftMode: isDraft }),
+    getEnterpriseProjectsResolved({ draftMode: isDraft }),
+  ]);
 
   return (
-    <DashboardCV>
-      {/* Same order as Home — proof-first */}
-      <section className="space-y-4 rounded-xl border border-border bg-card p-6">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          {roleHeadline}
-        </h1>
-        <p className="text-muted-foreground">{proofLine}</p>
-        <p className="text-sm text-muted-foreground">{experienceLine}</p>
-        <div className="flex flex-wrap gap-3">
-          <Button asChild size="sm">
-            <Link href={ctaPrimary.href}>{ctaPrimary.label}</Link>
-          </Button>
-          {ctaSecondary.map((cta) => (
-            <Button key={cta.href} variant="outline" size="sm" asChild>
-              <Link href={cta.href}>{cta.label}</Link>
+    <DashboardCV
+      enterpriseProjects={enterpriseProjectsNav}
+      breadcrumbs={[
+        { label: 'Daniel Peters', href: '/' },
+        { label: 'CV' },
+      ]}
+      pageTitle="CV"
+    >
+      <article className="cv-document max-w-3xl space-y-8">
+        {/* Header */}
+        <header className="border-b border-border pb-6">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            {roleHeadline}
+          </h1>
+          <p className="mt-2 text-muted-foreground">{proofLine}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{experienceLine}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Button asChild size="sm">
+              <Link href={ctaPrimary.href}>{ctaPrimary.label}</Link>
             </Button>
-          ))}
-        </div>
-      </section>
+            {ctaSecondary.map((cta) => (
+              <Button key={cta.href} variant="outline" size="sm" asChild>
+                <Link href={cta.href}>{cta.label}</Link>
+              </Button>
+            ))}
+          </div>
+        </header>
 
-      <section
-        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
-        aria-label="Proof metrics"
-      >
-        {proofStrip.map((tile) => (
-          <Card key={tile.label} className="border-border bg-card p-4">
-            <p className="text-xl font-semibold tabular-nums text-foreground">
-              {tile.value}
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground">{tile.label}</p>
-          </Card>
-        ))}
-      </section>
+        {/* Proof metrics */}
+        <section aria-label="Proof metrics">
+          <ProofStripWithCharts />
+        </section>
 
-      <Card className="border-border bg-card">
-        <CardHeader>
-          <CardTitle>Experience</CardTitle>
+        {/* Experience */}
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-foreground">Experience</h2>
           <p className="text-sm text-muted-foreground">{experienceLine}</p>
-          <div className="flex flex-wrap gap-2 pt-2">
+          <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-muted-foreground">
             {experienceChips.map((chip) => (
-              <Badge key={chip} variant="secondary">
-                {chip}
-              </Badge>
+              <li key={chip}>{chip}</li>
             ))}
-          </div>
-          <p className="pt-2 text-xs text-muted-foreground">Trusted by</p>
-          <div className="flex flex-wrap gap-2">
-            {clients.map((client) => (
-              <Badge key={client} variant="outline">
-                {client}
-              </Badge>
+          </ul>
+          <p className="mt-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Trusted by
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {clients.join(', ')}
+          </p>
+        </section>
+
+        {/* Skills — skill snapshot */}
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-foreground">Skills</h2>
+          <CelonisSkillsPresentation />
+        </section>
+
+        {/* Products — hierarchical list */}
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-foreground">Products</h2>
+          <ul className="space-y-6">
+            {enterpriseProjects.map((project) => (
+              <li key={project.slug} className="list-none border-l-2 border-primary/30 pl-4">
+                <h3 className="font-semibold text-foreground">{project.title}</h3>
+                <p className="text-sm text-muted-foreground">{project.oneLiner}</p>
+                <p className="text-xs text-muted-foreground">
+                  {project.roles.join(', ')} · {project.year}
+                </p>
+                <ul className="mt-2 list-inside list-disc text-sm text-muted-foreground">
+                  {project.metrics.slice(0, 3).map((m) => (
+                    <li key={m}>{m}</li>
+                  ))}
+                </ul>
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {productCardBadges.map((b) => (
+                    <Badge key={b} variant="secondary" className="text-xs">
+                      {b}
+                    </Badge>
+                  ))}
+                </div>
+              </li>
             ))}
-          </div>
-        </CardHeader>
-      </Card>
+          </ul>
+          <p className="mt-3 text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">{additionalDelivery.label}:</span>{' '}
+            {additionalDelivery.items.join(', ')}
+          </p>
+        </section>
 
-      <section>
-        <h2 className="mb-4 text-lg font-semibold text-foreground">Products</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {enterpriseProjects.map((project) => {
-            const highlights = project.metrics.slice(0, 3);
-            return (
-              <Card key={project.slug} className="border-border bg-card">
-                <CardHeader className="pb-2">
-                  <div className="flex flex-wrap gap-1">
-                    {productCardBadges.map((b) => (
-                      <Badge key={b} variant="secondary" className="text-xs">
-                        {b}
-                      </Badge>
-                    ))}
-                  </div>
-                  <CardTitle className="mt-2 text-base">{project.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{project.oneLiner}</p>
-                  <ul className="list-inside list-disc text-sm text-muted-foreground">
-                    {highlights.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
-                </CardHeader>
-              </Card>
-            );
-          })}
-        </div>
-        <p className="mt-3 text-sm text-muted-foreground">
-          <span className="font-medium text-foreground">{additionalDelivery.label}:</span>{' '}
-          {additionalDelivery.items.join(', ')}
-        </p>
-      </section>
-
-      <Card className="border-border bg-card">
-        <CardHeader>
-          <CardTitle>{aiAutomationCard.title}</CardTitle>
+        {/* AI & Automation */}
+        <section>
+          <h2 className="mb-2 text-lg font-semibold text-foreground">
+            {aiAutomationCard.title}
+          </h2>
           <p className="text-sm text-muted-foreground">{aiAutomationCard.oneLiner}</p>
-          <Badge variant="secondary" className="mt-2 w-fit">
+          <Badge variant="secondary" className="mt-2">
             {aiAutomationCard.badge}
           </Badge>
-          <div className="flex flex-wrap gap-2 pt-2">
-            {aiAutomationCard.chips.map((chip) => (
-              <Badge key={chip} variant="outline">
-                {chip}
-              </Badge>
-            ))}
-          </div>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
+          <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-muted-foreground">
             {aiAutomationCard.highlights.map((h) => (
               <li key={h.slice(0, 40)}>{h}</li>
             ))}
           </ul>
-        </CardContent>
-      </Card>
+        </section>
 
-      <Card className="border-border bg-card">
-        <CardHeader>
-          <CardTitle>{leadershipCard.title}</CardTitle>
-          <p className="text-sm text-muted-foreground">{leadershipCard.shortCopy}</p>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {leadershipCard.metrics.map((m) => (
-              <div key={m.label}>
-                <p className="text-lg font-semibold tabular-nums text-foreground">
-                  {m.value}
-                </p>
-                <p className="text-xs text-muted-foreground">{m.label}</p>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+        {/* Leadership */}
+        <section>
+          <LeadershipCardWithTrend />
+        </section>
 
-      <section className="flex flex-wrap gap-3">
-        <Badge variant="secondary" className="px-3 py-1">
-          {publication.title}
-        </Badge>
-        <Badge variant="secondary" className="px-3 py-1">
-          {certification.name} (valid {certification.validFrom}–{certification.validTo})
-        </Badge>
-      </section>
+        {/* Publication & Certification */}
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-foreground">
+            Publication &amp; Certification
+          </h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li>
+              <Badge variant="secondary" className="mr-2">
+                {publication.title}
+              </Badge>
+            </li>
+            <li>
+              <Badge variant="secondary" className="mr-2">
+                {certification.name}
+              </Badge>
+              <span> (valid {certification.validFrom}–{certification.validTo})</span>
+            </li>
+          </ul>
+        </section>
 
-      <section>
-        <h2 className="mb-3 text-lg font-semibold text-foreground">Skills</h2>
-        <div className="flex flex-wrap gap-2">
-          {[...skillsGroups.productDesign, ...skillsGroups.tools, ...skillsGroups.techBasics, ...skillsGroups.aiWorkflows].map((s) => (
-            <Badge key={s} variant="outline">
-              {s}
-            </Badge>
-          ))}
-        </div>
-      </section>
+        {/* Practical */}
+        <section>
+          <h2 className="mb-2 text-lg font-semibold text-foreground">Practical</h2>
+          <ul className="list-inside list-disc text-sm text-muted-foreground">
+            <li>{practical.location}</li>
+            <li>{practical.languages}</li>
+          </ul>
+        </section>
 
-      <Separator className="my-4" />
-
-      <section className="text-sm text-muted-foreground">
-        <p>{practical.location}</p>
-        <p>{practical.languages}</p>
-      </section>
-
-      <Card className="border-border bg-card">
-        <CardContent className="p-6">
-          <p className="font-semibold text-foreground">{contact.name}</p>
+        {/* Contact */}
+        <section className="border-t border-border pt-6">
+          <h2 className="mb-2 text-lg font-semibold text-foreground">Contact</h2>
+          <p className="font-medium text-foreground">{contact.name}</p>
           <p className="text-sm text-muted-foreground">{contact.tagline}</p>
           <p className="mt-2">
             <a href={`mailto:${contact.email}`} className="text-primary hover:underline">
@@ -208,14 +195,14 @@ export default function CVPage() {
               {contact.phone}
             </a>
           </p>
-        </CardContent>
-      </Card>
+        </section>
 
-      <p className="pt-4">
-        <Link href="/" className="text-sm font-medium text-primary hover:underline">
-          Back to Home
-        </Link>
-      </p>
+        <p className="pt-4">
+          <Link href="/" className="text-sm font-medium text-primary hover:underline">
+            Back to Home
+          </Link>
+        </p>
+      </article>
     </DashboardCV>
   );
 }
