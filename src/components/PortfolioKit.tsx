@@ -135,7 +135,7 @@ const carouselVariants = {
     opacity: 1,
     scale: 1,
     filter: 'blur(0px)',
-    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
   exit: (direction: number) => ({
     x: direction > 0 ? -80 : 80,
@@ -193,7 +193,7 @@ export function BrowserMockup({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
       className={cn(
         'group relative my-12 overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)]',
         className
