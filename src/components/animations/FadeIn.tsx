@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 type FadeInProps = {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   /** Optional delay in seconds for sequencing multiple FadeIn blocks */
   delay?: number;
 };
@@ -18,10 +19,11 @@ type FadeInProps = {
  * Final:     opacity 1, y 0,   blur(0px)
  * Transition: spring { stiffness: 50, damping: 20, mass: 1 }
  */
-export function FadeIn({ children, className, delay = 0 }: FadeInProps) {
+export function FadeIn({ children, className, style, delay = 0 }: FadeInProps) {
   return (
     <motion.div
       className={cn(className)}
+      style={style}
       initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, amount: 0.2 }}
@@ -37,4 +39,3 @@ export function FadeIn({ children, className, delay = 0 }: FadeInProps) {
     </motion.div>
   );
 }
-
