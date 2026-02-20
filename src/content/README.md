@@ -21,7 +21,7 @@ Or call the API directly with your `PREVIEW_SECRET` from `.env` or `.env.local`:
 curl -X POST "http://localhost:3000/api/seed?secret=YOUR_PREVIEW_SECRET"
 ```
 
-Use POST (browser GET will not run the seed). This creates published project entries from `projects.ts` (KoVoN, CESA, FFP, Emission Compliance, etc.) if they don't already exist. After seeding, `/projects`, `/projects/[slug]`, and the home page Projects section show the project data. If the project list is empty, run the seed and refresh.
+Use POST (browser GET will not run the seed). This creates published project entries from `projects.ts` (KoVoN, CAESAR, FFP, Emission Compliance, etc.) if they don't already exist. After seeding, `/projects`, `/projects/[slug]`, and the home page Projects section show the project data. If the project list is empty, run the seed and refresh.
 
 ## Preview (Draft) mode
 

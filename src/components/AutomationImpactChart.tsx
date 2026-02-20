@@ -13,6 +13,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  pickSafeTooltipContentProps,
 } from '@/components/ui/chart';
 
 const automationImpactData = [
@@ -60,7 +61,9 @@ export function AutomationImpactChart() {
               width={28}
             />
             <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
+              content={(props) => (
+                <ChartTooltipContent {...pickSafeTooltipContentProps(props ?? {})} indicator="line" />
+              )}
               cursor={false}
             />
             <Area

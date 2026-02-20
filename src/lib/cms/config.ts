@@ -43,6 +43,12 @@ export const cmsConfig = {
    * In production you typically want this false except during maintenance windows.
    */
   editMode: booleanFromEnv(process.env.EDIT_MODE, process.env.NODE_ENV !== 'production'),
+
+  /**
+   * First admin user (used by seed when no users exist). Dev only; set in production.
+   */
+  adminEmail: stringFromEnv(process.env.ADMIN_EMAIL, 'admin@localhost'),
+  adminPassword: stringFromEnv(process.env.ADMIN_PASSWORD, 'admin123'),
 } as const;
 
 export type CmsConfig = typeof cmsConfig;

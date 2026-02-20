@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server';
 import { getPayloadClient } from '@/lib/cms/payload';
 import { cmsConfig } from '@/lib/cms/config';
 import { seedProjects } from '@/lib/cms/seed-projects';
+import { seedFirstUser } from '@/lib/cms/seed-first-user';
 
 /**
  * POST /api/seed?secret=<PREVIEW_SECRET>
- * Seeds the Payload projects collection from static content.
- * Run inside Next.js so Payload env loading works. Use PREVIEW_SECRET to authorize.
+ * Seeds projects and creates first admin user when none exist.
+ * After seeding, log in at /admin with ADMIN_EMAIL / ADMIN_PASSWORD (default: admin@localhost / admin).
  */
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -17,11 +18,16 @@ export async function POST(request: Request) {
 
   try {
     const payload = await getPayloadClient();
-    const result = await seedProjects(payload);
+    const [projectResult, userResult] = await Promise.all([
+      seedProjects(payload),
+      seedFirstUser(payload),
+    ]);
     return NextResponse.json({
       ok: true,
-      created: result.created,
-      skipped: result.skipped,
+      projects: { created: projectResult.created, skipped: projectResult.skipped },
+      adminUser: userResult.created
+        ? { created: true, email: cmsConfig.adminEmail, hint: 'Log in at /admin with this email and ADMIN_PASSWORD' }
+        : { created: false },
     });
   } catch (err) {
     console.error('Seed failed:', err);

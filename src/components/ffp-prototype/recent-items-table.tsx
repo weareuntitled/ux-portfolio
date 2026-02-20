@@ -55,14 +55,14 @@ const recentItems: RecentItem[] = [
 function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   if (type === "ffp") {
     return (
-      <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-        <Fingerprint className="h-4 w-4 text-primary-foreground" />
+      <span className="flex h-6 w-6 items-center justify-center rounded bg-primary">
+        <Fingerprint className="h-3 w-3 text-primary-foreground" />
       </span>
     );
   }
   return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-      <Shield className="h-4 w-4 text-primary-foreground" />
+    <span className="flex h-6 w-6 items-center justify-center rounded bg-primary">
+      <Shield className="h-3 w-3 text-primary-foreground" />
     </span>
   );
 }
@@ -72,24 +72,18 @@ export function RecentItemsTable() {
     <section aria-labelledby="recent-heading">
       <h2
         id="recent-heading"
-        className="mb-6 text-2xl font-bold text-foreground md:text-3xl"
+        className="mb-4 text-lg font-bold text-foreground md:text-xl"
       >
         Zuletzt bearbeitet / Favorisiert
       </h2>
 
-      <div className="overflow-x-auto rounded-lg">
+      <div className="overflow-x-auto rounded-lg border border-border">
         <Table>
           <TableHeader>
             <TableRow className="border-b border-border hover:bg-transparent">
-              <TableHead className="w-[40%] text-sm font-semibold text-foreground">
-                Name
-              </TableHead>
-              <TableHead className="text-sm font-semibold text-foreground">
-                Bearbeitet von
-              </TableHead>
-              <TableHead className="text-right text-sm font-semibold text-foreground">
-                Zuletzt bearbeitet:
-              </TableHead>
+              <TableHead className="w-[40%] py-2 text-xs font-semibold text-foreground">Name</TableHead>
+              <TableHead className="py-2 text-xs font-semibold text-foreground">Bearbeitet von</TableHead>
+              <TableHead className="py-2 text-right text-xs font-semibold text-foreground">Zuletzt bearbeitet</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -98,23 +92,17 @@ export function RecentItemsTable() {
                 key={item.id}
                 className="cursor-pointer border-b border-border transition-colors hover:bg-secondary"
               >
-                <TableCell>
-                  <div className="flex items-center gap-3">
+                <TableCell className="py-1.5">
+                  <div className="flex items-center gap-2">
                     <TypeIcon type={item.type} />
                     {item.starred && (
-                      <Star className="h-5 w-5 shrink-0 fill-accent text-accent" />
+                      <Star className="h-4 w-4 shrink-0 fill-accent text-accent" />
                     )}
-                    <span className="font-medium text-foreground">
-                      {item.name}
-                    </span>
+                    <span className="text-xs font-medium text-foreground">{item.name}</span>
                   </div>
                 </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {item.editedBy}
-                </TableCell>
-                <TableCell className="text-right font-medium text-foreground">
-                  {item.lastEdited}
-                </TableCell>
+                <TableCell className="py-1.5 text-xs text-muted-foreground">{item.editedBy}</TableCell>
+                <TableCell className="py-1.5 text-right text-xs font-medium text-foreground">{item.lastEdited}</TableCell>
               </TableRow>
             ))}
           </TableBody>

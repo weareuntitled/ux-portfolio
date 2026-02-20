@@ -13,7 +13,7 @@ interface NavItem {
 }
 
 const topItems: NavItem[] = [
-  { href: "/prototypes/ffp", icon: LayoutGrid, label: "Dashboard" },
+  { href: "/prototypes/ffp/fingerprints", icon: LayoutGrid, label: "Dashboard" },
   { href: "/prototypes/ffp-review", icon: BarChart3, label: "Reporting" },
   { href: "#", icon: MessageCircle, label: "SAGA" },
 ];

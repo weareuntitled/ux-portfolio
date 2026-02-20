@@ -1,4 +1,6 @@
+import type React from "react";
 import { Star, Fingerprint, Shield } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Table,
   TableBody,
@@ -7,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { FadeIn } from "@/components/animations";
 
 interface RecentItem {
   id: string;
@@ -67,15 +70,43 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
+const rowVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      damping: 20,
+      mass: 1,
+    },
+  },
+};
+
+const bodyVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const MotionTableRow = motion(TableRow);
+
 export function RecentItemsTable() {
   return (
     <section aria-labelledby="recent-heading">
-      <h2
-        id="recent-heading"
-        className="mb-6 text-2xl font-bold text-foreground md:text-3xl"
-      >
-        Zuletzt bearbeitet / Favorisiert
-      </h2>
+      <FadeIn>
+        <h2
+          id="recent-heading"
+          className="mb-6 text-2xl font-bold text-foreground md:text-3xl"
+        >
+          Zuletzt bearbeitet / Favorisiert
+        </h2>
+      </FadeIn>
 
       <div className="overflow-x-auto rounded-lg">
         <Table>
@@ -92,10 +123,17 @@ export function RecentItemsTable() {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody
+            as={motion.tbody as React.ElementType}
+            variants={bodyVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {recentItems.map((item) => (
-              <TableRow
+              <MotionTableRow
                 key={item.id}
+                variants={rowVariants}
                 className="cursor-pointer border-b border-border transition-colors hover:bg-secondary"
               >
                 <TableCell>
@@ -115,7 +153,7 @@ export function RecentItemsTable() {
                 <TableCell className="text-right font-medium text-foreground">
                   {item.lastEdited}
                 </TableCell>
-              </TableRow>
+              </MotionTableRow>
             ))}
           </TableBody>
         </Table>

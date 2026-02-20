@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
 
 const BASE = "/prototypes/kovon";
 
@@ -42,7 +43,17 @@ export function TopNavbar({ onGridToggle, showLogo }: TopNavbarProps) {
   const CurrentIcon = pageIcons[pathname] || LayoutGrid;
 
   return (
-    <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background px-4">
+    <motion.header
+      initial={{ opacity: 0, y: -24, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{
+        type: "spring",
+        stiffness: 50,
+        damping: 20,
+        mass: 1,
+      }}
+      className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background px-4"
+    >
       <div className="flex items-center gap-3">
         <Link
           href="/projects/kovon"
@@ -107,7 +118,7 @@ export function TopNavbar({ onGridToggle, showLogo }: TopNavbarProps) {
           <CurrentIcon className="h-5 w-5" />
         </Button>
       </div>
-    </header>
+    </motion.header>
   );
 }
 

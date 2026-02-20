@@ -22,6 +22,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
   const context = React.useContext(AvatarContext);
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element -- Avatar supports arbitrary image sources (external URLs, etc.)
     <img
       ref={ref}
       alt={alt ?? ''}

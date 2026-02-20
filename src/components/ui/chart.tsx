@@ -210,16 +210,86 @@ type TooltipPayloadItem = {
   payload?: Record<string, unknown>;
 };
 
-const ChartTooltipContent = React.forwardRef<
+type ChartTooltipContentProps = React.ComponentProps<'div'> & {
+  active?: boolean;
+  payload?: TooltipPayloadItem[];
+  label?: string;
+  hideLabel?: boolean;
+  indicator?: 'line' | 'dot';
+  nameKey?: string;
+  axisId?: string;
+  contentStyle?: React.CSSProperties;
+  cursor?: boolean | string | object;
+  allowEscapeViewBox?: boolean;
+  animationDuration?: number;
+  animationEasing?: string;
+  filterNull?: boolean;
+  viewBox?: object;
+  coordinate?: object;
+  formatter?: (...args: unknown[]) => unknown;
+  itemStyle?: object;
+  itemSorter?: (...args: unknown[]) => unknown;
+  separator?: React.ReactNode;
+  wrapperStyle?: object;
+  isAnimationActive?: boolean;
+  includeHidden?: boolean;
+  labelStyle?: object;
+  reverseDirection?: boolean;
+  activeIndex?: number;
+  accessibilityLayer?: boolean;
+};
+
+/** Safe prop keys to pass to ChartTooltipContent when using content as a function (avoids Recharts cloning and injecting labelStyle, itemStyle, etc. onto DOM). */
+const SAFE_TOOLTIP_CONTENT_PROPS = [
+  'active',
+  'payload',
+  'label',
+  'hideLabel',
+  'indicator',
+  'nameKey',
+  'className',
+  'id',
+  'style',
+] as const;
+
+export function pickSafeTooltipContentProps(
+  props: Record<string, unknown>
+): Pick<
+  ChartTooltipContentProps,
+  (typeof SAFE_TOOLTIP_CONTENT_PROPS)[number]
+> {
+  const out: Record<string, unknown> = {};
+  SAFE_TOOLTIP_CONTENT_PROPS.forEach((key) => {
+    if (props[key] !== undefined) out[key] = props[key];
+  });
+  return out as Pick<
+    ChartTooltipContentProps,
+    (typeof SAFE_TOOLTIP_CONTENT_PROPS)[number]
+  >;
+}
+
+/** Renders a div with only safe props. Explicitly destructure so no Recharts props (wrapperStyle, etc.) can reach the DOM. */
+const SafeTooltipDiv = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<'div'> & {
-    active?: boolean;
-    payload?: TooltipPayloadItem[];
-    label?: string;
-    hideLabel?: boolean;
-    indicator?: 'line' | 'dot';
-    nameKey?: string;
-  }
+  Record<string, unknown> & { children?: React.ReactNode }
+>((props, ref) => {
+  const { id, style, className, children, ..._ignored } = props;
+  return (
+    <div
+      ref={ref}
+      id={typeof id === 'string' ? id : undefined}
+      style={typeof style === 'object' && style != null ? (style as React.CSSProperties) : undefined}
+      className={typeof className === 'string' ? className : undefined}
+    >
+      {children as React.ReactNode}
+    </div>
+  );
+});
+SafeTooltipDiv.displayName = 'SafeTooltipDiv';
+
+const ChartTooltipContentInner = React.forwardRef<
+  HTMLDivElement,
+  ChartTooltipContentProps
 >(
   (
     {
@@ -230,7 +300,29 @@ const ChartTooltipContent = React.forwardRef<
       indicator = 'dot',
       nameKey,
       className,
-      ...props
+      id,
+      style,
+      axisId: _axisId,
+      contentStyle: _contentStyle,
+      cursor: _cursor,
+      allowEscapeViewBox: _allowEscapeViewBox,
+      animationDuration: _animationDuration,
+      animationEasing: _animationEasing,
+      filterNull: _filterNull,
+      viewBox: _viewBox,
+      coordinate: _coordinate,
+      formatter: _formatter,
+      itemStyle: _itemStyle,
+      itemSorter: _itemSorter,
+      separator: _separator,
+      wrapperStyle: _wrapperStyle,
+      isAnimationActive: _isAnimationActive,
+      includeHidden: _includeHidden,
+      labelStyle: _labelStyle,
+      reverseDirection: _reverseDirection,
+      activeIndex: _activeIndex,
+      accessibilityLayer: _accessibilityLayer,
+      ..._restRechartsProps
     },
     ref,
   ) => {
@@ -241,13 +333,14 @@ const ChartTooltipContent = React.forwardRef<
     }
 
     return (
-      <div
+      <SafeTooltipDiv
         ref={ref}
+        id={id}
+        style={style}
         className={cn(
-          'rounded-lg border border-border bg-popover px-3 py-2 text-sm shadow-md',
+          'rounded-xl border border-border bg-popover/95 px-3 py-2.5 text-sm shadow-lg backdrop-blur-sm animate-in fade-in zoom-in-95 duration-200',
           className,
         )}
-        {...props}
       >
         {!hideLabel && label != null && (
           <div className="mb-1.5 font-medium text-foreground">{label}</div>
@@ -289,8 +382,19 @@ const ChartTooltipContent = React.forwardRef<
             );
           })}
         </div>
-      </div>
+      </SafeTooltipDiv>
     );
+  },
+);
+ChartTooltipContentInner.displayName = 'ChartTooltipContentInner';
+
+const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContentProps>(
+  (props, ref) => {
+    const { active, payload } = props;
+    if (!active || !payload?.length) {
+      return null;
+    }
+    return <ChartTooltipContentInner ref={ref} {...pickSafeTooltipContentProps(props)} />;
   },
 );
 ChartTooltipContent.displayName = 'ChartTooltipContent';

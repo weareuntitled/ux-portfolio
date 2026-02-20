@@ -9,7 +9,7 @@ import {
 } from "recharts"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, pickSafeTooltipContentProps, type ChartConfig } from "@/components/ui/chart"
 
 type ScoreDatum = { label: string; score: number }
 
@@ -58,7 +58,7 @@ const radarConfig = {
   score: { label: "Score", color: "hsl(var(--chart-1))" },
 } satisfies ChartConfig
 
-function RadarTooltipContent({ active, payload }: { active?: boolean; payload?: Array<{ payload?: ScoreDatum; value?: number }> }) {
+function RadarTooltipContent({ active, payload }: { active?: boolean; payload?: readonly { payload?: ScoreDatum; value?: number }[] }) {
   if (!active || !payload?.length) return null
   const d = payload[0].payload ?? { label: String(payload[0].value), score: payload[0].value ?? 0 }
   return (
@@ -97,7 +97,7 @@ export function CelonisSkillsPresentation() {
           <CardContent>
             <ChartContainer config={radarConfig} className="min-h-[280px] w-full">
               <RadarChart data={skillsData} margin={{ top: 16, right: 16, bottom: 16, left: 16 }}>
-                <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+                <ChartTooltip cursor={false} content={(props) => <ChartTooltipContent {...pickSafeTooltipContentProps(props ?? {})} />} />
                 <PolarGrid />
                 <PolarAngleAxis dataKey="label" tick={{ fontSize: 10 }} />
                 <Radar
@@ -127,7 +127,7 @@ export function CelonisSkillsPresentation() {
           <CardContent>
             <ChartContainer config={radarConfig} className="min-h-[280px] w-full">
               <RadarChart data={toolsData} margin={{ top: 16, right: 16, bottom: 16, left: 16 }}>
-                <ChartTooltip cursor={false} content={<RadarTooltipContent />} />
+                <ChartTooltip cursor={false} content={(props) => <RadarTooltipContent active={props?.active} payload={props?.payload} />} />
                 <PolarGrid />
                 <PolarAngleAxis dataKey="label" tick={{ fontSize: 10 }} />
                 <Radar
@@ -154,7 +154,7 @@ export function CelonisSkillsPresentation() {
           <CardContent>
             <ChartContainer config={radarConfig} className="min-h-[280px] w-full">
               <RadarChart data={programmingData} margin={{ top: 16, right: 16, bottom: 16, left: 16 }}>
-                <ChartTooltip cursor={false} content={<RadarTooltipContent />} />
+                <ChartTooltip cursor={false} content={(props) => <RadarTooltipContent active={props?.active} payload={props?.payload} />} />
                 <PolarGrid />
                 <PolarAngleAxis dataKey="label" tick={{ fontSize: 10 }} />
                 <Radar

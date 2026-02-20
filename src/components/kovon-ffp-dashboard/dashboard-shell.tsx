@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { TopNavbar } from "@/components/kovon-ffp-dashboard/top-navbar";
 import { AppSidebar } from "@/components/kovon-ffp-dashboard/app-sidebar";
 import { LeftSidebar } from "@/components/kovon-ffp-dashboard/left-sidebar";
@@ -38,7 +39,15 @@ export function DashboardShell({ children, showLeftSidebar = false }: DashboardS
 
       {showLeftSidebar && <LeftSidebar open={leftSidebarOpen} />}
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          damping: 20,
+          mass: 1,
+        }}
         className={
           showLeftSidebar
             ? leftSidebarOpen
@@ -48,7 +57,7 @@ export function DashboardShell({ children, showLeftSidebar = false }: DashboardS
         }
       >
         {children}
-      </div>
+      </motion.div>
     </div>
   );
 }

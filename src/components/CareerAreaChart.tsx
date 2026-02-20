@@ -15,14 +15,16 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
+  pickSafeTooltipContentProps,
 } from '@/components/ui/chart';
 import { careerAreaData } from '@/content/home';
 
+/** Lime, cyan, violet, orange, gray (plan §8) */
 const chartConfig = {
   phase: { label: 'Phase' },
   graphicDesign: {
     label: 'Graphic design',
-    color: 'hsl(var(--chart-1))',
+    color: 'hsl(var(--chart-5))',
   },
   motionWeb: {
     label: 'Motion / Web',
@@ -30,11 +32,11 @@ const chartConfig = {
   },
   productUx: {
     label: 'Product / UX',
-    color: 'hsl(var(--chart-3))',
+    color: 'hsl(var(--chart-1))',
   },
   aiSystems: {
     label: 'AI / Design systems',
-    color: 'hsl(var(--chart-4))',
+    color: 'hsl(var(--chart-3))',
   },
 } satisfies ChartConfig;
 
@@ -46,7 +48,7 @@ export function CareerAreaChart() {
       <CardHeader>
         <CardTitle className="text-lg">Career transition</CardTitle>
         <p className="text-sm text-muted-foreground">
-          From graphic designer to product, UX, and AI/design systems focus.
+          From graphic design to enterprise product UX, compliance tools, and AI/automation.
         </p>
       </CardHeader>
       <CardContent className="pt-0">
@@ -60,7 +62,7 @@ export function CareerAreaChart() {
               dataKey="phase"
               tickLine={false}
               axisLine={false}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: 12, fill: 'hsl(var(--foreground))', fontWeight: 500 }}
             />
             <YAxis
               domain={[0, 100]}
@@ -70,7 +72,9 @@ export function CareerAreaChart() {
               width={28}
             />
             <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
+              content={(props) => (
+                <ChartTooltipContent {...pickSafeTooltipContentProps(props ?? {})} indicator="line" />
+              )}
               cursor={false}
             />
             <Area
@@ -90,6 +94,7 @@ export function CareerAreaChart() {
               fillOpacity={0.4}
               stroke="var(--color-motionWeb)"
               strokeWidth={1.5}
+              strokeDasharray="4 2"
             />
             <Area
               type="monotone"
@@ -108,6 +113,7 @@ export function CareerAreaChart() {
               fillOpacity={0.4}
               stroke="var(--color-aiSystems)"
               strokeWidth={1.5}
+              strokeDasharray="6 3"
             />
             <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>

@@ -14,6 +14,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
+  pickSafeTooltipContentProps,
 } from '@/components/ui/chart';
 
 const kovonRadarData = [
@@ -58,7 +59,9 @@ export function KovonSkillsRadar() {
           >
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
+              content={(props) => (
+                <ChartTooltipContent {...pickSafeTooltipContentProps(props ?? {})} indicator="line" />
+              )}
             />
             <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11 }} />
             <PolarGrid stroke="hsl(var(--border))" />

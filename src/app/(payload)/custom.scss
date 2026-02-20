@@ -1,1 +1,5 @@
-/* Payload admin custom styles (optional) */
+/* Payload admin: reset body so portfolio globals don't override admin UI */
+body.payload-admin-page {
+  background: #fff !important;
+  color: #1a1a1a !important;
+}

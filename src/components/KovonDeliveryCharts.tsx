@@ -7,6 +7,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  pickSafeTooltipContentProps,
 } from '@/components/ui/chart';
 import { KovonUsersRadial } from '@/components/KovonUsersRadial';
 
@@ -54,7 +55,9 @@ export function KovonDeliveryCharts() {
               <PieChart>
                 <ChartTooltip
                   cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
+                  content={(props) => (
+                  <ChartTooltipContent {...pickSafeTooltipContentProps(props ?? {})} hideLabel />
+                )}
                 />
                 <Pie
                   data={deliveryPieData}
@@ -83,7 +86,9 @@ export function KovonDeliveryCharts() {
               <PieChart>
                 <ChartTooltip
                   cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
+                  content={(props) => (
+                  <ChartTooltipContent {...pickSafeTooltipContentProps(props ?? {})} hideLabel />
+                )}
                 />
                 <Pie
                   data={freelanceEnterpriseData}

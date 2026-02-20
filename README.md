@@ -62,6 +62,17 @@ npm run lint
 npm run build
 ```
 
+## Docker (production)
+
+To run this portfolio in production using Docker:
+
+```bash
+docker compose build app
+docker compose up -d app
+```
+
+The app will be available on port 3000 behind the `caddy` reverse proxy defined in `docker-compose.yml`.
+
 ## Vercel deployment
 
 1. Push the repository to GitHub.

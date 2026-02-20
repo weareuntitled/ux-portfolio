@@ -4,7 +4,7 @@ This app runs as a single containerized Next.js + Payload server behind Caddy, w
 
 ### 1. Required env vars
 
-Configure these in `.env.production` on the KVM host:
+Configure these in `.env.production` on the KVM host (both the app and Caddy read this file):
 
 - `NODE_ENV=production`
 - `PORT=3000`
@@ -14,8 +14,10 @@ Configure these in `.env.production` on the KVM host:
 - `PAYLOAD_PUBLIC_URL=https://<APP_DOMAIN>`
 - `PAYLOAD_DB_SQLITE_PATH=/data/payload.db`
 - `PAYLOAD_UPLOADS_DIR=/uploads`
-- `APP_DOMAIN` – e.g. `portfolio.example.com`.
+- `APP_DOMAIN` – e.g. `portfolio.untitled-ux.de`.
 - `EMAIL_FOR_ACME` – email for Let’s Encrypt / ACME.
+- `ADMIN_EMAIL` / `ADMIN_PASSWORD` – first admin user (used by seed; log in at `/admin`).
+- `ALLOWED_ORIGINS` – set to `https://<APP_DOMAIN>` if you use CORS.
 
 ### 2. Volumes and persistence
 

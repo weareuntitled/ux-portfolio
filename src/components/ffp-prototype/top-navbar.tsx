@@ -3,18 +3,18 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Bell, LayoutGrid, Fingerprint, Activity, Shield, MessageCircle, BarChart3, Users, ArrowLeft } from "lucide-react";
+import { Search, Bell, LayoutGrid, Fingerprint, ListChecks, Activity, Shield, MessageCircle, BarChart3, Users, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const pageIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   "/prototypes/ffp": LayoutGrid,
+  "/prototypes/ffp/fingerprints": ListChecks,
   "/prototypes/ffp/reporting": BarChart3,
   "/prototypes/ffp/diss": Shield,
   "/prototypes/ffp/saga": MessageCircle,
   "/prototypes/ffp/diagnose": Activity,
-  "/prototypes/ffp/ffp": Fingerprint,
   "/prototypes/ffp/forum": Users,
 };
 
@@ -28,7 +28,7 @@ export function TopNavbar({ onGridToggle, showLogo }: TopNavbarProps) {
   const CurrentIcon = pageIcons[pathname] || LayoutGrid;
 
   return (
-    <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background px-4">
+    <header className="fixed left-0 right-0 top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="flex items-center gap-3">
         <Link
           href="/projects/ffp-dashboard"
