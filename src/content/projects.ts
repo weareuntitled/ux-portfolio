@@ -158,7 +158,7 @@ export const projects: Project[] = [
     tools: ['Next.js', 'Node.js', 'PostgreSQL'],
     methods: ['Rapid prototyping', 'Telemetry review', 'User interviews'],
     links: [
-      { label: 'Live demo', href: 'https://example.com/tracklistify' },
+      { label: 'Live demo', href: 'http://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.aZjo5w.kmAFwTEAWeRttLJTiSetI9IaPjk' },
       { label: 'GitHub', href: 'https://github.com/example/tracklistify' }
     ],
     prototype: {
@@ -200,7 +200,7 @@ export const projects: Project[] = [
     tools: ['TypeScript', 'Supabase', 'React'],
     methods: ['Problem interviews', 'Usability walkthroughs', 'Iterative releases'],
     links: [
-      { label: 'Live demo', href: 'https://app.untitled-ux.de/share/read/442b889ce2774c5298570cc3c4479597' },
+      { label: 'Live demo', href: 'https://app.untitled-ux.de/share/read/af9759caf9e54b09982d69987c516b95' },
       { label: 'GitHub', href: 'https://github.com/example/fixundfertig' }
     ],
     prototype: {
