@@ -6,8 +6,8 @@ import { LayoutGrid, Fingerprint, Activity, Shield, MessageCircle, BarChart3, Us
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Workflow", icon: LayoutGrid, href: "/prototypes/ffp" },
-  { label: "FFP", icon: Fingerprint, href: "/prototypes/ffp" },
+  { label: "Workflow", icon: LayoutGrid, href: "/prototypes/ffp/fingerprints" },
+  { label: "FFP", icon: Fingerprint, href: "/prototypes/ffp/fingerprints" },
   { label: "Comparison", icon: BarChart3, href: "/prototypes/ffp-review" },
   { label: "Diagnose", icon: Activity, href: "#" },
   { label: "DISS", icon: Shield, href: "#" },

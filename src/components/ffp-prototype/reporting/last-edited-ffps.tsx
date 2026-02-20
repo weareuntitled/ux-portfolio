@@ -27,7 +27,7 @@ const cards: FfpCard[] = [
 function TinyBars({ values }: { values: { v: number }[] }) {
   const max = Math.max(...values.map((x) => x.v));
   return (
-    <div className="mt-2 flex h-10 items-end gap-1">
+    <div className="mt-1 flex h-6 items-end gap-0.5">
       {values.map((item, index) => (
         <div key={index} className="flex-1 rounded-sm bg-primary/70" style={{ height: `${(item.v / max) * 100}%` }} />
       ))}
@@ -39,32 +39,32 @@ export function LastEditedFfps() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   function scroll(dir: "left" | "right") {
-    scrollRef.current?.scrollBy({ left: dir === "left" ? -260 : 260, behavior: "smooth" });
+    scrollRef.current?.scrollBy({ left: dir === "left" ? -210 : 210, behavior: "smooth" });
   }
 
   return (
     <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-base font-bold text-foreground">Last edited FFPs</h2>
-        <div className="flex items-center gap-2">
-          <button type="button" className="rounded-md bg-secondary p-1.5 text-foreground" aria-label="Grid view"><LayoutGrid className="h-4 w-4" /></button>
-          <button type="button" className="rounded-md p-1.5 text-muted-foreground hover:bg-secondary" aria-label="List view"><List className="h-4 w-4" /></button>
-          <button type="button" className="rounded-md p-1.5 text-muted-foreground hover:bg-secondary" aria-label="Expand"><Maximize2 className="h-4 w-4" /></button>
+      <div className="mb-1.5 flex items-center justify-between">
+        <h2 className="text-xs font-bold text-foreground">Last edited FFPs</h2>
+        <div className="flex items-center gap-1">
+          <button type="button" className="rounded bg-secondary p-1 text-foreground" aria-label="Grid view"><LayoutGrid className="h-3.5 w-3.5" /></button>
+          <button type="button" className="rounded p-1 text-muted-foreground hover:bg-secondary" aria-label="List view"><List className="h-3.5 w-3.5" /></button>
+          <button type="button" className="rounded p-1 text-muted-foreground hover:bg-secondary" aria-label="Expand"><Maximize2 className="h-3.5 w-3.5" /></button>
         </div>
       </div>
 
       <div className="relative">
-        <button type="button" onClick={() => scroll("left")} className="absolute -left-3 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background text-muted-foreground shadow-md hover:bg-secondary" aria-label="Scroll left"><ChevronLeft className="h-4 w-4" /></button>
-        <div ref={scrollRef} className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth pb-1">
+        <button type="button" onClick={() => scroll("left")} className="absolute -left-2 top-1/2 z-10 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-background text-muted-foreground shadow hover:bg-secondary" aria-label="Scroll left"><ChevronLeft className="h-3 w-3" /></button>
+        <div ref={scrollRef} className="no-scrollbar flex gap-2 overflow-x-auto scroll-smooth pb-1">
           {cards.map((card) => (
-            <div key={card.ffpId} className="min-w-[250px] rounded-xl border border-border bg-background p-4">
+            <div key={card.ffpId} className="min-w-[170px] rounded-lg border border-border bg-background p-2.5">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-foreground">{card.name}</h3>
-                <button type="button" className="text-muted-foreground hover:text-foreground" aria-label="More options"><MoreHorizontal className="h-4 w-4" /></button>
+                <h3 className="text-[11px] font-semibold text-foreground truncate">{card.name}</h3>
+                <button type="button" className="shrink-0 text-muted-foreground hover:text-foreground" aria-label="More options"><MoreHorizontal className="h-3 w-3" /></button>
               </div>
-              <span className={`mt-1 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${card.statusColor}`}>{card.status}</span>
+              <span className={`mt-0.5 inline-block rounded-full px-1.5 py-0.5 text-[8px] font-semibold ${card.statusColor}`}>{card.status}</span>
               <TinyBars values={card.chartData} />
-              <div className="mt-3 space-y-1 text-[10px]">
+              <div className="mt-1.5 space-y-0.5 text-[8px]">
                 <div className="flex justify-between"><span className="text-muted-foreground">FFP-ID</span><span className="font-bold text-foreground">{card.ffpId}</span></div>
                 <div className="flex justify-between"><span className="text-muted-foreground">Affected</span><span className="font-bold text-foreground">{card.affectedVehicles}</span></div>
                 <div className="flex justify-between"><span className="text-muted-foreground">Updated</span><span className="font-bold text-foreground">{card.updated}</span></div>
@@ -72,7 +72,7 @@ export function LastEditedFfps() {
             </div>
           ))}
         </div>
-        <button type="button" onClick={() => scroll("right")} className="absolute -right-3 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background text-muted-foreground shadow-md hover:bg-secondary" aria-label="Scroll right"><ChevronRight className="h-4 w-4" /></button>
+        <button type="button" onClick={() => scroll("right")} className="absolute -right-2 top-1/2 z-10 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-background text-muted-foreground shadow hover:bg-secondary" aria-label="Scroll right"><ChevronRight className="h-3 w-3" /></button>
       </div>
     </section>
   );

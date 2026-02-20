@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  ux-portfolio: # Eindeutiger Name für Caddy
+    build: .
+    container_name: ux-portfolio
+    env_file:
+      - .env.production
+    environment:
+      DEBUG_LOG_HOST: host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      # Ich habe Port 5002 für außen gewählt. 
+      # WICHTIG: Die 3000 hinten ist geraten. Wenn dein Portfolio (z.B. Next.js) 
+      # intern einen anderen Port nutzt, ändere die 3000 entsprechend ab!
+      - "127.0.0.1:5002:3000"
+    volumes:
+      - app_data:/data
+      - app_uploads:/uploads
+
+  # postgres:
+  #   image: postgres:16
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: payload
+  #     POSTGRES_PASSWORD: change-me
+  #     POSTGRES_DB: payload
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+networks:
+  default:
+    name: fixundfertig_internal_net
+    external: true
+
+volumes:
+  app_data:
+  app_uploads:
+  postgres_data:

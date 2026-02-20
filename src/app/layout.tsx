@@ -1,19 +1,12 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "UX Portfolio",
-  description: "Starter Next.js app with shadcn/ui",
-};
-
+/**
+ * Minimal root layout so Payload admin under (payload) can render its own
+ * <html>/<body> without nesting. The main site under (site) provides the
+ * document shell in (site)/layout.tsx.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
-    </html>
-  );
+  return children;
 }
