@@ -1,6 +1,7 @@
 import type React from "react";
 import { Star, Fingerprint, Shield } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import {
   Table,
   TableBody,
@@ -70,7 +71,7 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-const rowVariants = {
+const rowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
@@ -84,7 +85,7 @@ const rowVariants = {
   },
 };
 
-const bodyVariants = {
+const bodyVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
