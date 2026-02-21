@@ -19,7 +19,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import {
   ArrowRight,
   ChevronLeft,
@@ -32,6 +32,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { StaggerContainer, StaggerItem } from '@/components/animations';
+
+const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 // --- 1. HERO HEADER: Works for any project title ---
 
@@ -55,12 +57,7 @@ export function ProjectHero({
   className,
 }: ProjectHeroProps) {
   return (
-    <div
-      className={cn(
-        'space-y-6 border-b border-border py-10',
-        className
-      )}
-    >
+    <div className={cn('space-y-6 border-b border-border py-10', className)}>
       <div className="mb-4 flex flex-wrap gap-2">
         {tags.map((tag) => (
           <Badge
@@ -71,7 +68,10 @@ export function ProjectHero({
             {tag}
           </Badge>
         ))}
-        <Badge variant="outline" className="border-border font-mono text-xs text-muted-foreground">
+        <Badge
+          variant="outline"
+          className="border-border font-mono text-xs text-muted-foreground"
+        >
           {year}
         </Badge>
       </div>
@@ -110,7 +110,7 @@ export type BrowserMockupProps = {
   alt?: string;
   /** Optional URL bar text; defaults to derived from alt */
   urlBar?: string;
-  /** Use Next.js Image (recommended for local/optimized); false = plain img */
+  /** Kept for API compatibility. This component intentionally uses <img> to allow tall scrollable screenshots. */
   useNextImage?: boolean;
   /** If provided, show muted looping video instead of static image (e.g. Loom/interaction demo) */
   videoSrc?: string;
@@ -123,7 +123,7 @@ export type BrowserMockupProps = {
   className?: string;
 };
 
-const carouselVariants = {
+const carouselVariants: Variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 80 : -80,
     opacity: 0,
@@ -135,14 +135,14 @@ const carouselVariants = {
     opacity: 1,
     scale: 1,
     filter: 'blur(0px)',
-    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+    transition: { duration: 0.4, ease: EASE },
   },
   exit: (direction: number) => ({
     x: direction > 0 ? -80 : 80,
     opacity: 0,
     scale: 0.98,
     filter: 'blur(4px)',
-    transition: { duration: 0.3 },
+    transition: { duration: 0.3, ease: EASE },
   }),
 };
 
@@ -157,8 +157,10 @@ export function BrowserMockup({
   autoAdvanceMs = 5000,
   className,
 }: BrowserMockupProps) {
-  const displayUrl =
-    urlBar ?? `https://${alt.toLowerCase().replace(/\s/g, '-')}.com`;
+  // keep prop (avoid eslint unused warning) while intentionally using <img> for scrollable screenshots
+  void useNextImage;
+
+  const displayUrl = urlBar ?? `https://${alt.toLowerCase().replace(/\s/g, '-')}.com`;
 
   const allScreens = React.useMemo(() => {
     if (!screens?.length) return null;
@@ -193,7 +195,7 @@ export function BrowserMockup({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
+      transition={{ duration: 0.5, ease: EASE }}
       className={cn(
         'group relative my-12 overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)]',
         className
@@ -209,6 +211,7 @@ export function BrowserMockup({
           {displayUrl}
         </div>
       </div>
+
       <div className="relative aspect-video w-full max-h-[min(60vh,520px)] overflow-y-auto overflow-x-hidden bg-muted">
         {iframeSrc ? (
           <iframe
@@ -240,7 +243,6 @@ export function BrowserMockup({
                 className="absolute inset-0 flex min-h-0 flex-col"
               >
                 <div className="min-h-0 min-w-full flex-1 overflow-y-auto overflow-x-hidden">
-                  {/* Use img for scrollable tall screenshots; Next/Image fill constrains height */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={allScreens[index]!}
@@ -250,6 +252,7 @@ export function BrowserMockup({
                 </div>
               </motion.div>
             </AnimatePresence>
+
             {total > 1 && (
               <>
                 <motion.button
@@ -262,6 +265,7 @@ export function BrowserMockup({
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </motion.button>
+
                 <motion.button
                   type="button"
                   onClick={goNext}
@@ -274,26 +278,27 @@ export function BrowserMockup({
                 </motion.button>
               </>
             )}
+
             {total > 1 && (
               <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-              {allScreens.map((_, i) => (
-                <motion.button
-                  key={i}
-                  type="button"
-                  onClick={() => {
-                    setDirection(i > index ? 1 : -1);
-                    setIndex(i);
-                  }}
-                  className={cn(
-                    'h-1.5 rounded-full transition-colors',
-                    i === index
-                      ? 'w-5 bg-primary'
-                      : 'w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/60'
-                  )}
-                  aria-label={`Go to screen ${i + 1}`}
-                  whileHover={{ scale: 1.2 }}
-                />
-              ))}
+                {allScreens.map((_, i) => (
+                  <motion.button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setDirection(i > index ? 1 : -1);
+                      setIndex(i);
+                    }}
+                    className={cn(
+                      'h-1.5 rounded-full transition-colors',
+                      i === index
+                        ? 'w-5 bg-primary'
+                        : 'w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                    )}
+                    aria-label={`Go to screen ${i + 1}`}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                ))}
               </div>
             )}
           </>
@@ -301,7 +306,7 @@ export function BrowserMockup({
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.4, ease: EASE }}
             className="absolute inset-0 min-h-0 overflow-y-auto overflow-x-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -359,34 +364,49 @@ export function BeforeAfterSlider({
   };
 
   const imgClass = 'absolute inset-0 h-full w-full object-cover';
+
   return (
     <div
       ref={containerRef}
-      className={cn('relative my-12 aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted', className)}
+      className={cn(
+        'relative my-12 aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted',
+        className
+      )}
       role="img"
       aria-label={alt}
     >
       {/* Old (background) */}
       <div className="absolute inset-0">
         {useNextImage ? (
-          <Image src={oldImg} alt={alt} fill sizes="(max-width: 1024px) 100vw, 1024px" className={imgClass} />
+          <Image
+            src={oldImg}
+            alt={alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className={imgClass}
+          />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={oldImg} alt={alt} className={imgClass} />
         )}
       </div>
+
       {/* New (clipped) */}
-      <div
-        className="absolute inset-0"
-        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-      >
+      <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
         {useNextImage ? (
-          <Image src={newImg} alt={alt} fill sizes="(max-width: 1024px) 100vw, 1024px" className={imgClass} />
+          <Image
+            src={newImg}
+            alt={alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className={imgClass}
+          />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={newImg} alt={alt} className={imgClass} />
         )}
       </div>
+
       {/* Slider handle */}
       <div
         className="absolute top-0 bottom-0 z-10 w-1 cursor-ew-resize bg-primary"
@@ -441,9 +461,7 @@ export function MetricCard({
       <div>
         <div className="mb-1 text-4xl font-bold tracking-tighter text-foreground">
           {value}
-          {suffix && (
-            <span className="ml-1 text-2xl text-muted-foreground">{suffix}</span>
-          )}
+          {suffix && <span className="ml-1 text-2xl text-muted-foreground">{suffix}</span>}
         </div>
         <div className="text-sm text-muted-foreground">{label}</div>
       </div>
@@ -460,28 +478,18 @@ export type InsightCardProps = {
   className?: string;
 };
 
-export function InsightCard({
-  quote,
-  author,
-  type = 'insight',
-  className,
-}: InsightCardProps) {
+export function InsightCard({ quote, author, type = 'insight', className }: InsightCardProps) {
   return (
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl border p-8',
-        type === 'problem'
-          ? 'border-destructive/30 bg-destructive/5'
-          : 'border-border bg-card/30',
+        type === 'problem' ? 'border-destructive/30 bg-destructive/5' : 'border-border bg-card/30',
         className
       )}
     >
       <div className="relative z-10">
         <MessageSquareQuote
-          className={cn(
-            'mb-4 h-8 w-8',
-            type === 'problem' ? 'text-destructive' : 'text-primary'
-          )}
+          className={cn('mb-4 h-8 w-8', type === 'problem' ? 'text-destructive' : 'text-primary')}
         />
         <h3
           className={cn(
@@ -538,9 +546,7 @@ export function ProcessStep({
           {Icon && <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />}
           {title}
         </h4>
-        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-          {desc}
-        </p>
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">{desc}</p>
         {output && (
           <p className="mt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Output: {output}
@@ -569,23 +575,13 @@ export function ProcessSteps({
   stagger?: boolean;
 }) {
   const content = steps.map((step, i) => {
-    const node = (
-      <ProcessStep
-        key={step.title}
-        {...step}
-        isLast={i === steps.length - 1}
-      />
-    );
+    const node = <ProcessStep key={step.title} {...step} isLast={i === steps.length - 1} />;
     if (!stagger) return node;
     return <StaggerItem key={step.title}>{node}</StaggerItem>;
   });
 
   if (stagger) {
-    return (
-      <StaggerContainer className={className}>
-        {content}
-      </StaggerContainer>
-    );
+    return <StaggerContainer className={className}>{content}</StaggerContainer>;
   }
 
   return <div className={className}>{content}</div>;
@@ -630,11 +626,10 @@ export function FeatureItem({
         </div>
         <div className="min-w-0 flex-1">
           <h4 className="text-sm font-medium text-foreground">{title}</h4>
-          {!isProblemSolution && (
-            <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
-          )}
+          {!isProblemSolution && <p className="mt-1 text-sm text-muted-foreground">{desc}</p>}
         </div>
       </div>
+
       {isProblemSolution && (
         <div className="space-y-3 pl-0 text-sm">
           <div>
