@@ -1,4 +1,3 @@
-import type React from "react";
 import { Star, Fingerprint, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -77,7 +76,7 @@ const rowVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 50,
       damping: 20,
       mass: 1,
@@ -96,6 +95,7 @@ const bodyVariants: Variants = {
 };
 
 const MotionTableRow = motion(TableRow);
+const MotionTableBody = motion(TableBody);
 
 export function RecentItemsTable() {
   return (
@@ -124,8 +124,7 @@ export function RecentItemsTable() {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody
-            as={motion.tbody as React.ElementType}
+          <MotionTableBody
             variants={bodyVariants}
             initial="hidden"
             whileInView="visible"
@@ -156,7 +155,7 @@ export function RecentItemsTable() {
                 </TableCell>
               </MotionTableRow>
             ))}
-          </TableBody>
+          </MotionTableBody>
         </Table>
       </div>
     </section>
