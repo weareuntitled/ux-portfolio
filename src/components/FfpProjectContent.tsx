@@ -11,22 +11,6 @@ import {
 import { BrowserMockup } from '@/components/PortfolioKit';
 import type { ResolvedProject } from '@/lib/cms/types';
 
-/** Default FFP gallery images when project.galleryUrls is not set. */
-const FFP_GALLERY_URLS = [
-  '/projects/ffp_gallery_01.png',
-  '/projects/ffp_gallery_02.png',
-  '/projects/ffp_gallery_03.png',
-  '/projects/ffp_gallery_04.png',
-  '/projects/ffp_gallery_05.png',
-  '/projects/ffp_gallery_06.png',
-  '/projects/ffp_gallery_07.png',
-  '/projects/ffp_gallery_08.png',
-  '/projects/ffp_gallery_09.png',
-  '/projects/ffp_gallery_10.png',
-  '/projects/ffp_gallery_11.png',
-  '/projects/ffp_gallery_12.png',
-];
-
 /** Stats grid for FFP hero (used as ProjectCaseStudyHero children). */
 export function FfpHeroStats() {
   return (
@@ -50,7 +34,7 @@ export function FfpHeroStats() {
 type FfpProjectContentProps = { project?: ResolvedProject | null };
 
 export function FfpProjectContent({ project }: FfpProjectContentProps) {
-  const galleryUrls = project?.galleryUrls?.length ? project.galleryUrls : FFP_GALLERY_URLS;
+  const galleryUrls = project?.galleryUrls ?? [];
 
   return (
     <div className="space-y-24">
