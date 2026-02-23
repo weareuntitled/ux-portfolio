@@ -3,7 +3,7 @@ import { draftMode } from 'next/headers';
 import { ProjectCard } from '@/components/ProjectCard';
 import { DashboardCV } from '@/components/DashboardCV';
 import { ProjectPortfolioKit } from '@/components/ProjectPortfolioKit';
-import { ProjectCaseStudyHero } from '@/components/ProjectCaseStudyHero';
+import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
 import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
 import { ProjectLinks } from '@/components/project/ProjectLinks';
