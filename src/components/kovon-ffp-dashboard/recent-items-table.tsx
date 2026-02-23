@@ -1,5 +1,5 @@
 import { Star, Fingerprint, Shield } from "lucide-react";
-import { motion, type Transition, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Table,
   TableBody,
@@ -69,29 +69,30 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-const rowVariants = {
+// 1. Inlined and fixed the variants
+const rowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      type: "spring" as const, // <-- 'as const' tells TypeScript this is strictly "spring"
       stiffness: 50,
       damping: 20,
       mass: 1,
-    },
+    } 
   },
-} satisfies Variants;
-
-const bodyTransition: Transition = {
-  staggerChildren: 0.1,
-  delayChildren: 0.05,
 };
 
 const bodyVariants = {
   hidden: {},
-  visible: { transition: bodyTransition },
-} satisfies Variants;
+  visible: { 
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    } 
+  },
+};
 
 const MotionTableRow = motion(TableRow);
 const MotionTableBody = motion(TableBody);
