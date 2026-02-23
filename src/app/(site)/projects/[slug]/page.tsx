@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { ProjectCard } from '@/components/ProjectCard';
 import { DashboardCV } from '@/components/DashboardCV';
 // FIX: Geschweifte Klammern entfernt (Default Import)
-import ProjectPortfolioKit from '@/components/ProjectPortfolioKit';
+import {ProjectPortfolioKit} from '@/components/ProjectPortfolioKit';
 import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
 import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
