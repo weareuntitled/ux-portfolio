@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Box,
   FileText,
@@ -14,17 +14,22 @@ import {
   Menu,
   Search,
 } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+
 import { contact, identityName, identityRole } from '@/content/home';
 import { getAllProjects } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
-import { Breadcrumbs, type BreadcrumbItem } from './Breadcrumbs';
+
+import { Breadcrumbs, type BreadcrumbItem } from '@/components/Breadcrumbs';
 import type { LucideIcon } from 'lucide-react';
 
-const MotionLink = motion(Link as React.ComponentType<{ href: string; className?: string; children?: React.ReactNode }>);
+const MotionLink = motion(
+  Link as React.ComponentType<{ href: string; className?: string; children?: React.ReactNode }>
+);
 
 const navItems = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -33,7 +38,7 @@ const navItems = [
   { label: 'Contact', href: '/contact', icon: Mail },
 ];
 
-type DashboardCVProps = {
+export type DashboardCVProps = {
   children: React.ReactNode;
   searchQuery?: string;
   onSearchChange?: (value: string) => void;
@@ -82,8 +87,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
       : { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
   };
 
-  const rowBase =
-    'relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors';
+  const rowBase = 'relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors';
 
   function NavRow({
     label,
@@ -112,7 +116,6 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         whileHover={reduceMotion ? undefined : { x: 2 }}
         whileTap={reduceMotion ? undefined : { scale: 0.99 }}
       >
-        {/* Animated active rail */}
         <AnimatePresence>
           {isActive && (
             <motion.span
@@ -146,10 +149,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
   function ProjectLeading({ moodImageUrl }: { moodImageUrl: string | null }) {
     if (!moodImageUrl) {
       return (
-        <motion.span
-          className="grid h-6 w-6 place-items-center"
-          whileHover={reduceMotion ? undefined : { rotate: -3 }}
-        >
+        <motion.span className="grid h-6 w-6 place-items-center" whileHover={reduceMotion ? undefined : { rotate: -3 }}>
           <Box className="h-4 w-4 shrink-0" aria-hidden />
         </motion.span>
       );
@@ -166,20 +166,12 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
     );
   }
 
-  function ProjectSection({
-    title,
-    items,
-  }: {
-    title: string;
-    items: NavProjectWithImage[];
-  }) {
+  function ProjectSection({ title, items }: { title: string; items: NavProjectWithImage[] }) {
     if (!items.length) return null;
 
     return (
       <motion.div variants={vItem} className="mt-4 border-t border-border pt-3">
-        <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          {title}
-        </p>
+        <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{title}</p>
         <div className="space-y-1">
           {items.map((project) => {
             const href = `/projects/${project.slug}`;
@@ -201,14 +193,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
   }
 
   return (
-    <motion.div
-      className="flex h-full flex-col"
-      variants={vWrap}
-      initial="hidden"
-      animate="show"
-      key={pathname} // gives you a subtle re-stagger on route change without being too much
-    >
-      {/* Subtle animated glow background */}
+    <motion.div className="flex h-full flex-col" variants={vWrap} initial="hidden" animate="show" key={pathname}>
       {!reduceMotion && (
         <motion.div
           className="pointer-events-none absolute inset-0 -z-10 opacity-40"
@@ -222,7 +207,6 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         />
       )}
 
-      {/* Profile */}
       <motion.div variants={vItem} className="border-b border-border pb-5">
         <div className="flex items-center gap-3">
           <motion.div
@@ -239,20 +223,16 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         </div>
       </motion.div>
 
-      {/* Nav */}
       <motion.nav variants={vItem} className="mt-5 space-y-1" aria-label="Sidebar navigation">
         {navItems.map(({ label, href, icon }) => {
           const isActive = pathname === href || (href !== '/' && pathname?.startsWith(href));
-          return (
-            <NavRow key={label} label={label} href={href} icon={icon} isActive={isActive} />
-          );
+          return <NavRow key={label} label={label} href={href} icon={icon} isActive={isActive} />;
         })}
 
         <ProjectSection title="Enterprise" items={enterprise} />
         <ProjectSection title="Side projects" items={side} />
       </motion.nav>
 
-      {/* Footer links */}
       <motion.div variants={vItem} className="mt-auto border-t border-border pt-5 text-sm">
         <Link
           href="https://github.com"
@@ -263,10 +243,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
           <Github className="h-4 w-4" aria-hidden />
           GitHub
         </Link>
-        <a
-          href={`mailto:${contact.email}`}
-          className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-        >
+        <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-foreground">
           <Mail className="h-4 w-4" aria-hidden />
           {contact.email}
         </a>
@@ -275,12 +252,9 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
   );
 }
 
-const defaultBreadcrumbs: BreadcrumbItem[] = [
-  { label: 'Daniel Peters', href: '/' },
-  { label: 'Overview' },
-];
+const defaultBreadcrumbs: BreadcrumbItem[] = [{ label: 'Daniel Peters', href: '/' }, { label: 'Overview' }];
 
-export function DashboardCV({
+function DashboardCVImpl({
   children,
   searchQuery = '',
   onSearchChange,
@@ -294,12 +268,11 @@ export function DashboardCV({
   const isProject = variant === 'project';
 
   return (
-    <div className="dark min-h-screen text-foreground">
+    <div className="min-h-screen text-foreground">
       <div className="container-wrapper section-soft flex flex-1 flex-col pb-6">
         <div className="theme-container container flex flex-1 scroll-mt-20 flex-col">
           <div className="flex flex-col overflow-hidden rounded-lg border border-white/10 bg-background/40 bg-clip-padding backdrop-blur-2xl md:flex-1 xl:rounded-xl">
             <div className="mx-auto grid min-h-svh w-full max-w-[1400px] gap-0 md:grid-cols-[16rem_1fr]">
-              {/* Desktop sidebar (animated mount) */}
               <motion.aside
                 className="relative hidden min-h-[calc(100vh-2rem)] flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground md:flex"
                 aria-label="Main navigation"
@@ -310,7 +283,6 @@ export function DashboardCV({
                 <SidebarContent navProjects={navProjects} />
               </motion.aside>
 
-              {/* Mobile sheet */}
               <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                 <SheetTrigger
                   className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-foreground md:hidden"
@@ -327,10 +299,7 @@ export function DashboardCV({
 
               <main className="flex min-w-0 flex-1 flex-col">
                 <section
-                  className={cn(
-                    'min-w-0 flex-1 space-y-6 p-4 md:p-6',
-                    isLanding ? 'pt-6 md:pt-8' : 'pt-14 md:pt-6'
-                  )}
+                  className={cn('min-w-0 flex-1 space-y-6 p-4 md:p-6', isLanding ? 'pt-6 md:pt-8' : 'pt-14 md:pt-6')}
                 >
                   {!isLanding && (
                     <header
@@ -338,17 +307,12 @@ export function DashboardCV({
                         'flex flex-col gap-4 rounded-xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between',
                         isProject && 'sm:flex-row sm:items-center'
                       )}
-                      style={{
-                        backgroundColor: 'rgba(21, 24, 30, 0)',
-                        borderColor: 'rgba(40, 44, 51, 0)',
-                      }}
+                      style={{ backgroundColor: 'rgba(21, 24, 30, 0)', borderColor: 'rgba(40, 44, 51, 0)' }}
                     >
                       <div>
                         <Breadcrumbs items={breadcrumbs} />
                         {!isProject && (
-                          <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
-                            {pageTitle}
-                          </h1>
+                          <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">{pageTitle}</h1>
                         )}
                       </div>
 
@@ -381,3 +345,6 @@ export function DashboardCV({
     </div>
   );
 }
+
+export const DashboardCV = DashboardCVImpl;
+export default DashboardCVImpl;

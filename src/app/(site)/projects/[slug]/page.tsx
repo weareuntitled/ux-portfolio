@@ -1,31 +1,57 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
-import { ProjectCard } from '@/components/ProjectCard';
+import { ExternalLink } from 'lucide-react';
+
 import { DashboardCV } from '@/components/DashboardCV';
-// FIX: Geschweifte Klammern entfernt (Default Import)
-import {ProjectPortfolioKit} from '@/components/ProjectPortfolioKit';
-import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
-import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
-import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
-import { ProjectLinks } from '@/components/project/ProjectLinks';
+import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectGallery } from '@/components/ProjectGallery';
+import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
+
 import { AutomationProjectContent } from '@/components/AutomationProjectContent';
 import { FfpProjectContent } from '@/components/FfpProjectContent';
 import { CaesarProjectContent } from '@/components/CaesarProjectContent';
-import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
-import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
-import { ProjectGallery } from '@/components/ProjectGallery';
-import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
-import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
-import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
 import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
 import { WorkingCircle } from '@/components/kovon/WorkingCircle';
-import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
+
+import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
+import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
+
+import { getCaseStudySections, portfolio } from '@/content/portfolio';
 import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
 
 type Props = { params: Promise<{ slug: string }> };
-
 export const revalidate = 300;
+
+function pickHeroImage(project: any): string | null {
+  return (
+    project.heroImageUrl ??
+    project.heroImage ??
+    project.moodImageUrl ??
+    project.coverImageUrl ??
+    null
+  );
+}
+
+function StatRow({ label, value }: { label: string; value?: string | null }) {
+  if (!value) return null;
+  return (
+    <div className="flex items-start justify-between gap-3 rounded-lg border border-border bg-card/40 px-3 py-2">
+      <span className="text-xs font-medium text-muted-foreground">{label}</span>
+      <span className="text-xs font-semibold text-foreground text-right">{value}</span>
+    </div>
+  );
+}
+
+function Tag({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-border bg-muted/40 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+      {children}
+    </span>
+  );
+}
 
 export async function generateStaticParams() {
   try {
@@ -50,26 +76,26 @@ export default async function ProjectDetailPage({ params }: Props) {
   if (!project) notFound();
 
   const caseStudySections = getCaseStudySections(slug);
-  const portfolioKit = getPortfolioKit(slug);
+
   const related = resolvedProjects
     .filter((item) => item.slug !== project.slug && item.category === project.category)
     .slice(0, 2);
 
   const projectExtensions: Record<
     string,
-    Partial<Record<'quoteProblem' | 'coreInsights' | 'workflowTooling', ReactNode>>
+    Partial<Record<'customSection', ReactNode>>
   > = {
     automation: {
-      coreInsights: <AutomationProjectContent />,
+      customSection: <AutomationProjectContent />,
     },
     'ffp-dashboard': {
-      coreInsights: <FfpProjectContent project={project} />,
+      customSection: <FfpProjectContent project={project} />,
     },
     'emission-compliance': {
-      coreInsights: <CaesarProjectContent project={project} />,
+      customSection: <CaesarProjectContent project={project} />,
     },
     kovon: {
-      workflowTooling: (
+      customSection: (
         <>
           <RoleAndSetupSection />
           <WorkingCircle />
@@ -79,6 +105,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   };
 
   const extension = projectExtensions[slug] ?? {};
+  const heroImage = pickHeroImage(project);
 
   return (
     <DashboardCV
@@ -91,111 +118,122 @@ export default async function ProjectDetailPage({ params }: Props) {
       pageTitle={project.title}
       variant="project"
     >
-      <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
-        {/* 1) Hero */}
-        <ProjectCaseStudyHero project={project}>
-          {project.impactCards && project.impactCards.length > 0 && (
-            <ProjectImpactCards cards={project.impactCards} />
-          )}
-        </ProjectCaseStudyHero>
+      <div className="mx-auto max-w-5xl space-y-16 px-4 py-8 md:px-8 md:py-12">
+        {/* HERO: Fix für deinen Gap, Bild sitzt top aligned zur Textspalte */}
+        <section className="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+          <div className="space-y-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <Tag>{project.category ?? 'Project'}</Tag>
+              {project.year ? <Tag>{String(project.year)}</Tag> : null}
+              {project.client ? <Tag>{project.client}</Tag> : null}
+            </div>
 
-        <section id="case-study" className="space-y-16">
-          {/* 2) Quote / Problem */}
-          {extension.quoteProblem}
-        <ProjectPortfolioKit
-          project={project}
-          caseStudy={caseStudySections}
-          portfolioKit={portfolioKit ?? null}
-          skipHero
-        />
+            <div className="space-y-2">
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                {project.title}
+              </h1>
 
-          {slug !== 'kovon' && (
-            <>
-              {project.client && (
-                <p className="text-sm text-muted-foreground">
-                  Active project · {project.client}
+              {project.subtitle ? (
+                <p className="text-base text-muted-foreground">{project.subtitle}</p>
+              ) : project.description ? (
+                <p className="text-base text-muted-foreground">{project.description}</p>
+              ) : null}
+            </div>
+
+            {project.role ? (
+              <div className="rounded-xl border border-border bg-card/40 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Role
                 </p>
-              )}
-
-              <div className="grid gap-6 rounded-xl border border-border bg-card/50 p-6 md:grid-cols-2">
-                <article>
-                  <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                    Circumstances
-                  </h2>
-                  <p className="text-foreground">
-                    {[
-                      project.teamSize && `Team: ${project.teamSize}`,
-                      project.client && `Customer: ${project.client}`,
-                      project.year && `Year: ${project.year}`,
-                      project.category,
-                    ]
-                      .filter(Boolean)
-                      .join(' · ')}
-                  </p>
-                </article>
-                {project.customerAbout && (
-                  <article>
-                    <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                      Customer
-                    </h2>
-                    <p className="text-foreground">{project.customerAbout}</p>
-                  </article>
-                )}
+                <p className="mt-1 text-sm text-foreground">{project.role}</p>
               </div>
+            ) : null}
 
-              <div className="max-w-3xl space-y-8">
-                {caseStudySections ? (
-                  <CaseStudyTemplate sections={caseStudySections} />
-                ) : (
-                  <ProjectProblemWorkflowSolution project={project} />
-                )}
+            <div className="grid gap-2 sm:grid-cols-2">
+              <StatRow label="Client" value={project.client ?? null} />
+              <StatRow label="Year" value={project.year ? String(project.year) : null} />
+              <StatRow label="Team" value={project.teamSize ?? null} />
+              <StatRow label="Scope" value={project.scope ?? null} />
+            </div>
+
+            {project.links?.length ? (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {project.links.slice(0, 3).map((l: any) => (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-muted"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
+                    {l.label}
+                  </Link>
+                ))}
               </div>
-            </>
-          )}
-
-          {/* 3) Screenshot / Gallery */}
-          <ProjectGallery project={project} />
-
-          <div id="prototype">
-            <ProjectPrototypePanel project={project} />
+            ) : null}
           </div>
 
-          {/* 4) Core insights */}
-          {extension.coreInsights}
+          <div className="lg:sticky lg:top-6">
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+              <div className="relative aspect-[16/10] w-full bg-muted">
+                {heroImage ? (
+                  <Image
+                    src={heroImage}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-sm text-muted-foreground">
+                    No image available
+                  </div>
+                )}
+              </div>
 
-          {project.notes && (
-            <section className="max-w-3xl rounded-xl border border-border bg-card/50 p-6">
-              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                Notes
-              </h2>
-              <p className="text-muted-foreground">{project.notes}</p>
-            </section>
+              {project.customerAbout ? (
+                <div className="border-t border-border p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Customer
+                  </p>
+                  <p className="mt-2 text-sm text-foreground">{project.customerAbout}</p>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
+        {/* CONTENT: Kein PortfolioKit Placeholder mehr */}
+        <section className="space-y-8">
+          {caseStudySections ? (
+            <div className="max-w-3xl">
+              <CaseStudyTemplate sections={caseStudySections} />
+            </div>
+          ) : (
+            <div className="max-w-3xl">
+              <ProjectProblemWorkflowSolution project={project} />
+            </div>
           )}
+        </section>
 
-          {/* 5) Workflow / Tooling */}
-          {extension.workflowTooling}
-          {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
+        {/* OPTIONAL: Projektspezifische echte Sektion, aber nur wenn du sie bewusst setzt */}
+        {extension.customSection ? (
+          <section className="space-y-6">
+            {extension.customSection}
+          </section>
+        ) : null}
 
-          {/* 6) Impact */}
-          {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
-            <ProjectDeliveryImpact
-              delivery={project.deliveryImpact.delivery ?? []}
-              impact={project.deliveryImpact.impact ?? []}
-              learned={project.deliveryImpact.learned}
-            />
-          )}
+        {/* GALLERY: bleibt, weil das echte Evidence ist */}
+        <section>
+          <ProjectGallery project={project} />
+        </section>
 
-          {/* 7) Links */}
-          {project.links && project.links.length > 0 && (
-            <section>
-              <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground">Links</h2>
-              <ProjectLinks links={project.links.map((l) => ({ label: l.label, href: l.href }))} />
-            </section>
-          )}
-
-          {/* 8) Related */}
-          <section>
-            <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
+        {/* RELATED */}
+        {related.length ? (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
               Related projects
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
@@ -204,9 +242,8 @@ export default async function ProjectDetailPage({ params }: Props) {
               ))}
             </div>
           </section>
-        </section>
+        ) : null}
 
-        {/* 9) Footer CTA */}
         <CaseStudyFooterCta />
       </div>
     </DashboardCV>
