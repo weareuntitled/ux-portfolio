@@ -1,16 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
-import { ExternalLink } from 'lucide-react';
 
 import { DashboardCV } from '@/components/DashboardCV';
 import { ProjectPortfolioKit } from '@/components/PortfolioKit';
 import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
 import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
-import { ProjectLinks } from '@/components/project/ProjectLinks';
 import { AutomationProjectContent } from '@/components/AutomationProjectContent';
 import { FfpProjectContent } from '@/components/FfpProjectContent';
 import { CaesarProjectContent } from '@/components/CaesarProjectContent';
@@ -27,34 +23,6 @@ import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 300;
-
-function pickHeroImage(project: any): string | null {
-  return (
-    project.heroImageUrl ??
-    project.heroImage ??
-    project.moodImageUrl ??
-    project.coverImageUrl ??
-    null
-  );
-}
-
-function StatRow({ label, value }: { label: string; value?: string | null }) {
-  if (!value) return null;
-  return (
-    <div className="flex items-start justify-between gap-3 rounded-lg border border-border bg-card/40 px-3 py-2">
-      <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      <span className="text-xs font-semibold text-foreground text-right">{value}</span>
-    </div>
-  );
-}
-
-function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-full border border-border bg-muted/40 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-      {children}
-    </span>
-  );
-}
 
 export async function generateStaticParams() {
   try {
@@ -109,7 +77,6 @@ export default async function ProjectDetailPage({ params }: Props) {
   };
 
   const extension = projectExtensions[slug] ?? {};
-  const heroImage = pickHeroImage(project);
 
   return (
     <DashboardCV
