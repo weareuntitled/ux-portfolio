@@ -69,16 +69,18 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-const rowTransition: Transition = {
-  type: "spring",
-  stiffness: 50,
-  damping: 20,
-  mass: 1,
-};
-
 const rowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: rowTransition },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      damping: 20,
+      mass: 1,
+    } as const,
+  },
 };
 
 const bodyTransition: Transition = {
