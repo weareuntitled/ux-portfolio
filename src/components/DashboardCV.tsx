@@ -46,6 +46,9 @@ export type DashboardCVProps = {
   breadcrumbs?: BreadcrumbItem[];
   pageTitle?: string;
   variant?: 'default' | 'landing' | 'project';
+  rightRail?: React.ReactNode;
+  headerRight?: React.ReactNode;
+  showSearch?: boolean;
 };
 
 function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavProjectWithImage[] }) {
@@ -262,10 +265,14 @@ function DashboardCVImpl({
   breadcrumbs = defaultBreadcrumbs,
   pageTitle = 'Dashboard',
   variant = 'default',
+  rightRail,
+  headerRight,
+  showSearch = true,
 }: DashboardCVProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
   const isLanding = variant === 'landing';
   const isProject = variant === 'project';
+  const renderSearch = Boolean(onSearchChange) && showSearch;
 
   return (
     <div className="min-h-screen text-foreground">
@@ -316,26 +323,32 @@ function DashboardCVImpl({
                         )}
                       </div>
 
-                      {!isProject && (
-                        <div className="relative w-full sm:w-64">
-                          <Search
-                            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-                            aria-hidden
-                          />
-                          <Input
-                            type="search"
-                            placeholder="Search projects..."
-                            value={searchQuery}
-                            onChange={(e) => onSearchChange?.(e.target.value)}
-                            className="pl-9"
-                            aria-label="Search projects"
-                          />
-                        </div>
-                      )}
+                      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+                        {renderSearch && (
+                          <div className="relative w-full sm:w-64">
+                            <Search
+                              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                              aria-hidden
+                            />
+                            <Input
+                              type="search"
+                              placeholder="Search projects..."
+                              value={searchQuery}
+                              onChange={(e) => onSearchChange?.(e.target.value)}
+                              className="pl-9"
+                              aria-label="Search projects"
+                            />
+                          </div>
+                        )}
+                        {headerRight}
+                      </div>
                     </header>
                   )}
 
-                  {children}
+                  <div className={cn('min-w-0', rightRail && 'grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]')} >
+                    <div className="min-w-0">{children}</div>
+                    {rightRail ? <aside className="min-w-0 space-y-4">{rightRail}</aside> : null}
+                  </div>
                 </section>
               </main>
             </div>

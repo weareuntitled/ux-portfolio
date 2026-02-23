@@ -21,7 +21,7 @@ import {
 import { FadeIn } from '@/components/motion';
 import { SectionTitle, IconSquare } from '@/components/portfolio/PortfolioPrimitives';
 import { Card } from '@/components/ui/card';
-import { WorkingCircle } from '@/components/kovon/WorkingCircle';
+import { KovonWorkingCircle } from '@/components/kovon/KovonWorkingCircle';
 import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
 import { getKovonConfig } from '@/content/portfolio';
 
@@ -105,7 +105,7 @@ export function KovonDeliverySection() {
 
         <RoleAndSetupSection />
 
-        <WorkingCircle />
+        <KovonWorkingCircle />
       </section>
 
       <WhereItLandedAndWhyStopped />

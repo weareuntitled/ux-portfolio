@@ -5,16 +5,11 @@ import type { CaseStudySections } from '@/content/portfolio.types';
 type Props = { sections: CaseStudySections };
 
 const sectionOrder: (keyof CaseStudySections)[] = [
-  'summary',
-  'contextWhyMattered',
   'realProblem',
-  'constraints',
-  'myRole',
   'approach',
   'solutionConcept',
   'outcome',
   'whatILearned',
-  'whatToShowVisually',
   // insightAuthor excluded — used for quote attribution, not as a section
 ];
 
@@ -42,7 +37,7 @@ function Section({
   if (!content?.trim()) return null;
   const paragraphs = content.split(/\n\n+/).filter(Boolean);
   return (
-    <article className="rounded-xl border border-border bg-card p-6">
+    <article className="rounded-xl border border-border bg-card p-5">
       <h2 className="mb-4 text-lg font-semibold text-foreground">{title}</h2>
       <div className="space-y-3 text-muted-foreground">
         {paragraphs.length > 1 ? (
