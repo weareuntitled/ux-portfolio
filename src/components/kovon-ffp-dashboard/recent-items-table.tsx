@@ -69,14 +69,14 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-// 1. Inlined and fixed the variants
-const rowVariants: Variants = {
+// The bulletproof escape hatch for Framer Motion + Shadcn type clashes
+const rowVariants: any = {
   hidden: { opacity: 0, y: 16 },
   visible: { 
     opacity: 1, 
     y: 0, 
     transition: { 
-      type: "spring" as const, // <-- 'as const' tells TypeScript this is strictly "spring"
+      type: "spring",
       stiffness: 50,
       damping: 20,
       mass: 1,
@@ -84,7 +84,7 @@ const rowVariants: Variants = {
   },
 };
 
-const bodyVariants = {
+const bodyVariants: any = {
   hidden: {},
   visible: { 
     transition: {
