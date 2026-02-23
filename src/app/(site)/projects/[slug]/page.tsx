@@ -114,6 +114,12 @@ export default async function ProjectDetailPage({ params }: Props) {
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
         {/* 1) Hero / first card */}
         <ProjectCaseStudyHero project={project}>
+          <ProjectLinks
+            links={(project.links ?? []).map((link) => ({
+              label: link.label,
+              href: link.href,
+            }))}
+          />
           {project.impactCards && project.impactCards.length > 0 && (
             <ProjectImpactCards cards={project.impactCards} />
           )}

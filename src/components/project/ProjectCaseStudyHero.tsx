@@ -45,7 +45,7 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
       >
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex self-start items-center gap-2 rounded-md border border-border/70 bg-background/90 px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-background"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to projects
