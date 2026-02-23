@@ -146,6 +146,22 @@ export type KovonConfig = {
   contentTabs: ContentTabItem[];
   whereItLandedBullets: string[];
   whyRolloutStoppedBullets: string[];
+  featuredCase: {
+    glossary: Record<string, { label: string; short: string; detail: string; icon: string }>;
+    featuredVisuals: Array<{
+      id: string;
+      title: string;
+      subtitle: string;
+      icon: string;
+      bullets: string[];
+      diagram: { type: 'chaos' | 'orgVsVehicle' | 'regTree' | 'granularity' };
+    }>;
+    raciMini: {
+      legend: Array<{ key: string; label: string; hint: string }>;
+      roles: Array<{ id: string; label: string; icon: string }>;
+      tasks: Array<{ id: string; label: string; cells: Record<string, string> }>;
+    };
+  };
 };
 
 /** Full project in the single source: core + case study + portfolio kit + impact cards + optional kovon. */

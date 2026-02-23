@@ -153,6 +153,7 @@ export function resolveProject(
   project: CmsProject,
 ): ResolvedProject {
   const slug = project.slug ?? project.id;
+  const portfolioFallback = getPortfolioProjectBySlug(slug);
 
   // Map array-of-objects to simple string arrays, applying defaults when needed.
   const mapArray = <T extends { [key: string]: string }>(
@@ -231,44 +232,7 @@ export function resolveProject(
     }).filter((u): u is string => Boolean(u)) ?? [];
 
   if (galleryUrls.length === 0) {
-    const slugToGallery: Record<string, string[]> = {
-      kovon: [
-        '/projects/kovon_gallery_01.jpg',
-        '/projects/kovon_gallery_03.jpg',
-        '/projects/kovon_gallery_04.jpg',
-        '/projects/kovon_gallery_05.jpg',
-        '/projects/kovon_gallery_06.jpg',
-        '/projects/kovon_gallery_07.jpg',
-      ],
-      'ffp-dashboard': [
-        '/projects/ffp_gallery_01.png',
-        '/projects/ffp_gallery_02.png',
-        '/projects/ffp_gallery_03.png',
-        '/projects/ffp_gallery_04.png',
-        '/projects/ffp_gallery_05.png',
-        '/projects/ffp_gallery_06.png',
-        '/projects/ffp_gallery_07.png',
-        '/projects/ffp_gallery_08.png',
-        '/projects/ffp_gallery_09.png',
-        '/projects/ffp_gallery_10.png',
-        '/projects/ffp_gallery_11.png',
-        '/projects/ffp_gallery_12.png',
-      ],
-      'emission-compliance': [
-        '/projects/ceasar_gallery_01.png',
-        '/projects/ceasar_gallery_02.png',
-        '/projects/ceasar_gallery_03.png',
-        '/projects/ceasar_gallery_04.png',
-        '/projects/ceasar_gallery_05.png',
-        '/projects/ceasar_gallery_06.png',
-        '/projects/ceasar_gallery_07.png',
-        '/projects/ceasar_gallery_08.png',
-        '/projects/ceasar_gallery_09.png',
-        '/projects/ceasar_gallery_10.png',
-        '/projects/ceasar_gallery_11.png',
-      ],
-    };
-    galleryUrls = slugToGallery[slug] ?? [];
+    galleryUrls = portfolioFallback?.galleryUrls ?? [];
   }
 
   const impact = project.impact?.map((i) => ({ label: i.label, value: i.value })) ?? [];
