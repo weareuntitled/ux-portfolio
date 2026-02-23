@@ -1,3 +1,5 @@
+'use client';
+
 import { Star, Fingerprint, Shield } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import {
@@ -69,8 +71,8 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-// The bulletproof escape hatch for Framer Motion + Shadcn type clashes
-const rowVariants: any = {
+// FIX: 'any' wurde durch 'Variants' ersetzt
+const rowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: { 
     opacity: 1, 
@@ -84,7 +86,8 @@ const rowVariants: any = {
   },
 };
 
-const bodyVariants: any = {
+// FIX: 'any' wurde durch 'Variants' ersetzt
+const bodyVariants: Variants = {
   hidden: {},
   visible: { 
     transition: {
