@@ -39,7 +39,7 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
       </div>
       <div
         className={
-          'relative min-h-[280px] space-y-6 rounded-xl px-6 py-8 md:px-8 md:py-10' +
+          'relative min-h-[280px] space-y-8 rounded-xl px-6 py-8 md:px-8 md:py-10' +
           (hasImage ? ' bg-background/80 bg-clip-padding' : '')
         }
       >
@@ -64,14 +64,14 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
             {project.year}
           </Badge>
         </div>
-        <h1 className="text-5xl font-bold tracking-tighter text-foreground md:text-6xl">
+        <h1 className="pt-1 text-4xl font-bold tracking-tighter text-foreground md:pt-2 md:text-6xl">
           {project.title}
         </h1>
         {project.subtitle && (
-          <p className="max-w-2xl text-lg text-muted-foreground">{project.subtitle}</p>
+          <p className="max-w-2xl pt-1 text-lg leading-relaxed text-muted-foreground">{project.subtitle}</p>
         )}
-        <p className="mt-4 max-w-2xl text-xl text-muted-foreground">{project.oneLiner}</p>
-        <div className="flex flex-wrap items-center gap-6">
+        <p className="max-w-2xl pt-1 text-xl leading-relaxed text-muted-foreground">{project.oneLiner}</p>
+        <div className="flex flex-wrap items-start gap-x-8 gap-y-4 pt-2">
           <div>
             <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Role

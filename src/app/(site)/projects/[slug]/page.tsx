@@ -1,9 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
-import { ExternalLink } from 'lucide-react';
 
 import { DashboardCV } from '@/components/DashboardCV';
 import { ProjectPortfolioKit } from '@/components/PortfolioKit';
@@ -26,30 +24,6 @@ import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 300;
-
-type ProjectExtension = {
-  customSection?: ReactNode;
-};
-
-function pickHeroImage(project: any): string | null {
-  return (
-    project.heroImageUrl ??
-    project.heroImage ??
-    project.moodImageUrl ??
-    project.coverImageUrl ??
-    null
-  );
-}
-
-function StatRow({ label, value }: { label: string; value?: string | null }) {
-  if (!value) return null;
-  return (
-    <div className="flex items-start justify-between gap-3 rounded-lg border border-border bg-card/40 px-3 py-2">
-      <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      <span className="text-xs font-semibold text-foreground text-right">{value}</span>
-    </div>
-  );
-}
 
 function Tag({ children }: { children: ReactNode }) {
   return (
@@ -89,20 +63,20 @@ export default async function ProjectDetailPage({ params }: Props) {
     .slice(0, 2);
 
   const projectExtensions: Record<
-    'automation' | 'ffp-dashboard' | 'emission-compliance' | 'kovon',
-    ProjectExtension
+    string,
+    Partial<Record<'toolsMethods' | 'quote' | 'narrative' | 'delivery', ReactNode>>
   > = {
     automation: {
-      customSection: <AutomationProjectContent />,
+      narrative: <AutomationProjectContent />,
     },
     'ffp-dashboard': {
-      customSection: <FfpProjectContent project={project} />,
+      narrative: <FfpProjectContent project={project} />,
     },
     'emission-compliance': {
-      customSection: <CaesarProjectContent project={project} />,
+      narrative: <CaesarProjectContent project={project} />,
     },
     kovon: {
-      customSection: (
+      narrative: (
         <>
           <RoleAndSetupSection />
           <KovonWorkingCircle />
@@ -111,8 +85,19 @@ export default async function ProjectDetailPage({ params }: Props) {
     },
   };
 
-  const extension = projectExtensions[slug as keyof typeof projectExtensions] ?? {};
-  const heroImage = pickHeroImage(project);
+  const extension = projectExtensions[slug] ?? {};
+  const projectLinks = (project.links ?? []).filter((link) => Boolean(link?.href?.trim()));
+  const mockupImage = project.galleryUrls?.[0] ?? project.coverUrl ?? project.moodImageUrl;
+  const hasToolsMethods = Boolean(project.tools?.length || project.methods?.length || extension.toolsMethods);
+  const hasNarrative = Boolean(caseStudySections || extension.narrative);
+  const hasDeliveryImpact =
+    slug !== 'automation' &&
+    Boolean(
+      extension.delivery ||
+        project.deliveryImpact?.delivery?.length ||
+        project.deliveryImpact?.impact?.length ||
+        project.deliveryImpact?.learned?.length
+    );
 
   return (
     <DashboardCV
@@ -127,82 +112,128 @@ export default async function ProjectDetailPage({ params }: Props) {
       showSearch={false}
     >
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
-        {/* 1) Hero */}
+        {/* 1) Hero / first card */}
         <ProjectCaseStudyHero project={project}>
           {project.impactCards && project.impactCards.length > 0 && (
             <ProjectImpactCards cards={project.impactCards} />
           )}
         </ProjectCaseStudyHero>
 
-        <section id="case-study" className="space-y-16">
+        {/* 2) Project links row */}
+        {projectLinks.length > 0 ? (
+          <section className="-mt-12 border-t border-border/60 pt-4">
+            <ProjectLinks links={projectLinks} />
+          </section>
+        ) : null}
+
+        {/* 3) Tools & Methods */}
+        {hasToolsMethods ? (
+          <section className="space-y-5" aria-label="Tools and methods">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Tools &amp; Methods</h2>
+            {extension.toolsMethods}
+            <div className="grid gap-6 md:grid-cols-2">
+              {project.tools?.length ? (
+                <div className="space-y-3 rounded-xl border border-border bg-card p-5">
+                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                    Tools
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map((tool) => (
+                      <Tag key={tool}>{tool}</Tag>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {project.methods?.length ? (
+                <div className="space-y-3 rounded-xl border border-border bg-card p-5">
+                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                    Methods
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.methods.map((method) => (
+                      <Tag key={method}>{method}</Tag>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+            {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
+          </section>
+        ) : null}
+
+        {/* 4) Screenshot / mockup gallery block */}
+        {mockupImage ? (
+          <section className="space-y-4">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Screenshot / Mockup</h2>
+            <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-border bg-card">
+              <Image
+                src={mockupImage}
+                alt={`${project.title} mockup`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+            </div>
+          </section>
+        ) : null}
+
+        {/* 5) Quote block */}
+        <section id="case-study" className="space-y-8">
+          {extension.quote}
           <ProjectPortfolioKit
             project={project}
             caseStudy={caseStudySections}
             portfolioKit={portfolioKit ?? null}
             skipHero
           />
+        </section>
 
-          {extension.customSection}
-
-          {slug !== 'kovon' && (
-            <>
-              <div className="max-w-3xl space-y-8">
-                {caseStudySections ? (
-                  <CaseStudyTemplate sections={caseStudySections} />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-sm text-muted-foreground">
-                    No image available
-                  </div>
-                )}
+        {/* 6) Main narrative blocks */}
+        {hasNarrative ? (
+          <section className="space-y-8">
+            {caseStudySections ? (
+              <div className="max-w-3xl">
+                <CaseStudyTemplate sections={caseStudySections} />
               </div>
+            ) : (
+              <div className="max-w-3xl">
+                <ProjectProblemWorkflowSolution project={project} />
+              </div>
+            )}
+            {extension.narrative}
+          </section>
+        ) : null}
 
-              {project.customerAbout ? (
-                <div className="border-t border-border p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Customer
-                  </p>
-                  <p className="mt-2 text-sm text-foreground">{project.customerAbout}</p>
-                </div>
-              ) : null}
-            </>
-          )}
-        </section>
+        {/* 7) Delivery & impact */}
+        {hasDeliveryImpact ? (
+          <section className="space-y-6">
+            {project.customerAbout ? (
+              <div className="rounded-xl border border-border bg-card p-5">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Customer
+                </p>
+                <p className="mt-2 text-sm text-foreground">{project.customerAbout}</p>
+              </div>
+            ) : null}
+            {extension.delivery}
+            {project.deliveryImpact ? (
+              <ProjectDeliveryImpact
+                delivery={project.deliveryImpact.delivery ?? []}
+                impact={project.deliveryImpact.impact ?? []}
+                learned={project.deliveryImpact.learned}
+              />
+            ) : null}
+          </section>
+        ) : null}
 
-        {/* CONTENT: Kein PortfolioKit Placeholder mehr */}
-        <section className="space-y-8">
-          {caseStudySections ? (
-            <div className="max-w-3xl">
-              <CaseStudyTemplate sections={caseStudySections} />
-            </div>
-          ) : (
-            <div className="max-w-3xl">
-              <ProjectProblemWorkflowSolution project={project} />
-            </div>
-          )}
-        </section>
-
-          {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
-
-          {/* 6) Impact */}
-          {slug !== 'automation' && project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
-            <ProjectDeliveryImpact
-              delivery={project.deliveryImpact.delivery ?? []}
-              impact={project.deliveryImpact.impact ?? []}
-              learned={project.deliveryImpact.learned}
-            />
-          )}
-
-        {/* GALLERY: bleibt, weil das echte Evidence ist */}
+        {/* 8) Final gallery */}
         <section>
           <ProjectGallery project={project} />
         </section>
 
-        {/* RELATED */}
         {related.length ? (
           <section className="space-y-6">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              Related projects
-            </h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Related projects</h2>
             <div className="grid gap-6 md:grid-cols-2">
               {related.map((item) => (
                 <ProjectCard key={item.id} project={item} />
