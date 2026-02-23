@@ -39,6 +39,7 @@ function portfolioProjectToCmsProject(p: PortfolioProject): CmsProject {
       : null,
     prototypeButtonLabel: p.prototypeButtonLabel ?? null,
     moodImage: p.moodImageUrl ?? null,
+    cardCover: p.cardCoverUrl ?? null,
     cover: p.cover ?? null,
     coverFallback: p.coverFallback ?? null,
     teamSize: p.teamSize ?? null,
@@ -152,6 +153,7 @@ export function resolveProject(
   project: CmsProject,
 ): ResolvedProject {
   const slug = project.slug ?? project.id;
+  const portfolioFallback = getPortfolioProjectBySlug(slug);
 
   // Map array-of-objects to simple string arrays, applying defaults when needed.
   const mapArray = <T extends { [key: string]: string }>(
@@ -188,68 +190,18 @@ export function resolveProject(
       href: link.href,
     })) ?? [];
 
-  let moodImage: string | undefined;
-  if (project.moodImage != null && typeof project.moodImage === 'object' && 'url' in project.moodImage) {
-    moodImage = (project.moodImage as { url?: string }).url;
-  } else if (typeof project.moodImage === 'string' && project.moodImage) {
-    moodImage = project.moodImage;
-  } else {
-    // Fallback: static project images from public/projects/
-    const slugToImage: Record<string, string> = {
-      kovon: '/projects/kovon_hero.jpg',
-      'ffp-dashboard': '/projects/ffp_dashboard_hero.jpg',
-      'emission-compliance': '/projects/emission_compliance_hero.jpg',
-      automation: '/projects/sap_automation_bot_hero.png',
-      fixundfertig: '/projects/fixundfertig_preview.jpg',
-    };
-    moodImage = slugToImage[slug] ?? undefined;
-  }
-  let galleryUrls =
+  const moodImage =
+    project.moodImage != null && typeof project.moodImage === 'object' && 'url' in project.moodImage
+      ? (project.moodImage as { url?: string }).url
+      : typeof project.moodImage === 'string' && project.moodImage
+        ? project.moodImage
+        : undefined;
+
+  const galleryUrls =
     project.gallery?.map((g) => {
       const img = g.image;
       return typeof img === 'object' && img != null && 'url' in img ? (img as { url?: string }).url : undefined;
     }).filter((u): u is string => Boolean(u)) ?? [];
-
-  if (galleryUrls.length === 0) {
-    const slugToGallery: Record<string, string[]> = {
-      kovon: [
-        '/projects/kovon_gallery_01.jpg',
-        '/projects/kovon_gallery_03.jpg',
-        '/projects/kovon_gallery_04.jpg',
-        '/projects/kovon_gallery_05.jpg',
-        '/projects/kovon_gallery_06.jpg',
-        '/projects/kovon_gallery_07.jpg',
-      ],
-      'ffp-dashboard': [
-        '/projects/ffp_gallery_01.png',
-        '/projects/ffp_gallery_02.png',
-        '/projects/ffp_gallery_03.png',
-        '/projects/ffp_gallery_04.png',
-        '/projects/ffp_gallery_05.png',
-        '/projects/ffp_gallery_06.png',
-        '/projects/ffp_gallery_07.png',
-        '/projects/ffp_gallery_08.png',
-        '/projects/ffp_gallery_09.png',
-        '/projects/ffp_gallery_10.png',
-        '/projects/ffp_gallery_11.png',
-        '/projects/ffp_gallery_12.png',
-      ],
-      'emission-compliance': [
-        '/projects/ceasar_gallery_01.png',
-        '/projects/ceasar_gallery_02.png',
-        '/projects/ceasar_gallery_03.png',
-        '/projects/ceasar_gallery_04.png',
-        '/projects/ceasar_gallery_05.png',
-        '/projects/ceasar_gallery_06.png',
-        '/projects/ceasar_gallery_07.png',
-        '/projects/ceasar_gallery_08.png',
-        '/projects/ceasar_gallery_09.png',
-        '/projects/ceasar_gallery_10.png',
-        '/projects/ceasar_gallery_11.png',
-      ],
-    };
-    galleryUrls = slugToGallery[slug] ?? [];
-  }
 
   const impact = project.impact?.map((i) => ({ label: i.label, value: i.value })) ?? [];
 
@@ -308,13 +260,13 @@ export function resolveProject(
     cover: project.cover ?? undefined,
     coverFallback: project.coverFallback ?? undefined,
     metaCards: project.metaCards ?? [],
-    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [] },
+    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [], learned: [] },
     // Unified cover URL for all components to consume
     // Prefer explicit cover, then mood image; guarded by resolver.
+    cardCoverUrl: cardCover,
     coverUrl,
     impactCards: project.impactCards ?? undefined,
   };
 
   return base as ResolvedProject;
 }
-

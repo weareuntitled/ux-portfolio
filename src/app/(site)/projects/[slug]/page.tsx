@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
+import type { ReactNode } from 'react';
 import { ProjectCard } from '@/components/ProjectCard';
 import { DashboardCV } from '@/components/DashboardCV';
 import { ProjectPortfolioKit } from '@/components/ProjectPortfolioKit';
-import { ProjectCaseStudyHero } from '@/components/ProjectCaseStudyHero';
+import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
 import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
 import { ProjectLinks } from '@/components/project/ProjectLinks';
@@ -16,6 +17,8 @@ import { ProjectGallery } from '@/components/ProjectGallery';
 import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
 import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
 import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
+import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
+import { WorkingCircle } from '@/components/kovon/WorkingCircle';
 import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
 import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
 
@@ -51,6 +54,31 @@ export default async function ProjectDetailPage({ params }: Props) {
     .filter((item) => item.slug !== project.slug && item.category === project.category)
     .slice(0, 2);
 
+  const projectExtensions: Record<
+    string,
+    Partial<Record<'quoteProblem' | 'coreInsights' | 'workflowTooling', ReactNode>>
+  > = {
+    automation: {
+      coreInsights: <AutomationProjectContent />,
+    },
+    'ffp-dashboard': {
+      coreInsights: <FfpProjectContent project={project} />,
+    },
+    'emission-compliance': {
+      coreInsights: <CaesarProjectContent project={project} />,
+    },
+    kovon: {
+      workflowTooling: (
+        <>
+          <RoleAndSetupSection />
+          <WorkingCircle />
+        </>
+      ),
+    },
+  };
+
+  const extension = projectExtensions[slug] ?? {};
+
   return (
     <DashboardCV
       navProjects={navProjects}
@@ -63,80 +91,16 @@ export default async function ProjectDetailPage({ params }: Props) {
       variant="project"
     >
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
+        {/* 1) Hero */}
         <ProjectCaseStudyHero project={project}>
           {project.impactCards && project.impactCards.length > 0 && (
             <ProjectImpactCards cards={project.impactCards} />
           )}
         </ProjectCaseStudyHero>
 
-        {slug === 'automation' ? (
-          <>
-            <AutomationProjectContent />
-            {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
-              <ProjectDeliveryImpact
-                delivery={project.deliveryImpact.delivery ?? []}
-                impact={project.deliveryImpact.impact ?? []}
-                learned={project.deliveryImpact.learned}
-              />
-            )}
-            <section>
-              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
-                Related projects
-              </h2>
-              <div className="grid gap-6 md:grid-cols-2">
-                {related.map((item) => (
-                  <ProjectCard key={item.id} project={item} />
-                ))}
-              </div>
-            </section>
-            <CaseStudyFooterCta />
-          </>
-        ) : slug === 'ffp-dashboard' ? (
-          <>
-            <FfpProjectContent project={project} />
-            {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
-              <ProjectDeliveryImpact
-                delivery={project.deliveryImpact.delivery ?? []}
-                impact={project.deliveryImpact.impact ?? []}
-                learned={project.deliveryImpact.learned}
-              />
-            )}
-            <section>
-              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
-                Related projects
-              </h2>
-              <div className="grid gap-6 md:grid-cols-2">
-                {related.map((item) => (
-                  <ProjectCard key={item.id} project={item} />
-                ))}
-              </div>
-            </section>
-            <CaseStudyFooterCta />
-          </>
-        ) : slug === 'emission-compliance' ? (
-          <>
-            <CaesarProjectContent project={project} />
-            {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
-              <ProjectDeliveryImpact
-                delivery={project.deliveryImpact.delivery ?? []}
-                impact={project.deliveryImpact.impact ?? []}
-                learned={project.deliveryImpact.learned}
-              />
-            )}
-            <section>
-              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
-                Related projects
-              </h2>
-              <div className="grid gap-6 md:grid-cols-2">
-                {related.map((item) => (
-                  <ProjectCard key={item.id} project={item} />
-                ))}
-              </div>
-            </section>
-            <CaseStudyFooterCta />
-          </>
-        ) : (
-          <>
+        <section id="case-study" className="space-y-16">
+          {/* 2) Quote / Problem */}
+          {extension.quoteProblem}
         <ProjectPortfolioKit
           project={project}
           caseStudy={caseStudySections}
@@ -144,7 +108,6 @@ export default async function ProjectDetailPage({ params }: Props) {
           skipHero
         />
 
-        <section id="case-study" className="space-y-12">
           {slug !== 'kovon' && (
             <>
               {project.client && (
@@ -189,6 +152,16 @@ export default async function ProjectDetailPage({ params }: Props) {
             </>
           )}
 
+          {/* 3) Screenshot / Gallery */}
+          <ProjectGallery project={project} />
+
+          <div id="prototype">
+            <ProjectPrototypePanel project={project} />
+          </div>
+
+          {/* 4) Core insights */}
+          {extension.coreInsights}
+
           {project.notes && (
             <section className="max-w-3xl rounded-xl border border-border bg-card/50 p-6">
               <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -198,19 +171,11 @@ export default async function ProjectDetailPage({ params }: Props) {
             </section>
           )}
 
-          <ProjectGallery project={project} />
+          {/* 5) Workflow / Tooling */}
+          {extension.workflowTooling}
+          {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
 
-          <div id="prototype">
-            <ProjectPrototypePanel project={project} />
-          </div>
-
-          {project.links && project.links.length > 0 && (
-            <section>
-              <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground">Links</h2>
-              <ProjectLinks links={project.links.map((l) => ({ label: l.label, href: l.href }))} />
-            </section>
-          )}
-
+          {/* 6) Impact */}
           {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
             <ProjectDeliveryImpact
               delivery={project.deliveryImpact.delivery ?? []}
@@ -219,6 +184,15 @@ export default async function ProjectDetailPage({ params }: Props) {
             />
           )}
 
+          {/* 7) Links */}
+          {project.links && project.links.length > 0 && (
+            <section>
+              <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground">Links</h2>
+              <ProjectLinks links={project.links.map((l) => ({ label: l.label, href: l.href }))} />
+            </section>
+          )}
+
+          {/* 8) Related */}
           <section>
             <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
               Related projects
@@ -231,10 +205,8 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         </section>
 
-        {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
+        {/* 9) Footer CTA */}
         <CaseStudyFooterCta />
-          </>
-        )}
       </div>
     </DashboardCV>
   );

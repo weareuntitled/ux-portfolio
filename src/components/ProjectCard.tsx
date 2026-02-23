@@ -29,7 +29,7 @@ export function ProjectCard({ project, displayTitle }: ProjectCardProps) {
   const reduceMotion = useReducedMotion();
 
   const liveDemoLink = project.links?.find((link) => link.label === 'Live demo');
-  const coverUrl = project.coverUrl ?? project.moodImageUrl ?? null;
+  const coverUrl = project.cardCoverUrl ?? project.coverUrl ?? project.moodImageUrl ?? null;
 
   const displayTags = (project.tags ?? []).slice(0, 3);
   const title = displayTitle ?? project.title;
