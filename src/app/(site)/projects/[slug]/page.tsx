@@ -28,6 +28,10 @@ import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 300;
 
+type ProjectExtension = {
+  customSection?: ReactNode;
+};
+
 function pickHeroImage(project: any): string | null {
   return (
     project.heroImageUrl ??
@@ -86,8 +90,8 @@ export default async function ProjectDetailPage({ params }: Props) {
     .slice(0, 2);
 
   const projectExtensions: Record<
-    string,
-    Partial<Record<'customSection', ReactNode>>
+    'automation' | 'ffp-dashboard' | 'emission-compliance' | 'kovon',
+    ProjectExtension
   > = {
     automation: {
       customSection: <AutomationProjectContent />,
@@ -108,7 +112,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     },
   };
 
-  const extension = projectExtensions[slug] ?? {};
+  const extension = projectExtensions[slug as keyof typeof projectExtensions] ?? {};
   const heroImage = pickHeroImage(project);
 
   return (
@@ -132,14 +136,14 @@ export default async function ProjectDetailPage({ params }: Props) {
         </ProjectCaseStudyHero>
 
         <section id="case-study" className="space-y-16">
-          {/* 2) Quote / Problem */}
-          {extension.quoteProblem}
           <ProjectPortfolioKit
             project={project}
             caseStudy={caseStudySections}
             portfolioKit={portfolioKit ?? null}
             skipHero
           />
+
+          {extension.customSection}
 
           {slug !== 'kovon' && (
             <>
@@ -178,8 +182,6 @@ export default async function ProjectDetailPage({ params }: Props) {
           )}
         </section>
 
-          {/* 5) Workflow / Tooling */}
-          {extension.workflowTooling}
           {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
 
           {/* 6) Impact */}
