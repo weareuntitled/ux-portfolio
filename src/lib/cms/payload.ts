@@ -190,50 +190,18 @@ export function resolveProject(
       href: link.href,
     })) ?? [];
 
-  let moodImage: string | undefined;
-  if (project.moodImage != null && typeof project.moodImage === 'object' && 'url' in project.moodImage) {
-    moodImage = (project.moodImage as { url?: string }).url;
-  } else if (typeof project.moodImage === 'string' && project.moodImage) {
-    moodImage = project.moodImage;
-  } else {
-    // Fallback: static project images from public/projects/
-    const slugToImage: Record<string, string> = {
-      kovon: '/projects/kovon_hero.jpg',
-      'ffp-dashboard': '/projects/ffp_dashboard_hero.jpg',
-      'emission-compliance': '/projects/emission_compliance_hero.jpg',
-      automation: '/projects/sap_automation_bot_hero.png',
-      fixundfertig: '/projects/ffp_gallery_08.png',
-    };
-    moodImage = slugToImage[slug] ?? undefined;
-  }
+  const moodImage =
+    project.moodImage != null && typeof project.moodImage === 'object' && 'url' in project.moodImage
+      ? (project.moodImage as { url?: string }).url
+      : typeof project.moodImage === 'string' && project.moodImage
+        ? project.moodImage
+        : undefined;
 
-  let cardCover: string | undefined;
-  if (project.cardCover != null && typeof project.cardCover === 'object' && 'url' in project.cardCover) {
-    cardCover = (project.cardCover as { url?: string }).url;
-  } else if (typeof project.cardCover === 'string' && project.cardCover) {
-    cardCover = project.cardCover;
-  }
-
-  if (!cardCover) {
-    const slugToCardCover: Record<string, string> = {
-      kovon: '/projects/kovon_gallery_04.jpg',
-      automation: '/projects/sap_automation_bot_hero.png',
-      'ffp-dashboard': '/projects/ffp_gallery_04.png',
-      'emission-compliance': '/projects/ceasar_gallery_05.png',
-      tracklistify: '/projects/ffp_gallery_08.png',
-      fixundfertig: '/projects/ffp_gallery_08.png',
-    };
-    cardCover = slugToCardCover[slug] ?? undefined;
-  }
-  let galleryUrls =
+  const galleryUrls =
     project.gallery?.map((g) => {
       const img = g.image;
       return typeof img === 'object' && img != null && 'url' in img ? (img as { url?: string }).url : undefined;
     }).filter((u): u is string => Boolean(u)) ?? [];
-
-  if (galleryUrls.length === 0) {
-    galleryUrls = portfolioFallback?.galleryUrls ?? [];
-  }
 
   const impact = project.impact?.map((i) => ({ label: i.label, value: i.value })) ?? [];
 
@@ -292,7 +260,7 @@ export function resolveProject(
     cover: project.cover ?? undefined,
     coverFallback: project.coverFallback ?? undefined,
     metaCards: project.metaCards ?? [],
-    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [] },
+    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [], learned: [] },
     // Unified cover URL for all components to consume
     // Prefer explicit cover, then mood image; guarded by resolver.
     cardCoverUrl: cardCover,
