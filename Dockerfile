@@ -2,6 +2,7 @@
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
 
+# Copy only dependency manifests before install for deterministic layer caching.
 COPY package.json package-lock.json* ./
 RUN npm ci --legacy-peer-deps
 
