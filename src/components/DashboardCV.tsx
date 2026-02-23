@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
 import {
+  Bot,
   Box,
+  Fingerprint,
   FileText,
   FolderKanban,
   Github,
@@ -149,11 +151,12 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
     );
   }
 
-  function ProjectLeading({ moodImageUrl }: { moodImageUrl: string | null }) {
+  function ProjectLeading({ moodImageUrl, slug }: { moodImageUrl: string | null; slug: string }) {
     if (!moodImageUrl) {
+      const FallbackIcon = slug === 'ffp-dashboard' ? Fingerprint : slug === 'automation' ? Bot : Box;
       return (
         <motion.span className="grid h-6 w-6 place-items-center" whileHover={reduceMotion ? undefined : { rotate: -3 }}>
-          <Box className="h-4 w-4 shrink-0" aria-hidden />
+          <FallbackIcon className="h-4 w-4 shrink-0" aria-hidden />
         </motion.span>
       );
     }
@@ -186,7 +189,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
                 href={href}
                 icon={Box}
                 isActive={isActive}
-                leading={<ProjectLeading moodImageUrl={project.moodImageUrl ?? null} />}
+                leading={<ProjectLeading moodImageUrl={project.moodImageUrl ?? null} slug={project.slug} />}
               />
             );
           })}

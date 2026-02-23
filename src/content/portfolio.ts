@@ -771,6 +771,8 @@ export const portfolio: PortfolioSource = {
     tools: ['SAP', 'Figma', 'Docs'],
     methods: ['Process mapping', 'Expert workshops', 'Use case clustering', 'Handoff documentation'],
     links: [{ label: 'Case study', href: '/projects/automation' }],
+    moodImageUrl: '/projects/sap_automation_bot_hero.png',
+    galleryUrls: ['/projects/sap_automation_bot_hero.png'],
     cardCoverUrl: '/projects/sap_automation_bot_hero.png',
     metaCards: [
       { label: 'Experts', value: '~20', icon: 'users' },
