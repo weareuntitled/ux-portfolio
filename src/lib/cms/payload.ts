@@ -39,6 +39,7 @@ function portfolioProjectToCmsProject(p: PortfolioProject): CmsProject {
       : null,
     prototypeButtonLabel: p.prototypeButtonLabel ?? null,
     moodImage: p.moodImageUrl ?? null,
+    cardCover: p.cardCoverUrl ?? null,
     cover: p.cover ?? null,
     coverFallback: p.coverFallback ?? null,
     teamSize: p.teamSize ?? null,
@@ -262,6 +263,7 @@ export function resolveProject(
     deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [], learned: [] },
     // Unified cover URL for all components to consume
     // Prefer explicit cover, then mood image; guarded by resolver.
+    cardCoverUrl: cardCover,
     coverUrl,
     impactCards: project.impactCards ?? undefined,
   };

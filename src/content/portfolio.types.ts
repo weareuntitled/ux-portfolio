@@ -60,6 +60,7 @@ export type Project = {
   notes?: string;
   impact?: ProjectImpactItem[];
   galleryUrls?: string[];
+  cardCoverUrl?: string;
   coverUrl?: string;
   cover?: string;
   coverFallback?: 'gradient' | 'initials' | 'icon';

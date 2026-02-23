@@ -602,7 +602,7 @@ export const portfolio: PortfolioSource = {
     tools: ['SAP', 'Figma', 'Docs'],
     methods: ['Process mapping', 'Expert workshops', 'Use case clustering', 'Handoff documentation'],
     links: [{ label: 'Case study', href: '/projects/automation' }],
-    moodImageUrl: '/projects/sap_automation_bot_hero.png',
+    cardCoverUrl: '/projects/sap_automation_bot_hero.png',
     metaCards: [
       { label: 'Experts', value: '~20', icon: 'users' },
       { label: 'Time saved', value: '~4 h/week', icon: 'impact' },
@@ -870,6 +870,7 @@ export const portfolio: PortfolioSource = {
       { label: 'Live demo', href: 'http://tracklistify.untitled-ux.de/' },
       { label: 'GitHub', href: 'https://github.com/example/tracklistify' },
     ],
+    cardCoverUrl: '/projects/ffp_gallery_08.png',
     prototype: {
       prototypeType: 'figma',
       figmaEmbedUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/TracklistifyPrototype',
@@ -945,7 +946,8 @@ export const portfolio: PortfolioSource = {
     prototype: {
       hints: ['Open the app to see the pipeline flow and extracted JSON fields'],
     },
-    moodImageUrl: '/projects/fixundfertig_preview.jpg',
+    moodImageUrl: '/projects/ffp_gallery_08.png',
+    cardCoverUrl: '/projects/ffp_gallery_08.png',
     notes:
       'Pipeline: email attachment intake via n8n. OCR plus semantic extraction to JSON. JSON pushed into the API. Python only stack with NiceGUI.',
     metaCards: [
