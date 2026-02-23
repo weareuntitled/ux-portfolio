@@ -18,6 +18,12 @@ import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
 import { KovonWorkingCircle } from '@/components/kovon/KovonWorkingCircle';
 import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
 import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
+import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
+import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
+import { ProjectGallery } from '@/components/ProjectGallery';
+import { ProjectCard } from '@/components/ProjectCard';
+import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
+import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 300;
@@ -73,6 +79,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   if (!project) notFound();
 
   const caseStudySections = getCaseStudySections(slug);
+  const portfolioKit = getPortfolioKit(slug);
 
   const related = resolvedProjects
     .filter((item) => item.slug !== project.slug && item.category === project.category)
@@ -154,8 +161,8 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <p className="mt-2 text-sm text-foreground">{project.customerAbout}</p>
                 </div>
               ) : null}
-            </div>
-          </div>
+            </>
+          )}
         </section>
 
         {/* CONTENT: Kein PortfolioKit Placeholder mehr */}

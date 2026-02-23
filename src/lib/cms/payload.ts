@@ -153,7 +153,6 @@ export function resolveProject(
   project: CmsProject,
 ): ResolvedProject {
   const slug = project.slug ?? project.id;
-  const portfolioFallback = getPortfolioProjectBySlug(slug);
 
   // Map array-of-objects to simple string arrays, applying defaults when needed.
   const mapArray = <T extends { [key: string]: string }>(

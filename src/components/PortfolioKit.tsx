@@ -669,10 +669,11 @@ export type ProjectPortfolioKitProps = {
 export function ProjectPortfolioKit({
   project,
   caseStudy,
-  portfolioKit: _portfolioKit,
+  portfolioKit,
   skipHero,
   className,
 }: ProjectPortfolioKitProps) {
+  void portfolioKit; // accepted for API; optional use in future
   if (!project) return null;
 
   return (
