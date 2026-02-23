@@ -3,6 +3,7 @@ FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# Copy only dependency manifests before install for deterministic layer caching.
 COPY package.json package-lock.json* ./
 RUN npm ci --legacy-peer-deps
 
