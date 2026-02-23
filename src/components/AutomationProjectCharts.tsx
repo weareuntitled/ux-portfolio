@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/chart';
 import { Lock, Zap, GitMerge, ShieldAlert } from 'lucide-react';
 import { KLevelStack } from '@/components/KLevelStack';
+import { BrowserMockup } from '@/components/PortfolioKit';
 
 const volumeData = [
   { label: 'Parts pushed/mo', value: 15 },
@@ -23,7 +24,16 @@ const chartConfig = {
   value: { label: 'Value', color: 'hsl(var(--primary))' },
 } satisfies ChartConfig;
 
-export function AutomationProjectCharts() {
+type AutomationProjectChartsProps = {
+  galleryUrls?: string[];
+};
+
+export function AutomationProjectCharts({ galleryUrls = [] }: AutomationProjectChartsProps) {
+  const screens =
+    galleryUrls.length > 0
+      ? galleryUrls
+      : ['/projects/sap_automation_bot_hero.png'];
+
   return (
     <div className="space-y-8">
       <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/30 p-4">
@@ -33,10 +43,22 @@ export function AutomationProjectCharts() {
             Highly confidential project
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Working with parts and confidential car-building processes. No screenshots available. Outcomes visualized below.
+            Working with parts and confidential car-building processes. Visuals below use a sanitized process mockup and KPI abstractions.
           </p>
         </div>
       </div>
+
+      <section className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <BrowserMockup
+          src={screens[0]}
+          alt="Automation process overview mockup"
+          urlBar="https://sap-automation.internal"
+          useNextImage={true}
+          screens={screens}
+          autoAdvanceMs={5000}
+          className="border-0 shadow-none"
+        />
+      </section>
 
       {/* Compare & Contrast: V-System vs K-Levels */}
       <div className="grid gap-6 md:grid-cols-2">
