@@ -20,6 +20,8 @@ import { ProjectGallery } from '@/components/ProjectGallery';
 import { ProjectCard } from '@/components/ProjectCard';
 import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
 import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
+import { ProjectDetailsFromSource } from '@/components/project/ProjectDetailsFromSource';
+import { BrowserMockup } from '@/components/PortfolioKit';
 
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 300;
@@ -55,7 +57,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const projectExtensions: Record<
     string,
-    Partial<Record<'customSection', ReactNode>>
+    Partial<Record<'customSection' | 'quoteProblem' | 'workflowTooling', ReactNode>>
   > = {
     automation: {
       customSection: <AutomationProjectContent />,
@@ -98,6 +100,24 @@ export default async function ProjectDetailPage({ params }: Props) {
           )}
         </ProjectCaseStudyHero>
 
+        {/* All portfolio-sourced data: metaCards, outcomes, highlights, tools, methods, links */}
+        <ProjectDetailsFromSource project={project} />
+
+        {/* 3) Browser mockup gallery — auto-flow screenshots, always 3rd place */}
+        {project?.galleryUrls && project.galleryUrls.length > 0 && (
+          <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+            <div className="my-12">
+              <BrowserMockup
+                src={project.galleryUrls[0]!}
+                alt={`${project.title} — screenshot`}
+                urlBar={`https://${project.slug ?? 'app'}.internal`}
+                screens={project.galleryUrls.length > 1 ? project.galleryUrls : undefined}
+                autoAdvanceMs={5000}
+              />
+            </div>
+          </section>
+        )}
+
         <section id="case-study" className="space-y-16">
           {/* 2) Quote / Problem */}
           {extension.quoteProblem}
@@ -108,28 +128,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             skipHero
           />
 
-          {slug !== 'kovon' && (
-            <>
-              <div className="max-w-3xl space-y-8">
-                {caseStudySections ? (
-                  <CaseStudyTemplate sections={caseStudySections} />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-sm text-muted-foreground">
-                    No image available
-                  </div>
-                )}
-              </div>
-
-              {project.customerAbout ? (
-                <div className="border-t border-border p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Customer
-                  </p>
-                  <p className="mt-2 text-sm text-foreground">{project.customerAbout}</p>
-                </div>
-              ) : null}
-            </>
-          )}
+          
         </section>
 
         {/* CONTENT: Kein PortfolioKit Placeholder mehr */}
@@ -149,14 +148,19 @@ export default async function ProjectDetailPage({ params }: Props) {
           {extension.workflowTooling}
           {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
 
-          {/* 6) Impact */}
-          {slug !== 'automation' && project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
-            <ProjectDeliveryImpact
-              delivery={project.deliveryImpact.delivery ?? []}
-              impact={project.deliveryImpact.impact ?? []}
-              learned={project.deliveryImpact.learned}
-            />
-          )}
+          {/* 6) Result / Impact — same card + 4 metrics layout only; skip for automation (already in customSection) */}
+          {slug !== 'automation' &&
+            project.deliveryImpact &&
+            (project.deliveryImpact.delivery?.length > 0 ||
+              project.deliveryImpact.impact?.length > 0 ||
+              project.deliveryImpact.document) && (
+              <ProjectDeliveryImpact
+                delivery={project.deliveryImpact.delivery ?? []}
+                impact={project.deliveryImpact.impact ?? []}
+                learned={project.deliveryImpact.learned}
+                document={project.deliveryImpact.document}
+              />
+            )}
 
         {/* GALLERY: bleibt, weil das echte Evidence ist */}
         <section>

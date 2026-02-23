@@ -207,6 +207,7 @@ export function resolveProject(
   const galleryUrls =
     project.gallery?.map((g) => {
       const img = g.image;
+      if (typeof img === 'string' && img) return img;
       return typeof img === 'object' && img != null && 'url' in img ? (img as { url?: string }).url : undefined;
     }).filter((u): u is string => Boolean(u)) ?? [];
 
@@ -219,11 +220,13 @@ export function resolveProject(
     delivery: project.deliveryImpact?.delivery ?? [],
     impact: project.deliveryImpact?.impact ?? [],
     learned: project.deliveryImpact?.learned ?? [],
+    document: project.deliveryImpact?.document,
   };
   const hasDeliveryImpact =
     (deliveryImpact.delivery && deliveryImpact.delivery.length > 0) ||
     (deliveryImpact.impact && deliveryImpact.impact.length > 0) ||
-    (deliveryImpact.learned && deliveryImpact.learned.length > 0);
+    (deliveryImpact.learned && deliveryImpact.learned.length > 0) ||
+    Boolean(deliveryImpact.document?.href);
 
   const base: Partial<ResolvedProject> = {
     id: slug,
@@ -267,7 +270,7 @@ export function resolveProject(
     cover: project.cover ?? undefined,
     coverFallback: project.coverFallback ?? undefined,
     metaCards: project.metaCards ?? [],
-    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [], learned: [] },
+    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [], learned: [], document: undefined },
     // Unified cover URL for all components to consume
     // Prefer explicit cover, then mood image; guarded by resolver.
     cardCoverUrl: cardCover,

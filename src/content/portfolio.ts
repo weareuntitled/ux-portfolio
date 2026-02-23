@@ -369,7 +369,7 @@ const caseStudyKovon: CaseStudySections = {
   contextWhyMattered:
     'An internal audit demanded traceable proof of Conformity of Production documentation. Teams lacked a single source to check completeness, progress, and accountability.',
   realProblem:
-    'Scattered documentation caused compliance panic under time pressure. Regulations and internal rules updated constantly, immediately outdating static files.',
+    'Scattered documentation caused compliance panic under time pressure. Regulations and internal rules updated constantly, immediately outdating static files all held together in various Excel files.',
   myRole:
     'Product and UX concept. Scrum facilitation. Information architecture, workflow mapping, and prototype design.',
   approach:
@@ -654,7 +654,7 @@ export const portfolio: PortfolioSource = {
   kovon: {
     id: '1',
     slug: 'kovon',
-    title: 'KoVoN',
+    title: 'Automototive Compliance Documentation Tool ',
     navTitle: 'Automotive compliance documentation tool',
     subtitle: 'Audit-driven verification tracking for COP documentation.',
     oneLiner:
@@ -789,6 +789,7 @@ export const portfolio: PortfolioSource = {
         'More consistent handling after inheritance events',
         'Less error-prone operational routine',
       ],
+      document: { label: 'Implementation PDD', href: '/docs/automation-pdd.pdf' },
     },
     coverFallback: 'icon',
     tags: ['automation', 'ops', 'enterprise'],
@@ -1151,9 +1152,6 @@ export function getProjectCoreBySlug(
 ): (Project & { impactCards: ImpactCardItem[] }) | null {
   const p = portfolio[slug];
   if (!p) return null;
-  const core = { ...p };
-  delete core.caseStudy;
-  delete core.portfolioKit;
-  delete core.kovon;
+  const { caseStudy: _cs, portfolioKit: _pk, kovon: _kv, ...core } = p;
   return { ...core, impactCards: p.impactCards };
 }

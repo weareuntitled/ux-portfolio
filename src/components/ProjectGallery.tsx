@@ -2,33 +2,39 @@
 
 import Image from 'next/image';
 import type { ResolvedProject } from '@/lib/cms/types';
-import { StaggerContainer, StaggerItem } from '@/components/animations';
+import { MacBookFrame } from '@/components/MacBookFrame';
 
 type Props = { project: ResolvedProject };
 
 export function ProjectGallery({ project }: Props) {
-  const urls = project.galleryUrls;
-  if (!urls?.length) return null;
+  const urls = project.galleryUrls ?? [];
+
   return (
-    <section>
-      <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
+    <section aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
         Gallery
       </h2>
-      <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {urls.map((url, i) => (
-          <StaggerItem key={i}>
-            <div className="group relative aspect-video overflow-hidden rounded-xl border border-border bg-muted transition-transform duration-300 hover:scale-[1.02]">
-              <Image
-                src={url}
-                alt=""
-                fill
-                className="object-cover transition-opacity group-hover:opacity-95"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-            </div>
-          </StaggerItem>
-        ))}
-      </StaggerContainer>
+      {urls.length > 0 ? (
+        <div className="grid gap-10 sm:grid-cols-1 lg:grid-cols-2">
+          {urls.map((url, i) => (
+            <MacBookFrame key={i}>
+              <div className="relative h-full w-full bg-neutral-900">
+                <Image
+                  src={url}
+                  alt={`${project.title} — screenshot ${i + 1}`}
+                  fill
+                  className="object-contain object-top"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </MacBookFrame>
+          ))}
+        </div>
+      ) : (
+        <p className="rounded-xl border border-dashed border-border bg-muted/30 px-6 py-10 text-center text-sm text-muted-foreground">
+          No screenshots for this project yet.
+        </p>
+      )}
     </section>
   );
 }

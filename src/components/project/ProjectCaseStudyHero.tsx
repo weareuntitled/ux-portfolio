@@ -21,7 +21,7 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
   const tags = project.tags?.slice(0, 5) ?? [];
 
   return (
-    <FadeIn className="relative space-y-6 overflow-hidden rounded-xl">
+    <FadeIn className="relative overflow-hidden rounded-xl">
       <div className="absolute inset-0 -z-10 min-h-[280px]">
         {hasImage ? (
           <Image
@@ -39,7 +39,7 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
       </div>
       <div
         className={
-          'relative min-h-[280px] space-y-6 rounded-xl px-6 py-8 md:px-8 md:py-10' +
+          'relative min-h-[280px] rounded-xl px-6 py-8 md:px-8 md:py-10' +
           (hasImage ? ' bg-background/80 bg-clip-padding' : '')
         }
       >
@@ -68,10 +68,10 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
           {project.title}
         </h1>
         {project.subtitle && (
-          <p className="max-w-2xl text-lg text-muted-foreground">{project.subtitle}</p>
+          <p className="mt-2 max-w-2xl text-lg text-muted-foreground">{project.subtitle}</p>
         )}
         <p className="mt-4 max-w-2xl text-xl text-muted-foreground">{project.oneLiner}</p>
-        <div className="flex flex-wrap items-center gap-6">
+        <div className="mt-8 flex flex-wrap items-center gap-8">
           <div>
             <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Role
@@ -80,7 +80,7 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
           </div>
           <ProjectPrototypeButton project={project} />
         </div>
-        {children}
+        {children && <div className="mt-8">{children}</div>}
       </div>
     </FadeIn>
   );

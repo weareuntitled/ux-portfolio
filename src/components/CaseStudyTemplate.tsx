@@ -1,6 +1,15 @@
 'use client';
 
+import {
+  AlertCircle,
+  GitBranch,
+  Lightbulb,
+  TrendingUp,
+  BookOpen,
+  type LucideIcon,
+} from 'lucide-react';
 import type { CaseStudySections } from '@/content/portfolio.types';
+import { cn } from '@/lib/utils';
 
 type Props = { sections: CaseStudySections };
 
@@ -27,18 +36,61 @@ const sectionTitles: Record<keyof CaseStudySections, string> = {
   insightAuthor: 'Quote by',
 };
 
+const sectionIcons: Record<keyof CaseStudySections, LucideIcon> = {
+  summary: BookOpen,
+  contextWhyMattered: BookOpen,
+  realProblem: AlertCircle,
+  constraints: AlertCircle,
+  myRole: GitBranch,
+  approach: GitBranch,
+  solutionConcept: Lightbulb,
+  outcome: TrendingUp,
+  whatILearned: BookOpen,
+  whatToShowVisually: Lightbulb,
+  insightAuthor: BookOpen,
+};
+
+const sectionAccent: Record<keyof CaseStudySections, string> = {
+  summary: 'border-l-primary',
+  contextWhyMattered: 'border-l-primary',
+  realProblem: 'border-l-destructive/70',
+  constraints: 'border-l-destructive/70',
+  myRole: 'border-l-primary',
+  approach: 'border-l-primary',
+  solutionConcept: 'border-l-emerald-500/80',
+  outcome: 'border-l-emerald-500/80',
+  whatILearned: 'border-l-amber-500/80',
+  whatToShowVisually: 'border-l-emerald-500/80',
+  insightAuthor: 'border-l-muted-foreground/50',
+};
+
 function Section({
   title,
   content,
+  icon: Icon,
+  accent,
 }: {
   title: string;
   content: string;
+  icon: LucideIcon;
+  accent: string;
 }) {
   if (!content?.trim()) return null;
   const paragraphs = content.split(/\n\n+/).filter(Boolean);
   return (
-    <article className="rounded-xl border border-border bg-card p-5">
-      <h2 className="mb-4 text-lg font-semibold text-foreground">{title}</h2>
+    <article
+      className={cn(
+        'rounded-xl border border-border bg-card p-6 pl-6 shadow-sm',
+        'border-l-4',
+        accent
+      )}
+    >
+      <div className="mb-4 flex items-center gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+          <Icon className="h-5 w-5" aria-hidden />
+        </span>
+        <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+      </div>
       <div className="space-y-3 text-muted-foreground">
         {paragraphs.length > 1 ? (
           paragraphs.map((p, i) => (
@@ -65,6 +117,8 @@ export function CaseStudyTemplate({ sections }: Props) {
             key={key}
             title={sectionTitles[key]}
             content={content}
+            icon={sectionIcons[key]}
+            accent={sectionAccent[key]}
           />
         );
       })}

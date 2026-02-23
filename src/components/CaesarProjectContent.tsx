@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { CircleDot, LayoutGrid } from 'lucide-react';
-import type { ResolvedProject } from '@/lib/cms/types';
 import { BrowserMockup } from '@/components/PortfolioKit';
+import type { ResolvedProject } from '@/lib/cms/types';
 
 /** Stats grid for CAESAR hero (used as ProjectCaseStudyHero children). */
 export function CaesarHeroStats() {
@@ -34,8 +33,6 @@ type CaesarProjectContentProps = {
 };
 
 export function CaesarProjectContent({ project }: CaesarProjectContentProps) {
-  const galleryUrls = project?.galleryUrls ?? [];
-
   return (
     <div className="space-y-24">
       {/* Quote */}
@@ -142,88 +139,17 @@ export function CaesarProjectContent({ project }: CaesarProjectContentProps) {
           </div>
         </section>
 
-        {/* Mockup — browser frame below concepts */}
-        <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
-          <BrowserMockup
-            src={galleryUrls[0] ?? '/projects/ceasar_gallery_01.png'}
-            alt="CAESAR Dashboard"
-            urlBar="https://caesar-emission-dashboard.internal"
-            useNextImage={true}
-            screens={galleryUrls}
-            autoAdvanceMs={5000}
-            className="border-0 shadow-none"
-          />
-        </section>
+        {/* Browser mockup — single screenshot */}
+        {project?.galleryUrls?.[0] && (
+          <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+            <BrowserMockup
+              src={project.galleryUrls[0]}
+              alt="CAESAR Report UI"
+              urlBar="https://caesar-report.internal"
+            />
+          </section>
+        )}
 
-        {/* Design Methodology */}
-        <section className="max-w-3xl space-y-12 py-8">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-3xl font-semibold tracking-tight text-zinc-100">Design Methodology</h2>
-          </div>
-
-          <div className="relative pl-4 sm:pl-6">
-            <div className="absolute left-[27px] top-4 bottom-4 w-px bg-zinc-800 sm:left-[35px]" aria-hidden />
-
-            <div className="space-y-10">
-              <div className="relative flex items-start gap-6">
-                <div className="absolute -left-4 flex h-7 w-7 items-center justify-center rounded-full border-4 border-zinc-950 bg-zinc-800 text-[10px] font-bold text-zinc-300 sm:-left-3.5 sm:h-9 sm:w-9 sm:text-xs">
-                  01
-                </div>
-                <div className="ml-8 pt-1 sm:ml-10 sm:pt-1.5">
-                  <h4 className="text-lg font-semibold text-zinc-200">Data Exploration</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                    Began with an initial exploration of raw emission values, mapping out how the current table clutter was obscuring the data story.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative flex items-start gap-6">
-                <div className="absolute -left-4 flex h-7 w-7 items-center justify-center rounded-full border-4 border-zinc-950 bg-zinc-800 text-[10px] font-bold text-zinc-300 sm:-left-3.5 sm:h-9 sm:w-9 sm:text-xs">
-                  02
-                </div>
-                <div className="ml-8 pt-1 sm:ml-10 sm:pt-1.5">
-                  <h4 className="text-lg font-semibold text-zinc-200">Rapid Prototyping</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                    Executed two high-speed, high-fidelity design iterations to test and find the perfect visual metaphor for the experts.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative flex items-start gap-6">
-                <div className="absolute -left-4 flex h-7 w-7 items-center justify-center rounded-full border-4 border-zinc-950 bg-primary/20 text-[10px] font-bold text-primary shadow-[0_0_15px_rgba(var(--primary),0.4)] sm:-left-3.5 sm:h-9 sm:w-9 sm:text-xs">
-                  03
-                </div>
-                <div className="ml-8 pt-1 sm:ml-10 sm:pt-1.5">
-                  <h4 className="text-lg font-semibold text-primary">Implementation Handover</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                    Delivered the finalized, de-cluttered UI specs, ensuring anomalies surface clearly before reporting.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Gallery — always last on every project */}
-        <section>
-          <h2 className="mb-6 text-2xl font-semibold tracking-tight text-zinc-100">Gallery</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryUrls.map((url) => (
-              <div
-                key={url}
-                className="group relative aspect-video overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all hover:scale-[1.02] hover:border-primary/50"
-              >
-                <Image
-                  src={url}
-                  alt=""
-                  fill
-                  className="object-cover transition-opacity group-hover:opacity-95"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
     </div>
   );
 }

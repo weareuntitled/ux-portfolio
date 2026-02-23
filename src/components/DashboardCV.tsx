@@ -197,18 +197,15 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
 
   return (
     <motion.div className="flex h-full flex-col" variants={vWrap} initial="hidden" animate="show" key={pathname}>
-      {!reduceMotion && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 -z-10 opacity-40"
-          style={{
-            backgroundImage:
-              'radial-gradient(600px 350px at 20% 10%, rgba(132,204,22,0.18), transparent 60%), radial-gradient(700px 500px at 70% 70%, rgba(132,204,22,0.10), transparent 60%)',
-            backgroundSize: '200% 200%',
-          }}
-          animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: 'mirror', ease: 'linear' }}
-        />
-      )}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-40"
+        style={{
+          backgroundImage:
+            'radial-gradient(600px 350px at 20% 10%, rgba(132, 204, 22, 0.18), transparent 60%), radial-gradient(700px 500px at 70% 70%, rgba(132, 204, 22, 0.1), transparent 60%)',
+          backgroundSize: '200% 200%',
+          backgroundPosition: '50% 50%',
+        }}
+      />
 
       <motion.div variants={vItem} className="border-b border-border pb-5">
         <div className="flex items-center gap-3">

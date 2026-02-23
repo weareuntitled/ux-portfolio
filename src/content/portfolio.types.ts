@@ -69,6 +69,8 @@ export type Project = {
     delivery: string[];
     impact: string[];
     learned?: string[];
+    /** Optional document link (e.g. PDD) shown beside Delivery and Impact. */
+    document?: { label: string; href: string };
   };
   tags: string[];
 };
