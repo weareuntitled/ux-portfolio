@@ -32,6 +32,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { StaggerContainer, StaggerItem } from '@/components/animations';
+import type { CaseStudySections, PortfolioKitData, Project } from '@/content/portfolio.types';
 
 const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
@@ -656,12 +657,10 @@ export function FeatureItem({
   );
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export type ProjectPortfolioKitProps = {
-  project: any;
-  caseStudy?: any;
-  portfolioKit?: any;
+  project: Project;
+  caseStudy?: CaseStudySections | null;
+  portfolioKit?: PortfolioKitData | null;
   skipHero?: boolean;
   className?: string;
 };
