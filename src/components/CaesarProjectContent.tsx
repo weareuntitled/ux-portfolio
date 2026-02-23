@@ -5,21 +5,6 @@ import { CircleDot, LayoutGrid } from 'lucide-react';
 import type { ResolvedProject } from '@/lib/cms/types';
 import { BrowserMockup } from '@/components/PortfolioKit';
 
-/** Default CAESAR gallery images when project.galleryUrls is not set. */
-const CAESAR_GALLERY_URLS = [
-  '/projects/ceasar_gallery_01.png',
-  '/projects/ceasar_gallery_02.png',
-  '/projects/ceasar_gallery_03.png',
-  '/projects/ceasar_gallery_04.png',
-  '/projects/ceasar_gallery_05.png',
-  '/projects/ceasar_gallery_06.png',
-  '/projects/ceasar_gallery_07.png',
-  '/projects/ceasar_gallery_08.png',
-  '/projects/ceasar_gallery_09.png',
-  '/projects/ceasar_gallery_10.png',
-  '/projects/ceasar_gallery_11.png',
-];
-
 /** Stats grid for CAESAR hero (used as ProjectCaseStudyHero children). */
 export function CaesarHeroStats() {
   return (
@@ -49,7 +34,7 @@ type CaesarProjectContentProps = {
 };
 
 export function CaesarProjectContent({ project }: CaesarProjectContentProps) {
-  const galleryUrls = project?.galleryUrls?.length ? project.galleryUrls : CAESAR_GALLERY_URLS;
+  const galleryUrls = project?.galleryUrls ?? [];
 
   return (
     <div className="space-y-24">
