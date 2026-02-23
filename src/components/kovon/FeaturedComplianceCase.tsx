@@ -33,8 +33,13 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { FadeIn } from '@/components/motion';
+import { getKovonFeaturedCaseConfig } from '@/content/portfolio';
 
-import { glossary, featuredVisuals, raciMini } from '@/content/kovon/featuredCase.config';
+const featuredCaseConfig = getKovonFeaturedCaseConfig();
+const glossary: Record<string, { label: string; short: string; detail: string; icon: string }> =
+  featuredCaseConfig?.glossary ?? {};
+const featuredVisuals = featuredCaseConfig?.featuredVisuals ?? [];
+const raciMini = featuredCaseConfig?.raciMini ?? { legend: [], roles: [], tasks: [] };
 
 const iconMap: Record<string, LucideIcon> = {
   Building2,
@@ -65,7 +70,7 @@ function Icon({ name, className }: { name: IconName | string; className?: string
   return <Cmp className={className} />;
 }
 
-type GlossaryKey = keyof typeof glossary;
+type GlossaryKey = string;
 
 const GLOSSARY_PATTERN = /\[\[([^\]]+)\]\]/g;
 
@@ -164,7 +169,7 @@ function renderWithGlossary(
   return <>{parts}</>;
 }
 
-type DiagramType = (typeof featuredVisuals)[number]['diagram']['type'];
+type DiagramType = 'chaos' | 'orgVsVehicle' | 'regTree' | 'granularity';
 
 const Diagram = React.memo(function Diagram({ type }: { type: DiagramType }) {
   if (type === 'chaos') {
@@ -405,6 +410,7 @@ const Diagram = React.memo(function Diagram({ type }: { type: DiagramType }) {
 Diagram.displayName = 'Diagram';
 
 export function FeaturedComplianceCase() {
+  if (featuredVisuals.length === 0) return null;
   const firstByBullet = useFirstOccurrenceByBullet();
 
   return (
