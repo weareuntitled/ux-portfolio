@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
-import { ExternalLink } from 'lucide-react';
 
 import { DashboardCV } from '@/components/DashboardCV';
 import { ProjectPortfolioKit } from '@/components/PortfolioKit';
@@ -126,6 +125,12 @@ export default async function ProjectDetailPage({ params }: Props) {
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
         {/* 1) Hero */}
         <ProjectCaseStudyHero project={project}>
+          <ProjectLinks
+            links={(project.links ?? []).map((link) => ({
+              label: link.label,
+              href: link.href,
+            }))}
+          />
           {project.impactCards && project.impactCards.length > 0 && (
             <ProjectImpactCards cards={project.impactCards} />
           )}
