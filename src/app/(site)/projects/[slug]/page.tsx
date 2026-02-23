@@ -111,38 +111,6 @@ export default async function ProjectDetailPage({ params }: Props) {
 
           {slug !== 'kovon' && (
             <>
-              {project.client && (
-                <p className="text-sm text-muted-foreground">
-                  Active project · {project.client}
-                </p>
-              )}
-
-              <div className="grid gap-6 rounded-xl border border-border bg-card/50 p-6 md:grid-cols-2">
-                <article>
-                  <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                    Circumstances
-                  </h2>
-                  <p className="text-foreground">
-                    {[
-                      project.teamSize && `Team: ${project.teamSize}`,
-                      project.client && `Customer: ${project.client}`,
-                      project.year && `Year: ${project.year}`,
-                      project.category,
-                    ]
-                      .filter(Boolean)
-                      .join(' · ')}
-                  </p>
-                </article>
-                {project.customerAbout && (
-                  <article>
-                    <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                      Customer
-                    </h2>
-                    <p className="text-foreground">{project.customerAbout}</p>
-                  </article>
-                )}
-              </div>
-
               <div className="max-w-3xl space-y-8">
                 {caseStudySections ? (
                   <CaseStudyTemplate sections={caseStudySections} />
@@ -177,7 +145,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
 
           {/* 6) Impact */}
-          {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
+          {slug !== 'automation' && project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
             <ProjectDeliveryImpact
               delivery={project.deliveryImpact.delivery ?? []}
               impact={project.deliveryImpact.impact ?? []}

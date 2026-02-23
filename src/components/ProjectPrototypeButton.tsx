@@ -13,7 +13,8 @@ export function ProjectPrototypeButton({ project }: Props) {
   const proto = project.prototype;
   const hasInApp = proto?.prototypeType === 'in-app' && proto?.inAppPrototypeHref;
   const hasFigma = Boolean(proto?.figmaEmbedUrl);
-  const hasPrototype = hasInApp || hasFigma;
+  const liveDemoLink = project.links?.find((link) => link.label.toLowerCase() === 'live demo')?.href;
+  const hasPrototype = hasInApp || hasFigma || Boolean(liveDemoLink);
   const label = project.prototypeButtonLabel ?? 'View prototype';
 
   if (!hasPrototype) return null;
@@ -24,6 +25,19 @@ export function ProjectPrototypeButton({ project }: Props) {
   if (hasInApp) {
     return (
       <Link href={proto!.inAppPrototypeHref!} className={buttonClass}>
+        {label}
+      </Link>
+    );
+  }
+
+  if (liveDemoLink) {
+    return (
+      <Link
+        href={liveDemoLink}
+        className={buttonClass}
+        target={liveDemoLink.startsWith('http') ? '_blank' : undefined}
+        rel={liveDemoLink.startsWith('http') ? 'noopener noreferrer' : undefined}
+      >
         {label}
       </Link>
     );

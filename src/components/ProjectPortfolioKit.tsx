@@ -688,11 +688,12 @@ export function ProjectPortfolioKit({
         />
       )}
       
-      {/* Hier kannst du später das Rendering deiner Case Study / Portfolio Kit Inhalte einbauen */}
-      {portfolioKit && (
-         <div className="text-sm text-muted-foreground p-4 border rounded-lg bg-muted/20">
-            Portfolio Kit Content Placeholder
-         </div>
+      {caseStudy?.realProblem && (
+        <InsightCard
+          quote={caseStudy.realProblem}
+          author={caseStudy.insightAuthor ?? 'Project team'}
+          type="problem"
+        />
       )}
     </div>
   );
