@@ -1,8 +1,8 @@
 # Stage 1: Build
-FROM node:20-alpine AS builder
-RUN apk add --no-cache libc6-compat
+FROM node:20-bookworm-slim AS builder
 WORKDIR /app
 
+# Copy only dependency manifests before install for deterministic layer caching.
 COPY package.json package-lock.json* ./
 RUN npm ci --legacy-peer-deps
 
@@ -11,12 +11,11 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # Stage 2: Run
-FROM node:20-alpine AS runner
+FROM node:20-bookworm-slim AS runner
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json package-lock.json* ./

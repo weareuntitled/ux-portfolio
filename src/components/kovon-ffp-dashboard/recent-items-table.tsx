@@ -84,7 +84,7 @@ const rowVariants: Variants = {
   },
 };
 
-const bodyVariants: Variants = {
+const bodyVariants = {
   hidden: {},
   visible: { 
     transition: {
