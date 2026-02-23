@@ -22,11 +22,11 @@ export type {
 
 /** Core project only (strip case study, portfolio kit, kovon, impactCards for legacy callers). */
 function toProject(p: ReturnType<typeof getAllProjects>[number]): Project {
-  const { caseStudy, portfolioKit, kovon, impactCards, ...rest } = p;
-  void caseStudy;
-  void portfolioKit;
-  void kovon;
-  void impactCards;
+  const rest = { ...p };
+  delete rest.caseStudy;
+  delete rest.portfolioKit;
+  delete rest.kovon;
+  delete rest.impactCards;
   return rest;
 }
 
