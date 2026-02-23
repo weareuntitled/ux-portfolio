@@ -28,8 +28,8 @@ function getTrendIcon(trend: ActivityFFP["trend"]) {
 
 export default function DiagnosePage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [startWeek, setStartWeek] = useState("CW11");
-  const [endWeek, setEndWeek] = useState("CW13");
+  const [startWeek] = useState("CW11");
+  const [endWeek] = useState("CW13");
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
   const toggleRow = (id: string) => {
