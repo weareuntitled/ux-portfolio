@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { CircleDot, LayoutGrid } from 'lucide-react';
 import type { ResolvedProject } from '@/lib/cms/types';
 import { BrowserMockup } from '@/components/PortfolioKit';
+import { ProjectGallery } from '@/components/ProjectGallery';
 
 /** Stats grid for CAESAR hero (used as ProjectCaseStudyHero children). */
 export function CaesarHeroStats() {
@@ -205,25 +205,7 @@ export function CaesarProjectContent({ project }: CaesarProjectContentProps) {
         </section>
 
         {/* Gallery — always last on every project */}
-        <section>
-          <h2 className="mb-6 text-2xl font-semibold tracking-tight text-zinc-100">Gallery</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryUrls.map((url) => (
-              <div
-                key={url}
-                className="group relative aspect-video overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all hover:scale-[1.02] hover:border-primary/50"
-              >
-                <Image
-                  src={url}
-                  alt=""
-                  fill
-                  className="object-cover transition-opacity group-hover:opacity-95"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+        {project ? <ProjectGallery project={project} /> : null}
     </div>
   );
 }
