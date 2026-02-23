@@ -260,6 +260,7 @@ const kovonConfig: KovonConfig = {
   featuredCase: {
     glossary: kovonFeaturedCaseGlossary,
     featuredVisuals: kovonFeaturedCaseVisuals,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     raciMini: kovonRaciMini as any,
   },
 };
