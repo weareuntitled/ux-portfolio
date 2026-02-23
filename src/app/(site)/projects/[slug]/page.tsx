@@ -4,17 +4,19 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { DashboardCV } from '@/components/DashboardCV';
 import { ProjectPortfolioKit } from '@/components/ProjectPortfolioKit';
 import { ProjectCaseStudyHero } from '@/components/ProjectCaseStudyHero';
+import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
+import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
+import { ProjectLinks } from '@/components/project/ProjectLinks';
 import { AutomationProjectContent } from '@/components/AutomationProjectContent';
-import { FfpProjectContent, FfpHeroStats } from '@/components/FfpProjectContent';
-import { CaesarProjectContent, CaesarHeroStats } from '@/components/CaesarProjectContent';
+import { FfpProjectContent } from '@/components/FfpProjectContent';
+import { CaesarProjectContent } from '@/components/CaesarProjectContent';
 import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
 import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
 import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
-import { getCaseStudySections, getPortfolioKit } from '@/content/caseStudies';
-import { projects as staticProjects } from '@/content/projects';
+import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
 import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -26,7 +28,7 @@ export async function generateStaticParams() {
     const projects = await getProjectsResolved({ draftMode: false });
     return projects.map((p) => ({ slug: p.slug }));
   } catch {
-    return staticProjects.map((p) => ({ slug: p.slug }));
+    return Object.keys(portfolio).map((slug) => ({ slug }));
   }
 }
 
@@ -62,13 +64,21 @@ export default async function ProjectDetailPage({ params }: Props) {
     >
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
         <ProjectCaseStudyHero project={project}>
-          {slug === 'ffp-dashboard' && <FfpHeroStats />}
-          {slug === 'emission-compliance' && <CaesarHeroStats />}
+          {project.impactCards && project.impactCards.length > 0 && (
+            <ProjectImpactCards cards={project.impactCards} />
+          )}
         </ProjectCaseStudyHero>
 
         {slug === 'automation' ? (
           <>
             <AutomationProjectContent />
+            {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
+              <ProjectDeliveryImpact
+                delivery={project.deliveryImpact.delivery ?? []}
+                impact={project.deliveryImpact.impact ?? []}
+                learned={project.deliveryImpact.learned}
+              />
+            )}
             <section>
               <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
                 Related projects
@@ -84,6 +94,13 @@ export default async function ProjectDetailPage({ params }: Props) {
         ) : slug === 'ffp-dashboard' ? (
           <>
             <FfpProjectContent project={project} />
+            {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
+              <ProjectDeliveryImpact
+                delivery={project.deliveryImpact.delivery ?? []}
+                impact={project.deliveryImpact.impact ?? []}
+                learned={project.deliveryImpact.learned}
+              />
+            )}
             <section>
               <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
                 Related projects
@@ -99,6 +116,13 @@ export default async function ProjectDetailPage({ params }: Props) {
         ) : slug === 'emission-compliance' ? (
           <>
             <CaesarProjectContent project={project} />
+            {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
+              <ProjectDeliveryImpact
+                delivery={project.deliveryImpact.delivery ?? []}
+                impact={project.deliveryImpact.impact ?? []}
+                learned={project.deliveryImpact.learned}
+              />
+            )}
             <section>
               <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
                 Related projects
@@ -179,6 +203,21 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div id="prototype">
             <ProjectPrototypePanel project={project} />
           </div>
+
+          {project.links && project.links.length > 0 && (
+            <section>
+              <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground">Links</h2>
+              <ProjectLinks links={project.links.map((l) => ({ label: l.label, href: l.href }))} />
+            </section>
+          )}
+
+          {project.deliveryImpact && (project.deliveryImpact.delivery?.length > 0 || project.deliveryImpact.impact?.length > 0) && (
+            <ProjectDeliveryImpact
+              delivery={project.deliveryImpact.delivery ?? []}
+              impact={project.deliveryImpact.impact ?? []}
+              learned={project.deliveryImpact.learned}
+            />
+          )}
 
           <section>
             <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">

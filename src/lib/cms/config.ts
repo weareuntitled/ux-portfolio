@@ -46,9 +46,16 @@ export const cmsConfig = {
 
   /**
    * First admin user (used by seed when no users exist). Dev only; set in production.
+   * Accepts ADMIN_EMAIL / ADMIN_PASSWORD or ADMIN_DEFAULT_EMAIL / ADMIN_DEFAULT_PASSWORD.
    */
-  adminEmail: stringFromEnv(process.env.ADMIN_EMAIL, 'admin@localhost'),
-  adminPassword: stringFromEnv(process.env.ADMIN_PASSWORD, 'admin123'),
+  adminEmail: stringFromEnv(
+    process.env.ADMIN_EMAIL ?? process.env.ADMIN_DEFAULT_EMAIL,
+    'admin@localhost',
+  ),
+  adminPassword: stringFromEnv(
+    process.env.ADMIN_PASSWORD ?? process.env.ADMIN_DEFAULT_PASSWORD,
+    'admin123',
+  ),
 } as const;
 
 export type CmsConfig = typeof cmsConfig;

@@ -28,8 +28,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import type { ResolvedProject } from '@/lib/cms/types';
-import type { CaseStudySections } from '@/content/caseStudies';
-import { getBentoCards, type PortfolioKitData, type FeatureItemData } from '@/content/caseStudies';
+import type { CaseStudySections, PortfolioKitData, FeatureItemData } from '@/content/portfolio.types';
+import { getBentoCards } from '@/content/portfolio';
 import {
   BrowserMockup,
   InsightCard,
@@ -124,10 +124,8 @@ export function ProjectPortfolioKit({
   const insightAuthor = portfolioKit?.insightAuthor;
   const realProblem = caseStudy?.realProblem;
   const problemOneLine = (realProblem ?? project.problem)?.split(/[.!?]/)[0]?.trim();
-  const hasLocalImage = project.moodImageUrl && !project.moodImageUrl.startsWith('http');
-  const screenshotSrc =
-    project.moodImageUrl ?? 'https://placehold.co/1200x675/171717/404040?text=Project+Screenshot';
-  const useNextImage = Boolean(hasLocalImage);
+  const screenshotSrc = project.coverUrl ?? project.moodImageUrl ?? null;
+  const useNextImage = Boolean(screenshotSrc && !screenshotSrc.startsWith('http'));
   const inAppHref = project.prototype?.prototypeType === 'in-app' && project.prototype?.inAppPrototypeHref;
 
   const useUnifiedHeroLayout = !(
@@ -249,15 +247,19 @@ export function ProjectPortfolioKit({
             />
           )}
           <HeroParallax className="overflow-hidden rounded-xl border border-border shadow-2xl">
-            <BrowserMockup
-              src={screenshotSrc}
-              alt={project.title}
-              urlBar={project.client ? `https://${project.client.toLowerCase().replace(/\s/g, '')}.com` : undefined}
-              useNextImage={useNextImage}
-              iframeSrc={project.galleryUrls?.length ? undefined : inAppHref || undefined}
-              screens={project.galleryUrls}
-              autoAdvanceMs={5000}
-            />
+            {screenshotSrc ? (
+              <BrowserMockup
+                src={screenshotSrc}
+                alt={project.title}
+                urlBar={project.client ? `https://${project.client.toLowerCase().replace(/\s/g, '')}.com` : undefined}
+                useNextImage={useNextImage}
+                iframeSrc={project.galleryUrls?.length ? undefined : inAppHref || undefined}
+                screens={project.galleryUrls}
+                autoAdvanceMs={5000}
+              />
+            ) : (
+              <div className="aspect-video w-full bg-gradient-to-br from-muted via-muted/90 to-muted/70" aria-hidden />
+            )}
           </HeroParallax>
         </>
       ) : (
@@ -268,15 +270,19 @@ export function ProjectPortfolioKit({
             </div>
           ) : (
             <HeroParallax className="overflow-hidden rounded-xl border border-border shadow-2xl">
-              <BrowserMockup
-                src={screenshotSrc}
-                alt={project.title}
-                urlBar={project.client ? `https://${project.client.toLowerCase().replace(/\s/g, '')}.com` : undefined}
-                useNextImage={useNextImage}
-                iframeSrc={project.galleryUrls?.length ? undefined : inAppHref || undefined}
-                screens={project.galleryUrls}
-                autoAdvanceMs={5000}
-              />
+              {screenshotSrc ? (
+                <BrowserMockup
+                  src={screenshotSrc}
+                  alt={project.title}
+                  urlBar={project.client ? `https://${project.client.toLowerCase().replace(/\s/g, '')}.com` : undefined}
+                  useNextImage={useNextImage}
+                  iframeSrc={project.galleryUrls?.length ? undefined : inAppHref || undefined}
+                  screens={project.galleryUrls}
+                  autoAdvanceMs={5000}
+                />
+              ) : (
+                <div className="aspect-video w-full bg-gradient-to-br from-muted via-muted/90 to-muted/70" aria-hidden />
+              )}
             </HeroParallax>
           )}
           {realProblem && (

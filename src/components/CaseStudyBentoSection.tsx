@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Cpu, Layers, Search, ShieldCheck, Zap } from 'lucide-react';
-import { getBentoCards, type BentoCardVisual } from '@/content/caseStudies';
+import { getBentoCards } from '@/content/portfolio';
+import type { BentoCardVisual } from '@/content/portfolio.types';
 import { BentoCard } from '@/components/BentoCard';
 import { cn } from '@/lib/utils';
 

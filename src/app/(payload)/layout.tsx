@@ -4,6 +4,7 @@ import type { ServerFunctionClient } from 'payload'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import React from 'react'
 
+import { AdminBodyClass } from './AdminBodyClass'
 import { importMap } from './admin/importMap'
 import './custom.scss'
 
@@ -15,9 +16,12 @@ const serverFunction: ServerFunctionClient = async function (args) {
 }
 
 const Layout = ({ children }: Args) => (
-  <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
-    {children}
-  </RootLayout>
+  <>
+    <AdminBodyClass />
+    <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
+      {children}
+    </RootLayout>
+  </>
 )
 
 export default Layout

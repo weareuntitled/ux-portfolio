@@ -1,6 +1,5 @@
-import type React from "react";
 import { Star, Fingerprint, Shield } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, type Transition, type Variants } from "framer-motion";
 import {
   Table,
   TableBody,
@@ -70,31 +69,30 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-const rowVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 50,
-      damping: 20,
-      mass: 1,
-    },
-  },
+const rowTransition: Transition = {
+  type: "spring",
+  stiffness: 50,
+  damping: 20,
+  mass: 1,
 };
 
-const bodyVariants = {
+const rowVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: rowTransition },
+};
+
+const bodyTransition: Transition = {
+  staggerChildren: 0.1,
+  delayChildren: 0.05,
+};
+
+const bodyVariants: Variants = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.05,
-    },
-  },
+  visible: { transition: bodyTransition },
 };
 
 const MotionTableRow = motion(TableRow);
+const MotionTableBody = motion(TableBody);
 
 export function RecentItemsTable() {
   return (
@@ -123,8 +121,7 @@ export function RecentItemsTable() {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody
-            as={motion.tbody as React.ElementType}
+          <MotionTableBody
             variants={bodyVariants}
             initial="hidden"
             whileInView="visible"
@@ -155,7 +152,7 @@ export function RecentItemsTable() {
                 </TableCell>
               </MotionTableRow>
             ))}
-          </TableBody>
+          </MotionTableBody>
         </Table>
       </div>
     </section>

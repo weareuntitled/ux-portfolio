@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { getTechnicalSpecs } from '@/content/caseStudies';
+import { getTechnicalSpecs } from '@/content/portfolio';
 import { cn } from '@/lib/utils';
 
 type Props = {

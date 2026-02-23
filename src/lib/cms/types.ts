@@ -7,6 +7,9 @@ export type CmsProject = {
   id: string;
   slug?: string | null;
   title?: string | null;
+  navTitle?: string | null;
+  subtitle?: string | null;
+  roleLine?: string | null;
   oneLiner?: string | null;
   category?: 'Enterprise' | 'Side' | null;
   year?: string | null;
@@ -34,6 +37,8 @@ export type CmsProject = {
   } | null;
   prototypeButtonLabel?: string | null;
   moodImage?: string | null;
+  cover?: string | null;
+  coverFallback?: 'gradient' | 'initials' | 'icon' | null;
   teamSize?: string | null;
   customerAbout?: string | null;
   workflow?: string | null;
@@ -42,6 +47,14 @@ export type CmsProject = {
   gallery?: { image: string | { id: string; url?: string } }[];
   heroImage?: string | null;
   thumbnail?: string | null;
+  metaCards?: { label: string; value: string }[] | null;
+  deliveryImpact?: {
+    delivery?: string[];
+    impact?: string[];
+    learned?: string[];
+  } | null;
+  /** Unified impact cards (4 items); set when using portfolio fallback. */
+  impactCards?: { label: string; value: string }[] | null;
 };
 
 export type CmsProjectDefaults = {
@@ -57,5 +70,8 @@ export type CmsProjectDefaults = {
 
 // Resolved project is what the UI consumes. It mirrors the existing Project type,
 // but fields can be safely derived from defaults + overrides.
-export type ResolvedProject = Project;
+// impactCards: unified 4-card metric block from single source (portfolio) or CMS.
+export type ResolvedProject = Project & {
+  impactCards?: { label: string; value: string }[];
+};
 

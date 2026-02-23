@@ -11,13 +11,17 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-const SETUP_ROWS = [
+const SETUP_ROWS: ReadonlyArray<{
+  label: string;
+  value: string;
+  highlight?: boolean;
+}> = [
   { label: 'Role', value: 'PO & Scrum Master' },
   { label: 'Cadence', value: '2-Week Sprints' },
   { label: 'Dailies', value: '2x per week' },
   { label: 'Team', value: '3–5 Devs + Req Mgr' },
   { label: 'Key Sync', value: 'Tech Lead Alignment', highlight: true },
-] as const;
+];
 
 const PRODUCT_OWNERSHIP: Array<{
   id: string;

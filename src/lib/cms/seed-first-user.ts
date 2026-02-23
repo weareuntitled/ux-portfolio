@@ -28,3 +28,29 @@ export async function seedFirstUser(payload: Payload): Promise<{ created: boolea
 
   return { created: true };
 }
+
+/**
+ * Resets the password of the admin user matching ADMIN_EMAIL to ADMIN_PASSWORD.
+ * Use when you know the user exists but the password in DB doesn't match .env (e.g. after env change).
+ */
+export async function resetAdminPassword(payload: Payload): Promise<{ updated: boolean }> {
+  const result = await payload.find({
+    collection: 'users',
+    where: { email: { equals: cmsConfig.adminEmail } },
+    limit: 1,
+    overrideAccess: true,
+  });
+
+  if (result.docs.length === 0) {
+    return { updated: false };
+  }
+
+  await payload.update({
+    collection: 'users',
+    id: result.docs[0].id,
+    data: { password: cmsConfig.adminPassword },
+    overrideAccess: true,
+  });
+
+  return { updated: true };
+}
