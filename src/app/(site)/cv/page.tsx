@@ -56,7 +56,7 @@ export default async function CVPage() {
               </a>
               <span>Augsburg / Munich (Hybrid)</span>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/daniel-peters-055296203/"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2 transition-colors hover:text-primary"
@@ -104,7 +104,7 @@ export default async function CVPage() {
                     <h4 className="text-lg font-bold text-zinc-100">
                       Senior Product Designer & Process Analyst
                     </h4>
-                    <span className="font-mono text-sm text-zinc-400">Oct 2022 — Present</span>
+                    <span className="font-mono text-sm text-zinc-400">Oct 2022 — Nov 2025</span>
                   </div>
                   <p className="text-sm font-medium text-primary">8020 Consulting · Automotive Konzern</p>
                 </header>
