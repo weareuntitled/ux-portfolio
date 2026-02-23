@@ -260,7 +260,7 @@ const kovonConfig: KovonConfig = {
   featuredCase: {
     glossary: kovonFeaturedCaseGlossary,
     featuredVisuals: kovonFeaturedCaseVisuals,
-    raciMini: kovonRaciMini,
+    raciMini: kovonRaciMini as any,
   },
 };
 
