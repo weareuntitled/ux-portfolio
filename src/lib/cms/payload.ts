@@ -197,6 +197,14 @@ export function resolveProject(
         ? project.moodImage
         : undefined;
 
+  // NEU: Hier ist das fehlende cardCover, das den Fehler behoben hat!
+  const cardCover =
+    project.cardCover != null && typeof project.cardCover === 'object' && 'url' in project.cardCover
+      ? (project.cardCover as { url?: string }).url
+      : typeof project.cardCover === 'string' && project.cardCover
+        ? project.cardCover
+        : undefined;
+
   const galleryUrls =
     project.gallery?.map((g) => {
       const img = g.image;
