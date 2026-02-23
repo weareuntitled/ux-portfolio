@@ -3,8 +3,7 @@ import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
 import { ProjectCard } from '@/components/ProjectCard';
 import { DashboardCV } from '@/components/DashboardCV';
-// FIX: Geschweifte Klammern entfernt (Default Import)
-import {ProjectPortfolioKit} from '@/components/ProjectPortfolioKit';
+import { ProjectPortfolioKit } from '@/components/PortfolioKit';
 import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
 import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
@@ -19,7 +18,7 @@ import { ProjectPrototypePanel } from '@/components/ProjectPrototypePanel';
 import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
 import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
 import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
-import { WorkingCircle } from '@/components/kovon/WorkingCircle';
+import { KovonWorkingCircle } from '@/components/kovon/KovonWorkingCircle';
 import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
 import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
 
@@ -72,7 +71,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       workflowTooling: (
         <>
           <RoleAndSetupSection />
-          <WorkingCircle />
+          <KovonWorkingCircle />
         </>
       ),
     },
@@ -90,6 +89,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       ]}
       pageTitle={project.title}
       variant="project"
+      showSearch={false}
     >
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
         {/* 1) Hero */}
@@ -102,12 +102,12 @@ export default async function ProjectDetailPage({ params }: Props) {
         <section id="case-study" className="space-y-16">
           {/* 2) Quote / Problem */}
           {extension.quoteProblem}
-        <ProjectPortfolioKit
-          project={project}
-          caseStudy={caseStudySections}
-          portfolioKit={portfolioKit ?? null}
-          skipHero
-        />
+          <ProjectPortfolioKit
+            project={project}
+            caseStudy={caseStudySections}
+            portfolioKit={portfolioKit ?? null}
+            skipHero
+          />
 
           {slug !== 'kovon' && (
             <>
