@@ -1,0 +1,32 @@
+name: Deploy UX Portfolio to Hostinger
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # 1. In den Portfolio-Ordner wechseln
+            cd ~/ux-portfolio
+            
+            # 2. Lokale Änderungen auf dem Server verwerfen (Sicherheit geht vor!)
+            git reset --hard
+            
+            # 3. Neuesten Code von GitHub ziehen
+            git pull origin main
+            
+            # 4. Container neu bauen (wegen Next.js Änderungen) und im Hintergrund starten
+            docker compose up -d --build --remove-orphans
+            
+            # 5. Alte Images löschen, damit die Festplatte nicht vollläuft
+            docker image prune -f

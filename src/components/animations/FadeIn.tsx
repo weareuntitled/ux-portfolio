@@ -39,4 +39,3 @@ export function FadeIn({ children, className, style, delay = 0 }: FadeInProps) {
     </motion.div>
   );
 }
-
