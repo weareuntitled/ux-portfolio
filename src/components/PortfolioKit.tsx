@@ -655,3 +655,45 @@ export function FeatureItem({
     </div>
   );
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export type ProjectPortfolioKitProps = {
+  project: any;
+  caseStudy?: any;
+  portfolioKit?: any;
+  skipHero?: boolean;
+  className?: string;
+};
+
+export function ProjectPortfolioKit({
+  project,
+  caseStudy,
+  portfolioKit: _portfolioKit,
+  skipHero,
+  className,
+}: ProjectPortfolioKitProps) {
+  if (!project) return null;
+
+  return (
+    <div className={cn('space-y-16', className)}>
+      {!skipHero && (
+        <ProjectHero
+          title={project.title}
+          subtitle={project.description || ''}
+          role={project.role || 'Product Designer'}
+          year={project.year || '2024'}
+          tags={project.tags || []}
+        />
+      )}
+
+      {caseStudy?.realProblem && (
+        <InsightCard
+          quote={caseStudy.realProblem}
+          author={caseStudy.insightAuthor ?? 'Project team'}
+          type="problem"
+        />
+      )}
+    </div>
+  );
+}
