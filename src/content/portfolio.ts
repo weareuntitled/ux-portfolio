@@ -1151,6 +1151,9 @@ export function getProjectCoreBySlug(
 ): (Project & { impactCards: ImpactCardItem[] }) | null {
   const p = portfolio[slug];
   if (!p) return null;
-  const { caseStudy: _cs, portfolioKit: _pk, kovon: _k, ...core } = p;
+  const core = { ...p };
+  delete core.caseStudy;
+  delete core.portfolioKit;
+  delete core.kovon;
   return { ...core, impactCards: p.impactCards };
 }
