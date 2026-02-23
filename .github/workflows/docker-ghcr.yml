@@ -1,4 +1,4 @@
-name: build-and-push
+name: build-and-push-ghcr
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
