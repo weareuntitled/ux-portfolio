@@ -1,23 +1,53 @@
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { draftMode } from 'next/headers';
 
-export default function KovonPrototypePage() {
+import { DashboardCV } from '@/components/DashboardCV';
+import { getProjectsForNav } from '@/lib/cms/projects-nav';
+
+export const metadata: Metadata = {
+  title: 'KoVoN Prototype | Daniel Peters',
+  description: 'Prototype entry point for KoVoN and related FFP workflow pages.',
+};
+
+export const revalidate = 300;
+
+export default async function KovonPrototypePage() {
+  const draft = await draftMode();
+  const navProjects = await getProjectsForNav({ draftMode: draft.isEnabled });
+
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-6">
-      <Link href="/projects/kovon" className="text-sm text-blue-700 hover:underline">
-        ← Back to project
-      </Link>
-      <section className="rounded-xl border bg-white p-6">
-        <h1 className="text-xl font-semibold">KoVoN</h1>
-        <p className="mt-2 text-slate-600">
-          This project does not have an interactive prototype in this portfolio. The FFP workflow selection dashboard prototype is under the Failure Fingerprint Dashboard (FFP) project.
+    <DashboardCV
+      navProjects={navProjects}
+      breadcrumbs={[
+        { label: 'Daniel Peters', href: '/' },
+        { label: 'Prototypes', href: '/prototypes' },
+        { label: 'KoVoN' },
+      ]}
+      pageTitle="KoVoN"
+    >
+      <div className="space-y-6">
+        <p className="text-sm text-muted-foreground">
+          This project does not have an interactive prototype in this portfolio. The FFP workflow selection dashboard prototype
+          is under the Failure Fingerprint Dashboard project.
         </p>
-        <Link
-          href="/prototypes/ffp/fingerprints"
-          className="mt-4 inline-block rounded-md border border-blue-600 bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Open FFP prototype
-        </Link>
-      </section>
-    </main>
+
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/projects/kovon"
+            className="rounded-md border border-border bg-card px-4 py-2 text-sm hover:bg-muted/40"
+          >
+            Back to project
+          </Link>
+
+          <Link
+            href="/prototypes/ffp/fingerprints"
+            className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          >
+            Open FFP prototype
+          </Link>
+        </div>
+      </div>
+    </DashboardCV>
   );
 }
