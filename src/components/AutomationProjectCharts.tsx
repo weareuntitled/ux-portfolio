@@ -9,13 +9,7 @@ import {
   ChartTooltipContent,
   pickSafeTooltipContentProps,
 } from '@/components/ui/chart';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Lock, Zap, ArrowDown, GitMerge, ShieldAlert } from 'lucide-react';
+import { Lock, Zap, GitMerge, ShieldAlert } from 'lucide-react';
 import { KLevelStack } from '@/components/KLevelStack';
 
 const volumeData = [
@@ -55,7 +49,7 @@ export function AutomationProjectCharts() {
               </div>
               <div>
                 <CardTitle className="text-base">The Cascade</CardTitle>
-                <p className="text-xs font-medium text-muted-foreground">Data flows down ↓</p>
+                <p className="text-xs font-medium text-muted-foreground">Data flows down ???</p>
               </div>
             </div>
           </CardHeader>
@@ -64,7 +58,7 @@ export function AutomationProjectCharts() {
               The &quot;Single Source of Truth.&quot; Changes at the top project level automatically overwrite specifications at the part level. This ensures everyone builds to the same current standard.
             </p>
             <p className="mt-3 text-xs text-muted-foreground/80">
-              <strong className="text-foreground">Example:</strong> Parent changes brand color Blue → Red. Every business card, button, and flyer (Children) updates to Red. If a designer makes one card Blue, the Master overwrites it back. Parent always wins.
+              <strong className="text-foreground">Example:</strong> Parent changes brand color Blue ??? Red. Every business card, button, and flyer (Children) updates to Red. If a designer makes one card Blue, the Master overwrites it back. Parent always wins.
             </p>
           </CardContent>
         </Card>
@@ -78,7 +72,7 @@ export function AutomationProjectCharts() {
               </div>
               <div>
                 <CardTitle className="text-base">The Gatekeeper</CardTitle>
-                <p className="text-xs font-medium text-muted-foreground">Status flows up ↑</p>
+                <p className="text-xs font-medium text-muted-foreground">Status flows up ???</p>
               </div>
             </div>
           </CardHeader>
@@ -87,7 +81,7 @@ export function AutomationProjectCharts() {
               The &quot;Chain of Trust.&quot; Validation starts at the bottom. If a single screw fails its audit, the entire vehicle system above it is blocked from production. Quality is non-negotiable.
             </p>
             <p className="mt-3 text-xs text-muted-foreground/80">
-              <strong className="text-foreground">Example:</strong> A $1 brake bolt is defective (FAILED). Even though the rest of the Brake System is perfect, the system is marked UNSAFE. The entire car cannot be sold—the line stops because of that one bolt.
+              <strong className="text-foreground">Example:</strong> A $1 brake bolt is defective (FAILED). Even though the rest of the Brake System is perfect, the system is marked UNSAFE. The entire car cannot be sold???the line stops because of that one bolt.
             </p>
           </CardContent>
         </Card>
@@ -104,7 +98,7 @@ export function AutomationProjectCharts() {
         <CardContent className="space-y-6 py-8">
           <KLevelStack />
           <p className="text-center text-xs text-muted-foreground">
-            Part (cause) → System (victim) → Vehicle (blocked). Failure propagates upwards.
+            Part (cause) ??? System (victim) ??? Vehicle (blocked). Failure propagates upwards.
           </p>
         </CardContent>
       </Card>
@@ -115,7 +109,7 @@ export function AutomationProjectCharts() {
           <CardHeader>
             <CardTitle className="text-lg">Volume & false rate</CardTitle>
             <p className="text-sm text-muted-foreground">
-              ~10–20 parts pushed/month, ~50 fabrications; 5–10% wrongly reset (e.g. part swap not relevant to child project)
+              ~10???20 parts pushed/month, ~50 fabrications; 5???10% wrongly reset (e.g. part swap not relevant to child project)
             </p>
           </CardHeader>
           <CardContent className="pt-0">
@@ -144,11 +138,11 @@ export function AutomationProjectCharts() {
           </CardHeader>
           <CardContent className="mt-6 grid grid-cols-3 gap-4 p-0">
             <div className="rounded-lg border border-border bg-muted/30 p-3 text-center">
-              <p className="text-2xl font-bold text-primary">40–50</p>
+              <p className="text-2xl font-bold text-primary">40???50</p>
               <p className="text-xs text-muted-foreground">Experts</p>
             </div>
             <div className="rounded-lg border border-border bg-muted/30 p-3 text-center">
-              <p className="text-2xl font-bold text-primary">2–4h</p>
+              <p className="text-2xl font-bold text-primary">2???4h</p>
               <p className="text-xs text-muted-foreground">Hours/week each</p>
             </div>
             <div className="rounded-lg border border-border bg-muted/30 p-3 text-center">

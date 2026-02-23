@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Bell, LayoutGrid, Fingerprint, ListChecks, Activity, Shield, MessageCircle, BarChart3, Users, ArrowLeft } from "lucide-react";
+import { Search, Bell, LayoutGrid, ListChecks, Activity, Shield, MessageCircle, BarChart3, Users, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

@@ -273,7 +273,7 @@ const SafeTooltipDiv = React.forwardRef<
   HTMLDivElement,
   Record<string, unknown> & { children?: React.ReactNode }
 >((props, ref) => {
-  const { id, style, className, children, ..._ignored } = props;
+  const { id, style, className, children } = props;
   return (
     <div
       ref={ref}
@@ -302,27 +302,6 @@ const ChartTooltipContentInner = React.forwardRef<
       className,
       id,
       style,
-      axisId: _axisId,
-      contentStyle: _contentStyle,
-      cursor: _cursor,
-      allowEscapeViewBox: _allowEscapeViewBox,
-      animationDuration: _animationDuration,
-      animationEasing: _animationEasing,
-      filterNull: _filterNull,
-      viewBox: _viewBox,
-      coordinate: _coordinate,
-      formatter: _formatter,
-      itemStyle: _itemStyle,
-      itemSorter: _itemSorter,
-      separator: _separator,
-      wrapperStyle: _wrapperStyle,
-      isAnimationActive: _isAnimationActive,
-      includeHidden: _includeHidden,
-      labelStyle: _labelStyle,
-      reverseDirection: _reverseDirection,
-      activeIndex: _activeIndex,
-      accessibilityLayer: _accessibilityLayer,
-      ..._restRechartsProps
     },
     ref,
   ) => {
