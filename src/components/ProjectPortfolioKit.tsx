@@ -652,3 +652,45 @@ export function FeatureItem({
     </div>
   );
 }
+
+// --- 7. MAIN WRAPPER: The missing ProjectPortfolioKit component ---
+
+export type ProjectPortfolioKitProps = {
+  project: any;
+  caseStudy?: any;
+  portfolioKit?: any;
+  skipHero?: boolean;
+  className?: string;
+};
+
+export function ProjectPortfolioKit({
+  project,
+  caseStudy,
+  portfolioKit,
+  skipHero,
+  className,
+}: ProjectPortfolioKitProps) {
+  if (!project) return null;
+
+  return (
+    <div className={cn('space-y-16', className)}>
+      {/* Wenn skipHero false ist, zeigen wir den Hero an */}
+      {!skipHero && (
+        <ProjectHero
+          title={project.title}
+          subtitle={project.description || ''}
+          role={project.role || 'Product Designer'}
+          year={project.year || '2024'}
+          tags={project.tags || []}
+        />
+      )}
+      
+      {/* Hier kannst du später das Rendering deiner Case Study / Portfolio Kit Inhalte einbauen */}
+      {portfolioKit && (
+         <div className="text-sm text-muted-foreground p-4 border rounded-lg bg-muted/20">
+            Portfolio Kit Content Placeholder
+         </div>
+      )}
+    </div>
+  );
+}
