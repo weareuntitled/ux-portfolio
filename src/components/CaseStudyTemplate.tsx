@@ -1,6 +1,6 @@
 'use client';
 
-import type { CaseStudySections } from '@/content/caseStudies';
+import type { CaseStudySections } from '@/content/portfolio.types';
 
 type Props = { sections: CaseStudySections };
 

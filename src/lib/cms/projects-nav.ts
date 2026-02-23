@@ -79,7 +79,7 @@ export async function getEnterpriseProjectsForNav({
   draftMode,
 }: DraftModeFlag): Promise<NavProject[]> {
   const enterprise = await getEnterpriseProjectsResolved({ draftMode });
-  return enterprise.map((p) => ({ slug: p.slug, title: p.title }));
+  return enterprise.map((p) => ({ slug: p.slug, title: p.navTitle ?? p.title }));
 }
 
 /**
@@ -92,7 +92,7 @@ export async function getProjectsForNav({
   const all = await getProjectsResolved({ draftMode });
   return all.map((p) => ({
     slug: p.slug,
-    title: p.title,
+    title: p.navTitle ?? p.title,
     moodImageUrl: p.moodImageUrl ?? null,
     category: p.category,
   }));

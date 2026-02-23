@@ -16,7 +16,7 @@ export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view', i
   const [showPrototype, setShowPrototype] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const hasPrototype = Boolean(project.prototype?.figmaEmbedUrl);
-  const coverUrl = project.moodImageUrl ?? null;
+  const coverUrl = project.coverUrl ?? project.moodImageUrl ?? null;
 
   return (
     <>

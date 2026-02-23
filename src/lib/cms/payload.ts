@@ -1,16 +1,18 @@
 import { cache } from 'react';
 import type { Where } from 'payload';
 import type { CmsProject, CmsProjectDefaults, ResolvedProject } from './types';
-import type { Project } from '@/content/projects';
-import { projects as staticProjects } from '@/content/projects';
-import { findProjectBySlug } from '@/content/projects';
+import type { PortfolioProject } from '@/content/portfolio.types';
+import { getAllProjects, getProjectBySlug as getPortfolioProjectBySlug } from '@/content/portfolio';
 
-/** Map static Project to CmsProject shape for fallback when CMS has no data. */
-function staticProjectToCmsProject(p: Project): CmsProject {
+/** Map portfolio project (single source) to CmsProject for fallback when CMS has no data. */
+function portfolioProjectToCmsProject(p: PortfolioProject): CmsProject {
   return {
     id: p.id,
     slug: p.slug,
     title: p.title,
+    navTitle: p.navTitle ?? null,
+    subtitle: p.subtitle ?? null,
+    roleLine: p.roleLine ?? null,
     oneLiner: p.oneLiner,
     category: p.category,
     year: p.year,
@@ -36,11 +38,21 @@ function staticProjectToCmsProject(p: Project): CmsProject {
         }
       : null,
     prototypeButtonLabel: p.prototypeButtonLabel ?? null,
+    moodImage: p.moodImageUrl ?? null,
+    cover: p.cover ?? null,
+    coverFallback: p.coverFallback ?? null,
     teamSize: p.teamSize ?? null,
     customerAbout: p.customerAbout ?? null,
     workflow: p.workflow ?? null,
     notes: p.notes ?? null,
     impact: p.impact ?? undefined,
+    gallery:
+      p.galleryUrls?.map((url) => ({
+        image: url,
+      })) ?? undefined,
+    metaCards: p.metaCards ?? null,
+    deliveryImpact: p.deliveryImpact ?? null,
+    impactCards: p.impactCards ?? null,
   };
 }
 
@@ -95,7 +107,8 @@ export async function getProjects({ draftMode }: DraftModeFlag): Promise<CmsProj
 
   const docs = result.docs as unknown as CmsProject[];
   if (docs.length === 0) {
-    return staticProjects.map(staticProjectToCmsProject);
+    const portfolioProjects = getAllProjects();
+    return portfolioProjects.map(portfolioProjectToCmsProject);
   }
   return docs;
 }
@@ -130,8 +143,8 @@ export async function getProjectBySlug(
 
   const [project] = result.docs as unknown as CmsProject[];
   if (project) return project;
-  const staticProject = findProjectBySlug(slug);
-  return staticProject ? staticProjectToCmsProject(staticProject) : null;
+  const portfolioProject = getPortfolioProjectBySlug(slug);
+  return portfolioProject ? portfolioProjectToCmsProject(portfolioProject) : null;
 }
 
 export function resolveProject(
@@ -240,10 +253,26 @@ export function resolveProject(
 
   const impact = project.impact?.map((i) => ({ label: i.label, value: i.value })) ?? [];
 
+  // Unified cover: prefer explicit cover, then mood image, else null
+  const coverUrl = project.cover && project.cover.length > 0 ? project.cover : moodImage ?? undefined;
+
+  const deliveryImpact = {
+    delivery: project.deliveryImpact?.delivery ?? [],
+    impact: project.deliveryImpact?.impact ?? [],
+    learned: project.deliveryImpact?.learned ?? [],
+  };
+  const hasDeliveryImpact =
+    (deliveryImpact.delivery && deliveryImpact.delivery.length > 0) ||
+    (deliveryImpact.impact && deliveryImpact.impact.length > 0) ||
+    (deliveryImpact.learned && deliveryImpact.learned.length > 0);
+
   const base: Partial<ResolvedProject> = {
     id: slug,
     slug,
     title: project.title ?? slug,
+    navTitle: project.navTitle ?? project.title ?? slug,
+    subtitle: project.subtitle ?? undefined,
+    roleLine: project.roleLine ?? undefined,
     oneLiner: project.oneLiner ?? '',
     category: (project.category as ResolvedProject['category']) ?? 'Enterprise',
     year: project.year ?? '',
@@ -276,6 +305,14 @@ export function resolveProject(
     notes: project.notes ?? undefined,
     impact: impact.length > 0 ? impact : undefined,
     galleryUrls: galleryUrls.length > 0 ? galleryUrls : undefined,
+    cover: project.cover ?? undefined,
+    coverFallback: project.coverFallback ?? undefined,
+    metaCards: project.metaCards ?? [],
+    deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [] },
+    // Unified cover URL for all components to consume
+    // Prefer explicit cover, then mood image; guarded by resolver.
+    coverUrl,
+    impactCards: project.impactCards ?? undefined,
   };
 
   return base as ResolvedProject;

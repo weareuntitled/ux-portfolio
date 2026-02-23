@@ -10,35 +10,37 @@ import { FadeIn } from '@/components/motion';
 
 type ProjectCaseStudyHeroProps = {
   project: ResolvedProject;
-  /** Optional slot for stats or extra hero content (e.g. FFP metrics grid, automation stats). */
+  /** Optional slot for stats or meta cards (e.g. ProjectMetaCards, FfpHeroStats). */
   children?: React.ReactNode;
 };
 
-const FALLBACK_PLACEHOLDER =
-  'https://placehold.co/1200x675/171717/404040?text=Project+Screenshot';
-
 export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHeroProps) {
-  const role = project.roles?.[0] ?? '—';
+  const heroSrc = project.coverUrl ?? project.moodImageUrl ?? null;
+  const hasImage = Boolean(heroSrc);
+  const roleLine = project.roleLine ?? (project.roles?.length ? project.roles.join(', ') : '—');
   const tags = project.tags?.slice(0, 5) ?? [];
-  const heroSrc = project.moodImageUrl ?? FALLBACK_PLACEHOLDER;
-  const hasImage = Boolean(project.moodImageUrl);
 
   return (
     <FadeIn className="relative space-y-6 overflow-hidden rounded-xl">
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src={heroSrc}
-          alt=""
-          fill
-          className="object-cover"
-          sizes="(max-width: 1280px) 100vw, 1280px"
-          priority
-          quality={80}
-        />
+      {/* Background: cover image or gradient only (no broken image) */}
+      <div className="absolute inset-0 -z-10 min-h-[280px]">
+        {hasImage ? (
+          <Image
+            src={heroSrc!}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            priority
+            quality={80}
+          />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-muted via-muted/90 to-muted/70" />
+        )}
       </div>
       <div
         className={
-          'relative space-y-6 rounded-xl px-6 py-8 md:px-8 md:py-10' +
+          'relative min-h-[280px] space-y-6 rounded-xl px-6 py-8 md:px-8 md:py-10' +
           (hasImage ? ' bg-background/80 bg-clip-padding' : '')
         }
       >
@@ -66,13 +68,16 @@ export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHero
         <h1 className="text-5xl font-bold tracking-tighter text-foreground md:text-6xl">
           {project.title}
         </h1>
+        {project.subtitle && (
+          <p className="max-w-2xl text-lg text-muted-foreground">{project.subtitle}</p>
+        )}
         <p className="mt-4 max-w-2xl text-xl text-muted-foreground">{project.oneLiner}</p>
         <div className="flex flex-wrap items-center gap-6">
           <div>
             <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Role
             </div>
-            <div className="font-medium text-foreground">{role}</div>
+            <div className="font-medium text-foreground">{roleLine}</div>
           </div>
           <ProjectPrototypeButton project={project} />
         </div>

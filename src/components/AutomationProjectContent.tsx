@@ -77,42 +77,6 @@ export function AutomationProjectContent() {
           </blockquote>
         </div>
 
-        {/* Impact cards */}
-        <div className="grid grid-cols-1 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-both sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-6 shadow-lg">
-            <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-              Experts Relieved
-            </p>
-            <p className="mt-2 text-2xl font-mono font-bold tracking-tight text-primary">
-              40–50
-            </p>
-          </div>
-          <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-6 shadow-lg">
-            <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-              Recovered Time
-            </p>
-            <p className="mt-2 text-2xl font-mono font-bold tracking-tight text-primary">
-              2–4h / week
-            </p>
-          </div>
-          <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-6 shadow-lg">
-            <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-              Delivery Timeline
-            </p>
-            <p className="mt-2 text-2xl font-mono font-bold tracking-tight text-primary">
-              3 Months
-            </p>
-          </div>
-          <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-6 shadow-lg">
-            <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-              Accuracy (UC1)
-            </p>
-            <p className="mt-2 text-2xl font-mono font-bold tracking-tight text-primary">
-              100%
-            </p>
-          </div>
-        </div>
-
         {/* V-System vs K-Levels — CSS architectural diagram */}
         <section className="rounded-3xl border border-zinc-800/80 bg-zinc-950/40 p-6 shadow-2xl md:p-10">
           <div className="mb-10 flex flex-col gap-4 sm:gap-6">

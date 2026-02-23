@@ -1,5 +1,67 @@
-/* Payload admin: reset body so portfolio globals don't override admin UI */
+/* Payload admin: force light, readable theme so portfolio globals don't cause white-on-white */
+
 body.payload-admin-page {
   background: #fff !important;
   color: #1a1a1a !important;
+}
+
+/* Ensure all text and UI elements are visible (dark on light) */
+body.payload-admin-page,
+body.payload-admin-page *,
+body.payload-admin-page *::placeholder {
+  color: #1a1a1a !important;
+}
+
+/* Primary buttons: dark background, white text so they stay visible */
+body.payload-admin-page button[type='submit'],
+body.payload-admin-page button.btn--style-primary,
+body.payload-admin-page [data-button-variant='primary'] {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border-color: #1a1a1a !important;
+}
+
+/* Links: keep visible and distinguishable */
+body.payload-admin-page a {
+  color: #2563eb !important;
+}
+body.payload-admin-page a:hover {
+  color: #1d4ed8 !important;
+  text-decoration: underline;
+}
+
+/* Form controls: light background, dark text, visible border */
+body.payload-admin-page input,
+body.payload-admin-page textarea,
+body.payload-admin-page select,
+body.payload-admin-page [contenteditable='true'],
+body.payload-admin-page [role='textbox'] {
+  background: #fff !important;
+  color: #1a1a1a !important;
+  border: 1px solid #d1d5db !important;
+}
+
+body.payload-admin-page input::placeholder,
+body.payload-admin-page textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Sidebar/nav: light gray background so it's still distinct */
+body.payload-admin-page [class*='sidebar'],
+body.payload-admin-page [class*='nav'],
+body.payload-admin-page aside {
+  background: #f9fafb !important;
+  color: #1a1a1a !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Headings and labels */
+body.payload-admin-page h1,
+body.payload-admin-page h2,
+body.payload-admin-page h3,
+body.payload-admin-page h4,
+body.payload-admin-page h5,
+body.payload-admin-page h6,
+body.payload-admin-page label {
+  color: #111827 !important;
 }

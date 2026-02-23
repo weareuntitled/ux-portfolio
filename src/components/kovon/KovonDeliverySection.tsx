@@ -23,10 +23,7 @@ import { SectionTitle, IconSquare } from '@/components/portfolio/PortfolioPrimit
 import { Card } from '@/components/ui/card';
 import { WorkingCircle } from '@/components/kovon/WorkingCircle';
 import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
-import {
-  kovonWhereItLandedBullets,
-  kovonWhyRolloutStoppedBullets,
-} from '@/content/kovon/kovonPage.config';
+import { getKovonConfig } from '@/content/portfolio';
 
 const icon = (name: string): LucideIcon | null => {
   const map: Record<string, LucideIcon> = {
@@ -51,6 +48,9 @@ const icon = (name: string): LucideIcon | null => {
 
 /** Impact (where it landed) + Why rollout stopped — Impact prominent, Why as side note */
 function WhereItLandedAndWhyStopped() {
+  const config = getKovonConfig();
+  if (!config) return null;
+  const { whereItLandedBullets, whyRolloutStoppedBullets } = config;
   return (
     <Card className="overflow-hidden border-border bg-card/50">
       <div className="grid grid-cols-1 gap-0 lg:grid-cols-2">
@@ -59,7 +59,7 @@ function WhereItLandedAndWhyStopped() {
             Impact
           </h3>
           <ul className="list-inside list-disc space-y-2 text-sm leading-relaxed text-foreground">
-            {kovonWhereItLandedBullets.map((item, i) => (
+            {whereItLandedBullets.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
@@ -69,7 +69,7 @@ function WhereItLandedAndWhyStopped() {
             Why rollout stopped
           </h3>
           <ul className="list-inside list-disc space-y-1.5 text-sm leading-relaxed text-muted-foreground">
-            {kovonWhyRolloutStoppedBullets.map((item, i) => (
+            {whyRolloutStoppedBullets.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
