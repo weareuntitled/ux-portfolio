@@ -69,7 +69,7 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
   );
 }
 
-const rowVariants: Variants = {
+const rowVariants = {
   hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
@@ -79,19 +79,19 @@ const rowVariants: Variants = {
       stiffness: 50,
       damping: 20,
       mass: 1,
-    } as const,
+    },
   },
-};
+} satisfies Variants;
 
 const bodyTransition: Transition = {
   staggerChildren: 0.1,
   delayChildren: 0.05,
 };
 
-const bodyVariants: Variants = {
+const bodyVariants = {
   hidden: {},
   visible: { transition: bodyTransition },
-};
+} satisfies Variants;
 
 const MotionTableRow = motion(TableRow);
 const MotionTableBody = motion(TableBody);
