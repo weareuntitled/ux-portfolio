@@ -6,8 +6,8 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --legacy-peer-deps
 
-# Force install the standard Linux sharp binary
-RUN npm install --os=linux --cpu=x64 sharp
+# Force install the standard Linux sharp binary WITH legacy-peer-deps
+RUN npm install --os=linux --cpu=x64 sharp --legacy-peer-deps
 
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -24,8 +24,8 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev --legacy-peer-deps
 
-# Force install sharp for runtime image optimization
-RUN npm install --os=linux --cpu=x64 sharp
+# Force install sharp for runtime image optimization WITH legacy-peer-deps
+RUN npm install --os=linux --cpu=x64 sharp --legacy-peer-deps
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
