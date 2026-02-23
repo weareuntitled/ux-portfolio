@@ -39,6 +39,7 @@ function portfolioProjectToCmsProject(p: PortfolioProject): CmsProject {
       : null,
     prototypeButtonLabel: p.prototypeButtonLabel ?? null,
     moodImage: p.moodImageUrl ?? null,
+    cardCover: p.cardCoverUrl ?? null,
     cover: p.cover ?? null,
     coverFallback: p.coverFallback ?? null,
     teamSize: p.teamSize ?? null,
@@ -200,9 +201,28 @@ export function resolveProject(
       'ffp-dashboard': '/projects/ffp_dashboard_hero.jpg',
       'emission-compliance': '/projects/emission_compliance_hero.jpg',
       automation: '/projects/sap_automation_bot_hero.png',
-      fixundfertig: '/projects/fixundfertig_preview.jpg',
+      fixundfertig: '/projects/ffp_gallery_08.png',
     };
     moodImage = slugToImage[slug] ?? undefined;
+  }
+
+  let cardCover: string | undefined;
+  if (project.cardCover != null && typeof project.cardCover === 'object' && 'url' in project.cardCover) {
+    cardCover = (project.cardCover as { url?: string }).url;
+  } else if (typeof project.cardCover === 'string' && project.cardCover) {
+    cardCover = project.cardCover;
+  }
+
+  if (!cardCover) {
+    const slugToCardCover: Record<string, string> = {
+      kovon: '/projects/kovon_gallery_04.jpg',
+      automation: '/projects/sap_automation_bot_hero.png',
+      'ffp-dashboard': '/projects/ffp_gallery_04.png',
+      'emission-compliance': '/projects/ceasar_gallery_05.png',
+      tracklistify: '/projects/ffp_gallery_08.png',
+      fixundfertig: '/projects/ffp_gallery_08.png',
+    };
+    cardCover = slugToCardCover[slug] ?? undefined;
   }
   let galleryUrls =
     project.gallery?.map((g) => {
@@ -311,10 +331,10 @@ export function resolveProject(
     deliveryImpact: hasDeliveryImpact ? deliveryImpact : { delivery: [], impact: [] },
     // Unified cover URL for all components to consume
     // Prefer explicit cover, then mood image; guarded by resolver.
+    cardCoverUrl: cardCover,
     coverUrl,
     impactCards: project.impactCards ?? undefined,
   };
 
   return base as ResolvedProject;
 }
-

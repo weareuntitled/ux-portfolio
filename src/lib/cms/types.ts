@@ -37,6 +37,7 @@ export type CmsProject = {
   } | null;
   prototypeButtonLabel?: string | null;
   moodImage?: string | null;
+  cardCover?: string | { id: string; url?: string } | null;
   cover?: string | null;
   coverFallback?: 'gradient' | 'initials' | 'icon' | null;
   teamSize?: string | null;
@@ -74,4 +75,3 @@ export type CmsProjectDefaults = {
 export type ResolvedProject = Project & {
   impactCards?: { label: string; value: string }[];
 };
-
