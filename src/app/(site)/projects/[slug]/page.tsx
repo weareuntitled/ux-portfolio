@@ -20,7 +20,6 @@ import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
 import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { ProjectCard } from '@/components/ProjectCard';
-import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
 import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -243,7 +242,6 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        <CaseStudyFooterCta />
       </div>
     </DashboardCV>
   );
