@@ -410,8 +410,10 @@ const Diagram = React.memo(function Diagram({ type }: { type: DiagramType }) {
 Diagram.displayName = 'Diagram';
 
 export function FeaturedComplianceCase() {
-  if (featuredVisuals.length === 0) return null;
+  // HOOK FIX: Wurde vor das if-Statement gezogen
   const firstByBullet = useFirstOccurrenceByBullet();
+
+  if (featuredVisuals.length === 0) return null;
 
   return (
     <FadeIn>
