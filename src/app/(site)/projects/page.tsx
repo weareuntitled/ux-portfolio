@@ -8,7 +8,7 @@ import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
 import { AutomationProjectContent } from '@/components/AutomationProjectContent';
 import { FfpProjectContent } from '@/components/FfpProjectContent';
-import { CaesarProjectContent } from '@/components/CaesarProjectContent';
+
 import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
 import { KovonWorkingCircle } from '@/components/kovon/KovonWorkingCircle';
 
@@ -67,9 +67,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     'ffp-dashboard': {
       customSection: <FfpProjectContent project={project} hideScreenshots />,
     },
-    'emission-compliance': {
-      customSection: <CaesarProjectContent project={project} hideScreenshots />,
-    },
+   
     kovon: {
       customSection: (
         <>

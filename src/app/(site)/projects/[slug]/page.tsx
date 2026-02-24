@@ -1,4 +1,5 @@
 // src/app/(site)/projects/[slug]/page.tsx
+// FIX: draftMode() is async in your setup, so you must await it.
 
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
@@ -11,11 +12,11 @@ import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpac
 
 import { AutomationProjectContent } from '@/components/AutomationProjectContent';
 import { FfpProjectContent } from '@/components/FfpProjectContent';
-import { CaesarProjectContent } from '@/components/CaesarProjectContent';
+
 import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
 import { KovonWorkingCircle } from '@/components/kovon/KovonWorkingCircle';
 
-import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
+import { getCaseStudySections, portfolio } from '@/content/portfolio';
 import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
 
 import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
@@ -25,7 +26,6 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 import { BrowserMockup } from '@/components/PortfolioKit';
 
-import { ProjectAtAGlanceBlock } from '@/components/project/ProjectAtAGlanceBlock';
 import { ProjectHeaderLinks } from '@/components/project/ProjectHeaderLinks';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -33,7 +33,6 @@ export const revalidate = 300;
 
 type QuoteExtension = { quote?: string; footer?: string };
 const projectQuoteBySlug: Record<string, QuoteExtension> = {
-  // optional overrides
   kovon: {
     quote:
       'We had to bring people into task force mode to pass the audit. The tool pilot proved what a scalable, updatable verification system would need.',
@@ -52,6 +51,8 @@ export async function generateStaticParams() {
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
+
+  // FIX: await draftMode()
   const draft = await draftMode();
   const isDraft = draft.isEnabled;
 
@@ -64,25 +65,16 @@ export default async function ProjectDetailPage({ params }: Props) {
   if (!project) notFound();
 
   const caseStudySections = getCaseStudySections(slug);
-  const portfolioKit = getPortfolioKit(slug);
-  void portfolioKit;
 
   const related = resolvedProjects
     .filter((item) => item.slug !== project.slug && item.category === project.category)
     .slice(0, 2);
 
-  const projectExtensions: Record<string, Partial<Record<'customSection', ReactNode>>> = {
-    automation: {
-      narrative: <AutomationProjectContent />,
-    },
-    'ffp-dashboard': {
-      narrative: <FfpProjectContent project={project} />,
-    },
-    'emission-compliance': {
-      narrative: <CaesarProjectContent project={project} />,
-    },
+  const projectExtensions: Record<string, { customSection?: ReactNode }> = {
+    automation: { customSection: <AutomationProjectContent /> },
+    'ffp-dashboard': { customSection: <FfpProjectContent project={project} /> },
     kovon: {
-      narrative: (
+      customSection: (
         <>
           <RoleAndSetupSection />
           <KovonWorkingCircle />
@@ -93,19 +85,17 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const extension = projectExtensions[slug] ?? {};
 
-  // KOVON should show role/setup after "approach"
+  // KOVON role/setup should be AFTER the approach section
   const customBeforeApproach = slug === 'kovon' ? null : extension.customSection;
   const customAfterApproach = slug === 'kovon' ? extension.customSection : null;
 
   const quoteExt = projectQuoteBySlug[slug];
-  const quoteFromCaseStudy = caseStudySections?.realProblem ?? '';
+  const quoteFromCaseStudy = caseStudySections?.realProblem ?? project.problem ?? '';
   const footerFromCaseStudy = caseStudySections?.insightAuthor ?? 'Project team';
 
   const quote = (quoteExt?.quote || quoteFromCaseStudy).trim();
   const footer = (quoteExt?.footer || footerFromCaseStudy).trim();
-
-  const embeddedQuoteSlugs = new Set(['automation', 'ffp-dashboard', 'emission-compliance']);
-  const shouldRenderGlobalQuote = !embeddedQuoteSlugs.has(slug) && Boolean(quote);
+  const shouldRenderQuote = Boolean(quote);
 
   const deliveryMerged = [
     ...(project.deliveryImpact?.delivery ?? []),
@@ -118,10 +108,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   ].filter(Boolean);
 
   const hasDeliveryImpact =
-    slug !== 'automation' &&
-    (deliveryMerged.length > 0 ||
-      impactMerged.length > 0 ||
-      Boolean(project.deliveryImpact?.document));
+    deliveryMerged.length > 0 || impactMerged.length > 0 || Boolean(project.deliveryImpact?.document);
 
   return (
     <DashboardCV
@@ -137,21 +124,26 @@ export default async function ProjectDetailPage({ params }: Props) {
       headerRight={<ProjectHeaderLinks project={project} />}
     >
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
-        {/* 1) Hero / first card */}
+        {/* 1) HERO */}
         <ProjectCaseStudyHero project={project}>
-          <ProjectLinks
-            links={(project.links ?? []).map((link) => ({
-              label: link.label,
-              href: link.href,
-            }))}
-          />
-          {project.impactCards && project.impactCards.length > 0 && (
-            <ProjectImpactCards cards={project.impactCards} />
-          ) : null}
+          {project.impactCards?.length ? <ProjectImpactCards cards={project.impactCards} /> : null}
         </ProjectCaseStudyHero>
 
-       {/* 4) QUOTE (only when not already embedded in custom sections) */}
-       {shouldRenderGlobalQuote ? (
+        {/* 3) ABOVE THE FOLD: AUTO SCREENSHOT GALLERY */}
+        {project.galleryUrls?.length ? (
+          <section className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <BrowserMockup
+              src={project.galleryUrls[0]!}
+              alt={`${project.title} screenshot`}
+              urlBar={`https://${project.slug ?? 'app'}.internal`}
+              screens={project.galleryUrls.length > 1 ? project.galleryUrls : undefined}
+              autoAdvanceMs={5000}
+            />
+          </section>
+        ) : null}
+
+        {/* 4) QUOTE AFTER screenshots */}
+        {shouldRenderQuote ? (
           <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
             <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
               &ldquo;{quote}&rdquo;
@@ -165,43 +157,26 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        {/* 3) ABOVE THE FOLD: AUTO SCREENSHOT GALLERY */}
-        {project.galleryUrls && project.galleryUrls.length > 0 ? (
-          <section className="overflow-hidden rounded-2xl border border-border shadow-2xl">
-            <BrowserMockup
-              src={project.galleryUrls[0]!}
-              alt={`${project.title} screenshot`}
-              urlBar={`https://${project.slug ?? 'app'}.internal`}
-              screens={project.galleryUrls.length > 1 ? project.galleryUrls : undefined}
-              autoAdvanceMs={5000}
-            />
-          </section>
-        ) : null}
-
-      
-
-     
-
-        {/* 6) Main narrative blocks */}
-        {hasNarrative ? (
-          <section className="space-y-8">
+        {/* 5) APPROACH */}
+        <section className="space-y-10">
+          <div className="max-w-3xl space-y-8">
             {caseStudySections ? (
-              <div className="max-w-3xl">
-                <CaseStudyTemplate sections={caseStudySections} />
-              </div>
+              <CaseStudyTemplate sections={caseStudySections} />
             ) : (
-              <div className="max-w-3xl">
-                <ProjectProblemWorkflowSolution project={project} />
-              </div>
+              <ProjectProblemWorkflowSolution project={project} />
             )}
-            {extension.narrative}
-          </section>
-        ) : null}
+          </div>
 
-   
+          {customBeforeApproach ? <div className="space-y-16">{customBeforeApproach}</div> : null}
+        </section>
 
+        {/* 6) KOVON role/setup AFTER approach */}
+        {customAfterApproach ? <section className="space-y-16">{customAfterApproach}</section> : null}
 
-        {/* 9) DELIVERY + IMPACT (merged with highlights + outcomes) */}
+        {/* 7) TECHNICAL SPECS */}
+        {slug !== 'kovon' ? <CaseStudyTechnicalSpecs slug={slug} /> : null}
+
+        {/* 8) DELIVERY + IMPACT */}
         {hasDeliveryImpact ? (
           <ProjectDeliveryImpact
             delivery={deliveryMerged}
@@ -210,11 +185,12 @@ export default async function ProjectDetailPage({ params }: Props) {
           />
         ) : null}
 
-        {/* 8) Final gallery */}
+        {/* 9) FINAL GALLERY */}
         <section>
           <ProjectGallery project={project} />
         </section>
 
+        {/* 10) RELATED */}
         {related.length ? (
           <section className="space-y-6">
             <h2 className="text-2xl font-semibold tracking-tight text-foreground">Related projects</h2>
@@ -225,7 +201,6 @@ export default async function ProjectDetailPage({ params }: Props) {
             </div>
           </section>
         ) : null}
-
       </div>
     </DashboardCV>
   );
