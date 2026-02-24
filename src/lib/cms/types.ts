@@ -53,6 +53,7 @@ export type CmsProject = {
     delivery?: string[];
     impact?: string[];
     learned?: string[];
+    document?: { label: string; href: string };
   } | null;
   /** Unified impact cards (4 items); set when using portfolio fallback. */
   impactCards?: { label: string; value: string }[] | null;

@@ -680,10 +680,10 @@ export function ProjectPortfolioKit({
       {!skipHero && (
         <ProjectHero
           title={project.title}
-          subtitle={project.subtitle || project.oneLiner}
-          role={project.roleLine || project.roles?.join(', ') || 'Product Designer'}
-          year={project.year || '2024'}
-          tags={project.tags || []}
+          subtitle={project.subtitle ?? project.oneLiner ?? ''}
+          role={project.roleLine ?? project.roles?.[0] ?? 'Product Designer'}
+          year={project.year ?? '2024'}
+          tags={project.tags ?? []}
         />
       )}
 

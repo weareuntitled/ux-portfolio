@@ -375,12 +375,12 @@ export function NextGenStartPage() {
                 Grew the event to <strong>4,000+ attendees</strong> and <strong>€250k+ revenue</strong>.
               </p>
               <a
-                href="https://instagram.com/contrastfestival.archive"
+                href="https://instagram.com/kontrastfestival.archive"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex h-10 items-center justify-center rounded-md bg-emerald-600 px-4 text-sm font-medium text-white transition-colors hover:bg-emerald-500"
               >
-                Contrast Festival Archive on Instagram
+                Kontrast Festival Archive on Instagram
               </a>
             </div>
             <div className="hidden shrink-0 items-center justify-center p-4 sm:flex">

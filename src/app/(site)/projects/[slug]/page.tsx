@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
@@ -8,7 +7,6 @@ import { ProjectPortfolioKit } from '@/components/PortfolioKit';
 import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
 import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
 import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
-import { ProjectLinks } from '@/components/project/ProjectLinks';
 import { AutomationProjectContent } from '@/components/AutomationProjectContent';
 import { FfpProjectContent } from '@/components/FfpProjectContent';
 import { CaesarProjectContent } from '@/components/CaesarProjectContent';
@@ -21,17 +19,11 @@ import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkf
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { ProjectCard } from '@/components/ProjectCard';
 import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
+import { ProjectDetailsFromSource } from '@/components/project/ProjectDetailsFromSource';
+import { BrowserMockup } from '@/components/PortfolioKit';
 
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 300;
-
-function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-full border border-border bg-muted/40 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-      {children}
-    </span>
-  );
-}
 
 export async function generateStaticParams() {
   try {
@@ -64,7 +56,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const projectExtensions: Record<
     string,
-    Partial<Record<'toolsMethods' | 'quote' | 'narrative' | 'delivery', ReactNode>>
+    Partial<Record<'customSection' | 'quoteProblem' | 'workflowTooling', ReactNode>>
   > = {
     automation: {
       narrative: <AutomationProjectContent />,
@@ -86,18 +78,6 @@ export default async function ProjectDetailPage({ params }: Props) {
   };
 
   const extension = projectExtensions[slug] ?? {};
-  const projectLinks = (project.links ?? []).filter((link) => Boolean(link?.href?.trim()));
-  const mockupImage = project.galleryUrls?.[0] ?? project.coverUrl ?? project.moodImageUrl;
-  const hasToolsMethods = Boolean(project.tools?.length || project.methods?.length || extension.toolsMethods);
-  const hasNarrative = Boolean(caseStudySections || extension.narrative);
-  const hasDeliveryImpact =
-    slug !== 'automation' &&
-    Boolean(
-      extension.delivery ||
-        project.deliveryImpact?.delivery?.length ||
-        project.deliveryImpact?.impact?.length ||
-        project.deliveryImpact?.learned?.length
-    );
 
   return (
     <DashboardCV
@@ -125,73 +105,35 @@ export default async function ProjectDetailPage({ params }: Props) {
           )}
         </ProjectCaseStudyHero>
 
-        {/* 2) Project links row */}
-        {projectLinks.length > 0 ? (
-          <section className="-mt-12 border-t border-border/60 pt-4">
-            <ProjectLinks links={projectLinks} />
-          </section>
-        ) : null}
+        {/* All portfolio-sourced data: metaCards, outcomes, highlights, tools, methods, links */}
+        <ProjectDetailsFromSource project={project} />
 
-        {/* 3) Tools & Methods */}
-        {hasToolsMethods ? (
-          <section className="space-y-5" aria-label="Tools and methods">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Tools &amp; Methods</h2>
-            {extension.toolsMethods}
-            <div className="grid gap-6 md:grid-cols-2">
-              {project.tools?.length ? (
-                <div className="space-y-3 rounded-xl border border-border bg-card p-5">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    Tools
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tools.map((tool) => (
-                      <Tag key={tool}>{tool}</Tag>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-              {project.methods?.length ? (
-                <div className="space-y-3 rounded-xl border border-border bg-card p-5">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    Methods
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.methods.map((method) => (
-                      <Tag key={method}>{method}</Tag>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-            {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
-          </section>
-        ) : null}
-
-        {/* 4) Screenshot / mockup gallery block */}
-        {mockupImage ? (
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Screenshot / Mockup</h2>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-border bg-card">
-              <Image
-                src={mockupImage}
-                alt={`${project.title} mockup`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1280px) 100vw, 1280px"
+        {/* 3) Browser mockup gallery — auto-flow screenshots, always 3rd place */}
+        {project?.galleryUrls && project.galleryUrls.length > 0 && (
+          <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+            <div className="my-12">
+              <BrowserMockup
+                src={project.galleryUrls[0]!}
+                alt={`${project.title} — screenshot`}
+                urlBar={`https://${project.slug ?? 'app'}.internal`}
+                screens={project.galleryUrls.length > 1 ? project.galleryUrls : undefined}
+                autoAdvanceMs={5000}
               />
             </div>
           </section>
-        ) : null}
+        )}
 
-        {/* 5) Quote block */}
-        <section id="case-study" className="space-y-8">
-          {extension.quote}
+        <section id="case-study" className="space-y-16">
+          {/* 2) Quote / Problem */}
+          {extension.quoteProblem}
           <ProjectPortfolioKit
             project={project}
             caseStudy={caseStudySections}
             portfolioKit={portfolioKit ?? null}
             skipHero
           />
+
+          
         </section>
 
         {/* 6) Main narrative blocks */}
@@ -210,27 +152,23 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        {/* 7) Delivery & impact */}
-        {hasDeliveryImpact ? (
-          <section className="space-y-6">
-            {project.customerAbout ? (
-              <div className="rounded-xl border border-border bg-card p-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Customer
-                </p>
-                <p className="mt-2 text-sm text-foreground">{project.customerAbout}</p>
-              </div>
-            ) : null}
-            {extension.delivery}
-            {project.deliveryImpact ? (
+          {/* 5) Workflow / Tooling */}
+          {extension.workflowTooling}
+          {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
+
+          {/* 6) Result / Impact — same card + 4 metrics layout only; skip for automation (already in customSection) */}
+          {slug !== 'automation' &&
+            project.deliveryImpact &&
+            (project.deliveryImpact.delivery?.length > 0 ||
+              project.deliveryImpact.impact?.length > 0 ||
+              project.deliveryImpact.document) && (
               <ProjectDeliveryImpact
                 delivery={project.deliveryImpact.delivery ?? []}
                 impact={project.deliveryImpact.impact ?? []}
                 learned={project.deliveryImpact.learned}
+                document={project.deliveryImpact.document}
               />
-            ) : null}
-          </section>
-        ) : null}
+            )}
 
         {/* 8) Final gallery */}
         <section>
