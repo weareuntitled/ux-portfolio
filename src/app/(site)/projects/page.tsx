@@ -1,186 +1,111 @@
-import { notFound } from 'next/navigation';
-import { draftMode } from 'next/headers';
-import type { ReactNode } from 'react';
+'use client';
 
-import { DashboardCV } from '@/components/DashboardCV';
-import { ProjectCaseStudyHero } from '@/components/project/ProjectCaseStudyHero';
-import { ProjectImpactCards } from '@/components/project/ProjectImpactCards';
-import { ProjectDeliveryImpact } from '@/components/project/ProjectDeliveryImpact';
-import { AutomationProjectContent } from '@/components/AutomationProjectContent';
-import { FfpProjectContent } from '@/components/FfpProjectContent';
+import React, { useMemo, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Search, Film, Layers3, FolderKanban } from 'lucide-react';
 
-import { RoleAndSetupSection } from '@/components/kovon/RoleAndSetupSection';
-import { KovonWorkingCircle } from '@/components/kovon/KovonWorkingCircle';
+import DashboardCV from '@/components/DashboardCV';
+import { getAllProjects } from '@/content/portfolio';
+import { cn } from '@/lib/utils';
 
-import { getCaseStudySections, getPortfolioKit, portfolio } from '@/content/portfolio';
-import { getProjectsForNav, getProjectsResolved } from '@/lib/cms/projects-nav';
-import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
-import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
-import { ProjectGallery } from '@/components/ProjectGallery';
-import { ProjectCard } from '@/components/ProjectCard';
-import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
-import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
-import { BrowserMockup } from '@/components/PortfolioKit';
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-import { ProjectPatchesAboveFold } from '@/components/project/ProjectPatchesAboveFold';
-import { ProjectHeaderLinks } from '@/components/project/ProjectHeaderLinks';
+export default function ProjectsPage() {
+  const [q, setQ] = useState('');
 
-type Props = { params: Promise<{ slug: string }> };
-export const revalidate = 300;
+  const all = useMemo(() => getAllProjects(), []);
+  const filtered = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    if (!s) return all;
+    return all.filter((p) => {
+      return (
+        p.title.toLowerCase().includes(s) ||
+        (p.subtitle ?? '').toLowerCase().includes(s) ||
+        (p.oneLiner ?? '').toLowerCase().includes(s) ||
+        (p.category ?? '').toLowerCase().includes(s)
+      );
+    });
+  }, [all, q]);
 
-export async function generateStaticParams() {
-  try {
-    const projects = await getProjectsResolved({ draftMode: false });
-    return projects.map((p) => ({ slug: p.slug }));
-  } catch {
-    return Object.keys(portfolio).map((slug) => ({ slug }));
-  }
-}
-
-export default async function ProjectDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const draft = await draftMode();
-  const isDraft = draft.isEnabled;
-
-  const [resolvedProjects, navProjects] = await Promise.all([
-    getProjectsResolved({ draftMode: isDraft }),
-    getProjectsForNav({ draftMode: isDraft }),
-  ]);
-
-  const project = resolvedProjects.find((p) => p.slug === slug);
-  if (!project) notFound();
-
-  const caseStudySections = getCaseStudySections(slug);
-  const portfolioKit = getPortfolioKit(slug);
-
-  const related = resolvedProjects
-    .filter((item) => item.slug !== project.slug && item.category === project.category)
-    .slice(0, 2);
-
-  const projectExtensions: Record<
-    string,
-    Partial<Record<'customSection' | 'quoteProblem' | 'workflowTooling', ReactNode>>
-  > = {
-    automation: {
-      customSection: <AutomationProjectContent />,
-    },
-    'ffp-dashboard': {
-      customSection: <FfpProjectContent project={project} hideScreenshots />,
-    },
-   
-    kovon: {
-      customSection: (
-        <>
-          <RoleAndSetupSection />
-          <KovonWorkingCircle />
-        </>
-      ),
-    },
-  };
-
-  const extension = projectExtensions[slug] ?? {};
-
-  // KOVON should show role/setup after "approach" not before
-  const customBeforeApproach = slug === 'kovon' ? null : extension.customSection;
-  const customAfterApproach = slug === 'kovon' ? extension.customSection : null;
+  const breadcrumbs = [
+    { label: 'Daniel Peters', href: '/' },
+    { label: 'Projects', href: '/projects' },
+  ];
 
   return (
     <DashboardCV
-      navProjects={navProjects}
-      breadcrumbs={[
-        { label: 'Daniel Peters', href: '/' },
-        { label: 'Projects', href: '/projects' },
-        { label: project.title },
-      ]}
-      pageTitle={project.title}
-      variant="project"
-      showSearch={false}
-      headerRight={<ProjectHeaderLinks project={project} />}
+      variant="default"
+      breadcrumbs={breadcrumbs}
+      pageTitle="Projects"
+      searchQuery={q}
+      onSearchChange={setQ}
+      showSearch={true}
+      headerRight={
+        <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
+          <Search className="h-4 w-4" />
+          <span className="tabular-nums">{filtered.length}</span>
+        </div>
+      }
     >
-      <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
-        {/* 1) HERO */}
-        <ProjectCaseStudyHero project={project}>
-          {project.impactCards && project.impactCards.length > 0 && (
-            <ProjectImpactCards cards={project.impactCards} />
-          )}
-        </ProjectCaseStudyHero>
+      <div className="space-y-6">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((p, idx) => {
+            const isMotion = p.category === 'Motion';
+            const Icon = isMotion ? Film : FolderKanban;
 
-        {/* 2) PROJECT AT A GLANCE (first card includes role + stages), then tools/methods */}
-        <ProjectPatchesAboveFold project={project} />
+            return (
+              <motion.div
+                key={p.slug}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: EASE, delay: Math.min(idx * 0.03, 0.25) }}
+              >
+                <Link
+                  href={`/projects/${p.slug}`}
+                  className={cn(
+                    'group block overflow-hidden rounded-2xl border border-border bg-background/40 backdrop-blur-2xl',
+                    'hover:bg-background/60 transition-colors'
+                  )}
+                >
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+                    {p.moodImageUrl ? (
+                      <Image
+                        src={p.moodImageUrl}
+                        alt=""
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="(max-width: 1024px) 100vw, 33vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 grid place-items-center text-muted-foreground">
+                        <Layers3 className="h-6 w-6" />
+                      </div>
+                    )}
 
-        {/* 3) ABOVE THE FOLD: AUTO SCREENSHOT GALLERY */}
-        {project?.galleryUrls && project.galleryUrls.length > 0 && (
-          <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
-            <div className="my-12">
-              <BrowserMockup
-                src={project.galleryUrls[0]!}
-                alt={`${project.title} screenshot`}
-                urlBar={`https://${project.slug ?? 'app'}.internal`}
-                screens={project.galleryUrls.length > 1 ? project.galleryUrls : undefined}
-                autoAdvanceMs={5000}
-              />
-            </div>
-          </section>
-        )}
+                    <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                      <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+                      <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
+                    </div>
+                  </div>
 
-        {/* 4) QUOTES + PROJECT-SPECIFIC STORY (after screenshots) */}
-        {customBeforeApproach ? <section className="space-y-16">{customBeforeApproach}</section> : null}
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                      <Icon className="h-4 w-4" />
+                      <span>{p.category}</span>
+                      {p.year ? <span className="ml-auto font-normal tracking-normal">{p.year}</span> : null}
+                    </div>
 
-        {/* 5) APPROACH I CHOSE (text) */}
-        <section className="space-y-8">
-          {caseStudySections ? (
-            <div className="max-w-3xl">
-              {/* You can later restrict which sections render if you want. For now: full template */}
-              <CaseStudyTemplate sections={caseStudySections} />
-            </div>
-          ) : (
-            <div className="max-w-3xl">
-              <ProjectProblemWorkflowSolution project={project} />
-            </div>
-          )}
-        </section>
-
-        {/* 6) ROLE SETUP / WORKING CYCLE (KOVON) */}
-        {customAfterApproach ? <section className="space-y-16">{customAfterApproach}</section> : null}
-
-        {/* 7) OPTIONAL WORKFLOW / TOOLING */}
-        {extension.workflowTooling}
-        {slug !== 'kovon' && <CaseStudyTechnicalSpecs slug={slug} />}
-
-        {/* 8) DELIVERY + IMPACT (MERGED WITH OUTCOMES + HIGHLIGHTS) */}
-        {slug !== 'automation' &&
-          project.deliveryImpact &&
-          (project.deliveryImpact.delivery?.length > 0 ||
-            project.deliveryImpact.impact?.length > 0 ||
-            project.deliveryImpact.document) && (
-            <ProjectDeliveryImpact
-              delivery={project.deliveryImpact.delivery ?? []}
-              impact={project.deliveryImpact.impact ?? []}
-              learned={project.deliveryImpact.learned}
-              document={project.deliveryImpact.document}
-              outcomes={project.outcomes ?? []}
-              highlights={project.highlights ?? []}
-            />
-          )}
-
-        {/* 9) GALLERY */}
-        <section>
-          <ProjectGallery project={project} />
-        </section>
-
-        {/* 10) RELATED */}
-        {related.length ? (
-          <section className="space-y-6">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Related projects</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              {related.map((item) => (
-                <ProjectCard key={item.id} project={item} />
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        <CaseStudyFooterCta />
+                    <h3 className="mt-2 text-base font-semibold tracking-tight">{p.title}</h3>
+                    {p.subtitle ? <p className="mt-1 text-sm text-muted-foreground">{p.subtitle}</p> : null}
+                    {p.oneLiner ? <p className="mt-2 text-sm text-muted-foreground">{p.oneLiner}</p> : null}
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </DashboardCV>
   );

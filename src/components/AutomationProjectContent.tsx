@@ -152,10 +152,7 @@ export function AutomationProjectContent() {
         {/* My Scope & Operation — reusable section */}
         <ScopeAndOperationSection {...AUTOMATION_SCOPE} />
 
-        {/* Result / Impact — single card + 4 metrics only */}
-        <section className="mx-auto w-full max-w-5xl py-12">
-          <ResultImpactCard {...AUTOMATION_RESULT_IMPACT} />
-        </section>
+      
     </div>
   );
 }
