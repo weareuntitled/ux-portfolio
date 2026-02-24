@@ -41,21 +41,21 @@ export type Project = {
   category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Archive'; // Alle 4 Kategorien
   year: string;
   client?: string;
-  roles: string[];
+  roles?: string[];
   teamSize?: string;
   customerAbout?: string;
-  context: string;
-  problem: string;
-  solution: string;
-  outcomes: string[];
-  metrics: string[];
-  highlights: string[];
-  tools: string[];
-  methods: string[];
+  context?: string;
+  problem?: string;
+  solution?: string;
+  outcomes?: string[];
+  metrics?: string[];
+  highlights?: string[];
+  tools?: string[];
+  methods?: string[];
   links?: ProjectLink[];
   prototype?: ProjectPrototype;
   prototypeButtonLabel?: string;
-  moodImageUrl?: string;
+  moodImageUrl?: string | null;
   workflow?: string;
   notes?: string;
   impact?: ProjectImpactItem[];
@@ -71,7 +71,7 @@ export type Project = {
     learned?: string[];
     document?: { label: string; href: string };
   };
-  tags: string[];
+  tags?: string[];
   
   // NEU: YouTube Support für Motion Design
   youtubeUrl?: string;
@@ -176,7 +176,7 @@ export type KovonConfig = {
 };
 
 export type PortfolioProject = Project & {
-  impactCards: ImpactCardItem[];
+  impactCards?: ImpactCardItem[];
   caseStudy: CaseStudySections;
   portfolioKit?: PortfolioKitData;
   kovon?: KovonConfig;
