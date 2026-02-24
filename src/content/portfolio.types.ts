@@ -29,7 +29,7 @@ export type ProjectMetaCard = {
   icon?: 'users' | 'timeline' | 'stages' | 'role' | 'stack' | 'deliverable' | 'impact';
 };
 
-/** Core project fields (same shape as original Project for compatibility). */
+/** Core project fields */
 export type Project = {
   id: string;
   slug: string;
@@ -38,7 +38,7 @@ export type Project = {
   subtitle?: string;
   roleLine?: string;
   oneLiner: string;
-  category: 'Enterprise' | 'Side';
+  category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Archive'; // Alle 4 Kategorien
   year: string;
   client?: string;
   roles: string[];
@@ -69,13 +69,22 @@ export type Project = {
     delivery: string[];
     impact: string[];
     learned?: string[];
-    /** Optional document link (e.g. PDD) shown beside Delivery and Impact. */
     document?: { label: string; href: string };
   };
   tags: string[];
+  
+  // NEU: YouTube Support für Motion Design
+  youtubeUrl?: string;
+
+  // NEU: Modulares Highlight für die Outcome-Sektion
+  outcomeHighlight?: {
+    value: string;
+    label: string;
+    description: string;
+    icon: string;
+  };
 };
 
-/** One card in the unified impact cards block (label + value). */
 export type ImpactCardItem = { label: string; value: string };
 
 export type CaseStudySections = {
@@ -166,11 +175,10 @@ export type KovonConfig = {
   };
 };
 
-/** Full project in the single source: core + case study + portfolio kit + impact cards + optional kovon. */
 export type PortfolioProject = Project & {
   impactCards: ImpactCardItem[];
   caseStudy: CaseStudySections;
-  portfolioKit: PortfolioKitData;
+  portfolioKit?: PortfolioKitData;
   kovon?: KovonConfig;
 };
 

@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/update-gallery.mjs && next dev",
+    "build": "node scripts/update-gallery.mjs && next build",
     "start": "next start",
     "start:3001": "next start -p 3001",
     "lint": "next lint",
-    "seed": "curl -X POST \"http://localhost:3000/api/seed?secret=dev-preview-secret\""
+    "seed": "curl -X POST \"http://localhost:3000/api/seed?secret=dev-preview-secret\"",
+    "typecheck": "tsc --noEmit",
+    "update-images": "node scripts/update-gallery.mjs"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.76.1",
@@ -33,7 +35,8 @@
     "react-dom": "^19.0.0",
     "recharts": "^3.7.0",
     "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "typecheck": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",

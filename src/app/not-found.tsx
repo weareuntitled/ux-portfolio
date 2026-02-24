@@ -1,13 +1,19 @@
-import Link from "next/link";
+import './globals.css';
+import React from 'react';
+import { Inter } from 'next/font/google';
 
-export default function NotFound() {
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 p-8">
-      <h1 className="text-2xl font-semibold">404</h1>
-      <p className="text-muted-foreground">Page not found</p>
-      <Link href="/" className="text-primary underline hover:no-underline">
-        Return home
-      </Link>
-    </div>
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen bg-background text-foreground font-sans antialiased">
+        {children}
+      </body>
+    </html>
   );
 }

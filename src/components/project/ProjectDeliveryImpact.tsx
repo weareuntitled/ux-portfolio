@@ -1,77 +1,118 @@
-'use client';
-
-import { FileText, PackageCheck, Zap } from 'lucide-react';
-import { FadeIn } from '@/components/motion';
-import { ResultImpactCard } from '@/components/project/ResultImpactCard';
-import type { ResultImpactMetric } from '@/components/project/ResultImpactCard';
+// src/components/project/ProjectDeliveryImpact.tsx
+import React from 'react';
 
 export type ProjectDeliveryImpactProps = {
   delivery: string[];
   impact: string[];
-  learned?: string[];
-  /** Optional document (e.g. PDD) — used as card title when provided. */
   document?: { label: string; href: string };
+
+  // falls du die schon nutzt, lass sie drin
+  outcomes?: string[];
+  highlights?: string[];
+
+  // ✅ neu
+  learned?: string[];
 };
 
 export function ProjectDeliveryImpact({
   delivery,
   impact,
-  document: documentLink,
+  document,
+  outcomes,
+  highlights,
+  learned,
 }: ProjectDeliveryImpactProps) {
-  const hasDelivery = delivery?.length > 0;
-  const hasImpact = impact?.length > 0;
-  const hasDocument = Boolean(documentLink?.href && documentLink?.label);
-
-  if (!hasDelivery && !hasImpact && !hasDocument) return null;
-
-  const title = documentLink?.label ?? 'Delivery and Impact';
-  const description =
-    delivery[0] ?? impact[0] ?? 'Key deliverables and outcomes from this project.';
-
-  const metrics: ResultImpactMetric[] = [];
-  const maxDelivery = Math.min(delivery.length, 2);
-  const maxImpact = Math.min(impact.length, 2);
-  for (let i = 0; i < maxDelivery; i++) {
-    const d = delivery[i];
-    metrics.push({
-      value: d.length > 18 ? `${d.slice(0, 15).trim()}…` : d,
-      label: 'Deliverable',
-      description: d,
-      icon: FileText,
-    });
-  }
-  for (let i = 0; i < maxImpact; i++) {
-    const im = impact[i];
-    metrics.push({
-      value: im.length > 18 ? `${im.slice(0, 15).trim()}…` : im,
-      label: 'Outcome',
-      description: im,
-      icon: i === maxImpact - 1 ? Zap : PackageCheck,
-      highlight: i === maxImpact - 1,
-    });
-  }
-  if (metrics.length === 0 && hasDocument) {
-    metrics.push({
-      value: documentLink!.label,
-      label: 'Document',
-      description: 'View the deliverable document.',
-      icon: FileText,
-      highlight: true,
-    });
-  }
-
-  if (metrics.length === 0) return null;
+  const deliveryItems = (delivery ?? []).filter(Boolean);
+  const impactItems = (impact ?? []).filter(Boolean);
+  const outcomeItems = (outcomes ?? []).filter(Boolean);
+  const highlightItems = (highlights ?? []).filter(Boolean);
+  const learnedItems = (learned ?? []).filter(Boolean);
 
   return (
-    <FadeIn>
-      <section>
-        <ResultImpactCard
-          title={title}
-          description={description}
-          metrics={metrics}
-          icon={PackageCheck}
-        />
-      </section>
-    </FadeIn>
+    <section className="space-y-10">
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">Delivery</h2>
+          {deliveryItems.length ? (
+            <ul className="space-y-2 text-sm text-zinc-300">
+              {deliveryItems.map((item) => (
+                <li key={item} className="leading-relaxed">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">Impact</h2>
+          {impactItems.length ? (
+            <ul className="space-y-2 text-sm text-zinc-300">
+              {impactItems.map((item) => (
+                <li key={item} className="leading-relaxed">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      </div>
+
+      {/* optional: outcomes + highlights (wenn du es nutzt) */}
+      {(outcomeItems.length || highlightItems.length) ? (
+        <div className="grid gap-8 md:grid-cols-2">
+          {outcomeItems.length ? (
+            <div className="space-y-4">
+              <h3 className="text-base font-semibold tracking-tight text-foreground">Outcomes</h3>
+              <ul className="space-y-2 text-sm text-zinc-300">
+                {outcomeItems.map((item) => (
+                  <li key={item} className="leading-relaxed">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {highlightItems.length ? (
+            <div className="space-y-4">
+              <h3 className="text-base font-semibold tracking-tight text-foreground">Highlights</h3>
+              <ul className="space-y-2 text-sm text-zinc-300">
+                {highlightItems.map((item) => (
+                  <li key={item} className="leading-relaxed">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      {/* ✅ neu: learned */}
+      {learnedItems.length ? (
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold tracking-tight text-foreground">Learnings</h3>
+          <ul className="space-y-2 text-sm text-zinc-300">
+            {learnedItems.map((item) => (
+              <li key={item} className="leading-relaxed">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {document?.href ? (
+        <div>
+          <a
+            href={document.href}
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800"
+          >
+            {document.label ?? 'Open document'}
+          </a>
+        </div>
+      ) : null}
+    </section>
   );
 }

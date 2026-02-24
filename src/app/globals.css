@@ -169,6 +169,17 @@ body {
   box-sizing: border-box;
 }
 
+/* Versteckt die Scrollbar für Chrome, Safari und Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Versteckt die Scrollbar für IE, Edge und Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* The motion now comes from animations inside mesh-bg.svg itself */
 
 /* Trust Ticker marquee */

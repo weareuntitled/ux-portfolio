@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronDown, LayoutGrid, Search, LayoutDashboard, ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown, LayoutDashboard, LayoutGrid, Search } from 'lucide-react';
 import { BrowserMockup } from '@/components/PortfolioKit';
 import { SolutionConceptCards } from '@/components/project/SolutionConceptCards';
 import { MethodologyTimeline } from '@/components/project/MethodologyTimeline';
@@ -24,7 +24,7 @@ const FFP_SOLUTION_CONCEPTS = [
     icon: Search,
     title: 'Symptom-First Architecture',
     description:
-      'We abandoned the legacy "Database-First" layout. Engineers don\'t search for a part number; they search for an "Engine Whine." By realigning the taxonomy to the actual human symptom, triage time plummeted.',
+      'We abandoned the legacy "Database-First" layout. Engineers do not search for a part number. They search for an "Engine Whine." By realigning the taxonomy to the actual human symptom, triage time plummeted.',
   },
 ];
 
@@ -51,7 +51,7 @@ const FFP_METHODOLOGY_STEPS = [
     number: '04',
     title: 'Live Prototype Handoff',
     description:
-      'Delivered a comprehensive navigation concept—from tagging to diagnosis to reporting—packaged perfectly for the dev team.',
+      'Delivered a comprehensive navigation concept, from tagging to diagnosis to reporting, packaged cleanly for the dev team.',
     highlight: true,
   },
 ];
@@ -76,33 +76,36 @@ export function FfpHeroStats() {
   );
 }
 
-type FfpProjectContentProps = { project?: ResolvedProject | null };
+export type FfpProjectContentProps = {
+  project?: ResolvedProject | null;
+  hideScreenshots?: boolean;
+};
 
-export function FfpProjectContent({ project }: FfpProjectContentProps) {
+export function FfpProjectContent({ project, hideScreenshots }: FfpProjectContentProps) {
   return (
     <div className="space-y-24">
       {/* Quote */}
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
-          <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
-            &quot;Finding similarities in massive tables was a nightmare. The UI
-            never surfaced the right context, creating a massive bottleneck.
-            When we showed them the new GitHub-style merge flow, it clicked
-            instantly. It finally fit their mental model.&quot;
-            <footer className="mt-4 flex items-center gap-2 text-sm font-medium not-italic text-zinc-500">
-              <span className="h-px w-4 bg-zinc-600" />
-              The Breakthrough Moment
-            </footer>
-          </blockquote>
-        </div>
+      <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
+        <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
+          &quot;Finding similarities in massive tables was a nightmare. The UI never surfaced the right
+          context, creating a massive bottleneck. When we showed them the new GitHub-style merge flow,
+          it clicked instantly. It finally fit their mental model.&quot;
+          <footer className="mt-4 flex items-center gap-2 text-sm font-medium not-italic text-zinc-500">
+            <span className="h-px w-4 bg-zinc-600" />
+            The Breakthrough Moment
+          </footer>
+        </blockquote>
+      </div>
 
-        {/* Designing the Solution — process chart (icon cards) */}
-        <SolutionConceptCards
-          title="Designing the Solution"
-          subtitle="Untangling data silos with progressive disclosure and familiar mental models."
-          items={FFP_SOLUTION_CONCEPTS}
-        />
+      {/* Designing the Solution */}
+      <SolutionConceptCards
+        title="Designing the Solution"
+        subtitle="Untangling data silos with progressive disclosure and familiar mental models."
+        items={FFP_SOLUTION_CONCEPTS}
+      />
 
-        {/* Browser mockup — single screenshot */}
+      {/* Screenshot (optional) */}
+      {!hideScreenshots && (
         <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
           <BrowserMockup
             src={project?.galleryUrls?.[0] ?? '/projects/ffp_gallery_01.png'}
@@ -110,43 +113,35 @@ export function FfpProjectContent({ project }: FfpProjectContentProps) {
             urlBar="https://ffp-dashboard.internal"
           />
         </section>
+      )}
 
-        {/* UX Methodology — vertical timeline 01–04 */}
-        <MethodologyTimeline
-          title="UX Methodology"
-          steps={FFP_METHODOLOGY_STEPS}
-        />
+      {/* UX Methodology */}
+      <MethodologyTimeline title="UX Methodology" steps={FFP_METHODOLOGY_STEPS} />
 
-        {/* Experience the Dashboard CTA */}
-        <section className="space-y-12 py-12">
-          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-zinc-900/50 p-1 shadow-[0_0_40px_-15px_rgba(var(--primary),0.2)]">
-            <div className="relative flex flex-col items-center rounded-[22px] border border-zinc-800/80 bg-zinc-950 p-10 text-center sm:p-16">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 shadow-inner">
-                <LayoutDashboard
-                  className="h-10 w-10 text-primary"
-                  strokeWidth={1.5}
-                  aria-hidden
-                />
-              </div>
-              <h3 className="mb-4 text-3xl font-bold tracking-tight text-zinc-100">
-                Experience the Dashboard
-              </h3>
-              <p className="mb-8 max-w-lg leading-relaxed text-zinc-400">
-                Words only go so far. Explore the interactive prototype to see
-                the symptom-first navigation and GitHub-style merge flow in
-                action.
-              </p>
-              <Link
-                href="/prototypes/ffp/fingerprints"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:-translate-y-1 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                Open Live Prototype
-                <ArrowRight className="h-5 w-5" strokeWidth={2} />
-              </Link>
+      {/* Experience the Dashboard CTA */}
+      <section className="space-y-12 py-12">
+        <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-zinc-900/50 p-1 shadow-[0_0_40px_-15px_rgba(var(--primary),0.2)]">
+          <div className="relative flex flex-col items-center rounded-[22px] border border-zinc-800/80 bg-zinc-950 p-10 text-center sm:p-16">
+            <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 shadow-inner">
+              <LayoutDashboard className="h-10 w-10 text-primary" strokeWidth={1.5} aria-hidden />
             </div>
+            <h3 className="mb-4 text-3xl font-bold tracking-tight text-zinc-100">
+              Experience the Dashboard
+            </h3>
+            <p className="mb-8 max-w-lg leading-relaxed text-zinc-400">
+              Words only go so far. Explore the interactive prototype to see the symptom-first navigation
+              and GitHub-style merge flow in action.
+            </p>
+            <Link
+              href="/prototypes/ffp/fingerprints"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:-translate-y-1 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              Open Live Prototype
+              <ArrowRight className="h-5 w-5" strokeWidth={2} />
+            </Link>
           </div>
-
-        </section>
+        </div>
+      </section>
     </div>
   );
 }
