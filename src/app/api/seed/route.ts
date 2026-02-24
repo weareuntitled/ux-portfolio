@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getPayloadClient } from '@/lib/cms/payload';
+import { getPayloadClient } from '@/lib/cms/getPayloadClient';
 import { cmsConfig } from '@/lib/cms/config';
 import { seedProjects } from '@/lib/cms/seed-projects';
 import { seedFirstUser, resetAdminPassword } from '@/lib/cms/seed-first-user';
