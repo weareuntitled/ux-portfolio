@@ -22,7 +22,6 @@ import { CaseStudyTemplate } from '@/components/CaseStudyTemplate';
 import { ProjectProblemWorkflowSolution } from '@/components/ProjectProblemWorkflowSolution';
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { ProjectCard } from '@/components/ProjectCard';
-import { CaseStudyFooterCta } from '@/components/CaseStudyFooterCta';
 import { CaseStudyTechnicalSpecs } from '@/components/CaseStudyTechnicalSpecs';
 import { BrowserMockup } from '@/components/PortfolioKit';
 
@@ -74,16 +73,16 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const projectExtensions: Record<string, Partial<Record<'customSection', ReactNode>>> = {
     automation: {
-      customSection: <AutomationProjectContent />,
+      narrative: <AutomationProjectContent />,
     },
     'ffp-dashboard': {
-      customSection: <FfpProjectContent project={project} hideScreenshots />,
+      narrative: <FfpProjectContent project={project} />,
     },
     'emission-compliance': {
-      customSection: <CaesarProjectContent project={project} hideScreenshots />,
+      narrative: <CaesarProjectContent project={project} />,
     },
     kovon: {
-      customSection: (
+      narrative: (
         <>
           <RoleAndSetupSection />
           <KovonWorkingCircle />
@@ -138,9 +137,15 @@ export default async function ProjectDetailPage({ params }: Props) {
       headerRight={<ProjectHeaderLinks project={project} />}
     >
       <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-12">
-        {/* 1) HERO */}
+        {/* 1) Hero / first card */}
         <ProjectCaseStudyHero project={project}>
-          {project.impactCards && project.impactCards.length > 0 ? (
+          <ProjectLinks
+            links={(project.links ?? []).map((link) => ({
+              label: link.label,
+              href: link.href,
+            }))}
+          />
+          {project.impactCards && project.impactCards.length > 0 && (
             <ProjectImpactCards cards={project.impactCards} />
           ) : null}
         </ProjectCaseStudyHero>
@@ -177,18 +182,21 @@ export default async function ProjectDetailPage({ params }: Props) {
 
      
 
-        {/* 6) APPROACH I CHOSE */}
-        <section className="space-y-8">
-          {caseStudySections ? (
-            <div className="max-w-3xl">
-              <CaseStudyTemplate sections={caseStudySections} />
-            </div>
-          ) : (
-            <div className="max-w-3xl">
-              <ProjectProblemWorkflowSolution project={project} />
-            </div>
-          )}
-        </section>
+        {/* 6) Main narrative blocks */}
+        {hasNarrative ? (
+          <section className="space-y-8">
+            {caseStudySections ? (
+              <div className="max-w-3xl">
+                <CaseStudyTemplate sections={caseStudySections} />
+              </div>
+            ) : (
+              <div className="max-w-3xl">
+                <ProjectProblemWorkflowSolution project={project} />
+              </div>
+            )}
+            {extension.narrative}
+          </section>
+        ) : null}
 
    
 
@@ -202,15 +210,14 @@ export default async function ProjectDetailPage({ params }: Props) {
           />
         ) : null}
 
-        {/* 10) GALLERY */}
-        <ProjectGallery project={project} />
+        {/* 8) Final gallery */}
+        <section>
+          <ProjectGallery project={project} />
+        </section>
 
-        {/* 11) RELATED */}
         {related.length ? (
           <section className="space-y-6">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              Related projects
-            </h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Related projects</h2>
             <div className="grid gap-6 md:grid-cols-2">
               {related.map((item) => (
                 <ProjectCard key={item.id} project={item} />
@@ -219,7 +226,6 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        <CaseStudyFooterCta />
       </div>
     </DashboardCV>
   );
