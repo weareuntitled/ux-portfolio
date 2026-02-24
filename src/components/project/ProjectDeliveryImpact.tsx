@@ -1,77 +1,90 @@
 'use client';
 
-import { FileText, PackageCheck, Zap } from 'lucide-react';
+import { FileText, Sparkles, CheckCircle2, Star } from 'lucide-react';
 import { FadeIn } from '@/components/motion';
-import { ResultImpactCard } from '@/components/project/ResultImpactCard';
-import type { ResultImpactMetric } from '@/components/project/ResultImpactCard';
+import { ResultImpactCard, type ResultImpactMetric } from '@/components/project/ResultImpactCard';
 
 export type ProjectDeliveryImpactProps = {
   delivery: string[];
   impact: string[];
-  learned?: string[];
-  /** Optional document (e.g. PDD) — used as card title when provided. */
   document?: { label: string; href: string };
 };
 
-export function ProjectDeliveryImpact({
-  delivery,
-  impact,
-  document: documentLink,
-}: ProjectDeliveryImpactProps) {
-  const hasDelivery = delivery?.length > 0;
-  const hasImpact = impact?.length > 0;
-  const hasDocument = Boolean(documentLink?.href && documentLink?.label);
+function headlineFromText(input: string, maxChars = 34) {
+  const s = (input ?? '').trim().replace(/\s+/g, ' ');
+  if (!s) return '';
+  const firstSentence = s.split(/[.!?]/)[0]!.trim();
+  if (firstSentence.length <= maxChars) return firstSentence;
 
-  if (!hasDelivery && !hasImpact && !hasDocument) return null;
+  const words = firstSentence.split(' ');
+  let out = '';
+  for (const w of words) {
+    const next = out ? `${out} ${w}` : w;
+    if (next.length > maxChars) break;
+    out = next;
+  }
+  return out || firstSentence.slice(0, maxChars).trim();
+}
 
-  const title = documentLink?.label ?? 'Delivery and Impact';
-  const description =
-    delivery[0] ?? impact[0] ?? 'Key deliverables and outcomes from this project.';
+export function ProjectDeliveryImpact({ delivery, impact, document }: ProjectDeliveryImpactProps) {
+  const left = delivery ?? [];
+  const right = impact ?? [];
 
-  const metrics: ResultImpactMetric[] = [];
-  const maxDelivery = Math.min(delivery.length, 2);
-  const maxImpact = Math.min(impact.length, 2);
-  for (let i = 0; i < maxDelivery; i++) {
-    const d = delivery[i];
-    metrics.push({
-      value: d.length > 18 ? `${d.slice(0, 15).trim()}…` : d,
+  if (!left.length && !right.length && !document?.href) return null;
+
+  const deliverable = left[0] ?? '';
+  const highlight = left[1] ?? left[0] ?? '';
+  const outcome = right[0] ?? '';
+  const impactPoint = right[1] ?? right[0] ?? '';
+
+  const metrics: ResultImpactMetric[] = [
+    {
       label: 'Deliverable',
-      description: d,
+      value: deliverable,
+      displayValue: headlineFromText(deliverable),
+      description: deliverable,
       icon: FileText,
-    });
-  }
-  for (let i = 0; i < maxImpact; i++) {
-    const im = impact[i];
-    metrics.push({
-      value: im.length > 18 ? `${im.slice(0, 15).trim()}…` : im,
+      primary: true,
+    },
+    {
+      label: 'Highlight',
+      value: highlight,
+      displayValue: headlineFromText(highlight),
+      description: highlight,
+      icon: Sparkles,
+    },
+    {
       label: 'Outcome',
-      description: im,
-      icon: i === maxImpact - 1 ? Zap : PackageCheck,
-      highlight: i === maxImpact - 1,
-    });
-  }
-  if (metrics.length === 0 && hasDocument) {
-    metrics.push({
-      value: documentLink!.label,
-      label: 'Document',
-      description: 'View the deliverable document.',
-      icon: FileText,
+      value: outcome,
+      displayValue: headlineFromText(outcome),
+      description: outcome,
+      icon: CheckCircle2,
+    },
+    {
+      label: 'Impact',
+      value: impactPoint,
+      displayValue: headlineFromText(impactPoint),
+      description: impactPoint,
+      icon: Star,
       highlight: true,
-    });
-  }
+    },
+  ].filter((m) => (m.displayValue ?? '').trim().length > 0);
 
-  if (metrics.length === 0) return null;
+  const title = 'Delivery and impact';
+  const description = outcome || deliverable || 'Key deliverables and outcomes from this project.';
 
   return (
     <FadeIn>
-      <section>
-        <ResultImpactCard
-          title={title}
-          description={description}
-          metrics={metrics}
-          icon={PackageCheck}
-        />
-      </section>
+      <ResultImpactCard
+        title={title}
+        description={description}
+        icon={Star}
+        metrics={metrics}
+        leftItems={left}
+        rightItems={right}
+        listMaxItems={3}
+        document={document}
+      />
     </FadeIn>
   );
 }

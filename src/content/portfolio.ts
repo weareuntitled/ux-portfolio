@@ -29,63 +29,63 @@ const kovonContentTabs: ContentTabItem[] = [
     id: 'solution',
     label: 'Solution',
     icon: 'Layout',
-    title: 'One place for COP status, ownership, and evidence',
+    title: 'A usable COP hub built as an Angular pilot app',
     body:
-      'KoVoN created a single COP overview for vehicle projects. Teams could see what was complete, missing, or in progress, alongside exact ownership. This turned audit requirements into a workable day-to-day flow.',
+      'KoVoN is a working Angular pilot that digitizes COP documentation for a vehicle project. It connects regulation structure, working structure, and the evaluation itself. The result is a snapshot view that makes a complex system scannable, with clear ownership and evidence per evaluation.',
     outcomeBullets: [
-      'Pilot validated the workflow and ownership model.',
-      'Clear lifecycle states for verification items and evidence.',
+      'Beta pilot validated the core model and the workflows.',
+      'Teams could review progress and gaps without hunting through files.',
     ],
   },
   {
-    id: 'regulation',
-    label: 'Regulation updates',
-    icon: 'FileText',
-    title: 'Updates without breaking traceability',
-    body:
-      'Structured ownership and a clear routine handle regulation changes. The system keeps a stable audit trail even when the underlying rules shift.',
-    outcomeBullets: [
-      'Defined responsibilities for regulation changes.',
-      'Audit trail stays readable through updates.',
-    ],
-  },
-  {
-    id: 'adaptability',
-    label: 'Adaptability',
+    id: 'model',
+    label: 'Model',
     icon: 'Layers',
-    title: 'Works across programs and domains',
+    title: 'Regulations, work packages, evaluations',
     body:
-      'KoVoN supports different vehicle programs and component domains. The structure stays consistent while scope and task packages adapt to specific needs.',
+      'The system starts from regulation structure, turns requirements into work packages, and maps them to responsible roles. Evaluation is the core unit. It carries status, responsibility, evidence, and outcome so progress can roll up cleanly.',
     outcomeBullets: [
-      'Reusable structure across projects.',
-      'Consistent documentation without reinvention.',
+      'Clear mapping from regulation to tasks to responsibility.',
+      'Evaluation as the single unit of work across roles.',
+    ],
+  },
+  {
+    id: 'updates',
+    label: 'Updates',
+    icon: 'FileText',
+    title: 'Governance for regulation change',
+    body:
+      'Regulations change and static files break. KoVoN introduced a governance routine so updates stay traceable and previous decisions remain understandable. That prevents rework loops caused by silent changes.',
+    outcomeBullets: [
+      'Defined review steps and responsibilities for updates.',
+      'History stays readable through rule changes.',
     ],
   },
   {
     id: 'collaboration',
     label: 'Collaboration',
     icon: 'Users',
-    title: 'Clear handoffs and approvals',
+    title: 'Mixed roles, clean handoffs',
     body:
-      'Explicitly modeled roles and handoffs. Approvals and bottlenecks became visible, scaling coordination without duplicate work or unclear responsibilities.',
+      'Technical leads, responsible persons, and assistant team leads work in the same system, but with different responsibilities. KoVoN makes handoffs visible, so ownership gaps become obvious and fewer items fall through.',
     outcomeBullets: [
-      'Ownership and approvals made explicit.',
-      'Coordination overhead reduced through clearer handoffs.',
+      'Ownership gaps reduced through explicit handoffs.',
+      'Snapshot view supports review and alignment across roles.',
     ],
   },
 ];
 
 const kovonWhereItLandedBullets: string[] = [
-  'Working pilot delivered for one vehicle configuration.',
+  'Working beta pilot delivered for one vehicle project context.',
   'About 80 percent of documentation fields filled in the pilot.',
-  'End-to-end visibility for status and responsibility.',
-  'Bottlenecks surfaced for next iterations: ownership load, update cycles, matching effort, complexity.',
-  'Governance foundation for a scalable COP documentation approach.',
+  'Snapshot view for status, ownership, evidence, and outcomes.',
+  'Rollout paused due to a strategy shift during scale-up.',
+  'Insights gathered on how to digitize COP documentation in practice.',
 ];
 
 const kovonWhyRolloutStoppedBullets: string[] = [
   'Rollout began, then priorities shifted due to a strategy change.',
-  'Audit-related rollout activities paused; the pilot did not scale further.',
+  'The pilot did not scale to a full production rollout.',
 ];
 
 const kovonFeaturedCaseGlossary = {
@@ -117,11 +117,11 @@ const kovonFeaturedCaseGlossary = {
       'EC acts as shorthand for EU-level type approval rules. In this context, it represents the legal layer connected to COP requirements.',
     icon: 'Landmark',
   },
-  Verdict: {
-    label: 'Verdict',
-    short: 'A documented compliance decision for a scope item, backed by evidence.',
+  Evaluation: {
+    label: 'Evaluation',
+    short: 'Core unit of work that links requirement, ownership, evidence, and outcome.',
     detail:
-      'A Verdict links a vehicle scope item to a regulation item. It stores status, responsibility, evidence, and review state. It serves as the primary unit of work.',
+      'An Evaluation is the central unit. It is derived from regulation structure, mapped through the working structure to responsible roles, and stores status, evidence, and outcomes for roll-ups and snapshots.',
     icon: 'BadgeCheck',
   },
   Annex: {
@@ -156,7 +156,7 @@ const kovonFeaturedCaseGlossary = {
     label: 'Inheritance',
     short: 'Reuse approved work from a base project with identical scope.',
     detail:
-      'Inheritance works like a template. The derivative starts with reused verdicts and evidence; experts only review deltas.',
+      'Inheritance works like a template. The derivative starts with reused evaluations and evidence; experts only review deltas.',
     icon: 'GitMerge',
   },
   'Multi-Assignment': {
@@ -184,43 +184,43 @@ const kovonFeaturedCaseVisuals = [
     bullets: [
       'Tasks depended on [[UN-ECE]] and [[EC]] requirements but lived in scattered files.',
       'Ownership lived in [[OE]] structures, not in vehicle components.',
-      'Status and freshness were untrustworthy; updates created rework.',
+      'Status and freshness were hard to trust; updates caused rework.',
     ],
     diagram: { type: 'chaos' as const },
   },
   {
     id: 'v2',
     title: 'Ownership mismatch',
-    subtitle: 'OE ownership did not map to vehicle systems and parts.',
+    subtitle: 'Org ownership did not map cleanly to vehicle scope.',
     icon: 'Network',
     bullets: [
-      '[[OE]] teams optimized for internal delivery, not a 1:1 vehicle mapping.',
-      'One expert often handled multiple vehicle projects.',
-      'Shared ownership and handovers lacked a single source of truth.',
+      '[[OE]] teams optimize for internal delivery, not a 1:1 vehicle mapping.',
+      'One expert often covers multiple vehicle contexts.',
+      'Handovers created gaps without a single shared snapshot.',
     ],
     diagram: { type: 'orgVsVehicle' as const },
   },
   {
     id: 'v3',
     title: 'Regulation churn',
-    subtitle: 'Updates created rework because nobody saw what changed.',
+    subtitle: 'Updates triggered rework because deltas were unclear.',
     icon: 'Scale',
     bullets: [
       'Regulatory hierarchy flows from [[Annex]] to [[Regulation]] to [[Chapter]].',
-      'Each mapped item produces a [[Verdict]]; catalog changes forced re-reviews.',
-      'Affected tasks re-entered review with no clear delta view.',
+      'Changes forced re-checks without a clear “what changed” view.',
+      'Governance is needed so history stays readable.',
     ],
     diagram: { type: 'regTree' as const },
   },
   {
     id: 'v4',
-    title: 'Mixed granularity',
-    subtitle: 'Work existed at system and paragraph levels with no roll-up.',
+    title: 'Evaluation as the core unit',
+    subtitle: 'One unit that ties requirement, work package, and responsibility together.',
     icon: 'Layers3',
     bullets: [
-      'Teams evaluated per [[Chapter]] or delivered one package per [[Regulation]].',
-      'Both modes had to coexist without breaking reporting.',
-      '[[Multi-Assignment]] was essential to support cross-functional contributions.',
+      'Evaluations are derived from regulation structure.',
+      'Working structure maps evaluations to responsible roles.',
+      'Status, evidence, and outcome roll up into a snapshot view.',
     ],
     diagram: { type: 'granularity' as const },
   },
@@ -233,23 +233,18 @@ const kovonRaciMini = {
     { key: 'S', label: 'Supporting', hint: 'Supports or signs off' },
   ],
   roles: [
-    { id: 'techEvalOwner', label: 'Technical Evaluation Owner', icon: 'Wrench' },
-    { id: 'tc', label: 'Technical Circle (TC)', icon: 'CircleDot' },
-    { id: 'typeApproval', label: 'Type Approval Body', icon: 'ShieldCheck' },
+    { id: 'techLead', label: 'Technical Lead', icon: 'Wrench' },
+    { id: 'assistantLead', label: 'Assistant Team Lead', icon: 'CircleDot' },
+    { id: 'responsible', label: 'Responsible Person', icon: 'ShieldCheck' },
     { id: 'sysAdmin', label: 'System Administrator', icon: 'Settings' },
-    { id: 'teamLead', label: 'System Team Lead', icon: 'Users' },
+    { id: 'review', label: 'Review Body', icon: 'Users' },
   ],
   tasks: [
-    { id: 'tldDoc', label: 'Document TLD sheets per part number', cells: { techEvalOwner: 'R' } },
-    { id: 'assignWork', label: 'Assign work packages to evaluators', cells: { teamLead: 'R' } },
-    { id: 'copFeatures', label: 'Define and document COP test characteristics', cells: { typeApproval: 'R' } },
-    { id: 'releaseReport', label: 'Release conformity report version', cells: { tc: 'R', sysAdmin: 'S' } },
-    { id: 'configureProject', label: 'Configure project in the tool', cells: { sysAdmin: 'R' } },
-    {
-      id: 'checkCompleteness',
-      label: 'Check evaluation completeness',
-      cells: { teamLead: 'R', tc: 'A', sysAdmin: 'S' },
-    },
+    { id: 'deriveWork', label: 'Derive work packages from regulations', cells: { techLead: 'R', assistantLead: 'S' } },
+    { id: 'assign', label: 'Assign evaluations to responsible roles', cells: { assistantLead: 'R', sysAdmin: 'S' } },
+    { id: 'document', label: 'Document evidence and outcomes', cells: { responsible: 'R' } },
+    { id: 'review', label: 'Review completeness and snapshot', cells: { review: 'R', techLead: 'A', sysAdmin: 'S' } },
+    { id: 'updates', label: 'Apply regulation updates with governance', cells: { sysAdmin: 'R', techLead: 'S' } },
   ],
 };
 
@@ -270,7 +265,7 @@ const kovonConfig: KovonConfig = {
 const ffpBentoCards: BentoCardItem[] = [
   {
     title: 'Symptom-first entry',
-    subtitle: 'Start from symptoms instead of part numbers.',
+    subtitle: 'Start from what failed, not from part numbers.',
     visual: 'switcher',
     colSpan: 2,
   },
@@ -278,66 +273,66 @@ const ffpBentoCards: BentoCardItem[] = [
     title: 'Correlation',
     subtitle: 'Merge signals into one fingerprint.',
     visual: 'metric',
-    value: '1:1',
+    value: '1 view',
   },
   {
-    title: 'Three workflows',
-    subtitle: 'Supplier, production, root cause.',
+    title: 'Root cause focus',
+    subtitle: 'Designed for synthesis, not only intake.',
     icon: 'Search',
     visual: 'bars',
   },
   {
-    title: 'Role-based modes',
-    subtitle: 'Clear entry points and handoffs.',
+    title: 'Clickable prototype',
+    subtitle: 'A working flow you can click through.',
     visual: 'chips',
     colSpan: 2,
-    items: ['Supplier quality', 'Production testing', 'Root cause synthesis'],
+    items: ['Triage', 'Correlation', 'Synthesis', 'Review'],
   },
 ];
 
 const ffpTechnicalSpecs: TechnicalSpecItem[] = [
   {
-    title: 'Research and mental models',
+    title: 'Mental model',
     body:
-      'Shadowing and deep interviews revealed a symptom-first mental model. The legacy UI forced part number lookup first, adding friction to investigations. Three distinct workflows required clear modes and handoffs.',
+      'Experts reason from symptoms to cause. The legacy UI forced part numbers first, which slowed triage and broke correlation across cases.',
   },
   {
-    title: 'Workflow design and correlation',
+    title: 'Workflow reshape',
     body:
-      'Supplier quality tackles external cases. Production testing handles internal findings. Root cause synthesis merges these signals into a single fingerprint. This supports moving smoothly from symptom to evidence to root cause.',
+      'Restructured the flow around root cause intent. The design supports triage, correlation, and synthesis as one continuous story instead of scattered screens.',
   },
   {
-    title: 'Design delivery and handoff',
+    title: 'Handoff',
     body:
-      'High-fidelity prototypes drove reviews while development ran in parallel. The Figma package served as the direct reference for building screens and validating logic.',
+      'Delivered a high-fidelity, clickable prototype as the build reference so developers and stakeholders could validate the logic quickly.',
   },
 ];
 
-// --- KoVoN bento + technical specs (Tier A) ---
+// --- KoVoN bento + technical specs ---
 
 const kovonBentoCards: BentoCardItem[] = [
   {
-    title: 'Verification lifecycle',
-    subtitle: 'Status, evidence, and outcomes in one flow.',
+    title: 'Snapshot view',
+    subtitle: 'See progress and gaps at a glance.',
     visual: 'chips',
     colSpan: 2,
-    items: ['Missing', 'Planned', 'In progress', 'Verified', 'Applied'],
+    items: ['Missing', 'Planned', 'In progress', 'Reviewed', 'Closed'],
   },
   {
-    title: 'Ownership model',
-    subtitle: 'One accountable owner per verification unit.',
+    title: 'Evaluation as the unit',
+    subtitle: 'One unit ties requirement, owner, evidence, outcome.',
     visual: 'metric',
-    value: '1 owner',
+    value: '1 unit',
   },
   {
-    title: 'Audit readiness',
-    subtitle: 'Readable snapshots for review and audit.',
+    title: 'Mixed role system',
+    subtitle: 'Technical leads and responsible roles in one workflow.',
     icon: 'ShieldCheck',
     visual: 'bars',
   },
   {
-    title: 'Update handling',
-    subtitle: 'Regulation changes stay traceable.',
+    title: 'Governed updates',
+    subtitle: 'Keep history readable when regulations change.',
     visual: 'switcher',
     colSpan: 2,
   },
@@ -345,19 +340,19 @@ const kovonBentoCards: BentoCardItem[] = [
 
 const kovonTechnicalSpecs: TechnicalSpecItem[] = [
   {
-    title: 'Information model',
+    title: 'Three-layer model',
     body:
-      'Defined entities for vehicle, system, verification unit, status, ownership, evidence, and outcome. This guarantees overview completeness and deep traceability.',
+      'Built around regulation structure, working structure, and the evaluation itself. Evaluations roll up into snapshots for review and coordination across roles.',
   },
   {
-    title: 'Lifecycle and governance',
+    title: 'Ownership and handoffs',
     body:
-      'Verification moves through strict lifecycle states. Rollups make progress visible across the entire vehicle. Governance handles regulation updates without corrupting the audit trail.',
+      'Mapped evaluations to responsible roles with clear handoffs. This reduced ownership gaps and made next steps visible.',
   },
   {
-    title: 'Pilot delivery',
+    title: 'Beta pilot, real insights',
     body:
-      'Delivered to validate scalability, workflows, and role assignments. Provided a governance-ready foundation waiting for organizational capacity to scale.',
+      'Delivered a working Angular beta pilot and gathered concrete insights on what COP digitization needs in daily practice. Rollout paused after a strategy shift.',
   },
 ];
 
@@ -365,119 +360,119 @@ const kovonTechnicalSpecs: TechnicalSpecItem[] = [
 
 const caseStudyKovon: CaseStudySections = {
   summary:
-    'Audit-driven pilot proving how COP documentation operates safely with lifecycle tracking, ownership mapping, and verifiable evidence.',
+    'Angular beta pilot app that digitizes COP documentation with a snapshot view, clear ownership, and evidence per evaluation.',
   contextWhyMattered:
-    'An internal audit demanded traceable proof of Conformity of Production documentation. Teams lacked a single source to check completeness, progress, and accountability.',
+    'COP documentation spans multiple roles and complex regulation structures. Without one shared system, teams lose time and create gaps when audits and updates hit.',
   realProblem:
-    'Scattered documentation caused compliance panic under time pressure. Regulations and internal rules updated constantly, immediately outdating static files all held together in various Excel files.',
+    'Status, evidence, and responsibility were spread across files and threads. Updates broke traceability. Teams could not reliably answer what is missing and who owns the next step.',
   myRole:
     'Product and UX concept. Scrum facilitation. Information architecture, workflow mapping, and prototype design.',
   approach:
-    'Mapped the information model and verification lifecycle. Designed distinct ownership rules, status tracking, and evidence handling, validating the concept through iterative pilot reviews.',
+    'Modeled regulation structure, working structure, and evaluation as the core unit. Iterated with technical leads and responsible roles to validate the pilot workflows.',
   solutionConcept:
-    'A central dashboard enforcing lifecycle states, assigning one owner per evaluation unit, and securing evidence via a governance-oriented update structure.',
+    'A working Angular pilot that maps requirements to work packages, assigns ownership, tracks status, and stores evidence and outcomes, with governance for updates.',
   outcome:
-    'Validated a scalable operational fit. The pilot successfully made status visible and established a robust foundation for future enterprise rollout.',
+    'Beta pilot delivered and used by about 200 active users. Enabled snapshots with fewer gaps and generated concrete insights for a potential rollout, which paused due to strategy shift.',
   whatToShowVisually:
-    'Lifecycle diagram. Overview of systems with status chips and owners. Detail page with evidence and outcome. Update concept for regulation changes.',
+    'Snapshot overview. Evaluation detail with ownership and evidence. Mapping from regulation to work packages. Governance view for updates.',
 };
 
 const caseStudyAutomation: CaseStudySections = {
   summary:
-    'SAP process automation concept and step-by-step PDD reducing recurring manual validation after inheritance events.',
+    'Automation concept and PDD that removes recurring manual checks after SAP inheritance events.',
   contextWhyMattered:
-    'Inherited database updates often reset states in shared environments. Experts wasted time repeatedly verifying and restoring correctness.',
+    'Inheritance updates reset states in shared SAP environments. Experts lost time re-checking correctness instead of doing domain work.',
   realProblem:
-    'Manual checks were repetitive, time-consuming, and error-prone. Experts could not trust review states after updates. The fix had to be safe and implementable within strict SAP constraints.',
+    'A faulty rule caused repeated resets and manual validation loops. The routine was error-prone and wasted expert hours.',
   constraints:
-    'Strict environment constraints and zero budget for custom software. Required a precise handoff for internal SAP administrators to execute safely.',
+    'Strict SAP constraints. The solution had to be safe, predictable, and implementable by SAP administrators.',
   myRole:
     'Automation manager and process analyst. Use case clustering, prioritization, PDD creation, and stakeholder alignment.',
   approach:
-    'Clustered use cases alongside experts, prioritized the highest-value path, and documented the exact workflow. Aligned with SAP administrators to ensure feasibility.',
+    'Mapped the failure pattern with experts, clustered use cases, picked the highest-value intervention, then documented decision rules and steps as a PDD.',
   solutionConcept:
-    'Automated flagging for incorrect resets and a supported restoration routine. The PDD acted as the strict implementation contract.',
+    'Remove the faulty rule, define a controlled automation routine, and hand it over as a click-by-click PDD so implementation stays safe in SAP.',
   outcome:
-    'Eliminated recurring manual checks and lowered operational risk through a predictable, automated routine.',
+    'Recurring manual checks reduced with a measurable impact. The expert group regained time and reduced risk caused by repeated resets.',
   whatToShowVisually:
-    'Parent-child inheritance diagram. Before and after workflow. PDD excerpt showing step clarity.',
+    'Inheritance reset diagram. Before and after routine. PDD excerpt showing decision rules and steps.',
 };
 
 const caseStudyFfp: CaseStudySections = {
   summary:
-    'Redesigned a diagnostic tool to support triage, correlation, and root cause synthesis across siloed expert streams.',
+    'Clickable high-fidelity prototype that reshapes an expert workflow around root cause investigation, from symptom-first triage to correlation and synthesis.',
   contextWhyMattered:
-    'One department executed three distinct jobs (supplier, production, correlation), but the legacy UI crammed everything into one view, lacking clear handoffs.',
+    'Experts need to move fast from symptom signals to a credible root cause hypothesis. A mixed, cluttered UI blocks correlation and slows synthesis.',
   realProblem:
-    'Experts could not merge similar cases reliably. The UI forced a part-number-first behavior, slowing down symptom-driven investigations.',
+    'The legacy flow forced part-number-first behavior and made cross-case correlation unreliable. Root cause work suffered from context switching and weak handoffs.',
   insightAuthor: 'Lead Engineer',
   myRole:
     'UX and UI design. Workflow mapping, information architecture, and high-fidelity prototyping.',
   approach:
-    'Shadowed experts to map real-world jobs and mental models. Designed role-based modes and iterated high-fidelity prototypes as exact development references.',
+    'Shadowed and interviewed experts, then redesigned the workflow and information hierarchy. Validated the logic through a clickable prototype.',
   solutionConcept:
-    'A symptom-first information hierarchy merging disparate signals into one cohesive fingerprint, complete with dedicated entry points per workflow.',
+    'A symptom-first entry with a correlation layer that merges signals into one fingerprint, supporting the full story from triage to synthesis.',
   outcome:
-    'Sped up triage and case-matching capabilities. Drastically improved tagging consistency and supported clear root-cause synthesis.',
+    'Improved workflow clarity and supported root cause synthesis with fewer breaks and less mental load. Delivered as a prototype stakeholders could click through.',
   whatToShowVisually:
-    'Workflow map showing three modes merging into one flow. Before and after IA. Key screens: intake, triage, correlation, review.',
+    'Triage entry. Correlation view. Fingerprint detail. Key states and transitions in the clickable prototype.',
 };
 
 const caseStudyCaesar: CaseStudySections = {
   summary:
-    'Visual and interaction redesign that cuts table clutter, helping experts spot outliers and threshold breaches instantly.',
+    'Prototype dashboard and interaction concept that makes thresholds and outliers readable fast in dense emission reporting.',
   contextWhyMattered:
-    'Data existed but wasn’t readable at speed. Analysts required immediate, trustworthy threshold rules across lists and charts.',
+    'Under reporting pressure, experts need scan speed and adjustable thresholds they can trust. If outliers are hidden, decisions get delayed and risk increases.',
   realProblem:
-    'Severe UI clutter buried outliers. Threshold logic existed in the backend but remained invisible to the user at a glance.',
+    'Table clutter buried anomalies. Threshold logic was not adjustable in a consistent way, which made interpretation slower and less reliable.',
   myRole:
-    'UX and UI design. Visual hierarchy, interaction rules, and high-fidelity prototype exploration.',
+    'UX and UI design. Visual hierarchy, interaction rules, and high-fidelity prototype delivery.',
   approach:
-    'Explored raw data models, built rapid visual iterations, and standardized threshold encoding. Handed off a stable, tested design package.',
+    'Analyzed real table patterns, tested visual encodings for breaches, and designed a threshold interaction concept that stays consistent across views.',
   solutionConcept:
-    'A strict visual hierarchy for dense tables paired with consistent color-encoding rules for breaches and a unified settings panel.',
+    'A strict table hierarchy plus consistent breach encoding, paired with a threshold settings concept users can adapt to their measurement values.',
   outcome:
-    'Outliers surfaced immediately. Scan speed accelerated and ambiguity dropped prior to mandatory reporting.',
+    'Better scan speed and clearer decisions. Outliers surfaced earlier, and thresholds became easier to adjust and interpret.',
   whatToShowVisually:
-    'Before and after table hierarchy. Outlier highlighting rules. Threshold settings panel. Consistent list-to-chart encoding example.',
+    'Before and after table density. Outlier encoding rules. Threshold settings flow. Dashboard prototype screens.',
 };
 
 const caseStudyTracklistify: CaseStudySections = {
   summary:
-    'Indie pipeline turning DJ sets into actionable track lists and wishlists, built strictly around analysis-first principles.',
+    'Side project in beta that uses AI-assisted analysis to turn DJ sets into a review list and a wishlist flow.',
   contextWhyMattered:
-    'Manual track identification is painfully slow. DJs lack a clean pipeline from audio input to a functional, saved wishlist.',
+    'Manual track identification is slow. DJs need a workflow that turns listening into an actionable list, without messy iterations.',
   realProblem:
-    'Existing solutions mix source storage with scan results unpredictably and often fail to support iterative rescans.',
+    'Existing solutions mix scanning, storage, and results. That makes rescans and review inconsistent.',
   myRole:
-    'Concept and indie developer. Workflow design and front-end prototyping.',
+    'Concept and indie developer. Workflow design and prototyping.',
   approach:
-    'Mapped the ingest-to-wishlist flow. Built a pipeline to analyze audio, discard the source file, store pointers, and present clean UI decisions for the user.',
+    'Designed the flow from ingest to review and wishlist. Built it around repeatable scanning so results stay actionable.',
   solutionConcept:
-    'Analysis-first architecture. It stores results and rescan pointers instead of hoarding audio files, driving users straight to review and save actions.',
+    'An analysis-first workflow that helps generate a clean list, supports iteration, and drives saving and wishlist actions.',
   outcome:
-    'A seamless flow from ingest to cart. Clean separation of source and results with native rescan support.',
+    'Beta stage with a clear end-to-end flow. Set up for fast iteration and feature growth as the AI pipeline improves.',
   whatToShowVisually:
-    'Flow diagram. Track review screen. Wishlist screen. Example rescan state.',
+    'Review list. Wishlist flow. Rescan concept. Example set analysis output.',
 };
 
 const caseStudyFixundfertig: CaseStudySections = {
   summary:
-    'Python-driven automation pipeline ingesting receipts via email, extracting data via OCR, and storing structured JSON.',
+    'Personal invoicing tool that creates and sends invoices, plus automated OCR intake for receipts and expenses.',
   contextWhyMattered:
-    'Invoices arrive in infinite formats. Manual data entry guarantees friction and formatting errors.',
+    'Invoices and receipts come in endless formats. Manual entry kills momentum and introduces formatting errors.',
   realProblem:
-    'No single pipeline bridged email attachments to reliable API data. Heavy manual correction defeated the purpose of existing tools.',
+    'A holistic workflow was missing: create invoices, send them, and also automate intake of incoming documents into structured data.',
   myRole:
-    'Indie developer. Pipeline architecture, API integration, and review UI creation.',
+    'Indie developer. Product concept, pipeline design, and UI implementation.',
   approach:
-    'Linked n8n email intake to an OCR extraction script, mapped output to JSON, and built a lightweight NiceGUI surface for quick human review.',
+    'Designed a single workflow that covers invoice creation and sending, plus an intake pipeline for receipts. Built a review surface for quick corrections.',
   solutionConcept:
-    'Strictly separated ingestion, extraction, and storage phases. Only unresolved data hits the human review UI.',
+    'Create and send invoices in one tool, ingest incoming documents via automation, extract fields via OCR, and store structured data for reuse.',
   outcome:
-    'Drastically lowered manual entry time and effectively eliminated formatting errors through repeatable structured pipelines.',
+    'Reduced manual copying and improved consistency across outgoing invoices and incoming expense data.',
   whatToShowVisually:
-    'Pipeline diagram. Example JSON output. NiceGUI review surface. Email intake status steps.',
+    'Invoice creation flow. Sent invoice view. Intake pipeline. OCR result review UI.',
 };
 
 // --- Portfolio kit data (keyed by slug) ---
@@ -487,70 +482,42 @@ const portfolioKitFfp: PortfolioKitData = {
   bentoCards: ffpBentoCards,
   technicalSpecs: ffpTechnicalSpecs,
   processSteps: [
-    {
-      number: '01',
-      title: 'Shadowing',
-      desc: 'Observed experts to capture real workflows and unwritten investigation habits.',
-    },
-    {
-      number: '02',
-      title: 'Interviews',
-      desc: 'Mapped out distinct jobs to be done across supplier, production, and correlation tasks.',
-    },
-    {
-      number: '03',
-      title: 'Workflow mapping',
-      desc: 'Defined handoffs and restructured the information hierarchy for a symptom-first approach.',
-    },
-    {
-      number: '04',
-      title: 'Prototype and handoff',
-      desc: 'Shipped a high-fidelity prototype as the strict reference point for development.',
-    },
+    { number: '01', title: 'Shadowing', desc: 'Observed real expert workflows and root cause reasoning patterns.' },
+    { number: '02', title: 'Interviews', desc: 'Validated pain points and clarified what blocks correlation and synthesis.' },
+    { number: '03', title: 'Workflow redesign', desc: 'Reshaped the flow around triage, correlation, and synthesis.' },
+    { number: '04', title: 'Clickable prototype', desc: 'Delivered a high-fidelity prototype stakeholders could click through.' },
   ],
   featureItems: [
-    {
-      icon: 'Layout',
-      title: 'Role-based modes',
-      desc: 'Isolated views separating supplier work, production testing, and correlation synthesis.',
-    },
-    {
-      icon: 'Database',
-      title: 'Correlation concept',
-      desc: 'Merge scattered signals into a unified fingerprint profile.',
-    },
-    {
-      icon: 'Search',
-      title: 'Symptom-first entry',
-      desc: 'Search natively by failure symptoms before requiring hard part numbers.',
-    },
+    { icon: 'Search', title: 'Symptom-first intake', desc: 'Start from what failed, then narrow down.' },
+    { icon: 'Database', title: 'Correlation layer', desc: 'Merge signals into one fingerprint for synthesis.' },
+    { icon: 'Layout', title: 'End-to-end flow', desc: 'Triage to correlation to synthesis without breaking context.' },
   ],
 };
 
 const portfolioKitCaesar: PortfolioKitData = {
   processSteps: [
-    { number: '01', title: 'Exploration', desc: 'Analyzed raw data views to pinpoint where human interpretation broke down.' },
-    { number: '02', title: 'Rapid prototyping', desc: 'Tested visual encoding rules for thresholds and critical outliers.' },
-    { number: '03', title: 'Handoff', desc: 'Delivered finalized screens and a strict UI encoding rulebook.' },
+    { number: '01', title: 'Data scan', desc: 'Reviewed dense reporting tables and identified scan blockers.' },
+    { number: '02', title: 'Encoding rules', desc: 'Defined consistent outlier and threshold encoding across views.' },
+    { number: '03', title: 'Prototype delivery', desc: 'Delivered a dashboard prototype plus interaction concept for thresholds.' },
   ],
   featureItems: [
-    { icon: 'Layout', title: 'Reduced clutter', desc: 'Stripped visual noise to enhance scannability in dense tables.' },
-    { icon: 'BarChart3', title: 'Outlier visibility', desc: 'Breaches and critical drops catch the eye immediately.' },
-    { icon: 'Sliders', title: 'Threshold rules', desc: 'Consistent logic panel governing list and chart highlighting.' },
+    { icon: 'Layout', title: 'Less clutter', desc: 'Stronger hierarchy for faster scanning.' },
+    { icon: 'BarChart3', title: 'Outliers visible', desc: 'Breaches stand out immediately.' },
+    { icon: 'Sliders', title: 'Adjustable thresholds', desc: 'Users can adapt threshold values to their measurement needs.' },
   ],
 };
 
 const portfolioKitAutomation: PortfolioKitData = {
   processSteps: [
-    { number: '01', title: 'Process mapping', desc: 'Traced inheritance events and the resulting manual validation loops.' },
-    { number: '02', title: 'Expert sessions', desc: 'Clustered and prioritized pain points with core domain users.' },
-    { number: '03', title: 'PDD creation', desc: 'Drafted click-by-click implementation logic for SAP engineers.' },
-    { number: '04', title: 'Handoff', desc: 'Secured alignment on automation safety limits prior to build.' },
+    { number: '01', title: 'Process mapping', desc: 'Traced inheritance events and recurring validation loops.' },
+    { number: '02', title: 'Expert workshops', desc: 'Clustered pain points and selected the best automation target.' },
+    { number: '03', title: 'PDD creation', desc: 'Documented decision rules and click-by-click steps for SAP admins.' },
+    { number: '04', title: 'Safety alignment', desc: 'Aligned feasibility and boundaries inside SAP constraints.' },
   ],
   featureItems: [
-    { icon: 'Zap', title: 'Automation intervention', desc: 'Intercepts and handles recurring manual checks automatically.' },
-    { icon: 'FileCheck', title: 'Implementation PDD', desc: 'Bulletproof documentation for safe SAP handoff.' },
-    { icon: 'ShieldCheck', title: 'Operational safety', desc: 'Executes a repeatable, error-free restoration routine.' },
+    { icon: 'Zap', title: 'Automation concept', desc: 'Targets recurring checks after inheritance resets.' },
+    { icon: 'FileCheck', title: 'Implementation PDD', desc: 'A build-ready spec for SAP administrators.' },
+    { icon: 'ShieldCheck', title: 'Measured reduction', desc: 'Reduced manual checks with a hard metric in the expert group.' },
   ],
 };
 
@@ -561,89 +528,89 @@ const portfolioKitKovon: PortfolioKitData = {
   featureItems: [
     {
       icon: 'ShieldCheck',
-      title: 'Verification lifecycle',
-      desc: 'Strict status tracking linked to evidence and final outcomes.',
-      problem: 'Teams lacked a trustworthy view of completeness across vehicle systems.',
-      solution: 'Enforced lifecycle states and attached evidence to specific accountable owners.',
-      impact: 'Drove faster audit readiness and killed operational ambiguity.',
+      title: 'Snapshot over complexity',
+      desc: 'One view for gaps, progress, and responsibility.',
+      problem: 'Teams could not reliably see what is missing and who owns it.',
+      solution: 'Snapshot view that rolls up evaluations with ownership and status.',
+      impact: 'Fewer gaps and faster review readiness.',
     },
     {
       icon: 'UserCog',
-      title: 'Ownership model',
-      desc: 'Assigns one accountable expert per evaluation unit.',
-      problem: 'Shared multi-party responsibility caused gaps and dropped follow-ups.',
-      solution: 'Explicit mapping rolled up across system and vehicle levels.',
-      impact: 'Created predictable execution and clear accountability.',
+      title: 'Ownership mapped to evaluations',
+      desc: 'Responsible roles are tied to the unit of work.',
+      problem: 'Mixed roles and handoffs caused ownership gaps.',
+      solution: 'Working structure mapping evaluations to responsible roles and handoffs.',
+      impact: 'Clear next steps and less coordination noise.',
     },
     {
       icon: 'RefreshCw',
-      title: 'Update handling',
-      desc: 'Preserves traceability during major regulation shifts.',
-      problem: 'Rule changes consistently broke static documentation setups.',
-      solution: 'Built a governance engine that updates rules without erasing the audit trail.',
-      impact: 'Maintains compliance effortlessly instead of triggering panic rework.',
+      title: 'Governed updates',
+      desc: 'Regulation changes stay traceable.',
+      problem: 'Updates broke static documentation and triggered rework.',
+      solution: 'Governance routine for updates, with review steps and responsibilities.',
+      impact: 'Less rework and a readable history.',
     },
   ],
   processSteps: [
     {
       number: '01',
-      title: 'Define scope',
-      desc: 'Establish vehicle and system parameters for COP documentation.',
+      title: 'Model the structures',
+      desc: 'Define regulation structure, working structure, and evaluation as the core unit.',
       icon: 'Database',
-      output: 'Scope locked and visible in the overview.',
+      output: 'A model that supports roll-ups and snapshots.',
     },
     {
       number: '02',
-      title: 'Assign ownership',
-      desc: 'Delegate discrete verification units to specific experts.',
+      title: 'Map ownership',
+      desc: 'Assign evaluations to responsible roles and define handoffs.',
       icon: 'UserCog',
-      output: 'Responsibility assigned and actively tracked.',
+      output: 'Clear next steps per role.',
     },
     {
       number: '03',
-      title: 'Document and resolve',
-      desc: 'Log status, attach proofs, and register compliance outcomes.',
+      title: 'Track evidence and outcomes',
+      desc: 'Store status, evidence, and outcome on the evaluation.',
       icon: 'FileBadge',
-      output: 'Evidence secured with an unalterable audit trail.',
+      output: 'Traceable decisions, not scattered files.',
     },
     {
       number: '04',
-      title: 'Review and snapshot',
-      desc: 'Roll up granular status data into a finalized review view.',
+      title: 'Create snapshots',
+      desc: 'Roll up progress into a review-ready view.',
       icon: 'FileCheck',
-      output: 'Clean, readable snapshot ready for auditors.',
+      output: 'Fewer gaps and faster review cycles.',
     },
     {
       number: '05',
-      title: 'Maintain updates',
-      desc: 'Process regulatory changes without corrupting history.',
+      title: 'Handle updates',
+      desc: 'Apply regulation changes through governance steps.',
       icon: 'RefreshCw',
-      output: 'Stable, long-term audit trail.',
+      output: 'Readable history through updates.',
     },
   ],
 };
 
 const portfolioKitTracklistify: PortfolioKitData = {
   featureItems: [
-    { icon: 'Upload', title: 'Ingest', desc: 'Upload a set or audio link to kick off analysis.' },
-    { icon: 'Waveform', title: 'Analyze', desc: 'Extract identified tracks into a clean UI list.' },
-    { icon: 'Repeat', title: 'Rescan', desc: 'Retain pointers and text results to enable rapid future rescans.' },
-    { icon: 'Bookmark', title: 'Wishlist', desc: 'Save favorites and build a targeted purchase intent list.' },
+    { icon: 'Upload', title: 'Ingest', desc: 'Upload a set or provide an audio link to start analysis.' },
+    { icon: 'Waveform', title: 'Analyze', desc: 'AI-assisted extraction into a reviewable track list.' },
+    { icon: 'Repeat', title: 'Iterate', desc: 'Support rescans and refinement as detection improves.' },
+    { icon: 'Bookmark', title: 'Wishlist', desc: 'Save favorites and build an actionable wishlist flow.' },
   ],
 };
 
 const portfolioKitFixundfertig: PortfolioKitData = {
   featureItems: [
-    { icon: 'Mail', title: 'Email intake', desc: 'Auto-ingest and classify arriving attachments.' },
-    { icon: 'Scan', title: 'OCR to JSON', desc: 'Extract semantic structures natively into JSON formatting.' },
-    { icon: 'Database', title: 'API storage', desc: 'Push validated JSON payloads directly into application APIs.' },
-    { icon: 'CheckCircle', title: 'Review UI', desc: 'Provide a fast, lightweight dashboard for human corrections.' },
+    { icon: 'FileText', title: 'Create invoices', desc: 'Create invoices with structured fields and templates.' },
+    { icon: 'Mail', title: 'Send', desc: 'Send invoices from the same tool, with consistent output.' },
+    { icon: 'Scan', title: 'OCR intake', desc: 'Ingest receipts and expenses via automation and extract fields.' },
+    { icon: 'CheckCircle', title: 'Review', desc: 'Fast correction UI for extracted fields and exceptions.' },
   ],
   technicalSpecs: [
     {
-      title: 'Stack and pipeline',
+      title: 'Stack and flow',
       body:
-        'Built entirely in Python. Utilizes n8n for email transport, an OCR engine for extraction, and NiceGUI for the front-end review surface.',
+        'Personal tool built in Python with a UI layer, automation for intake, and OCR extraction for incoming documents. Designed as one end-to-end invoicing and expense workflow.',
     },
   ],
 };
@@ -654,11 +621,11 @@ export const portfolio: PortfolioSource = {
   kovon: {
     id: '1',
     slug: 'kovon',
-    title: 'Automototive Compliance Documentation Tool ',
-    navTitle: 'Automotive compliance documentation tool',
-    subtitle: 'Audit-driven verification tracking for COP documentation.',
+    title: 'KoVoN COP Pilot App',
+    navTitle: 'KoVoN COP pilot',
+    subtitle: 'Angular beta pilot for COP snapshots, ownership, and evidence.',
     oneLiner:
-      'Pilot web tool that tracks verification status, ownership, and evidence across vehicle parts and systems.',
+      'Working Angular beta pilot that digitizes COP documentation and produces snapshot visibility with fewer gaps.',
     category: 'Enterprise',
     year: '2022 to 2024',
     client: 'Automotive (Konzern)',
@@ -676,56 +643,59 @@ export const portfolio: PortfolioSource = {
     teamSize: '4 to 6 devs, 2 designers',
     customerAbout: 'Automotive product development. Internal compliance workflows.',
     context:
-      'An internal audit required traceable proof of Conformity of Production documentation. Teams needed one place to see completeness, progress, and ownership.',
+      'COP documentation involves mixed roles and complex regulation structures. The pilot needed one system that makes progress, responsibility, and evidence visible.',
     problem:
-      'Documentation was scattered and avoided due to time pressure. Verification paths differed heavily, and regular regulation updates broke static tracking files.',
+      'Status, evidence, and ownership lived in scattered files. Updates broke traceability. Teams struggled to produce a reliable snapshot and close gaps consistently.',
     solution:
-      'Delivered a digital workflow mapping explicit lifecycle states and governance structures to handle regulatory updates gracefully.',
+      'Delivered a working Angular beta pilot that connects regulation structure, working structure, and evaluations, with ownership mapping, evidence handling, and governed updates.',
     outcomes: [
-      'Validated a pilot concept for COP documentation and verification tracking.',
-      'Defined ownership and responsibilities per evaluation unit.',
-      'Established lifecycle states for status, evidence, and outcomes.',
-      'Provided a governance foundation for regulation and rule updates.',
+      'Beta pilot delivered and used by about 200 active users.',
+      'Snapshot view made gaps and ownership visible across roles.',
+      'Evaluation model established as the core unit of work.',
+      'Governance approach defined for regulation updates.',
+      'Insights gathered on how COP digitization needs to work in practice.',
     ],
-    metrics: [],
+    metrics: ['About 200 active users (pilot)'],
     highlights: [
-      'Role-based dashboards governing vehicle projects, tasks, and users.',
-      'Clear separation of status, evidence, ownership, and outcome.',
-      'Robust update engine for regulation structure changes.',
+      'Snapshot overview for fast review and alignment.',
+      'Clear mapping from regulation to work packages to responsibility.',
+      'Evaluation detail view with status, evidence, and outcome.',
+      'Governed update routine to keep history readable.',
     ],
     tools: ['Angular', 'AWS'],
     methods: ['Stakeholder interviews', 'Workflow definition', 'User tests', 'Scrum facilitation'],
     links: [{ label: 'Case study', href: '/projects/kovon' }],
     impact: [
-      { value: '~500 users', label: 'Scale' },
-      { value: 'POC to Beta', label: 'Maturity' },
+      { value: 'about 200', label: 'Active users' },
+      { value: 'POC, MVP, Beta', label: 'Stages' },
       { value: '2.5 years', label: 'Timeline' },
       { value: 'Angular, AWS', label: 'Stack' },
     ],
     metaCards: [
-      { label: 'Users', value: '~500', icon: 'users', hint: 'Estimated user group size around the pilot.' },
+      { label: 'Active users', value: 'about 200', icon: 'users', hint: 'Pilot usage before rollout paused.' },
       { label: 'Timeline', value: '2.5 years', icon: 'timeline' },
       { label: 'Stages', value: 'POC, MVP, Beta', icon: 'stages' },
-      { label: 'Role', value: 'Product and UX concept. Scrum facilitation.', icon: 'role' },
+      { label: 'Primary roles', value: 'Tech leads, responsible roles', icon: 'role' },
     ],
     deliveryImpact: {
       delivery: [
-        'Compliance documentation concept and information model',
-        'Verification lifecycle and ownership model',
-        'Prototype screens and governance for updates',
+        'Angular beta pilot app',
+        'Model: regulation structure, working structure, evaluation',
+        'Snapshot overview plus evaluation detail views',
+        'Governance routine for regulation updates',
       ],
       impact: [
-        'Central visibility of status across parts and systems',
-        'Clear ownership per evaluation unit',
-        'Less manual searching and ambiguity',
+        'Snapshot visibility with fewer gaps',
+        'Clear ownership per evaluation',
+        'Less manual searching and fewer handoff failures',
       ],
     },
     tags: ['compliance', 'enterprise', 'automotive', 'product'],
     impactCards: [
-      { label: 'Users', value: '~500' },
+      { label: 'Active users', value: 'about 200' },
       { label: 'Timeline', value: '2.5 years' },
       { label: 'Stages', value: 'POC, MVP, Beta' },
-      { label: 'Role', value: 'Product and UX concept' },
+      { label: 'Deliverable', value: 'Angular beta pilot app' },
     ],
     caseStudy: caseStudyKovon,
     portfolioKit: portfolioKitKovon,
@@ -735,67 +705,67 @@ export const portfolio: PortfolioSource = {
   automation: {
     id: '6',
     slug: 'automation',
-    title: 'SAP process automation',
-    navTitle: 'SAP process automation',
-    subtitle: 'Automation concept and PDD for a recurring SAP validation workflow.',
+    title: 'SAP inheritance validation automation',
+    navTitle: 'SAP automation',
+    subtitle: 'Automation concept and PDD for recurring inheritance resets.',
     oneLiner:
-      'Automation concept and step-by-step PDD reducing recurring manual checks after database inheritance events.',
+      'Automation concept plus PDD that reduces recurring manual checks by removing a faulty rule and defining a safe routine.',
     category: 'Enterprise',
     year: '2024',
     client: 'Automotive (Konzern)',
     roles: ['Automation Manager', 'Process Analyst'],
     roleLine: 'Automation concept owner. Process definition and handoff.',
     context:
-      'In a shared group environment, inherited changes reset states in the child database. Experts continually verified and restored correctness manually.',
+      'Inheritance updates in SAP reset states in shared environments. Experts repeatedly verified and restored correctness by hand.',
     problem:
-      'Review states could not be trusted after inheritance updates. Manual checks wasted time and spiked operational risk through human error.',
+      'A faulty rule caused repeated resets and recurring manual checks. The routine was time-consuming and risked human error.',
     solution:
-      'Clustered use cases alongside experts, prioritized the highest-value path, and delivered a precise PDD for SAP admins to implement safely.',
+      'Clustered use cases with experts, selected the highest-value intervention, removed the faulty rule conceptually, and delivered a build-ready PDD for SAP admins.',
     outcomes: [
       'Use cases clustered and prioritized with domain experts.',
       'Implementation-ready PDD delivered for SAP administrators.',
-      'Recurring manual checking effort reduced for the expert group.',
+      'Recurring manual checks reduced with a measurable impact.',
     ],
-    metrics: ['About 20 experts', 'About 4 hours per week saved'],
+    metrics: ['10 to 20 experts', 'Hard metric measured in the expert group'],
     impact: [
-      { value: '~20', label: 'Experts impacted' },
-      { value: '~4 h/week', label: 'Time saved' },
+      { value: '10 to 20', label: 'Experts impacted' },
+      { value: 'Measured', label: 'Time saved' },
       { value: 'SAP', label: 'Environment' },
       { value: 'PDD', label: 'Deliverable' },
     ],
     highlights: [
-      'Use case clustering and prioritization with experts.',
-      'Implementation-ready documentation for SAP administrators.',
-      'Safe automation focus in a highly constrained environment.',
+      'Clear automation target: recurring inheritance resets.',
+      'Build-ready PDD with decision rules and steps.',
+      'Safety-first approach inside SAP constraints.',
     ],
     tools: ['SAP', 'Figma', 'Docs'],
     methods: ['Process mapping', 'Expert workshops', 'Use case clustering', 'Handoff documentation'],
     links: [{ label: 'Case study', href: '/projects/automation' }],
     cardCoverUrl: '/projects/sap_automation_bot_hero.png',
     metaCards: [
-      { label: 'Experts', value: '~20', icon: 'users' },
-      { label: 'Time saved', value: '~4 h/week', icon: 'impact' },
+      { label: 'Experts', value: '10 to 20', icon: 'users' },
+      { label: 'Metric', value: 'Hard metric', icon: 'impact' },
       { label: 'Environment', value: 'SAP enterprise', icon: 'stack' },
       { label: 'Deliverable', value: 'PDD, click-by-click', icon: 'deliverable' },
     ],
     deliveryImpact: {
       delivery: [
         'Use case clustering with experts',
-        'PDD documentation and handoff',
-        'Automation pitch and alignment with SAP admins',
+        'Automation concept and decision rules',
+        'PDD specification and handoff',
       ],
       impact: [
         'Reduced recurring manual checks',
         'More consistent handling after inheritance events',
-        'Less error-prone operational routine',
+        'Lower error risk through a repeatable routine',
       ],
       document: { label: 'Implementation PDD', href: '/docs/automation-pdd.pdf' },
     },
     coverFallback: 'icon',
     tags: ['automation', 'ops', 'enterprise'],
     impactCards: [
-      { label: 'Experts impacted', value: '~20' },
-      { label: 'Time saved', value: '~4 h/week' },
+      { label: 'Experts impacted', value: '10 to 20' },
+      { label: 'Metric', value: 'Hard metric' },
       { label: 'Deliverable', value: 'Implementation PDD' },
       { label: 'Environment', value: 'SAP enterprise' },
     ],
@@ -806,10 +776,10 @@ export const portfolio: PortfolioSource = {
   'ffp-dashboard': {
     id: '7',
     slug: 'ffp-dashboard',
-    title: 'Automotive Failure Fingerprint Dashboard',
-    subtitle: 'Workflow-based redesign for expert triage, correlation, and root cause synthesis.',
+    title: 'Failure Fingerprint Dashboard',
+    subtitle: 'Root cause workflow redesign as a clickable prototype.',
     oneLiner:
-      'Redesigned an expert tool to separate siloed workflows and support symptom-first root cause investigations.',
+      'High-fidelity, clickable prototype that reshapes expert work around symptom-first triage, correlation, and root cause synthesis.',
     category: 'Enterprise',
     year: '2024',
     client: 'Automotive (Konzern)',
@@ -829,25 +799,25 @@ export const portfolio: PortfolioSource = {
       '/projects/ffp_gallery_12.png',
     ],
     roles: ['UX/UI Designer'],
-    roleLine: 'UX/UI Designer. Workflow mapping and high-fidelity prototype.',
+    roleLine: 'UX/UI design. Workflow mapping and high-fidelity prototype.',
     teamSize: '2 to 3',
     customerAbout: 'Automotive internal expert tool for diagnostics and failure analysis.',
     context:
-      'The department handled three conflicting jobs: supplier issues, production issues, and root cause correlation. The legacy UI mashed them into a single interface.',
+      'Experts needed to move from symptoms to root cause fast. The legacy UI blocked correlation and created context switching.',
     problem:
-      'Symptom-first reasoning was completely blocked by part-number-centric flows, preventing experts from merging similar cases effectively.',
+      'Part-number-first flows slowed investigations and made cross-case matching unreliable. The system did not support a clean synthesis story.',
     solution:
-      'Mapped distinct roles through expert shadowing and delivered a workflow-separated prototype specifically referencing development targets.',
+      'Reshaped the workflow around root cause intent and delivered a clickable high-fidelity prototype that stakeholders could validate end to end.',
     outcomes: [
-      'Separated workflows into role-based modes and clear entry points.',
-      'Improved information hierarchy for symptom-first investigation.',
-      'Enabled cross-stream correlation for rapid root cause synthesis.',
+      'Symptom-first entry supports real investigation behavior.',
+      'Correlation merges signals into one fingerprint.',
+      'Clickable prototype proves the end-to-end workflow and handoffs.',
     ],
     metrics: [],
     highlights: [
-      'Workflow-based navigation isolating supplier and production modes.',
-      'Clear handoffs between intake, triage, and final review.',
-      'Figma prototypes acting as immediate implementation references.',
+      'Full click-through prototype for stakeholder validation.',
+      'Information hierarchy optimized for triage and synthesis.',
+      'Clear transitions across key investigation steps.',
     ],
     tools: ['Figma', 'Jira', 'Confluence', 'Miro'],
     methods: ['Shadowing', 'Interviews', 'Workflow mapping', 'Iterative prototyping'],
@@ -864,34 +834,34 @@ export const portfolio: PortfolioSource = {
     },
     prototypeButtonLabel: 'Live demo',
     impact: [
-      { value: 'Role-based', label: 'Modes' },
-      { value: 'Symptom-first', label: 'Search model' },
-      { value: 'Correlation', label: 'Root cause support' },
+      { value: 'Symptom-first', label: 'Entry' },
+      { value: 'Correlation', label: 'Matching' },
+      { value: 'Synthesis', label: 'Root cause' },
     ],
     metaCards: [
       { label: 'Experts', value: '10 to 20', icon: 'users' },
       { label: 'Duration', value: 'Over 6 months', icon: 'timeline' },
-      { label: 'Methods', value: 'Shadowing, interviews, workflow mapping', icon: 'stages' },
-      { label: 'Deliverable', value: 'Concept and high-fidelity prototype', icon: 'deliverable' },
+      { label: 'Proof', value: 'Clickable prototype', icon: 'stages' },
+      { label: 'Deliverable', value: 'High-fidelity concept', icon: 'deliverable' },
     ],
     deliveryImpact: {
       delivery: [
-        'Workflow-based IA and modes',
-        'Screen designs per role and task',
-        'Interaction concept and high-fidelity prototype',
+        'Workflow redesign around root cause intent',
+        'High-fidelity screen designs and states',
+        'Clickable prototype for end-to-end validation',
       ],
       impact: [
-        'Reduced cognitive load',
-        'Better findability and continuity',
-        'Improved correlation and root cause workflow support',
+        'Better scan and flow continuity during investigations',
+        'Improved correlation support for matching similar cases',
+        'Clearer synthesis story and fewer context breaks',
       ],
     },
     tags: ['enterprise', 'automotive', 'diagnostics', 'workflow'],
     impactCards: [
-      { label: 'Modes', value: 'Role-based' },
-      { label: 'Search model', value: 'Symptom-first' },
-      { label: 'Correlation', value: 'Merged view' },
-      { label: 'Deliverable', value: 'High-fidelity prototype' },
+      { label: 'Entry', value: 'Symptom-first' },
+      { label: 'Matching', value: 'Correlation view' },
+      { label: 'Proof', value: 'Clickable prototype' },
+      { label: 'Deliverable', value: 'High-fidelity concept' },
     ],
     caseStudy: caseStudyFfp,
     portfolioKit: portfolioKitFfp,
@@ -900,10 +870,10 @@ export const portfolio: PortfolioSource = {
   'emission-compliance': {
     id: '8',
     slug: 'emission-compliance',
-    title: 'Car Emission Compliance Dashboard',
-    subtitle: 'Visual interaction concept solving table clarity and outlier visibility.',
+    title: 'Emission Compliance Dashboard',
+    subtitle: 'Prototype that makes outliers and thresholds readable fast.',
     oneLiner:
-      'Visual redesign stripping table clutter to help experts instantly spot anomalies and threshold breaches.',
+      'Dashboard prototype and interaction concept that reduces table clutter, improves scan speed, and makes thresholds easy to adjust to measurement values.',
     category: 'Enterprise',
     year: '2024',
     client: 'Automotive (Konzern)',
@@ -922,57 +892,57 @@ export const portfolio: PortfolioSource = {
       '/projects/ceasar_gallery_011.png',
     ],
     roles: ['UX Designer', 'UI Designer'],
-    roleLine: 'UX/UI Designer. Visual concept and high-fidelity prototypes.',
+    roleLine: 'UX/UI design. Visual concept and prototype delivery.',
     teamSize: '2 to 3',
     context:
-      'Emission data lived in flat tables. Visual noise made it painfully slow to identify critical threshold drops before mandatory reporting.',
+      'Emission reporting is table-heavy and time-critical. Experts need scan speed and threshold logic they can adjust and trust.',
     problem:
-      'Experts missed outliers buried in text-heavy views. The UI required a consistent way to encode and adjust thresholds reliably.',
+      'Table clutter buried anomalies. Threshold logic was hard to interpret and not adjustable in a consistent way.',
     solution:
-      'Standardized threshold interaction rules and stripped non-essential visual noise, delivering high-fidelity prototypes for rapid implementation.',
+      'Delivered a prototype dashboard plus visual and interaction concept for outliers and adjustable thresholds.',
     outcomes: [
-      'Reduced visual clutter in table-heavy reporting views.',
-      'Made anomalies and threshold breaches visible at a glance.',
-      'Improved confidence through consistent color-encoding rules.',
+      'Reduced visual clutter in dense reporting tables.',
+      'Outliers and breaches surfaced faster.',
+      'Threshold logic became easier to adjust and interpret.',
     ],
     metrics: [],
     impact: [
-      { value: 'Earlier', label: 'Anomaly detection' },
-      { value: 'Clearer', label: 'Table hierarchy' },
-      { value: 'Visible', label: 'Threshold logic' },
+      { value: 'Faster', label: 'Scan speed' },
+      { value: 'Visible', label: 'Outliers' },
+      { value: 'Adjustable', label: 'Thresholds' },
     ],
     highlights: [
-      'List-level color coding flawlessly mapped to chart thresholds.',
-      'Unified threshold settings conceptualization.',
-      'Design strictly focused on high-speed expert interpretation.',
+      'Prototype dashboard for rapid stakeholder alignment.',
+      'Consistent encoding rules for breaches and thresholds.',
+      'Threshold settings concept adaptable to measurement values.',
     ],
     tools: ['Figma'],
     methods: ['Workflow capture', 'Interaction concept', 'High-fidelity prototyping', 'Reviews and handoff'],
     links: [{ label: 'Case study', href: '/projects/emission-compliance' }],
     metaCards: [
       { label: 'Users', value: '10 to 15', icon: 'users' },
-      { label: 'Deliverable', value: 'Visual concept and high-fidelity prototypes', icon: 'deliverable' },
-      { label: 'Testing', value: 'Tested, implemented fast', icon: 'stages' },
-      { label: 'Role', value: 'UX/UI Designer, visual concept focus', icon: 'role' },
+      { label: 'Deliverable', value: 'Prototype and rule concept', icon: 'deliverable' },
+      { label: 'Focus', value: 'Outliers and thresholds', icon: 'stages' },
+      { label: 'Role', value: 'UX/UI Designer', icon: 'role' },
     ],
     deliveryImpact: {
       delivery: [
-        'Explorative visualization drafts',
-        'Threshold and outlier interaction concept',
-        'List color coding plus settings concept',
+        'Dashboard prototype',
+        'Outlier and threshold visual encoding rules',
+        'Threshold interaction concept and settings pattern',
       ],
       impact: [
-        'Faster outlier detection',
-        'Clearer thresholds and actions',
-        'Consistent encoding across views',
+        'Better scan speed in table-heavy reporting',
+        'Earlier visibility of anomalies and breaches',
+        'More confident decisions through adjustable thresholds',
       ],
     },
     tags: ['enterprise', 'automotive', 'emission', 'compliance'],
     impactCards: [
       { label: 'Users', value: '10 to 15' },
       { label: 'Focus', value: 'Outliers and thresholds' },
-      { label: 'Deliverable', value: 'High-fidelity concept' },
-      { label: 'Outcome', value: 'Earlier anomaly detection' },
+      { label: 'Deliverable', value: 'Prototype dashboard' },
+      { label: 'Outcome', value: 'Faster scanning' },
     ],
     caseStudy: caseStudyCaesar,
     portfolioKit: portfolioKitCaesar,
@@ -982,58 +952,61 @@ export const portfolio: PortfolioSource = {
     id: '4',
     slug: 'tracklistify',
     title: 'Tracklistify Studio',
-    subtitle: 'Tooling for DJs to analyze sets and build track wishlists.',
+    subtitle: 'AI-assisted set analysis with review and wishlist flows.',
     oneLiner:
-      'Side project analyzing DJ sets to extract track metadata and support wishlist creation without hoarding audio files.',
+      'Beta side project that analyzes DJ sets, generates a clean review list, and supports a wishlist flow for saved tracks.',
     category: 'Side',
     year: '2026',
     roles: ['Indie developer'],
     roleLine: 'Concept and indie developer.',
     context:
-      'DJs frequently study sets but manual track identification is tedious and entirely unstructured.',
+      'DJs study sets, but manual track identification is slow and unstructured.',
     problem:
-      'Existing solutions blend audio storage with analysis poorly, failing to provide a clean path from ingest to a purchasable wishlist.',
+      'Many tools make iteration messy. Results, rescans, and review are inconsistent, which blocks a clean wishlist flow.',
     solution:
-      'Built a prototype pipeline that ingests audio for analysis, stores pointers instead of heavy files, and immediately pushes tracks to review and wishlist flows.',
+      'Built a beta workflow that uses AI-assisted analysis to generate a review list and drive saving and wishlist actions.',
     outcomes: [
-      'Defined an end-to-end workflow from ingest to wishlist.',
-      'Architected an analysis-first prototype focusing strictly on metadata rescans rather than source storage.',
+      'Defined an end-to-end flow from ingest to review to wishlist.',
+      'Set up a structure for iteration as the detection pipeline improves.',
     ],
     metrics: [],
     highlights: [
-      'Clean architectural separation between results and raw source handling.',
-      'Rescan functionality powered by stored pointers.',
-      'UI highly optimized for fast track review and saving.',
+      'Review flow designed for fast decisions.',
+      'Beta stage with clear feature growth path.',
+      'Workflow optimized for iteration and saved outcomes.',
     ],
     tools: ['Python', 'Next.js'],
     methods: ['Rapid prototyping', 'Flow design', 'Iteration'],
     links: [
-      { label: 'Live demo', href: 'http://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.aZxIdQ.-CQMXtrCxrMpTC0SgrVOn3I5XDk' },
+      {
+        label: 'Live demo',
+        href: 'http://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.aZxIdQ.-CQMXtrCxrMpTC0SgrVOn3I5XDk',
+      },
       { label: 'GitHub', href: 'https://github.com/example/tracklistify' },
     ],
     metaCards: [
-      { label: 'Timeline', value: 'Jan 2026', icon: 'timeline' },
-      { label: 'Deliverable', value: 'Prototype and workflow concept', icon: 'deliverable' },
-      { label: 'Core flow', value: 'Ingest, analyze, rescan, wishlist', icon: 'stages' },
-      { label: 'Role', value: 'Concept and indie developer', icon: 'role' },
+      { label: 'Stage', value: 'Beta', icon: 'timeline' },
+      { label: 'Deliverable', value: 'Workflow and prototype', icon: 'deliverable' },
+      { label: 'Core flow', value: 'Analyze, review, wishlist', icon: 'stages' },
+      { label: 'Role', value: 'Indie developer', icon: 'role' },
     ],
     coverFallback: 'initials',
     deliveryImpact: {
       delivery: [
-        'Ingest and analyze audio, then remove source data',
-        'Store scan results and pointers for rescanning',
-        'Track list, wishlist, and buy intent flow',
+        'AI-assisted set analysis into a review list',
+        'Review and save decisions',
+        'Wishlist flow as a structured output',
       ],
       impact: [
-        'Clean workflow from ingest to wishlist',
-        'No original source storage, analysis-first design',
+        'Faster track identification workflow',
+        'Cleaner output and repeatable iteration',
       ],
     },
     tags: ['side', 'audio', 'dj', 'workflow'],
     impactCards: [
-      { label: 'Timeline', value: 'Jan 2026' },
-      { label: 'Deliverable', value: 'Prototype and workflow concept' },
-      { label: 'Core flow', value: 'Ingest, rescan, wishlist' },
+      { label: 'Stage', value: 'Beta' },
+      { label: 'Deliverable', value: 'Prototype workflow' },
+      { label: 'Core flow', value: 'Analyze, review, wishlist' },
       { label: 'Role', value: 'Indie developer' },
     ],
     caseStudy: caseStudyTracklistify,
@@ -1044,32 +1017,32 @@ export const portfolio: PortfolioSource = {
     id: '5',
     slug: 'fixundfertig',
     title: 'Fix und Fertig',
-    subtitle: 'Invoice and expense automation with OCR and structured extraction.',
+    subtitle: 'Personal invoicing tool with OCR intake for expenses.',
     oneLiner:
-      'Python pipeline utilizing OCR and semantic extraction to turn email attachments into structured API JSON.',
+      'Holistic personal invoicing tool: create and send invoices, plus automated OCR intake and structured expense extraction.',
     category: 'Side',
     year: '2026',
     roles: ['Indie developer'],
     roleLine: 'Indie developer, automation.',
     context:
-      'Invoices and receipts flood inboxes in infinite formats, making manual data entry a guaranteed bottleneck.',
+      'A single tool should cover outgoing invoices and incoming receipts, without manual copying and formatting errors.',
     problem:
-      'Heavy manual correction defeated the purpose of existing OCR tools. We needed a reliable bridge from raw email attachment to structured data.',
+      'Invoice creation and expense intake often live in separate tools. Manual entry and inconsistent formats slow everything down.',
     solution:
-      'Linked n8n email intake to an OCR extraction script, mapping output to JSON, and presenting it in a lightweight NiceGUI surface for rapid review.',
+      'Built a personal end-to-end workflow: create and send invoices, ingest receipts via automation, extract fields via OCR, and review exceptions quickly.',
     outcomes: [
-      'Automated intake and extraction pipeline from raw email to structured data.',
-      'Drastically reduced manual copying and routine formatting errors.',
+      'Unified invoice creation, sending, and expense intake in one workflow.',
+      'Reduced manual copying and improved consistency across documents.',
     ],
     metrics: [],
     impact: [
-      { value: 'Email to JSON', label: 'Automated pipeline' },
-      { value: 'OCR and semantics', label: 'Extraction steps' },
+      { value: 'Invoices', label: 'Create and send' },
+      { value: 'OCR', label: 'Expense intake' },
     ],
     highlights: [
-      'NiceGUI frontend for hyper-fast internal reviews.',
-      'n8n automation handling email and raw attachment logistics.',
-      'Clean JSON payloads delivered straight to application APIs.',
+      'Single workflow for outgoing and incoming documents.',
+      'Automation reduces manual admin overhead.',
+      'Fast review surface for corrections and exceptions.',
     ],
     tools: ['Python', 'NiceGUI', 'n8n', 'OCR pipeline'],
     methods: ['Workflow automation', 'Incremental builds', 'Debug-driven iteration'],
@@ -1078,30 +1051,30 @@ export const portfolio: PortfolioSource = {
       { label: 'GitHub', href: 'https://github.com/example/fixundfertig' },
     ],
     notes:
-      'Pipeline: email attachment intake via n8n. OCR plus semantic extraction to JSON. JSON pushed into the API. Python-only stack with NiceGUI.',
+      'Personal tool: invoice creation and sending plus automated intake for receipts. OCR extraction into structured fields. Fast review UI for exceptions.',
     metaCards: [
-      { label: 'Timeline', value: 'Feb 2026', icon: 'timeline' },
+      { label: 'Type', value: 'Personal tool', icon: 'timeline' },
       { label: 'Stack', value: 'Python, NiceGUI, n8n, OCR', icon: 'stack' },
-      { label: 'Deliverable', value: 'Automated document processing pipeline', icon: 'deliverable' },
-      { label: 'Role', value: 'Indie developer, automation', icon: 'role' },
+      { label: 'Scope', value: 'Invoices and expenses', icon: 'deliverable' },
+      { label: 'Role', value: 'Indie developer', icon: 'role' },
     ],
     deliveryImpact: {
       delivery: [
-        'Python-only stack with NiceGUI',
-        'n8n automation for email and attachments',
-        'OCR and semantic extraction into JSON',
-        'JSON into API plus automated build',
+        'Invoice creation and sending flow',
+        'Automated receipt intake',
+        'OCR extraction into structured fields',
+        'Review UI for exceptions',
       ],
       impact: [
-        'Single pipeline from attachment to structured data',
-        'Less manual entry and fewer formatting errors',
+        'Less manual admin work',
+        'More consistent document handling end to end',
       ],
     },
     tags: ['side', 'automation', 'ops', 'python'],
     impactCards: [
-      { label: 'Timeline', value: 'Feb 2026' },
+      { label: 'Type', value: 'Personal tool' },
       { label: 'Stack', value: 'Python and OCR pipeline' },
-      { label: 'Deliverable', value: 'Email to JSON automation' },
+      { label: 'Deliverable', value: 'Invoices plus OCR intake' },
       { label: 'Role', value: 'Indie developer' },
     ],
     caseStudy: caseStudyFixundfertig,

@@ -1,0 +1,2954 @@
+﻿/*
+BUNDLE GENERATED FROM: src/app/(site)/projects/[slug]/page.tsx
+INCLUDES: @/components/*
+GENERATED AT: 02/24/2026 01:26:39
+*/
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\AutomationProjectContent.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import {
+  FileText,
+  Globe,
+  Clock,
+  Bot,
+  LayoutGrid,
+  Map,
+  Search,
+  Scissors,
+  GitBranch,
+  UsersRound,
+  FileJson,
+  Zap,
+} from 'lucide-react';
+import { VsystemKlevelsSection } from '@/components/automation/VsystemKlevelsSection';
+import { ScopeAndOperationSection } from '@/components/project/ScopeAndOperationSection';
+
+const AUTOMATION_SCOPE = {
+  headerIcon: Bot,
+  title: 'My Scope & Operation',
+  subtitle: 'Process Analyst & Automation Concept Owner',
+  intro:
+    'I led the discovery and automation strategy, acting as the bridge between 40+ subject matter experts and the SAP development team. I deconstructed manual workflows to deliver a flawless technical blueprint.',
+  setup: {
+    title: 'The Setup',
+    description:
+      'Operating in agile sprints, we moved from an initial business pain point to a fully documented, unblocked SAP development handoff in just 3 months.',
+    rows: [
+      { label: 'Roles', value: 'Process, UX, Automation' },
+      { label: 'Cadence', value: '2-Week Sprints' },
+      { label: 'Timeline', value: '3 Months (Idea to PDD)' },
+      { label: 'Team', value: '1 Biz, 1 Consultant, 2 SMEs' },
+      { label: 'Deliverable', value: 'Technical SAP PDD', highlight: true },
+    ],
+  },
+  setupIcon: LayoutGrid,
+  focusGroups: [
+    {
+      label: 'Discovery & UX Research',
+      items: [
+        {
+          title: 'Process Mapping',
+          description:
+            'Mapped the exact manual workflow in FigJam before writing any technical rules.',
+          tags: ['FigJam', 'As-Is Flow'],
+          icon: Map,
+        },
+        {
+          title: 'In-Situ Shadowing',
+          description:
+            'Sat with 2 experts to observe exact clicks, Excel usage, and mechanical friction.',
+          tags: ['Interviews', 'Observation'],
+          icon: Search,
+        },
+        {
+          title: 'Scope Definition',
+          description:
+            'Aggressively cut edge-cases to isolate the most reliable "low-hanging fruit."',
+          tags: ['Scope Trimming', 'Prioritization'],
+          icon: Scissors,
+        },
+      ],
+    },
+    {
+      label: 'Automation Architecture',
+      items: [
+        {
+          title: 'Deterministic Rules',
+          description:
+            'Defined the deterministic logic: if a part has historical K-levels, safely restore it.',
+          tags: ['Bot Logic', 'ID Matching'],
+          icon: GitBranch,
+        },
+        {
+          title: 'Human-in-the-Loop',
+          description:
+            'Established routing for edge cases so the bot hands complex issues back to humans.',
+          tags: ['Exceptions', 'Routing'],
+          icon: UsersRound,
+        },
+        {
+          title: 'Technical Blueprint',
+          description:
+            'Authored the 36-page PDD, aligning the exact scope for SAP backend developers.',
+          tags: ['PDD Specs', 'Handoff'],
+          icon: FileJson,
+        },
+      ],
+    },
+  ],
+};
+import { ResultImpactCard } from '@/components/project/ResultImpactCard';
+
+const AUTOMATION_RESULT_IMPACT = {
+  title: 'The 36-Page PDD',
+  description:
+    'Instead of handing over vague user stories, we delivered a comprehensive 36-page PDD for Use Case 1. It eliminated all guesswork for the IT team, detailing the "As-Is" manual state and the "To-Be" automated logic.',
+  metrics: [
+    {
+      value: '36 Pages',
+      label: 'Technical Spec',
+      description:
+        'A complete architectural blueprint bridging business needs and SAP execution.',
+      icon: FileText,
+    },
+    {
+      value: '100%',
+      label: 'Clicks & Screens',
+      description:
+        'Documented every single click, edge-case, and SAP screenshot required for UC1.',
+      icon: Globe,
+    },
+    {
+      value: '1 Hour',
+      label: 'Dev Handoff',
+      description:
+        'The document was so precise, we aligned and overhanded the entire logic to SAP devs in a single 60-minute appointment.',
+      icon: Clock,
+    },
+    {
+      value: '~7,000h',
+      label: 'Saved Annually',
+      description:
+        'Calculated ROI: 45 experts recovering ~3 hours per week over a 52-week production cycle.',
+      icon: Zap,
+      highlight: true,
+    },
+  ],
+};
+
+export function AutomationProjectContent() {
+  return (
+    <div className="space-y-24">
+      {/* Quote */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150 fill-mode-both">
+          <blockquote className="border-l-4 border-primary bg-primary/5 p-8 italic text-lg text-zinc-200">
+            &ldquo;Operator pushes a part (e.g. new brake component) â†’ K-level
+            drops across the chain. Support uses bot-set IDs to find wrongly
+            reset items and restores them. The bot saves manual checks and
+            reduces the risk of an assembly line stop.&rdquo;
+            <footer className="mt-4 not-italic text-sm text-zinc-500">
+              â€” Project Core Logic
+            </footer>
+          </blockquote>
+        </div>
+
+        {/* V-Systems vs. K-Levels â€” exactly as reference (SAP) */}
+        <VsystemKlevelsSection />
+
+        {/* My Scope & Operation â€” reusable section */}
+        <ScopeAndOperationSection {...AUTOMATION_SCOPE} />
+
+        {/* Result / Impact â€” single card + 4 metrics only */}
+        <section className="mx-auto w-full max-w-5xl py-12">
+          <ResultImpactCard {...AUTOMATION_RESULT_IMPACT} />
+        </section>
+    </div>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\CaesarProjectContent.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import { CircleDot, LayoutGrid } from 'lucide-react';
+import { BrowserMockup } from '@/components/PortfolioKit';
+import type { ResolvedProject } from '@/lib/cms/types';
+
+/** Stats grid for CAESAR hero (used as ProjectCaseStudyHero children). */
+export function CaesarHeroStats() {
+  return (
+    <div className="grid grid-cols-1 gap-4 pt-6 sm:grid-cols-4">
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">Pre-Report</span>
+        <span className="text-xs font-medium text-zinc-400">Anomaly Detection</span>
+      </div>
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">Clear</span>
+        <span className="text-xs font-medium text-zinc-400">Threshold Visibility</span>
+      </div>
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">Bulk</span>
+        <span className="text-xs font-medium text-zinc-400">Lasso Adjustments</span>
+      </div>
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">Higher</span>
+        <span className="text-xs font-medium text-zinc-400">Reporting Quality</span>
+      </div>
+    </div>
+  );
+}
+
+type CaesarProjectContentProps = {
+  project?: ResolvedProject;
+};
+
+export function CaesarProjectContent({ project }: CaesarProjectContentProps) {
+  return (
+    <div className="space-y-24">
+      {/* Quote */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
+          <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
+            &quot;Too many tables created aggressive visual clutter. Experts couldn&apos;t easily spot critical outliers in the test data before pushing reports to compliance, meaning quality suffered. The anomalies were literally buried in flat data.&quot;
+            <footer className="mt-4 flex items-center gap-2 not-italic text-sm font-medium text-zinc-500">
+              <span className="h-px w-4 bg-zinc-600" aria-hidden />
+              The Legacy Pain Point
+            </footer>
+          </blockquote>
+        </div>
+
+        {/* Project Context */}
+        <section className="w-full space-y-8">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-3xl font-semibold tracking-tight text-zinc-100">Project Context</h2>
+            <p className="text-zinc-400">Protecting automotive compliance through data visualization.</p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+            <div className="flex flex-col justify-between rounded-2xl border border-zinc-800 bg-zinc-900/30 p-8 lg:col-span-4">
+              <div>
+                <h3 className="text-xl font-semibold text-zinc-100">The Operation</h3>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+                  Operating as the UX Designer, I led a rapid exploration phase to find the right visual metaphor to replace the legacy tables. The goal was to build an explorative UI that naturally draws the expert&apos;s eye to threshold breaches.
+                </p>
+              </div>
+              <div className="mt-10 flex flex-col gap-3">
+                <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2">
+                  <span className="text-sm text-zinc-500">Client</span>
+                  <span className="text-sm font-medium text-zinc-200">Automotive Konzern</span>
+                </div>
+                <div className="flex items-center justify-between pt-1">
+                  <span className="text-sm text-zinc-500">Output</span>
+                  <span className="text-sm font-medium text-primary">UI/UX Implementation</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 p-6 transition-all hover:border-primary/50 hover:shadow-[0_10px_30px_-15px_rgba(var(--primary),0.2)] lg:col-span-8">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50" aria-hidden />
+              <div className="relative z-10 flex h-full flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-semibold text-zinc-100">Visualizing the Outliers</h3>
+                  <p className="mt-2 max-w-md text-sm text-zinc-400">
+                    By moving away from strict row/column layouts, we introduced list-wise color coding and spatial thresholds, making it impossible for a user to accidentally report a failing test.
+                  </p>
+                </div>
+                <div className="mt-8 flex h-32 w-full items-end gap-2 border-b border-zinc-800 pb-2 pl-2">
+                  <div className="h-[20%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                  <div className="h-[35%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                  <div className="h-[15%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                  <div className="h-[45%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                  <div className="relative h-[95%] w-full rounded-t-sm bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 rounded border border-red-900/50 bg-red-950 px-2 py-0.5 text-[9px] font-bold text-red-400">
+                      BREACH
+                    </div>
+                  </div>
+                  <div className="h-[25%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                  <div className="h-[40%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                  <div className="h-[20%] w-full rounded-t-sm bg-zinc-800 transition-colors group-hover:bg-zinc-700" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Interaction Concepts */}
+        <section className="w-full space-y-8 py-8">
+          <div className="mb-8 flex flex-col gap-2">
+            <h2 className="text-3xl font-semibold tracking-tight text-zinc-100">Interaction Concepts</h2>
+            <p className="text-zinc-400">Advanced controls built for expert-level data manipulation.</p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="group flex flex-col items-start gap-6 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 transition-all hover:border-primary/50 hover:bg-zinc-900/60 sm:flex-row">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 shadow-sm transition-all group-hover:scale-105 group-hover:border-primary/50">
+                <CircleDot className="h-6 w-6 text-primary" strokeWidth={2} />
+              </div>
+              <div className="flex flex-col gap-2 pt-1">
+                <h3 className="text-lg font-semibold text-zinc-100 transition-colors group-hover:text-primary">
+                  Lasso-Selection & Bulk Overrides
+                </h3>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  Experts don&apos;t want to adjust anomalies one by one. I introduced a lasso-selection tool allowing users to drag and select multiple data points at once, instantly applying Global vs. Local threshold overrides in bulk.
+                </p>
+              </div>
+            </div>
+
+            <div className="group flex flex-col items-start gap-6 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 transition-all hover:border-primary/50 hover:bg-zinc-900/60 sm:flex-row">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 shadow-sm transition-all group-hover:scale-105 group-hover:border-primary/50">
+                <LayoutGrid className="h-6 w-6 text-primary" strokeWidth={2} />
+              </div>
+              <div className="flex flex-col gap-2 pt-1">
+                <h3 className="text-lg font-semibold text-zinc-100 transition-colors group-hover:text-primary">
+                  De-cluttering the Hierarchy
+                </h3>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  By removing redundant table borders and introducing strict typographical hierarchy and list-wise color coding, the interface naturally guides the user&apos;s eye to the most critical, actionable data first.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Browser mockup â€” single screenshot */}
+        {project?.galleryUrls?.[0] && (
+          <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+            <BrowserMockup
+              src={project.galleryUrls[0]}
+              alt="CAESAR Report UI"
+              urlBar="https://caesar-report.internal"
+            />
+          </section>
+        )}
+
+    </div>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\CaseStudyFooterCta.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+export function CaseStudyFooterCta() {
+  const year = new Date().getFullYear();
+  return (
+    <section className="py-32 text-center">
+      <h2 className="mb-8 text-5xl font-bold tracking-tighter text-neutral-800 md:text-8xl">
+        Next Gen.
+      </h2>
+      <Button variant="link" className="text-lg text-neutral-400 hover:text-foreground" asChild>
+        <Link href="/projects">
+          Explore other projects
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Link>
+      </Button>
+      <p className="mt-8 text-sm text-neutral-500">
+        Â© {year} Daniel Peters
+      </p>
+    </section>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\CaseStudyTechnicalSpecs.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { getTechnicalSpecs } from '@/content/portfolio';
+import { cn } from '@/lib/utils';
+
+type Props = {
+  slug: string;
+  className?: string;
+};
+
+export function CaseStudyTechnicalSpecs({ slug, className }: Props) {
+  const specs = getTechnicalSpecs(slug);
+  if (specs.length === 0) return null;
+
+  return (
+    <section
+      className={cn(
+        'border-t border-neutral-900 bg-[#0a0a0a] py-20',
+        className
+      )}
+    >
+      <div className="mx-auto max-w-3xl px-6">
+        <h3 className="mb-8 text-sm font-semibold uppercase tracking-widest text-neutral-500">
+          Technical Specifications
+        </h3>
+        <Accordion type="single" collapsible className="w-full space-y-2">
+          {specs.map((item, i) => (
+            <AccordionItem
+              key={item.title}
+              value={`item-${i}`}
+              className="border-none rounded-xl bg-neutral-900/20 px-4"
+            >
+              <AccordionTrigger className="py-5 hover:no-underline">
+                <span className="text-lg font-medium text-neutral-200">{item.title}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pb-6 leading-relaxed text-neutral-400">
+                <p>{item.body}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\CaseStudyTemplate.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import {
+  AlertCircle,
+  GitBranch,
+  Lightbulb,
+  TrendingUp,
+  BookOpen,
+  type LucideIcon,
+} from 'lucide-react';
+import type { CaseStudySections } from '@/content/portfolio.types';
+import { cn } from '@/lib/utils';
+
+type Props = { sections: CaseStudySections };
+
+const sectionOrder: (keyof CaseStudySections)[] = [
+  'realProblem',
+  'approach',
+  'solutionConcept',
+  'outcome',
+  'whatILearned',
+  // insightAuthor excluded â€” used for quote attribution, not as a section
+];
+
+const sectionTitles: Record<keyof CaseStudySections, string> = {
+  summary: 'Summary',
+  contextWhyMattered: 'Context and why it mattered',
+  realProblem: 'The real problem',
+  constraints: 'Constraints and complexity',
+  myRole: 'My role and collaboration',
+  approach: 'Approach and process',
+  solutionConcept: 'Solution and interaction concept',
+  outcome: 'Outcome and impact',
+  whatILearned: 'What I learned',
+  whatToShowVisually: 'What to show visually',
+  insightAuthor: 'Quote by',
+};
+
+const sectionIcons: Record<keyof CaseStudySections, LucideIcon> = {
+  summary: BookOpen,
+  contextWhyMattered: BookOpen,
+  realProblem: AlertCircle,
+  constraints: AlertCircle,
+  myRole: GitBranch,
+  approach: GitBranch,
+  solutionConcept: Lightbulb,
+  outcome: TrendingUp,
+  whatILearned: BookOpen,
+  whatToShowVisually: Lightbulb,
+  insightAuthor: BookOpen,
+};
+
+const sectionAccent: Record<keyof CaseStudySections, string> = {
+  summary: 'border-l-primary',
+  contextWhyMattered: 'border-l-primary',
+  realProblem: 'border-l-destructive/70',
+  constraints: 'border-l-destructive/70',
+  myRole: 'border-l-primary',
+  approach: 'border-l-primary',
+  solutionConcept: 'border-l-emerald-500/80',
+  outcome: 'border-l-emerald-500/80',
+  whatILearned: 'border-l-amber-500/80',
+  whatToShowVisually: 'border-l-emerald-500/80',
+  insightAuthor: 'border-l-muted-foreground/50',
+};
+
+function Section({
+  title,
+  content,
+  icon: Icon,
+  accent,
+}: {
+  title: string;
+  content: string;
+  icon: LucideIcon;
+  accent: string;
+}) {
+  if (!content?.trim()) return null;
+  const paragraphs = content.split(/\n\n+/).filter(Boolean);
+  return (
+    <article
+      className={cn(
+        'rounded-xl border border-border bg-card p-6 pl-6 shadow-sm',
+        'border-l-4',
+        accent
+      )}
+    >
+      <div className="mb-4 flex items-center gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+          <Icon className="h-5 w-5" aria-hidden />
+        </span>
+        <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+      </div>
+      <div className="space-y-3 text-muted-foreground">
+        {paragraphs.length > 1 ? (
+          paragraphs.map((p, i) => (
+            <p key={i} className="leading-relaxed">
+              {p}
+            </p>
+          ))
+        ) : (
+          <p className="leading-relaxed">{content}</p>
+        )}
+      </div>
+    </article>
+  );
+}
+
+export function CaseStudyTemplate({ sections }: Props) {
+  return (
+    <section className="space-y-8" aria-label="Case study">
+      {sectionOrder.map((key) => {
+        const content = sections[key];
+        if (typeof content !== 'string' || !content.trim()) return null;
+        return (
+          <Section
+            key={key}
+            title={sectionTitles[key]}
+            content={content}
+            icon={sectionIcons[key]}
+            accent={sectionAccent[key]}
+          />
+        );
+      })}
+    </section>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\DashboardCV.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React, { useMemo, useState } from 'react';
+import {
+  Box,
+  FileText,
+  FolderKanban,
+  Github,
+  LayoutDashboard,
+  Mail,
+  Menu,
+  Search,
+} from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+
+import { Input } from '@/components/ui/input';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+
+import { contact, identityName, identityRole } from '@/content/home';
+import { getAllProjects } from '@/content/portfolio';
+import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
+
+import { Breadcrumbs, type BreadcrumbItem } from '@/components/Breadcrumbs';
+import type { LucideIcon } from 'lucide-react';
+
+const MotionLink = motion(
+  Link as React.ComponentType<{ href: string; className?: string; children?: React.ReactNode }>
+);
+
+const navItems = [
+  { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { label: 'CV', href: '/cv', icon: FileText },
+  { label: 'Projects', href: '/projects', icon: FolderKanban },
+  { label: 'Contact', href: '/contact', icon: Mail },
+];
+
+export type DashboardCVProps = {
+  children: React.ReactNode;
+  searchQuery?: string;
+  onSearchChange?: (value: string) => void;
+  navProjects?: NavProjectWithImage[];
+  breadcrumbs?: BreadcrumbItem[];
+  pageTitle?: string;
+  variant?: 'default' | 'landing' | 'project';
+  rightRail?: React.ReactNode;
+  headerRight?: React.ReactNode;
+  showSearch?: boolean;
+};
+
+function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavProjectWithImage[] }) {
+  const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
+
+  const navProjects: NavProjectWithImage[] = useMemo(() => {
+    if (navProjectsProp?.length) return navProjectsProp;
+    return getAllProjects().map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      moodImageUrl: p.moodImageUrl ?? null,
+      category: p.category,
+    }));
+  }, [navProjectsProp]);
+
+  const { enterprise, side } = useMemo(() => {
+    const enterprise = navProjects.filter((p) => p.category === 'Enterprise');
+    const side = navProjects.filter((p) => p.category === 'Side');
+    return { enterprise, side };
+  }, [navProjects]);
+
+  const EASE = [0.16, 1, 0.3, 1] as const;
+
+  const vWrap = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: reduceMotion
+        ? { duration: 0 }
+        : { duration: 0.25, when: 'beforeChildren', staggerChildren: 0.05, ease: EASE },
+    },
+  };
+
+  const vItem = {
+    hidden: { opacity: 0, x: -10 },
+    show: reduceMotion
+      ? { opacity: 1, x: 0, transition: { duration: 0 } }
+      : { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
+  };
+
+  const rowBase = 'relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors';
+
+  function NavRow({
+    label,
+    href,
+    icon: Icon,
+    isActive,
+    leading,
+  }: {
+    label: string;
+    href: string;
+    icon: LucideIcon;
+    isActive: boolean;
+    leading?: React.ReactNode;
+  }) {
+    return (
+      <MotionLink
+        href={href}
+        className={cn(
+          rowBase,
+          isActive
+            ? 'bg-accent text-accent-foreground'
+            : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+        )}
+        aria-current={isActive ? 'page' : undefined}
+        variants={vItem}
+        whileHover={reduceMotion ? undefined : { x: 2 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+      >
+        <AnimatePresence>
+          {isActive && (
+            <motion.span
+              layoutId="sidebar-active-rail"
+              className="absolute left-0 top-1.5 h-[calc(100%-12px)] w-1 rounded-full bg-primary"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE }}
+            />
+          )}
+        </AnimatePresence>
+
+        {leading ? (
+          leading
+        ) : (
+          <motion.span
+            className="grid h-6 w-6 place-items-center"
+            animate={isActive && !reduceMotion ? { scale: 1.05 } : { scale: 1 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE }}
+          >
+            <Icon className="h-4 w-4 shrink-0" aria-hidden />
+          </motion.span>
+        )}
+
+        <span className="truncate">{label}</span>
+      </MotionLink>
+    );
+  }
+
+  function ProjectLeading({ moodImageUrl }: { moodImageUrl: string | null }) {
+    if (!moodImageUrl) {
+      return (
+        <motion.span className="grid h-6 w-6 place-items-center" whileHover={reduceMotion ? undefined : { rotate: -3 }}>
+          <Box className="h-4 w-4 shrink-0" aria-hidden />
+        </motion.span>
+      );
+    }
+
+    return (
+      <motion.div
+        className="relative h-6 w-6 shrink-0 overflow-hidden rounded border border-border bg-muted"
+        whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+        transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE }}
+      >
+        <Image src={moodImageUrl} alt="" fill className="object-cover" sizes="24px" />
+      </motion.div>
+    );
+  }
+
+  function ProjectSection({ title, items }: { title: string; items: NavProjectWithImage[] }) {
+    if (!items.length) return null;
+
+    return (
+      <motion.div variants={vItem} className="mt-4 border-t border-border pt-3">
+        <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{title}</p>
+        <div className="space-y-1">
+          {items.map((project) => {
+            const href = `/projects/${project.slug}`;
+            const isActive = pathname === href;
+            return (
+              <NavRow
+                key={project.slug}
+                label={project.title}
+                href={href}
+                icon={Box}
+                isActive={isActive}
+                leading={<ProjectLeading moodImageUrl={project.moodImageUrl ?? null} />}
+              />
+            );
+          })}
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div className="flex h-full flex-col" variants={vWrap} initial="hidden" animate="show" key={pathname}>
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-40"
+        style={{
+          backgroundImage:
+            'radial-gradient(600px 350px at 20% 10%, rgba(132, 204, 22, 0.18), transparent 60%), radial-gradient(700px 500px at 70% 70%, rgba(132, 204, 22, 0.1), transparent 60%)',
+          backgroundSize: '200% 200%',
+          backgroundPosition: '50% 50%',
+        }}
+      />
+
+      <motion.div variants={vItem} className="border-b border-border pb-5">
+        <div className="flex items-center gap-3">
+          <motion.div
+            className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-border bg-muted"
+            whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE }}
+          >
+            <Image src={contact.profileImage} alt="" fill className="object-cover" sizes="40px" />
+          </motion.div>
+          <div>
+            <p className="font-semibold text-foreground">{identityName}</p>
+            <p className="text-xs text-muted-foreground">{identityRole}</p>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.nav variants={vItem} className="mt-5 space-y-1" aria-label="Sidebar navigation">
+        {navItems.map(({ label, href, icon }) => {
+          const isActive = pathname === href || (href !== '/' && pathname?.startsWith(href));
+          return <NavRow key={label} label={label} href={href} icon={icon} isActive={isActive} />;
+        })}
+
+        <ProjectSection title="Enterprise" items={enterprise} />
+        <ProjectSection title="Side projects" items={side} />
+      </motion.nav>
+
+      <motion.div variants={vItem} className="mt-auto border-t border-border pt-5 text-sm">
+        <Link
+          href="https://github.com"
+          target="_blank"
+          rel="noreferrer"
+          className="mb-2 flex items-center gap-2 text-muted-foreground hover:text-foreground"
+        >
+          <Github className="h-4 w-4" aria-hidden />
+          GitHub
+        </Link>
+        <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-foreground">
+          <Mail className="h-4 w-4" aria-hidden />
+          {contact.email}
+        </a>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const defaultBreadcrumbs: BreadcrumbItem[] = [{ label: 'Daniel Peters', href: '/' }, { label: 'Overview' }];
+
+function DashboardCVImpl({
+  children,
+  searchQuery = '',
+  onSearchChange,
+  navProjects,
+  breadcrumbs = defaultBreadcrumbs,
+  pageTitle = 'Dashboard',
+  variant = 'default',
+  rightRail,
+  headerRight,
+  showSearch = true,
+}: DashboardCVProps) {
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const isLanding = variant === 'landing';
+  const isProject = variant === 'project';
+  const renderSearch = Boolean(onSearchChange) && showSearch;
+
+  return (
+    <div className="min-h-screen text-foreground">
+      <div className="container-wrapper section-soft flex flex-1 flex-col pb-6">
+        <div className="theme-container container flex flex-1 scroll-mt-20 flex-col">
+          <div className="flex flex-col overflow-hidden rounded-lg border border-white/10 bg-background/40 bg-clip-padding backdrop-blur-2xl md:flex-1 xl:rounded-xl">
+            <div className="mx-auto grid min-h-svh w-full max-w-[1400px] gap-0 md:grid-cols-[16rem_1fr]">
+              <motion.aside
+                className="relative hidden min-h-[calc(100vh-2rem)] flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground md:flex"
+                aria-label="Main navigation"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <SidebarContent navProjects={navProjects} />
+              </motion.aside>
+
+              <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+                <SheetTrigger
+                  className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-foreground md:hidden"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-5 w-5" />
+                </SheetTrigger>
+                <SheetContent side="left" className="relative w-64 border-border bg-background p-5">
+                  <div className="flex min-h-full flex-col pt-8">
+                    <SidebarContent navProjects={navProjects} />
+                  </div>
+                </SheetContent>
+              </Sheet>
+
+              <main className="flex min-w-0 flex-1 flex-col">
+                <section
+                  className={cn('min-w-0 flex-1 space-y-6 p-4 md:p-6', isLanding ? 'pt-6 md:pt-8' : 'pt-14 md:pt-6')}
+                >
+                  {!isLanding && (
+                    <header
+                      className={cn(
+                        'flex flex-col gap-4 rounded-xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between',
+                        isProject && 'sm:flex-row sm:items-center'
+                      )}
+                      style={{ backgroundColor: 'rgba(21, 24, 30, 0)', borderColor: 'rgba(40, 44, 51, 0)' }}
+                    >
+                      <div>
+                        <Breadcrumbs items={breadcrumbs} />
+                        {!isProject && (
+                          <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">{pageTitle}</h1>
+                        )}
+                      </div>
+
+                      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+                        {renderSearch && (
+                          <div className="relative w-full sm:w-64">
+                            <Search
+                              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                              aria-hidden
+                            />
+                            <Input
+                              type="search"
+                              placeholder="Search projects..."
+                              value={searchQuery}
+                              onChange={(e) => onSearchChange?.(e.target.value)}
+                              className="pl-9"
+                              aria-label="Search projects"
+                            />
+                          </div>
+                        )}
+                        {headerRight}
+                      </div>
+                    </header>
+                  )}
+
+                  <div className={cn('min-w-0', rightRail && 'grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]')} >
+                    <div className="min-w-0">{children}</div>
+                    {rightRail ? <aside className="min-w-0 space-y-4">{rightRail}</aside> : null}
+                  </div>
+                </section>
+              </main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const DashboardCV = DashboardCVImpl;
+export default DashboardCVImpl;
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\FfpProjectContent.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Link from 'next/link';
+import { ChevronDown, LayoutGrid, Search, LayoutDashboard, ArrowRight } from 'lucide-react';
+import { BrowserMockup } from '@/components/PortfolioKit';
+import { SolutionConceptCards } from '@/components/project/SolutionConceptCards';
+import { MethodologyTimeline } from '@/components/project/MethodologyTimeline';
+import type { ResolvedProject } from '@/lib/cms/types';
+
+const FFP_SOLUTION_CONCEPTS = [
+  {
+    icon: ChevronDown,
+    title: 'The GitHub-Style Merge',
+    description:
+      "Merging duplicate cases was previously the biggest bottleneck. By modeling the dashboard's merge UI after GitHub (a paradigm these engineers already deeply understood), we turned a confusing chore into a confident, lightning-fast workflow.",
+  },
+  {
+    icon: LayoutGrid,
+    title: 'Progressive Disclosure',
+    description:
+      'Users were drowning in raw data because they were shown everything at once. We designed an adaptive UI: clean, guided entry points to onboard beginners, with high-density data tables just one click away for the power users.',
+  },
+  {
+    icon: Search,
+    title: 'Symptom-First Architecture',
+    description:
+      'We abandoned the legacy "Database-First" layout. Engineers don\'t search for a part number; they search for an "Engine Whine." By realigning the taxonomy to the actual human symptom, triage time plummeted.',
+  },
+];
+
+const FFP_METHODOLOGY_STEPS = [
+  {
+    number: '01',
+    title: 'Context Shadowing',
+    description:
+      'Observed experts in-situ to understand how they work with returns, diagnosis data, and existing fingerprints.',
+  },
+  {
+    number: '02',
+    title: 'Role Alignment',
+    description:
+      'Aligned tasks with a new role model. Identified exactly who assesses incoming cases, who merges them, and what info they need at each stage.',
+  },
+  {
+    number: '03',
+    title: 'Iterative Screen Design',
+    description:
+      'Built Figma prototypes iteratively while development ran in parallel. The prototype became the living concept document.',
+  },
+  {
+    number: '04',
+    title: 'Live Prototype Handoff',
+    description:
+      'Delivered a comprehensive navigation conceptâ€”from tagging to diagnosis to reportingâ€”packaged perfectly for the dev team.',
+    highlight: true,
+  },
+];
+
+/** Stats grid for FFP hero (used as ProjectCaseStudyHero children). */
+export function FfpHeroStats() {
+  return (
+    <div className="grid grid-cols-1 gap-4 pt-6 sm:grid-cols-3">
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">1:1</span>
+        <span className="text-xs font-medium text-zinc-400">Correlation Latency</span>
+      </div>
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">Eliminated</span>
+        <span className="text-xs font-medium text-zinc-400">Merge Bottlenecks</span>
+      </div>
+      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+        <span className="text-2xl font-mono font-bold text-primary">Adaptive</span>
+        <span className="text-xs font-medium text-zinc-400">Beginner to Expert UI</span>
+      </div>
+    </div>
+  );
+}
+
+type FfpProjectContentProps = { project?: ResolvedProject | null };
+
+export function FfpProjectContent({ project }: FfpProjectContentProps) {
+  return (
+    <div className="space-y-24">
+      {/* Quote */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
+          <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
+            &quot;Finding similarities in massive tables was a nightmare. The UI
+            never surfaced the right context, creating a massive bottleneck.
+            When we showed them the new GitHub-style merge flow, it clicked
+            instantly. It finally fit their mental model.&quot;
+            <footer className="mt-4 flex items-center gap-2 text-sm font-medium not-italic text-zinc-500">
+              <span className="h-px w-4 bg-zinc-600" />
+              The Breakthrough Moment
+            </footer>
+          </blockquote>
+        </div>
+
+        {/* Designing the Solution â€” process chart (icon cards) */}
+        <SolutionConceptCards
+          title="Designing the Solution"
+          subtitle="Untangling data silos with progressive disclosure and familiar mental models."
+          items={FFP_SOLUTION_CONCEPTS}
+        />
+
+        {/* Browser mockup â€” single screenshot */}
+        <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+          <BrowserMockup
+            src={project?.galleryUrls?.[0] ?? '/projects/ffp_gallery_01.png'}
+            alt="FFP Dashboard"
+            urlBar="https://ffp-dashboard.internal"
+          />
+        </section>
+
+        {/* UX Methodology â€” vertical timeline 01â€“04 */}
+        <MethodologyTimeline
+          title="UX Methodology"
+          steps={FFP_METHODOLOGY_STEPS}
+        />
+
+        {/* Experience the Dashboard CTA */}
+        <section className="space-y-12 py-12">
+          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-zinc-900/50 p-1 shadow-[0_0_40px_-15px_rgba(var(--primary),0.2)]">
+            <div className="relative flex flex-col items-center rounded-[22px] border border-zinc-800/80 bg-zinc-950 p-10 text-center sm:p-16">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 shadow-inner">
+                <LayoutDashboard
+                  className="h-10 w-10 text-primary"
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
+              </div>
+              <h3 className="mb-4 text-3xl font-bold tracking-tight text-zinc-100">
+                Experience the Dashboard
+              </h3>
+              <p className="mb-8 max-w-lg leading-relaxed text-zinc-400">
+                Words only go so far. Explore the interactive prototype to see
+                the symptom-first navigation and GitHub-style merge flow in
+                action.
+              </p>
+              <Link
+                href="/prototypes/ffp/fingerprints"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:-translate-y-1 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                Open Live Prototype
+                <ArrowRight className="h-5 w-5" strokeWidth={2} />
+              </Link>
+            </div>
+          </div>
+
+        </section>
+    </div>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\kovon\KovonWorkingCircle.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import { User, FileCheck, Code } from 'lucide-react';
+
+const NODES = [
+  {
+    id: 'design',
+    icon: User,
+    label: 'Design',
+    sub: '2 Designers',
+    tooltip: {
+      title: 'Design Focus',
+      items: ['Figma & Prototypes', 'Monthly User Testings', 'Angular Components'],
+    },
+  },
+  {
+    id: 'requirements',
+    icon: FileCheck,
+    label: 'Requirements',
+    sub: 'Req Mgr, PO',
+    tooltip: {
+      title: 'Requirements Focus',
+      items: ['Dailys, Pitches & Trainings', 'Powerpoint Presentations', 'Standardized ARIS Processes'],
+    },
+  },
+  {
+    id: 'development',
+    icon: Code,
+    label: 'Development',
+    sub: 'Tech Lead, Devs',
+    tooltip: {
+      title: 'Development Focus',
+      items: ['Security Audits', 'Iterative Development', 'Scrum Methodology', 'Capacity Planning'],
+    },
+  },
+] as const;
+
+export function KovonWorkingCircle() {
+  return (
+    <section className="space-y-6">
+      <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+        Working Circle
+      </h2>
+
+      <div className="relative mt-10 flex flex-col items-center rounded-xl border border-border bg-muted/10 p-8 sm:p-12">
+        {/* Top row: three nodes with connecting line */}
+        <div className="relative flex w-full max-w-3xl justify-between">
+          <div
+            className="absolute left-[15%] right-[15%] top-[30px] -z-10 h-[2px] bg-amber-200/70"
+            aria-hidden
+          />
+          <div
+            className="absolute left-1/2 top-[30px] -z-10 h-[55px] w-[2px] -translate-x-1/2 bg-amber-200/70"
+            aria-hidden
+          />
+
+          {NODES.map((node) => {
+            const Icon = node.icon;
+            return (
+              <div
+                key={node.id}
+                className="group relative z-20 flex w-[110px] cursor-help flex-col items-center gap-2 rounded-xl border border-border bg-card p-3 shadow-sm transition-colors hover:z-[100] hover:border-primary/50 sm:w-[140px]"
+              >
+                {/* Tooltip */}
+                <div
+                  className="invisible absolute left-1/2 top-full z-[100] mt-2 w-52 -translate-x-1/2 opacity-0 transition-all duration-300 group-hover:visible group-hover:mt-3 group-hover:opacity-100"
+                  role="tooltip"
+                >
+                  <div className="rounded-lg border border-border bg-popover/95 p-3 text-popover-foreground shadow-xl backdrop-blur-sm">
+                    <h4 className="mb-2 border-b border-border/50 pb-1 text-xs font-semibold text-foreground">
+                      {node.tooltip.title}
+                    </h4>
+                    <ul className="space-y-1.5 text-[11px] leading-tight text-muted-foreground">
+                      {node.tooltip.items.map((item) => (
+                        <li key={item} className="flex items-start gap-1.5">
+                          <span className="text-primary">â€º</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <Icon
+                  className="h-5 w-5 text-primary transition-transform group-hover:scale-110"
+                  strokeWidth={2}
+                  aria-hidden
+                />
+                <span className="text-xs font-semibold text-foreground">
+                  {node.label}
+                </span>
+                <span className="text-center text-[10px] leading-tight text-muted-foreground">
+                  {node.sub}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Center: Daniel Peters â€” Alignment */}
+        <div className="relative z-10 mt-12 flex h-36 w-36 flex-col items-center justify-center rounded-full border-2 border-primary bg-background p-4 text-center shadow-[0_0_30px_-10px_rgba(var(--primary),0.2)]">
+          <div
+            className="absolute left-1/2 top-full -z-10 h-[50px] w-[2px] -translate-x-1/2 bg-amber-200/70"
+            aria-hidden
+          />
+          <span className="text-sm font-bold text-foreground">Daniel Peters</span>
+          <span className="mt-1 text-[10px] font-medium uppercase tracking-widest text-primary">
+            Alignment
+          </span>
+        </div>
+
+        {/* Bottom labels */}
+        <div className="mt-12 flex w-full max-w-xl justify-between border-t border-border pt-6 text-center">
+          <span className="flex-1 text-sm font-medium text-foreground">
+            Strategy
+          </span>
+          <span className="flex-1 text-sm font-medium text-foreground">
+            Organisational Task
+          </span>
+          <span className="flex-1 text-sm font-medium text-foreground">
+            Delivery
+          </span>
+        </div>
+
+        <p className="mt-8 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+          I connected delivery, product direction, and stakeholder decisions,
+          keeping execution unblocked through tight Tech Lead alignment.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\kovon\RoleAndSetupSection.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import {
+  LayoutGrid,
+  Lightbulb,
+  CalendarRange,
+  ListChecks,
+  BarChart3,
+  ShieldCheck,
+  Handshake,
+  type LucideIcon,
+} from 'lucide-react';
+
+const SETUP_ROWS: ReadonlyArray<{
+  label: string;
+  value: string;
+  highlight?: boolean;
+}> = [
+  { label: 'Role', value: 'PO & Scrum Master' },
+  { label: 'Cadence', value: '2-Week Sprints' },
+  { label: 'Dailies', value: '2x per week' },
+  { label: 'Team', value: '3â€“5 Devs + Req Mgr' },
+  { label: 'Key Sync', value: 'Tech Lead Alignment', highlight: true },
+];
+
+const PRODUCT_OWNERSHIP: Array<{
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  icon: LucideIcon;
+}> = [
+  {
+    id: 'strategic',
+    title: 'Strategic Analysis',
+    description:
+      'Collaborative SWOT analysis to identify opportunities and facilitate decisions.',
+    tags: ['SWOT', 'Market Fit'],
+    icon: Lightbulb,
+  },
+  {
+    id: 'milestones',
+    title: 'Milestones',
+    description:
+      'Translating strategy into pilot phases, rollout steps, and roadmaps.',
+    tags: ['Forecasting', 'Roadmap'],
+    icon: CalendarRange,
+  },
+  {
+    id: 'scope',
+    title: 'Scope Definition',
+    description:
+      'Slicing complex compliance constraints into clear acceptance criteria.',
+    tags: ['Slicing', 'Criteria'],
+    icon: ListChecks,
+  },
+];
+
+const SCRUM_MASTERY: Array<{
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  icon: LucideIcon;
+}> = [
+  {
+    id: 'capacity',
+    title: 'Capacity & Flow',
+    description:
+      'Jira workflow optimization and capacity planning to match team velocity.',
+    tags: ['Jira', 'Velocity'],
+    icon: BarChart3,
+  },
+  {
+    id: 'risk',
+    title: 'Risk Management',
+    description:
+      'Defining validation goals early to minimize risks and ensure audit trails.',
+    tags: ['Mitigation', 'Audit'],
+    icon: ShieldCheck,
+  },
+  {
+    id: 'stakeholder',
+    title: 'Stakeholder Sync',
+    description:
+      'Continuous alignment with the Tech Lead to unblock paths and expectations.',
+    tags: ['Sync', 'Unblocking'],
+    icon: Handshake,
+  },
+];
+
+function FocusCard({
+  title,
+  description,
+  tags,
+  icon: Icon,
+}: {
+  title: string;
+  description: string;
+  tags: string[];
+  icon: LucideIcon;
+}) {
+  return (
+    <div className="group relative flex cursor-help flex-col items-start gap-3 transition-all hover:z-[100]">
+      <div
+        className="invisible absolute bottom-full left-0 z-50 mb-2 w-56 opacity-0 transition-all duration-300 group-hover:visible group-hover:mb-4 group-hover:opacity-100"
+        role="tooltip"
+      >
+        <div className="rounded-xl border border-border bg-popover/95 p-4 shadow-xl backdrop-blur-md">
+          <p className="mb-3 text-xs leading-relaxed text-popover-foreground">
+            {description}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md bg-muted px-2 py-1 text-[10px] text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <Icon
+        className="h-12 w-12 text-primary transition-transform duration-300 group-hover:-translate-y-1"
+        strokeWidth={1.5}
+        aria-hidden
+      />
+      <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+    </div>
+  );
+}
+
+export function RoleAndSetupSection() {
+  return (
+    <section className="w-full max-w-6xl space-y-8">
+      <div className="flex flex-col gap-2">
+        <h2 className="text-3xl font-semibold tracking-tight text-foreground">
+          Role & Setup
+        </h2>
+        <p className="text-muted-foreground">
+          Bridging product strategy and agile delivery.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* Left: The Setup (Spec Sheet) */}
+        <div className="flex flex-col justify-between rounded-2xl border border-border bg-muted/10 p-8 lg:col-span-4">
+          <div>
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <LayoutGrid className="h-6 w-6" aria-hidden />
+            </div>
+            <h3 className="text-xl font-semibold text-foreground">
+              The Setup
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              I built the delivery setup and led product direction, balancing
+              stakeholder inputs while keeping execution unblocked in a dual
+              PO/Scrum Master role.
+            </p>
+          </div>
+
+          <div className="mt-10 flex flex-col gap-3">
+            {SETUP_ROWS.map((row, i) => (
+              <div
+                key={row.label}
+                className={`flex items-center justify-between pb-2 ${
+                  i < SETUP_ROWS.length - 1
+                    ? 'border-b border-border/50'
+                    : 'pt-1'
+                }`}
+              >
+                <span className="text-sm text-muted-foreground">
+                  {row.label}
+                </span>
+                <span
+                  className={`text-sm font-medium ${
+                    row.highlight ? 'text-primary' : 'text-foreground'
+                  }`}
+                >
+                  {row.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: Focus Areas â€” Product Ownership + Scrum Mastery */}
+        <div className="flex flex-col justify-center gap-10 rounded-2xl border border-border bg-muted/10 p-8 lg:col-span-8">
+          <div className="space-y-6">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/70">
+              Product Ownership
+            </h4>
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
+              {PRODUCT_OWNERSHIP.map((item) => (
+                <FocusCard
+                  key={item.id}
+                  title={item.title}
+                  description={item.description}
+                  tags={item.tags}
+                  icon={item.icon}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px w-full bg-border/50" aria-hidden />
+
+          <div className="space-y-6">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/70">
+              Scrum Mastery
+            </h4>
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
+              {SCRUM_MASTERY.map((item) => (
+                <FocusCard
+                  key={item.id}
+                  title={item.title}
+                  description={item.description}
+                  tags={item.tags}
+                  icon={item.icon}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\PortfolioKit.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+/**
+ * Universal Portfolio Kit â€” reusable components for any project type
+ * (Fintech, Healthcare, E-commerce, Automotive, etc.).
+ *
+ * Use design tokens (primary, border, muted-foreground) so layouts stay
+ * consistent with the rest of the app. All components accept className.
+ *
+ * Example:
+ *   <ProjectHero title="..." subtitle="..." role="..." year="..." tags={[]} link="#" />
+ *   <BrowserMockup src="/screenshot.jpg" alt="Dashboard" />
+ *   <BrowserMockup src="/hero.jpg" screens={['/s1.jpg','/s2.jpg']} alt="App" />
+ *   <MetricCard value="45" label="Faster Triage" suffix="%" trend="+12% YoY" />
+ *   <InsightCard quote="..." author="Lead Engineer" type="problem" />
+ *   <ProcessSteps steps={[{ number: "01", title: "...", desc: "..." }]} />
+ *   <FeatureItem icon={Layout} title="React Frontend" desc="Modular architecture" />
+ */
+
+import React from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  MessageSquareQuote,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { StaggerContainer, StaggerItem } from '@/components/animations';
+import type { CaseStudySections, PortfolioKitData, Project } from '@/content/portfolio.types';
+
+const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+// --- 1. HERO HEADER: Works for any project title ---
+
+export type ProjectHeroProps = {
+  title: string;
+  subtitle: string;
+  role: string;
+  year: string;
+  tags: string[];
+  link?: string;
+  className?: string;
+};
+
+export function ProjectHero({
+  title,
+  subtitle,
+  role,
+  year,
+  tags,
+  link,
+  className,
+}: ProjectHeroProps) {
+  return (
+    <div className={cn('space-y-6 border-b border-border py-10', className)}>
+      <div className="mb-4 flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <Badge
+            key={tag}
+            variant="secondary"
+            className="border-border bg-muted/50 font-mono text-xs uppercase tracking-widest text-muted-foreground"
+          >
+            {tag}
+          </Badge>
+        ))}
+        <Badge
+          variant="outline"
+          className="border-border font-mono text-xs text-muted-foreground"
+        >
+          {year}
+        </Badge>
+      </div>
+
+      <h1 className="text-5xl font-bold tracking-tight text-foreground md:text-7xl">
+        {title}
+      </h1>
+      <p className="max-w-2xl text-xl leading-relaxed text-muted-foreground">
+        {subtitle}
+      </p>
+
+      <div className="flex items-center gap-8 pt-4">
+        <div>
+          <div className="mb-1 text-xs font-semibold uppercase text-muted-foreground">
+            Role
+          </div>
+          <div className="font-medium text-foreground">{role}</div>
+        </div>
+        {link && (
+          <a
+            href={link}
+            className="flex items-center gap-2 font-medium text-primary transition-colors hover:text-primary/90"
+          >
+            View Live <ArrowRight className="h-4 w-4" />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// --- 2. BROWSER FRAME: Makes any screenshot look professional ---
+
+export type BrowserMockupProps = {
+  src: string;
+  alt?: string;
+  /** Optional URL bar text; defaults to derived from alt */
+  urlBar?: string;
+  /** Kept for API compatibility. This component intentionally uses <img> to allow tall scrollable screenshots. */
+  useNextImage?: boolean;
+  /** If provided, show muted looping video instead of static image (e.g. Loom/interaction demo) */
+  videoSrc?: string;
+  /** If provided, embed live demo in iframe (e.g. /prototypes/ffp) â€” takes precedence over image/video */
+  iframeSrc?: string;
+  /** Screen design images to slide through like an app (hero not included) */
+  screens?: string[];
+  /** Auto-advance screens every N ms; 0 = manual only */
+  autoAdvanceMs?: number;
+  className?: string;
+};
+
+const carouselVariants: Variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 80 : -80,
+    opacity: 0,
+    scale: 0.98,
+    filter: 'blur(4px)',
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.4, ease: EASE },
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -80 : 80,
+    opacity: 0,
+    scale: 0.98,
+    filter: 'blur(4px)',
+    transition: { duration: 0.3, ease: EASE },
+  }),
+};
+
+export function BrowserMockup({
+  src,
+  alt = 'App Screenshot',
+  urlBar,
+  useNextImage = true,
+  videoSrc,
+  iframeSrc,
+  screens,
+  autoAdvanceMs = 5000,
+  className,
+}: BrowserMockupProps) {
+  // keep prop (avoid eslint unused warning) while intentionally using <img> for scrollable screenshots
+  void useNextImage;
+
+  const displayUrl = urlBar ?? `https://${alt.toLowerCase().replace(/\s/g, '-')}.com`;
+
+  const allScreens = React.useMemo(() => {
+    if (!screens?.length) return null;
+    return screens;
+  }, [screens]);
+
+  const [index, setIndex] = React.useState(0);
+  const [direction, setDirection] = React.useState(0);
+  const total = allScreens?.length ?? 0;
+
+  React.useEffect(() => {
+    if (total <= 1 || !autoAdvanceMs) return;
+    const t = setInterval(() => {
+      setDirection(1);
+      setIndex((i) => (i + 1) % total);
+    }, autoAdvanceMs);
+    return () => clearInterval(t);
+  }, [total, autoAdvanceMs]);
+
+  const goPrev = () => {
+    setDirection(-1);
+    setIndex((i) => (i - 1 + total) % total);
+  };
+  const goNext = () => {
+    setDirection(1);
+    setIndex((i) => (i + 1) % total);
+  };
+
+  const showCarousel = allScreens && total >= 1 && !iframeSrc && !videoSrc;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: EASE }}
+      className={cn(
+        'group relative overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)]',
+        className
+      )}
+    >
+      <div className="flex h-8 items-center gap-2 border-b border-border bg-muted/50 px-4">
+        <div className="flex gap-1.5">
+          <div className="h-3 w-3 rounded-full bg-red-500/20" />
+          <div className="h-3 w-3 rounded-full bg-yellow-500/20" />
+          <div className="h-3 w-3 rounded-full bg-green-500/20" />
+        </div>
+        <div className="ml-4 flex h-5 max-w-[33%] items-center truncate rounded px-2 font-mono text-[10px] text-muted-foreground">
+          {displayUrl}
+        </div>
+      </div>
+
+      <div className="relative aspect-video w-full max-h-[min(60vh,520px)] overflow-y-auto overflow-x-hidden bg-muted">
+        {iframeSrc ? (
+          <iframe
+            src={iframeSrc}
+            title={alt}
+            className="h-full w-full border-0"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          />
+        ) : videoSrc ? (
+          <video
+            src={videoSrc}
+            className="h-full w-full object-cover"
+            muted
+            loop
+            playsInline
+            autoPlay
+            aria-label={alt}
+          />
+        ) : showCarousel ? (
+          <>
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <motion.div
+                key={index}
+                custom={direction}
+                variants={carouselVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="absolute inset-0 flex min-h-0 flex-col"
+              >
+                <div className="min-h-0 min-w-full flex-1 overflow-y-auto overflow-x-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={allScreens[index]!}
+                    alt={`${alt} â€” screen ${index + 1}`}
+                    className="block w-full object-contain object-top opacity-95 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {total > 1 && (
+              <>
+                <motion.button
+                  type="button"
+                  onClick={goPrev}
+                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/90 p-2.5 text-foreground shadow-lg backdrop-blur-md focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary"
+                  aria-label="Previous screen"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  onClick={goNext}
+                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/90 p-2.5 text-foreground shadow-lg backdrop-blur-md focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary"
+                  aria-label="Next screen"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </motion.button>
+              </>
+            )}
+
+            {total > 1 && (
+              <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+                {allScreens.map((_, i) => (
+                  <motion.button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setDirection(i > index ? 1 : -1);
+                      setIndex(i);
+                    }}
+                    className={cn(
+                      'h-1.5 rounded-full transition-colors',
+                      i === index
+                        ? 'w-5 bg-primary'
+                        : 'w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                    )}
+                    aria-label={`Go to screen ${i + 1}`}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="absolute inset-0 min-h-0 overflow-y-auto overflow-x-hidden"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={alt}
+              className="block w-full object-contain object-top opacity-95 transition-opacity duration-300 group-hover:opacity-100"
+            />
+          </motion.div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+// --- 2b. BEFORE & AFTER SLIDER: Reveal new UI over old (redesigns) ---
+
+export type BeforeAfterSliderProps = {
+  oldImg: string;
+  newImg: string;
+  alt?: string;
+  /** Use Next.js Image for images; false = plain img (e.g. external URLs) */
+  useNextImage?: boolean;
+  className?: string;
+};
+
+export function BeforeAfterSlider({
+  oldImg,
+  newImg,
+  alt = 'Before and after',
+  useNextImage = true,
+  className,
+}: BeforeAfterSliderProps) {
+  const [position, setPosition] = React.useState(50);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const handleMove = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    setPosition(x);
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+    handleMove(e.clientX);
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (e.buttons !== 1) return;
+    handleMove(e.clientX);
+  };
+  const onPointerUp = (e: React.PointerEvent) => {
+    (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
+  };
+
+  const imgClass = 'absolute inset-0 h-full w-full object-cover';
+
+  return (
+    <div
+      ref={containerRef}
+      className={cn(
+        'relative my-12 aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted',
+        className
+      )}
+      role="img"
+      aria-label={alt}
+    >
+      {/* Old (background) */}
+      <div className="absolute inset-0">
+        {useNextImage ? (
+          <Image
+            src={oldImg}
+            alt={alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className={imgClass}
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={oldImg} alt={alt} className={imgClass} />
+        )}
+      </div>
+
+      {/* New (clipped) */}
+      <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+        {useNextImage ? (
+          <Image
+            src={newImg}
+            alt={alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className={imgClass}
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={newImg} alt={alt} className={imgClass} />
+        )}
+      </div>
+
+      {/* Slider handle */}
+      <div
+        className="absolute top-0 bottom-0 z-10 w-1 cursor-ew-resize bg-primary"
+        style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+      >
+        <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-background shadow-md" />
+      </div>
+    </div>
+  );
+}
+
+// --- 3. METRIC CARD: Visualizes numbers (Speed, Revenue, Users) ---
+
+export type MetricCardProps = {
+  value: string | number;
+  label: string;
+  trend?: string;
+  suffix?: string;
+  icon?: LucideIcon;
+  className?: string;
+};
+
+export function MetricCard({
+  value,
+  label,
+  trend,
+  suffix = '',
+  icon: Icon = Zap,
+  className,
+}: MetricCardProps) {
+  return (
+    <Card
+      className={cn(
+        'group flex flex-col justify-between border-border bg-card/50 p-6 transition-colors hover:bg-card',
+        className
+      )}
+    >
+      <div className="mb-4 flex items-start justify-between">
+        <div className="rounded-lg bg-muted p-2 text-muted-foreground transition-colors group-hover:text-foreground">
+          <Icon className="h-5 w-5" />
+        </div>
+        {trend && (
+          <span className="rounded bg-primary/10 px-2 py-1 font-mono text-xs text-primary">
+            {trend}
+          </span>
+        )}
+      </div>
+      <div>
+        <div className="mb-1 text-4xl font-bold tracking-tighter text-foreground">
+          {value}
+          {suffix && <span className="ml-1 text-2xl text-muted-foreground">{suffix}</span>}
+        </div>
+        <div className="text-sm text-muted-foreground">{label}</div>
+      </div>
+    </Card>
+  );
+}
+
+// --- 4. INSIGHT CARD: For "The Problem" or "The Quote" ---
+
+export type InsightCardProps = {
+  quote: string;
+  author?: string;
+  type?: 'insight' | 'problem';
+  className?: string;
+};
+
+export function InsightCard({ quote, author, type = 'insight', className }: InsightCardProps) {
+  return (
+    <div
+      className={cn(
+        'relative overflow-hidden rounded-2xl border p-8',
+        type === 'problem' ? 'border-destructive/30 bg-destructive/5' : 'border-border bg-card/30',
+        className
+      )}
+    >
+      <div className="relative z-10">
+        <MessageSquareQuote
+          className={cn('mb-4 h-8 w-8', type === 'problem' ? 'text-destructive' : 'text-primary')}
+        />
+        <h3
+          className={cn(
+            'text-2xl font-medium leading-normal',
+            type === 'problem' ? 'text-destructive-foreground' : 'text-foreground'
+          )}
+        >
+          &ldquo;{quote}&rdquo;
+        </h3>
+        {author && (
+          <div className="mt-4 flex items-center gap-2 border-t border-border/50 pt-4">
+            <div className="h-6 w-6 rounded-full bg-muted" />
+            <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+              {author}
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// --- 5. PROCESS FLOW: Visualizes Timeline/Steps ---
+
+export type ProcessStepProps = {
+  number: string | number;
+  title: string;
+  desc: string;
+  isLast?: boolean;
+  className?: string;
+  icon?: LucideIcon;
+  output?: string;
+};
+
+export function ProcessStep({
+  number,
+  title,
+  desc,
+  isLast = false,
+  className,
+  icon: Icon,
+  output,
+}: ProcessStepProps) {
+  return (
+    <div className={cn('group flex gap-4', className)}>
+      <div className="flex flex-col items-center">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-primary/10 font-bold text-sm text-primary">
+          {number}
+        </div>
+        {!isLast && <div className="my-2 h-full w-px bg-zinc-800" />}
+      </div>
+      <div className="pb-12">
+        <h4 className="mb-2 flex items-center gap-2 text-lg font-medium text-foreground">
+          {Icon && <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />}
+          {title}
+        </h4>
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">{desc}</p>
+        {output && (
+          <p className="mt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Output: {output}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** Renders a list of process steps with correct connector lines. */
+export function ProcessSteps({
+  steps,
+  className,
+  stagger,
+}: {
+  steps: Array<{
+    number: string | number;
+    title: string;
+    desc: string;
+    icon?: LucideIcon;
+    output?: string;
+  }>;
+  className?: string;
+  /** When true, apply a staggered entrance to each step. */
+  stagger?: boolean;
+}) {
+  const content = steps.map((step, i) => {
+    const node = <ProcessStep key={step.title} {...step} isLast={i === steps.length - 1} />;
+    if (!stagger) return node;
+    return <StaggerItem key={step.title}>{node}</StaggerItem>;
+  });
+
+  if (stagger) {
+    return <StaggerContainer className={className}>{content}</StaggerContainer>;
+  }
+
+  return <div className={className}>{content}</div>;
+}
+
+// --- 6. FEATURE GRID: For "Tech Stack" or "Key Features" ---
+
+export type FeatureItemProps = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  className?: string;
+  problem?: string;
+  solution?: string;
+  impact?: string;
+};
+
+export function FeatureItem({
+  icon: Icon,
+  title,
+  desc,
+  className,
+  problem,
+  solution,
+  impact,
+}: FeatureItemProps) {
+  const isProblemSolution = Boolean(problem && solution && impact);
+
+  return (
+    <div
+      className={cn(
+        'flex gap-4 rounded-xl border border-transparent p-4 transition-colors hover:border-border hover:bg-muted/30',
+        isProblemSolution && 'flex-col gap-3 p-6',
+        className
+      )}
+    >
+      <div className="flex gap-4">
+        <div className="mt-1 shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Icon className="h-5 w-5" />
+          </div>
+        </div>
+        <div className="min-w-0 flex-1">
+          <h4 className="text-sm font-medium text-foreground">{title}</h4>
+          {!isProblemSolution && <p className="mt-1 text-sm text-muted-foreground">{desc}</p>}
+        </div>
+      </div>
+
+      {isProblemSolution && (
+        <div className="space-y-3 pl-0 text-sm">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Problem
+            </p>
+            <p className="mt-1 text-muted-foreground">{problem}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Solution
+            </p>
+            <p className="mt-1 text-muted-foreground">{solution}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Impact
+            </p>
+            <p className="mt-1 text-muted-foreground">{impact}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export type ProjectPortfolioKitProps = {
+  project: Project;
+  caseStudy?: CaseStudySections | null;
+  portfolioKit?: PortfolioKitData | null;
+  skipHero?: boolean;
+  className?: string;
+};
+
+export function ProjectPortfolioKit({
+  project,
+  caseStudy,
+  portfolioKit,
+  skipHero,
+  className,
+}: ProjectPortfolioKitProps) {
+  void portfolioKit; // accepted for API; optional use in future
+  if (!project) return null;
+
+  return (
+    <div className={cn('space-y-16', className)}>
+      {!skipHero && (
+        <ProjectHero
+          title={project.title}
+          subtitle={project.subtitle ?? project.oneLiner ?? ''}
+          role={project.roleLine ?? project.roles?.[0] ?? 'Product Designer'}
+          year={project.year ?? '2024'}
+          tags={project.tags ?? []}
+        />
+      )}
+
+      {caseStudy?.realProblem && (
+        <InsightCard
+          quote={caseStudy.realProblem}
+          author={caseStudy.insightAuthor ?? 'Project team'}
+          type="problem"
+        />
+      )}
+    </div>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\project\ProjectCaseStudyHero.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowLeft } from 'lucide-react';
+import type { ResolvedProject } from '@/lib/cms/types';
+import { Badge } from '@/components/ui/badge';
+import { ProjectPrototypeButton } from '@/components/ProjectPrototypeButton';
+import { FadeIn } from '@/components/motion';
+
+type ProjectCaseStudyHeroProps = {
+  project: ResolvedProject;
+  /** Optional slot for stats or meta cards (e.g. ProjectMetaCards, FfpHeroStats). */
+  children?: React.ReactNode;
+};
+
+export function ProjectCaseStudyHero({ project, children }: ProjectCaseStudyHeroProps) {
+  const heroSrc = project.coverUrl ?? project.moodImageUrl ?? null;
+  const hasImage = Boolean(heroSrc);
+  const roleLine = project.roleLine ?? (project.roles?.length ? project.roles.join(', ') : 'â€”');
+  const tags = project.tags?.slice(0, 5) ?? [];
+
+  return (
+    <FadeIn className="relative overflow-hidden rounded-xl">
+      <div className="absolute inset-0 -z-10 min-h-[280px]">
+        {hasImage ? (
+          <Image
+            src={heroSrc!}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            priority
+            quality={80}
+          />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-muted via-muted/90 to-muted/70" />
+        )}
+      </div>
+      <div
+        className={
+          'relative min-h-[280px] rounded-xl px-6 py-8 md:px-8 md:py-10' +
+          (hasImage ? ' bg-background/80 bg-clip-padding' : '')
+        }
+      >
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to projects
+        </Link>
+        <div className="flex flex-wrap items-center gap-2">
+          {tags.map((tag) => (
+            <Badge
+              key={tag}
+              variant="secondary"
+              className="border-border bg-muted/50 font-mono text-xs uppercase tracking-widest text-muted-foreground"
+            >
+              {tag}
+            </Badge>
+          ))}
+          <Badge variant="outline" className="border-border font-mono text-xs text-muted-foreground">
+            {project.year}
+          </Badge>
+        </div>
+        <h1 className="text-5xl font-bold tracking-tighter text-foreground md:text-6xl">
+          {project.title}
+        </h1>
+        {project.subtitle && (
+          <p className="mt-2 max-w-2xl text-lg text-muted-foreground">{project.subtitle}</p>
+        )}
+        <p className="mt-4 max-w-2xl text-xl text-muted-foreground">{project.oneLiner}</p>
+        <div className="mt-8 flex flex-wrap items-center gap-8">
+          <div>
+            <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Role
+            </div>
+            <div className="font-medium text-foreground">{roleLine}</div>
+          </div>
+          <ProjectPrototypeButton project={project} />
+        </div>
+        {children && <div className="mt-8">{children}</div>}
+      </div>
+    </FadeIn>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\project\ProjectDeliveryImpact.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import { FileText, PackageCheck, Zap } from 'lucide-react';
+import { FadeIn } from '@/components/motion';
+import { ResultImpactCard } from '@/components/project/ResultImpactCard';
+import type { ResultImpactMetric } from '@/components/project/ResultImpactCard';
+
+export type ProjectDeliveryImpactProps = {
+  delivery: string[];
+  impact: string[];
+  learned?: string[];
+  /** Optional document (e.g. PDD) â€” used as card title when provided. */
+  document?: { label: string; href: string };
+};
+
+export function ProjectDeliveryImpact({
+  delivery,
+  impact,
+  document: documentLink,
+}: ProjectDeliveryImpactProps) {
+  const hasDelivery = delivery?.length > 0;
+  const hasImpact = impact?.length > 0;
+  const hasDocument = Boolean(documentLink?.href && documentLink?.label);
+
+  if (!hasDelivery && !hasImpact && !hasDocument) return null;
+
+  const title = documentLink?.label ?? 'Delivery and Impact';
+  const description =
+    delivery[0] ?? impact[0] ?? 'Key deliverables and outcomes from this project.';
+
+  const metrics: ResultImpactMetric[] = [];
+  const maxDelivery = Math.min(delivery.length, 2);
+  const maxImpact = Math.min(impact.length, 2);
+  for (let i = 0; i < maxDelivery; i++) {
+    const d = delivery[i];
+    metrics.push({
+      value: d.length > 18 ? `${d.slice(0, 15).trim()}â€¦` : d,
+      label: 'Deliverable',
+      description: d,
+      icon: FileText,
+    });
+  }
+  for (let i = 0; i < maxImpact; i++) {
+    const im = impact[i];
+    metrics.push({
+      value: im.length > 18 ? `${im.slice(0, 15).trim()}â€¦` : im,
+      label: 'Outcome',
+      description: im,
+      icon: i === maxImpact - 1 ? Zap : PackageCheck,
+      highlight: i === maxImpact - 1,
+    });
+  }
+  if (metrics.length === 0 && hasDocument) {
+    metrics.push({
+      value: documentLink!.label,
+      label: 'Document',
+      description: 'View the deliverable document.',
+      icon: FileText,
+      highlight: true,
+    });
+  }
+
+  if (metrics.length === 0) return null;
+
+  return (
+    <FadeIn>
+      <section>
+        <ResultImpactCard
+          title={title}
+          description={description}
+          metrics={metrics}
+          icon={PackageCheck}
+        />
+      </section>
+    </FadeIn>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\project\ProjectDetailsFromSource.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Link from 'next/link';
+import { ExternalLink, CheckCircle2, Sparkles, Wrench, BookOpen } from 'lucide-react';
+import type { ResolvedProject } from '@/lib/cms/types';
+import { ProjectMetaCards } from './ProjectMetaCards';
+
+type Props = { project: ResolvedProject };
+
+/**
+ * Renders project data that comes from the single source (portfolio.ts):
+ * metaCards, outcomes, highlights, tools, methods, links.
+ * Use on project detail pages so everything in the portfolio entry is visible.
+ */
+export function ProjectDetailsFromSource({ project }: Props) {
+  const hasMetaCards = project.metaCards && project.metaCards.length > 0;
+  const hasOutcomes = project.outcomes && project.outcomes.length > 0;
+  const hasHighlights = project.highlights && project.highlights.length > 0;
+  const hasTools = project.tools && project.tools.length > 0;
+  const hasMethods = project.methods && project.methods.length > 0;
+  const hasLinks = project.links && project.links.length > 0;
+  const hasCircumstances = Boolean(
+    project.client || project.teamSize || project.year
+  );
+
+  if (
+    !hasMetaCards &&
+    !hasOutcomes &&
+    !hasHighlights &&
+    !hasTools &&
+    !hasMethods &&
+    !hasLinks &&
+    !hasCircumstances
+  ) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-12">
+      {/* Circumstances: client, team size, year from portfolio */}
+      {hasCircumstances && (
+        <div className="grid gap-6 rounded-xl border border-border bg-card/50 p-6 md:grid-cols-2">
+          <article>
+            <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Circumstances
+            </h2>
+            <p className="text-foreground">
+              {[project.teamSize, project.client, project.year]
+                .filter(Boolean)
+                .join(' Â· ')}
+            </p>
+          </article>
+          {project.customerAbout && (
+            <article>
+              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                Customer
+              </h2>
+              <p className="text-foreground">{project.customerAbout}</p>
+            </article>
+          )}
+        </div>
+      )}
+
+      {/* Meta cards (Experts, Duration, Deliverable, etc.) */}
+      {hasMetaCards && (
+        <section>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            Project at a glance
+          </h2>
+          <ProjectMetaCards
+            cards={project.metaCards!.map((m) => ({
+              label: m.label,
+              value: m.value,
+              hint: m.hint,
+            }))}
+          />
+        </section>
+      )}
+
+      {/* Outcomes + Highlights */}
+      {(hasOutcomes || hasHighlights) && (
+        <section className="grid gap-8 md:grid-cols-2">
+          {hasOutcomes && (
+            <div className="rounded-xl border border-border bg-card/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+                <CheckCircle2 className="h-5 w-5 text-primary" aria-hidden />
+                Outcomes
+              </h3>
+              <ul className="list-inside list-disc space-y-2 text-sm leading-relaxed text-muted-foreground">
+                {project.outcomes!.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {hasHighlights && (
+            <div className="rounded-xl border border-border bg-card/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+                <Sparkles className="h-5 w-5 text-primary" aria-hidden />
+                Highlights
+              </h3>
+              <ul className="list-inside list-disc space-y-2 text-sm leading-relaxed text-muted-foreground">
+                {project.highlights!.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Tools & methods */}
+      {(hasTools || hasMethods) && (
+        <section className="rounded-xl border border-border bg-card/50 p-6">
+          <div className="flex flex-wrap items-start gap-6">
+            {hasTools && (
+              <div>
+                <h3 className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <Wrench className="h-4 w-4" aria-hidden />
+                  Tools
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.tools!.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium text-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {hasMethods && (
+              <div>
+                <h3 className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <BookOpen className="h-4 w-4" aria-hidden />
+                  Methods
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.methods!.map((m) => (
+                    <span
+                      key={m}
+                      className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium text-foreground"
+                    >
+                      {m}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Links (Live demo, Case study, GitHub) */}
+      {hasLinks && (
+        <section>
+          <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground">
+            Links
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {project.links!.map((link) => {
+              const isExternal = link.href.startsWith('http');
+              const className =
+                'inline-flex items-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
+              if (isExternal) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {link.label}
+                    <ExternalLink className="h-3.5 w-3.5 opacity-70" aria-hidden />
+                  </a>
+                );
+              }
+              return (
+                <Link key={link.href} href={link.href} className={className}>
+                  {link.label}
+                  <ExternalLink className="h-3.5 w-3.5 opacity-70" aria-hidden />
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\project\ProjectImpactCards.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+/**
+ * Unified impact cards block: 4-card metric grid used on every project page.
+ * Data comes from project.impactCards (single source: portfolio or CMS).
+ * Replaces automation hardcoded block, FfpHeroStats, CaesarHeroStats, and hero ProjectMetaCards for impact.
+ */
+
+import { cn } from '@/lib/utils';
+
+export type ImpactCard = { label: string; value: string };
+
+export function ProjectImpactCards({
+  cards,
+  className,
+}: {
+  cards: ImpactCard[];
+  className?: string;
+}) {
+  if (!cards?.length) return null;
+
+  return (
+    <div
+      className={cn(
+        'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4',
+        className
+      )}
+    >
+      {cards.map((card, idx) => (
+        <div
+          key={`${card.label}-${idx}`}
+          className="rounded-xl border border-border bg-card p-6 shadow-lg"
+        >
+          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            {card.label}
+          </p>
+          <p className="mt-2 text-2xl font-mono font-bold tracking-tight text-primary">
+            {card.value}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\ProjectCard.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { motion, useReducedMotion } from 'framer-motion';
+import { BarChart3, ImageIcon, Search, ShieldCheck, Star, Zap } from 'lucide-react';
+import type { ResolvedProject } from '@/lib/cms/types';
+import { Badge } from '@/components/ui/badge';
+import { ProjectQuickViewDialog } from './ProjectQuickViewDialog';
+import { cn } from '@/lib/utils';
+
+const featuredSlugs = ['kovon', 'ffp-dashboard'] as const;
+
+const slugToIcon: Record<string, React.ComponentType<{ className?: string }>> = {
+  kovon: ShieldCheck,
+  'emission-compliance': BarChart3,
+  automation: Zap,
+  'ffp-dashboard': Search,
+};
+
+type ProjectCardProps = {
+  project: ResolvedProject;
+  displayTitle?: string;
+};
+
+export function ProjectCard({ project, displayTitle }: ProjectCardProps) {
+  const router = useRouter();
+  const reduceMotion = useReducedMotion();
+
+  const liveDemoLink = project.links?.find((link) => link.label === 'Live demo');
+  const coverUrl = project.cardCoverUrl ?? project.coverUrl ?? project.moodImageUrl ?? null;
+
+  const displayTags = (project.tags ?? []).slice(0, 3);
+  const title = displayTitle ?? project.title;
+  const roleLine = project.roles?.length ? project.roles.join(', ') : 'â€”';
+
+  const outcomeLine = project.impact?.[0]
+    ? `${project.impact[0].value}: ${project.impact[0].label}`
+    : (() => {
+        const o = project.outcomes?.[0];
+        if (!o) return null;
+        return o.length > 90 ? `${o.slice(0, 90).replace(/\s+\S*$/, '')}â€¦` : o;
+      })();
+
+  const PlaceholderIcon = slugToIcon[project.slug] ?? ImageIcon;
+
+  const initials =
+    project.coverFallback === 'initials' && title
+      ? title
+          .split(/\s+/)
+          .slice(0, 2)
+          .map((w) => w[0])
+          .join('')
+          .toUpperCase()
+          .slice(0, 2) || title.slice(0, 2).toUpperCase()
+      : null;
+
+  const projectHref = `/projects/${project.slug}`;
+
+  const handleTryPrototype = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!liveDemoLink?.href) return;
+    if (liveDemoLink.href.startsWith('http')) {
+      window.open(liveDemoLink.href, '_blank', 'noopener,noreferrer');
+    } else {
+      router.push(liveDemoLink.href);
+    }
+  };
+
+  const isFeatured = featuredSlugs.includes(project.slug as (typeof featuredSlugs)[number]);
+
+  return (
+    <Link
+      href={projectHref}
+      className={cn(
+        'group block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+      )}
+    >
+      <motion.article
+        className={cn(
+          'flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm',
+          'transition-shadow hover:shadow-md'
+        )}
+        whileHover={reduceMotion ? undefined : { y: -4 }}
+        transition={reduceMotion ? undefined : { duration: 0.18 }}
+      >
+        {/* Cover */}
+        <div className="relative aspect-video w-full overflow-hidden bg-muted">
+          {coverUrl ? (
+            <>
+              <motion.div
+                className="absolute inset-0"
+                whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+                transition={reduceMotion ? undefined : { duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Image
+                  src={coverUrl}
+                  alt={`${title} cover`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 520px"
+                  loading="lazy"
+                  quality={75}
+                  decoding="async"
+                />
+              </motion.div>
+
+              {/* subtle overlay for consistency */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
+            </>
+          ) : (
+            <div
+              className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-muted via-muted/90 to-muted/70"
+              aria-hidden
+            >
+              {initials ? (
+                <span className="text-2xl font-bold tracking-tighter text-muted-foreground/60">
+                  {initials}
+                </span>
+              ) : (
+                <PlaceholderIcon className="h-11 w-11 text-muted-foreground/45" />
+              )}
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground/40">
+                {project.category ?? 'Project'}
+              </span>
+            </div>
+          )}
+
+          {/* Featured badge pinned to cover for visual consistency */}
+          {isFeatured && (
+            <div className="absolute left-3 top-3">
+              <Badge variant="secondary" className="gap-1 text-[10px] font-medium">
+                <Star className="h-3 w-3 fill-current" />
+                Featured
+              </Badge>
+            </div>
+          )}
+        </div>
+
+        {/* Body */}
+        <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
+          {/* Meta row */}
+          <div className="flex items-start justify-between gap-3">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+              {(project.category ?? 'Project')}{project.year ? ` Â· ${project.year}` : ''}
+            </p>
+
+            {/* quick actions only on desktop, consistent placement */}
+            <div className="hidden sm:block" onClick={(e) => e.stopPropagation()}>
+              <ProjectQuickViewDialog
+                project={project}
+                triggerLabel={`Open quick actions for ${project.title}`}
+                iconOnly
+              />
+            </div>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-lg font-semibold leading-snug text-foreground sm:text-xl line-clamp-2">
+            {title}
+          </h3>
+
+          {/* Role */}
+          <p className="text-xs text-muted-foreground line-clamp-1">
+            Role: {roleLine}
+          </p>
+
+          {/* One-liner */}
+          <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
+            {project.oneLiner}
+          </p>
+
+          {/* Outcome line (optional), keep it tight */}
+          {outcomeLine && (
+            <p className="text-xs text-muted-foreground/90 line-clamp-2">
+              {outcomeLine}
+            </p>
+          )}
+
+          {/* Tags */}
+          {displayTags.length > 0 && (
+            <ul className="flex flex-wrap gap-2 pt-1">
+              {displayTags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-full bg-muted px-2 py-1 text-[11px] leading-none text-muted-foreground"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* Actions: stacked on mobile, inline on desktop */}
+          <div className="mt-auto flex flex-col gap-2 pt-2 sm:flex-row sm:items-center">
+            {/* Visual CTA, card is already the link */}
+            <span className="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground sm:w-auto">
+              Case study
+            </span>
+
+            {liveDemoLink?.href && (
+              <button
+                type="button"
+                onClick={handleTryPrototype}
+                className="h-10 w-full rounded-md border border-input bg-background px-4 text-sm font-medium hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:w-auto"
+              >
+                Try prototype
+              </button>
+            )}
+          </div>
+        </div>
+      </motion.article>
+    </Link>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\ProjectGallery.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import Image from 'next/image';
+import type { ResolvedProject } from '@/lib/cms/types';
+import { MacBookFrame } from '@/components/MacBookFrame';
+
+type Props = { project: ResolvedProject };
+
+export function ProjectGallery({ project }: Props) {
+  const urls = project.galleryUrls ?? [];
+
+  return (
+    <section aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
+        Gallery
+      </h2>
+      {urls.length > 0 ? (
+        <div className="grid gap-10 sm:grid-cols-1 lg:grid-cols-2">
+          {urls.map((url, i) => (
+            <MacBookFrame key={i}>
+              <div className="relative h-full w-full bg-neutral-900">
+                <Image
+                  src={url}
+                  alt={`${project.title} â€” screenshot ${i + 1}`}
+                  fill
+                  className="object-contain object-top"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </MacBookFrame>
+          ))}
+        </div>
+      ) : (
+        <p className="rounded-xl border border-dashed border-border bg-muted/30 px-6 py-10 text-center text-sm text-muted-foreground">
+          No screenshots for this project yet.
+        </p>
+      )}
+    </section>
+  );
+}
+
+////////////////////////////////////////////////////////////////
+// FILE: C:\Users\hi\Documents\ux-portfolio\ux-portfolio\src\components\ProjectProblemWorkflowSolution.tsx
+////////////////////////////////////////////////////////////////
+
+'use client';
+
+import { AlertCircle, GitBranch, Lightbulb } from 'lucide-react';
+import type { ResolvedProject } from '@/lib/cms/types';
+
+function splitIntoParagraphs(text: string): string[] {
+  if (!text?.trim()) return [];
+  return text
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
+
+function parseWorkflowSteps(text: string): string[] {
+  if (!text?.trim()) return [];
+  // Split by "1) ", "2) ", "1. ", "2. " (lookahead so we keep content after number)
+  const stepChunks = text.split(/(?=\d+[).]\s*)/).map((s) => s.trim()).filter(Boolean);
+  if (stepChunks.length > 1) {
+    return stepChunks.map((chunk) => chunk.replace(/^\d+[).]\s*/, '').trim());
+  }
+  return splitIntoParagraphs(text);
+}
+
+type Props = { project: ResolvedProject };
+
+export function ProjectProblemWorkflowSolution({ project }: Props) {
+  const problemContent = project.problem ?? '';
+  const workflowContent = project.workflow ?? project.context ?? '';
+  const solutionContent = project.solution ?? '';
+
+  const problemParagraphs = splitIntoParagraphs(problemContent);
+  const workflowSteps = parseWorkflowSteps(workflowContent);
+  const solutionParagraphs = splitIntoParagraphs(solutionContent);
+
+  return (
+    <section className="space-y-8">
+      {problemContent && (
+        <article className="rounded-xl border border-border bg-card p-6">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10 text-destructive">
+              <AlertCircle className="h-5 w-5" aria-hidden />
+            </div>
+            <h2 className="font-semibold text-foreground">Problem</h2>
+          </div>
+          <div className="space-y-3 text-muted-foreground">
+            {problemParagraphs.length > 0 ? (
+              problemParagraphs.map((p, i) => (
+                <p key={i} className="leading-relaxed">
+                  {p}
+                </p>
+              ))
+            ) : (
+              <p className="leading-relaxed">{problemContent}</p>
+            )}
+          </div>
+        </article>
+      )}
+
+      {workflowContent && (
+        <article className="rounded-xl border border-border bg-card p-6">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <GitBranch className="h-5 w-5" aria-hidden />
+            </div>
+            <h2 className="font-semibold text-foreground">Workflow</h2>
+          </div>
+          {workflowSteps.length > 1 ? (
+            <ol className="list-none space-y-3 pl-0">
+              {workflowSteps.map((step, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
+                    {i + 1}
+                  </span>
+                  <span className="leading-relaxed text-muted-foreground">{step}</span>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <div className="space-y-3 text-muted-foreground">
+              {workflowSteps.length === 1 ? (
+                <p className="leading-relaxed">{workflowSteps[0]}</p>
+              ) : (
+                <p className="leading-relaxed">{workflowContent}</p>
+              )}
+            </div>
+          )}
+        </article>
+      )}
+
+      {solutionContent && (
+        <article className="rounded-xl border border-border bg-card p-6">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+              <Lightbulb className="h-5 w-5" aria-hidden />
+            </div>
+            <h2 className="font-semibold text-foreground">Solution</h2>
+          </div>
+          <div className="space-y-3 text-muted-foreground">
+            {solutionParagraphs.length > 0 ? (
+              solutionParagraphs.map((p, i) => (
+                <p key={i} className="leading-relaxed">
+                  {p}
+                </p>
+              ))
+            ) : (
+              <p className="leading-relaxed">{solutionContent}</p>
+            )}
+          </div>
+        </article>
+      )}
+    </section>
+  );
+}
+
