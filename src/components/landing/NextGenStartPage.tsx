@@ -187,8 +187,23 @@ export function NextGenStartPage() {
               Core Capabilities
             </h2>
             <p className="text-sm text-muted-foreground">
-              How I work. What teams get from me.
+              End-to-end product strength: from discovery and UX depth to technical execution and delivery leadership.
             </p>
+          </div>
+
+
+
+          <div className="rounded-2xl border border-border bg-card/70 p-5 shadow-sm">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              I combine <span className="font-medium text-foreground">deep product UX/UI expertise</span> with
+              <span className="font-medium text-foreground"> technical fluency</span> and
+              <span className="font-medium text-foreground"> process leadership</span> — so ideas become shippable outcomes.
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2 text-xs">
+              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">Research → Concept → Delivery</li>
+              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">AI-assisted execution</li>
+              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">Cross-functional collaboration</li>
+            </ul>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -203,7 +218,7 @@ export function NextGenStartPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Methodical thinking</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Strong UX foundation, structured discovery, alignment, and decisions. User and product centric.
+                    Strong UX foundation with structured discovery, sharp prioritization, and clear decision framing for teams.
                   </p>
                 </div>
               </div>
@@ -220,7 +235,7 @@ export function NextGenStartPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Product-centric delivery</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Connect research, interaction concept, and constraints to ship enterprise workflows.
+                    I translate insights into interaction concepts and ship-ready flows aligned with engineering reality.
                   </p>
                 </div>
               </div>
@@ -237,7 +252,58 @@ export function NextGenStartPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-primary">Tools & systems fluency</h3>
                   <p className="mt-2 text-sm leading-relaxed text-primary/80">
-                    Jira, Confluence, Figma, prototyping, technical collaboration, plus automation mindset.
+                    Confident with Jira, Confluence, Figma, prototyping, and technical collaboration in complex enterprise setups.
+                  </p>
+                </div>
+              </div>
+            </HoverTooltip>
+
+            <HoverTooltip label="AI-native execution: this portfolio is AI-assisted coded, and I use AI to accelerate discovery, prototyping, and delivery.">
+              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Code2 className="h-5 w-5" />
+                  </div>
+                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">AI-assisted coding</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    I code and vibe-code to turn product ideas into fast, testable interface outcomes and clearer team alignment.
+                  </p>
+                </div>
+              </div>
+            </HoverTooltip>
+
+            <HoverTooltip label="Process ownership from kickoff to rollout: workshops, backlog shaping, sprint rhythm, and delivery alignment.">
+              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Workflow className="h-5 w-5" />
+                  </div>
+                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Process leadership</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    I align stakeholders, scope, and sprint rhythm so teams move faster with less delivery friction.
+                  </p>
+                </div>
+              </div>
+            </HoverTooltip>
+
+            <HoverTooltip label="V-shaped profile: deep in product UX/UI, broad across technical and operational collaboration.">
+              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <GitBranch className="h-5 w-5" />
+                  </div>
+                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">V-shaped profile</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Deep in UX/UI product craft, broad across technical constraints, delivery, and operational thinking.
                   </p>
                 </div>
               </div>
