@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
@@ -127,7 +131,8 @@ body {
     background-repeat: no-repeat;
     opacity: 1;
     filter: none;
-    animation: breathe-bg 12s ease-in-out infinite;
+    will-change: transform, opacity;
+    animation: mesh-pulse 3.2s ease-in-out infinite;
   }
 
   .portfolio-shell::after {
@@ -139,18 +144,47 @@ body {
     background:
       radial-gradient(circle at top left, rgba(0, 0, 0, 0.2), transparent 60%),
       radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
-    animation: breathe-overlay 14s ease-in-out infinite;
+    will-change: opacity, transform;
+    animation: overlay-pulse 2.8s ease-in-out infinite;
   }
 }
 
-@keyframes breathe-bg {
-  0%, 100% { opacity: 0.92; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.03); }
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .portfolio-shell::before,
+  .portfolio-shell::after {
+    animation: none;
+  }
 }
 
-@keyframes breathe-overlay {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.92; }
+@keyframes mesh-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(0, -1.5%, 0) scale(1.035);
+  }
+}
+
+@keyframes overlay-pulse {
+  0%,
+  100% {
+    opacity: 0.86;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
 }
 
 /* Layout shell: used by DashboardCV; must be defined for correct width and spacing */
