@@ -308,6 +308,57 @@ export function NextGenStartPage() {
                 </div>
               </div>
             </HoverTooltip>
+
+            <HoverTooltip label="AI-native execution: this portfolio is AI-assisted coded, and I use AI to accelerate discovery, prototyping, and delivery.">
+              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Code2 className="h-5 w-5" />
+                  </div>
+                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">AI-assisted coding</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    I can code and vibe-code, turning product ideas into fast, testable interface outcomes.
+                  </p>
+                </div>
+              </div>
+            </HoverTooltip>
+
+            <HoverTooltip label="Process ownership from kickoff to rollout: workshops, backlog shaping, sprint rhythm, and delivery alignment.">
+              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Workflow className="h-5 w-5" />
+                  </div>
+                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Process leadership</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    I connect product, process, and stakeholders so teams can ship with less friction.
+                  </p>
+                </div>
+              </div>
+            </HoverTooltip>
+
+            <HoverTooltip label="V-shaped profile: deep in product UX/UI, broad across technical and operational collaboration.">
+              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <GitBranch className="h-5 w-5" />
+                  </div>
+                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">V-shaped profile</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Deep in UX/UI product work, broad across technical constraints, delivery, and operations.
+                  </p>
+                </div>
+              </div>
+            </HoverTooltip>
           </div>
         </section>
 
