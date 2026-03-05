@@ -131,8 +131,6 @@ body {
     background-repeat: no-repeat;
     opacity: 1;
     filter: none;
-    will-change: transform, opacity;
-    animation: mesh-pulse 3.2s ease-in-out infinite;
   }
 
   .portfolio-shell::after {
@@ -144,8 +142,6 @@ body {
     background:
       radial-gradient(circle at top left, rgba(0, 0, 0, 0.2), transparent 60%),
       radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
-    will-change: opacity, transform;
-    animation: overlay-pulse 2.8s ease-in-out infinite;
   }
 }
 
@@ -155,35 +151,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .portfolio-shell::before,
-  .portfolio-shell::after {
-    animation: none;
-  }
-}
-
-@keyframes mesh-pulse {
-  0%,
-  100% {
-    opacity: 0.9;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translate3d(0, -1.5%, 0) scale(1.035);
-  }
-}
-
-@keyframes overlay-pulse {
-  0%,
-  100% {
-    opacity: 0.86;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
   }
 }
 

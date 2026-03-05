@@ -266,7 +266,7 @@ function DashboardCVImpl({
   return (
     <div className="min-h-screen text-foreground">
       <div className="theme-container container flex flex-1 flex-col py-6">
-        <div className="flex flex-col overflow-hidden rounded-xl border border-white/10 bg-background/40 backdrop-blur-sm">
+        <div className="flex flex-col overflow-hidden rounded-xl border border-white/10 bg-background/75">
           <div className="mx-auto grid min-h-screen w-full max-w-[1400px] items-start md:grid-cols-[16rem_1fr]">
             <aside className="sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar md:flex">
               <SidebarContent navProjects={navProjects} />

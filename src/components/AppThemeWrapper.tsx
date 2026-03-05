@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { MouseGlow } from '@/components/MouseGlow';
 
 const ADMIN_PATH = '/admin';
 const FFP_PROTOTYPE_PATH = '/prototypes/ffp';
@@ -27,7 +26,6 @@ export function AppThemeWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={isFfpPrototype ? 'portfolio-shell light' : 'portfolio-shell dark'}>
-      <MouseGlow />
       {children}
     </div>
   );

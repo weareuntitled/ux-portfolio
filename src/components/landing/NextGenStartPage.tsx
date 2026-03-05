@@ -8,11 +8,8 @@ import {
   Sparkles,
   Zap,
   ExternalLink,
-  Box,
-  FileText,
   Star,
   Info,
-  Code2,
   Workflow,
   GitBranch,
 } from 'lucide-react';
@@ -181,7 +178,7 @@ export function NextGenStartPage() {
         </section>
 
         {/* Core Capabilities — with tooltips */}
-        <section className="space-y-6 pt-8">
+        <section className="space-y-6 pt-8" style={{ contentVisibility: 'auto', containIntrinsicSize: '900px' }}>
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
               Core Capabilities
@@ -206,159 +203,105 @@ export function NextGenStartPage() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <HoverTooltip label="Discovery and alignment: shadowing, interviews, workflow mapping, requirements, stakeholder alignment, and decision framing.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Box className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Methodical thinking</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Strong UX foundation with structured discovery, sharp prioritization, and clear decision framing for teams.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
-
-            <HoverTooltip label="Turn insights into shippable UI: interaction concept, information architecture, prototypes, handoff, and iteration with engineering constraints.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Users className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Product-centric delivery</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    I translate insights into interaction concepts and ship-ready flows aligned with engineering reality.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
-
-            <HoverTooltip label="Fluent across systems: Jira, Confluence, Figma, prototyping, and technical collaboration.">
-              <div className="flex flex-col justify-between rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-inner transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/10">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-background text-primary shadow-sm">
-                    <FileText className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-primary/70" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-primary">Tools & systems fluency</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-primary/80">
-                    Confident with Jira, Confluence, Figma, prototyping, and technical collaboration in complex enterprise setups.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
-
-            <HoverTooltip label="AI-native execution: this portfolio is AI-assisted coded, and I use AI to accelerate discovery, prototyping, and delivery.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Code2 className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">AI-assisted coding</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    I code and vibe-code to turn product ideas into fast, testable interface outcomes and clearer team alignment.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
-
-            <HoverTooltip label="Process ownership from kickoff to rollout: workshops, backlog shaping, sprint rhythm, and delivery alignment.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Workflow className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Process leadership</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    I align stakeholders, scope, and sprint rhythm so teams move faster with less delivery friction.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
-
-            <HoverTooltip label="V-shaped profile: deep in product UX/UI, broad across technical and operational collaboration.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[3fr_7fr] lg:items-stretch">
+            <HoverTooltip label="Cross-Functional Expert: deep in core UX/UI while connecting product, engineering, and operations.">
+              <div
+                className="group relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-2xl border border-primary/30 bg-card p-6 shadow-sm transition-colors duration-300 hover:border-primary/60"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.72), hsl(var(--background) / 0.28)), url('/projects/kovon_hero.jpg')",
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                <div className="relative z-10 mb-6 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
                     <GitBranch className="h-5 w-5" />
                   </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                  <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-primary">USP</span>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">V-shaped profile</h3>
+                <div className="relative z-10">
+                  <h3 className="text-xl font-semibold text-foreground">Cross-Functional Expert</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Deep in UX/UI product craft, broad across technical constraints, delivery, and operational thinking.
+                    My strength is connecting deep UX/UI product expertise with adjacent domains—engineering, delivery, and operations—to align teams and ship faster.
                   </p>
                 </div>
               </div>
             </HoverTooltip>
 
-            <HoverTooltip label="AI-native execution: this portfolio is AI-assisted coded, and I use AI to accelerate discovery, prototyping, and delivery.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Code2 className="h-5 w-5" />
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:grid-rows-2">
+              <HoverTooltip label="From concept to ship-ready UI flows aligned with engineering constraints.">
+                <div
+                  className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/ffp-dashboard_hero.jpg')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="relative z-10 mb-4 flex items-center justify-between">
+                    <Users className="h-5 w-5 text-primary" />
+                    <Info className="h-4 w-4 text-muted-foreground/70" />
                   </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                  <h3 className="relative z-10 text-base font-semibold text-foreground">Product-centric delivery</h3>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">AI-assisted coding</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    I can code and vibe-code, turning product ideas into fast, testable interface outcomes.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
+              </HoverTooltip>
 
-            <HoverTooltip label="Process ownership from kickoff to rollout: workshops, backlog shaping, sprint rhythm, and delivery alignment.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Workflow className="h-5 w-5" />
+              <HoverTooltip label="Ownership from kickoff to rollout: workshops, backlog shaping, and sprint rhythm.">
+                <div
+                  className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/emission-compliance_hero.jpg')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="relative z-10 mb-4 flex items-center justify-between">
+                    <Workflow className="h-5 w-5 text-primary" />
+                    <Info className="h-4 w-4 text-muted-foreground/70" />
                   </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                  <h3 className="relative z-10 text-base font-semibold text-foreground">Process leadership</h3>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Process leadership</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    I connect product, process, and stakeholders so teams can ship with less friction.
-                  </p>
-                </div>
-              </div>
-            </HoverTooltip>
+              </HoverTooltip>
 
-            <HoverTooltip label="V-shaped profile: deep in product UX/UI, broad across technical and operational collaboration.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <GitBranch className="h-5 w-5" />
+              <HoverTooltip label="Fluent in Jira, Confluence, Figma, and technical collaboration across complex systems.">
+                <div
+                  className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/automation_hero.jpg')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="relative z-10 mb-4 flex items-center justify-between">
+                    <Package className="h-5 w-5 text-primary" />
+                    <Info className="h-4 w-4 text-muted-foreground/70" />
                   </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
+                  <h3 className="relative z-10 text-base font-semibold text-foreground">Tools & systems fluency</h3>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">V-shaped profile</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Deep in UX/UI product work, broad across technical constraints, delivery, and operations.
-                  </p>
+              </HoverTooltip>
+
+              <HoverTooltip label="AI-assisted execution from idea to prototype with fast feedback loops.">
+                <div
+                  className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/8020-portfolio_hero.jpg')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="relative z-10 mb-4 flex items-center justify-between">
+                    <Sparkles className="h-5 w-5 text-primary" />
+                    <Info className="h-4 w-4 text-muted-foreground/70" />
+                  </div>
+                  <h3 className="relative z-10 text-base font-semibold text-foreground">AI-assisted coding</h3>
                 </div>
-              </div>
-            </HoverTooltip>
+              </HoverTooltip>
+            </div>
           </div>
         </section>
 
@@ -402,7 +345,11 @@ export function NextGenStartPage() {
         </section>
 
         {/* Selected Works — now KoVoN + FFP */}
-        <section id="featured-projects" className="scroll-mt-24 space-y-8 pt-8">
+        <section
+          id="featured-projects"
+          className="scroll-mt-24 space-y-8 pt-8"
+          style={{ contentVisibility: 'auto', containIntrinsicSize: '800px' }}
+        >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
@@ -426,14 +373,14 @@ export function NextGenStartPage() {
               href="/projects/kovon"
               className="group block h-full cursor-pointer rounded-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 active:scale-[0.995]"
             >
-              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2">
+              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/50">
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
                     src="/projects/kovon_hero.jpg"
                     alt="KoVoN Compliance Documentation Tool"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover opacity-90 transition-transform duration-700 ease-out group-hover:opacity-100 group-hover:scale-105"
+                    className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
@@ -471,14 +418,14 @@ export function NextGenStartPage() {
               href="/projects/ffp-dashboard"
               className="group block h-full cursor-pointer rounded-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 active:scale-[0.995]"
             >
-              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:delay-150">
+              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/50">
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
                     src="/projects/ffp-dashboard_hero.jpg"
                     alt="FFP Dashboard"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover opacity-90 transition-transform duration-700 ease-out group-hover:opacity-100 group-hover:scale-105"
+                    className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
