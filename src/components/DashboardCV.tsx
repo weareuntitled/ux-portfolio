@@ -62,7 +62,13 @@ export type DashboardCVProps = {
   showSearch?: boolean;
 };
 
-function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavProjectWithImage[] }) {
+function SidebarContent({
+  navProjects: navProjectsProp,
+  compact = false,
+}: {
+  navProjects?: NavProjectWithImage[];
+  compact?: boolean;
+}) {
   const pathname = usePathname();
 
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
@@ -77,6 +83,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
   };
 
   const navProjects: NavProjectWithImage[] = useMemo(() => {
+    if (compact) return [];
     if (navProjectsProp?.length) return navProjectsProp;
     return getAllProjects().map((p) => ({
       slug: p.slug,
@@ -84,7 +91,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
       moodImageUrl: p.moodImageUrl ?? null,
       category: p.category,
     }));
-  }, [navProjectsProp]);
+  }, [compact, navProjectsProp]);
 
   const { enterprise, motionProjects, side, archive } = useMemo(() => {
     const enterprise = navProjects.filter((p) => p.category === 'Enterprise');
@@ -220,10 +227,14 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
           />
         ))}
 
-        <ProjectSection title="Enterprise" items={enterprise} />
-        <ProjectSection title="Motion" items={motionProjects} />
-        <ProjectSection title="Side" items={side} />
-        <ProjectSection title="Archive" items={archive} />
+        {!compact && (
+          <>
+            <ProjectSection title="Enterprise" items={enterprise} />
+            <ProjectSection title="Motion" items={motionProjects} />
+            <ProjectSection title="Side" items={side} />
+            <ProjectSection title="Archive" items={archive} />
+          </>
+        )}
       </nav>
 
       <div className="mt-auto border-t border-border pt-5 text-sm">
@@ -269,7 +280,7 @@ function DashboardCVImpl({
         <div className="flex flex-col overflow-hidden rounded-xl border border-white/10 bg-background/75">
           <div className="mx-auto grid min-h-screen w-full max-w-[1400px] items-start md:grid-cols-[16rem_1fr]">
             <aside className="sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar md:flex">
-              <SidebarContent navProjects={navProjects} />
+              <SidebarContent navProjects={navProjects} compact={variant === 'landing'} />
             </aside>
 
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -278,7 +289,7 @@ function DashboardCVImpl({
               </SheetTrigger>
               <SheetContent side="left" className="w-[280px] border-border bg-background p-5 overflow-y-auto no-scrollbar">
                 <div className="h-full pt-8">
-                  <SidebarContent navProjects={navProjects} />
+                  <SidebarContent navProjects={navProjects} compact={variant === 'landing'} />
                 </div>
               </SheetContent>
             </Sheet>
