@@ -30,8 +30,8 @@ function HoverTooltip({ label, children }: { label: string; children: React.Reac
 
 export function NextGenStartPage() {
   return (
-    <main className="flex min-w-0 flex-1 flex-col bg-background">
-      <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-16">
+    <main className="flex min-w-0 flex-1 flex-col bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="mx-auto max-w-5xl space-y-24 px-4 py-10 md:px-8 md:py-16">
         {/* Hero */}
         <section
           className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between"
@@ -65,7 +65,7 @@ export function NextGenStartPage() {
             </div>
 
             <div>
-              <h1 className="text-5xl font-bold tracking-tighter text-foreground sm:text-6xl md:text-7xl">
+              <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl md:text-7xl">
                 {contact.name}.
               </h1>
               <p className="mt-4 text-xl font-medium text-primary">Product Designer, UX/UI</p>
@@ -209,7 +209,7 @@ export function NextGenStartPage() {
                 className="group relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-2xl border border-primary/30 bg-card p-6 shadow-sm transition-colors duration-300 hover:border-primary/60"
                 style={{
                   backgroundImage:
-                    "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.72), hsl(var(--background) / 0.28)), url('/projects/kovon_hero.jpg')",
+                    "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.72), hsl(var(--background) / 0.28)), url('/images/cap-profile.jpg')",
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
@@ -235,7 +235,7 @@ export function NextGenStartPage() {
                   className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/ffp-dashboard_hero.jpg')",
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/images/cap-delivery.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
@@ -253,7 +253,7 @@ export function NextGenStartPage() {
                   className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/emission-compliance_hero.jpg')",
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/images/cap-process.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
@@ -271,7 +271,7 @@ export function NextGenStartPage() {
                   className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/automation_hero.jpg')",
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/images/cap-tools.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
@@ -289,7 +289,7 @@ export function NextGenStartPage() {
                   className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/projects/8020-portfolio_hero.jpg')",
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/images/cap-ai.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
@@ -299,6 +299,24 @@ export function NextGenStartPage() {
                     <Info className="h-4 w-4 text-muted-foreground/70" />
                   </div>
                   <h3 className="relative z-10 text-base font-semibold text-foreground">AI-assisted coding</h3>
+                </div>
+              </HoverTooltip>
+
+              <HoverTooltip label="Structured systems thinking to simplify complexity for teams and stakeholders.">
+                <div
+                  className="group relative min-h-[172px] overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors duration-300 hover:border-primary/50 sm:col-span-2"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.78), hsl(var(--background) / 0.4)), url('/images/cap-thinking.jpg')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="relative z-10 mb-4 flex items-center justify-between">
+                    <Zap className="h-5 w-5 text-primary" />
+                    <Info className="h-4 w-4 text-muted-foreground/70" />
+                  </div>
+                  <h3 className="relative z-10 text-base font-semibold text-foreground">Systems thinking</h3>
                 </div>
               </HoverTooltip>
             </div>
@@ -376,7 +394,7 @@ export function NextGenStartPage() {
               <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/50">
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
-                    src="/projects/kovon_hero.jpg"
+                    src="/images/cap-profile.jpg"
                     alt="KoVoN Compliance Documentation Tool"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -421,7 +439,7 @@ export function NextGenStartPage() {
               <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/50">
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
-                    src="/projects/ffp-dashboard_hero.jpg"
+                    src="/images/cap-delivery.jpg"
                     alt="FFP Dashboard"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
