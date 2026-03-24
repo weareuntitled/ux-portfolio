@@ -7,6 +7,7 @@ import type {
   TechnicalSpecItem,
   KovonConfig,
 } from './portfolio.types';
+import { resolveProjectAssetUrl } from '@/lib/project-assets';
 
 // 1. IMPORT DER GALLERY-MAP (Generated via scripts/update-gallery.mjs)
 import galleryMapRaw from './gallery-map.json';
@@ -18,7 +19,7 @@ const galleryMap: GalleryMap = galleryMapRaw as unknown as GalleryMap;
 
 // 2. HELPERS: Automated Image Management
 export const getGallery = (slug: string): string[] =>
-  galleryMap[slug.toLowerCase()] ?? [];
+  (galleryMap[slug.toLowerCase()] ?? []).map((path) => resolveProjectAssetUrl(path));
 
 export const getPreviewImage = (slug: string): string | null => {
   const images = getGallery(slug);
@@ -285,8 +286,13 @@ export const portfolio: PortfolioSource = {
       'An indie developer side-project focused on AI-driven DJ set analysis. Tracklistify Studio turns raw audio sets into actionable, accurate tracklists through advanced AI extraction, streamlining the workflow for music professionals.',
     outcomes: ['Reduced manual listening loops for set documentation.', 'Prototype validates extraction quality on real-world recordings.'],
     tags: ['ai', 'audio', 'side-project'],
-    prototypeIframeUrl:
-      'http://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
+    links: [
+      {
+        label: 'Live demo',
+        href: 'https://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
+      },
+    ],
+    prototypeButtonLabel: 'Open Tracklistify',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
     caseStudy: { summary: 'AI DJ set analysis.' },
   },
@@ -310,8 +316,8 @@ export const portfolio: PortfolioSource = {
       'A personal admin automation tool developed to solve the headache of scattered receipts and invoices. By utilizing local OCR (Optical Character Recognition) extraction, the app unifies document intake and dramatically reduces manual data entry.',
     outcomes: ['Unified scattered document sources into one review queue.', 'Cut repetitive typing for recurring invoice fields.'],
     tags: ['automation', 'ocr', 'side-project'],
-    prototypeIframeUrl:
-      'https://app.untitled-ux.de/share/read/eadba98795f9470d9c83faa722d4e72a',
+    links: [{ label: 'Live demo', href: 'https://app.untitled-ux.de/share/read/eadba98795f9470d9c83faa722d4e72a' }],
+    prototypeButtonLabel: 'Open Fix und Fertig',
     outcomeHighlight: { value: 'OCR', label: 'Intake', description: 'Ended manual receipt copying via custom engine.', icon: 'Scan' },
     caseStudy: { summary: 'Personal admin automation.' },
   },

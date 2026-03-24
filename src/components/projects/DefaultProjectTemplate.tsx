@@ -4,9 +4,23 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BookOpen, Briefcase, Building2, Calendar, ChevronLeft, ChevronRight, ShieldCheck, Sparkles, Target, Wrench, X } from 'lucide-react';
+import {
+  BookOpen,
+  Briefcase,
+  Building2,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  Wrench,
+  X,
+} from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
+import { isRemoteImageSrc } from '@/lib/project-assets';
 
 type DefaultProject = {
   slug: string;
@@ -35,6 +49,10 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 function isGif(url: string) {
   return url.toLowerCase().endsWith('.gif');
+}
+
+function imageUnoptimized(src: string) {
+  return isGif(src) || isRemoteImageSrc(src);
 }
 
 function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
@@ -141,7 +159,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 sizes="100vw"
                 quality={100}
                 priority
-                unoptimized={isGif(urls[activeIndex])}
+                unoptimized={imageUnoptimized(urls[activeIndex])}
               />
             </div>
           </div>
@@ -246,7 +264,14 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                 className="relative mt-6 block w-full overflow-hidden rounded-2xl border border-border bg-muted text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <div className="relative aspect-[16/8] w-full">
-                  <Image src={project.moodImageUrl} alt="" fill className="object-cover" sizes="100vw" />
+                  <Image
+                    src={project.moodImageUrl}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                    unoptimized={imageUnoptimized(project.moodImageUrl)}
+                  />
                 </div>
               </motion.button>
             ) : null}
@@ -261,6 +286,42 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
           </section>
+        ) : null}
+
+        {project.links?.length ? (
+          <motion.section
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE, delay: 0.04 }}
+            className="rounded-2xl border border-border bg-background/40 p-5 backdrop-blur-2xl"
+          >
+            <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+              {project.links.some((l) => l.label === 'Live demo') ? 'Live prototype' : 'Links'}
+            </h2>
+            {project.links.some((l) => l.label === 'Live demo' && /^https?:\/\//i.test(l.href)) ? (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Opens in a new tab — the host blocks embedding in iframes (e.g. Caddy / X-Frame-Options).
+              </p>
+            ) : null}
+            <div className="mt-4 flex flex-wrap gap-3">
+              {project.links.map((link) => {
+                const external = /^https?:\/\//i.test(link.href);
+                const label = link.label === 'Live demo' ? project.prototypeButtonLabel ?? 'Live demo' : link.label;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                    className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-background/50 px-4 text-sm font-medium hover:bg-background"
+                  >
+                    {label}
+                    {external ? <ExternalLink className="h-4 w-4 opacity-70" aria-hidden /> : null}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.section>
         ) : null}
 
         {project.prototypeIframeUrl ? (
@@ -348,25 +409,6 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                 </div>
               ))}
             </div>
-          </motion.section>
-        ) : null}
-
-        {project.links?.length ? (
-          <motion.section
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: EASE, delay: 0.12 }}
-            className="flex flex-wrap gap-3"
-          >
-            {project.links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="inline-flex h-10 items-center justify-center rounded-md border border-border bg-background/50 px-4 text-sm font-medium hover:bg-background"
-              >
-                {link.label === 'Live demo' ? project.prototypeButtonLabel ?? 'Live demo' : link.label}
-              </Link>
-            ))}
           </motion.section>
         ) : null}
 

@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { BookOpen, Briefcase, Building2, Calendar, ChevronLeft, ChevronRight, ExternalLink, Film, Sparkles, X } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
+import { isRemoteImageSrc } from '@/lib/project-assets';
 import { cn } from '@/lib/utils';
 
 type MotionProject = {
@@ -39,6 +40,10 @@ function toWatchUrl(youtubeUrl?: string) {
 
 function isGif(url: string) {
   return url.toLowerCase().endsWith('.gif');
+}
+
+function imageUnoptimized(src: string) {
+  return isGif(src) || isRemoteImageSrc(src);
 }
 
 function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
@@ -93,7 +98,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
-                unoptimized={isGif(src)}
+                unoptimized={imageUnoptimized(src)}
               />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
@@ -142,7 +147,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 sizes="100vw"
                 quality={100}
                 priority
-                unoptimized={isGif(urls[activeIndex])}
+                unoptimized={imageUnoptimized(urls[activeIndex])}
               />
             </div>
           </div>
@@ -265,7 +270,14 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
             {project.moodImageUrl ? (
               <motion.div style={{ y: heroY }} className="relative mt-6 overflow-hidden rounded-2xl border border-border bg-muted">
                 <div className="relative aspect-[16/8] w-full">
-                  <Image src={project.moodImageUrl} alt="" fill className="object-cover" sizes="100vw" />
+                  <Image
+                    src={project.moodImageUrl}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                    unoptimized={imageUnoptimized(project.moodImageUrl)}
+                  />
                 </div>
               </motion.div>
             ) : null}
