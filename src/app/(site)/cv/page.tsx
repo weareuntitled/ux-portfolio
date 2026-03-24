@@ -35,8 +35,11 @@ export default async function CVPage() {
                 Daniel Peters
               </h1>
               <h2 className="mt-2 text-xl font-medium text-primary">
-                Senior Product Designer & Process Analyst
+                Management Consultant
               </h2>
+              <p className="mt-2 text-sm font-medium text-zinc-300">
+                Core roles: UX/UI Product Design · Scrum Master · Process Analyst
+              </p>
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
                 9+ years of experience mapping complex enterprise workflows into intuitive,
                 high-performance software. Certified SAFe 6.0 Scrum Master specializing in
@@ -102,15 +105,18 @@ export default async function CVPage() {
                 <header className="mb-3">
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                     <h4 className="text-lg font-bold text-zinc-100">
-                      Senior Product Designer & Process Analyst
+                      Management Consultant
                     </h4>
                     <span className="font-mono text-sm text-zinc-400">Oct 2022 — Nov 2025</span>
                   </div>
                   <p className="text-sm font-medium text-primary">8020 Consulting · Automotive Konzern</p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-zinc-400">
+                    Core roles: UX/UI Product Design · Scrum Master · Process Analyst
+                  </p>
                 </header>
                 <p className="mb-3 text-sm text-zinc-400">
-                  Leading product strategy and agile delivery for enterprise compliance, diagnostic,
-                  and automation tools. Dual role as UX Lead and SAFe Scrum Master.
+                  Management consulting for enterprise products across UX/UI, process analysis,
+                  automation, and agile delivery in a cross-functional Spotify-style setup.
                 </p>
                 <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
                   <li>
@@ -120,21 +126,19 @@ export default async function CVPage() {
                     7,000 hours annually) and reduced line stoppage risks.
                   </li>
                   <li>
-                    <strong className="text-zinc-100">Failure Fingerprint Dashboard:</strong> Redesigned
-                    a legacy database UI into a symptom-first diagnostic tool. Designed a 1:1
-                    Correlation Engine unifying Supplier Quality, Production, and Root Cause synthesis,
-                    drastically reducing duplicate cases.
+                    <strong className="text-zinc-100">Product, UX & Research:</strong> Designed apps,
+                    UX flows, and research-backed concepts across compliance and diagnostic use cases,
+                    from early process discovery to high-fidelity delivery.
                   </li>
                   <li>
-                    <strong className="text-zinc-100">KoVoN COP Platform:</strong> Designed and
-                    validated a scalable pilot web tool for Conformity of Production (COP)
-                    documentation for 500+ users, translating complex legal regulations into
-                    actionable software requirements.
+                    <strong className="text-zinc-100">Motion & Pitches:</strong> Acted as second
+                    motion-design lead, preparing app visualizations, marketing pitches, and
+                    presentation assets for tools and larger townhall meetings.
                   </li>
                   <li>
-                    <strong className="text-zinc-100">CAESAR Dashboard:</strong> De-cluttered raw
-                    emission tables, introducing lasso-selection and visual threshold overrides to
-                    help experts detect anomalies prior to legal reporting.
+                    <strong className="text-zinc-100">Process & Design Management:</strong> Improved
+                    internal and client-side workflows, bridging design management, UX/UI execution,
+                    and automation analysis across multiple teams.
                   </li>
                 </ul>
               </article>
@@ -142,19 +146,27 @@ export default async function CVPage() {
               <article>
                 <header className="mb-3">
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-                    <h4 className="text-lg font-bold text-zinc-100">Freelance UX/UI Designer</h4>
+                    <h4 className="text-lg font-bold text-zinc-100">UX/UI & Motion Designer</h4>
                     <span className="font-mono text-sm text-zinc-400">Feb 2020 — Present</span>
                   </div>
-                  <p className="text-sm font-medium text-primary">untitled ux</p>
+                  <p className="text-sm font-medium text-primary">Freelance & Agency Projects</p>
                 </header>
                 <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
                   <li>
-                    Delivered scalable design systems, user journey mapping, and high-fidelity
-                    prototyping for various B2B clients and enterprise ecosystems.
+                    Built untitled ux as an independent practice with a focus on restaurant and
+                    client brandings, from logo systems to print and production-ready assets.
                   </li>
                   <li>
-                    Consulted on AI automation use cases, integrating generative AI tools (ComfyUI,
-                    ChatGPT) for rapid ideation and workflow optimization.
+                    Delivered end-to-end brand applications including merchandise, print materials,
+                    and campaign visuals for small and mid-sized clients.
+                  </li>
+                  <li>
+                    Shifted toward motion design and produced social-media ad videos, from 3D-style
+                    rendered scenes to short graphic animations and classic design edits.
+                  </li>
+                  <li>
+                    Developed UX/UI concepts in Figma and translated brand ideas into web-ready
+                    designs and communication assets.
                   </li>
                 </ul>
               </article>
@@ -169,14 +181,14 @@ export default async function CVPage() {
                 </header>
                 <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
                   <li>
-                    Built an established culture brand from the ground up, managing a creative and
-                    operational team of 5–7 personnel.
+                    Served as final creative sign-off for festival communication, visual consistency,
+                    and cross-channel design quality.
+                  </li>
+                  <li>
+                    Produced the majority of print assets, including banners, construction-fence
+                    visuals, displays, merchandise, festival wristbands, and ticket materials.
                   </li>
                   <li>Scaled the event to 4,000+ visitors and over €250k in revenue.</li>
-                  <li>
-                    Optimized operational and financial processes to turn a Year 1 deficit into a
-                    sustainable ~€40k margin within three years.
-                  </li>
                 </ul>
               </article>
             </div>
@@ -202,7 +214,7 @@ export default async function CVPage() {
 
               <article className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                 <div>
-                  <h4 className="text-base font-bold text-zinc-100">Master of Arts / Science</h4>
+                  <h4 className="text-base font-bold text-zinc-100">Master of Science (M.Sc.) UX Design</h4>
                   <p className="text-sm text-zinc-400">Technische Hochschule Ingolstadt</p>
                 </div>
                 <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">
@@ -224,7 +236,7 @@ export default async function CVPage() {
 
               <article className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                 <div>
-                  <h4 className="text-base font-bold text-zinc-100">Bachelor of Arts / Science</h4>
+                  <h4 className="text-base font-bold text-zinc-100">Bachelor of Science (B.Sc.)</h4>
                   <p className="text-sm text-zinc-400">Technische Hochschule Ingolstadt</p>
                 </div>
                 <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">

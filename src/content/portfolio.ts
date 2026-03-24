@@ -142,7 +142,11 @@ export const portfolio: PortfolioSource = {
       'Successfully pitched and delivered an automated routine to protect local data. I created a highly detailed Process Design Document (PDD)—documenting every single click and step a bot must take—so responsible stakeholders could safely review and approve the routines. This ended manual rework cycles and restored data integrity across the inheritance tree.',
     outcomes: ['Ended manual rework cycles.', 'Integrity restored across the tree.'],
     tags: ['automation', 'sap'],
-    impactCards: [{ label: 'Efficiency', value: 'High' }, { label: 'PDD Pages', value: '36' }],
+    impactCards: [
+      { label: 'PDD', value: '37 pages' },
+      { label: 'Weekly time saved', value: '4h / expert' },
+      { label: 'Experts impacted', value: '10' },
+    ],
     outcomeHighlight: { value: 'PDD', label: 'Safe', description: 'Stopped data destruction in the VW/Audi inheritance tree.', icon: 'Zap' },
     caseStudy: caseStudyAutomation,
   },

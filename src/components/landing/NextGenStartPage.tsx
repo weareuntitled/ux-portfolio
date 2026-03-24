@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -10,91 +8,25 @@ import {
   Sparkles,
   Zap,
   ExternalLink,
-  Box,
-  FileText,
   Star,
   Workflow,
 } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { contact } from '@/content/home';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 
 export function NextGenStartPage() {
-  const reduceMotion = useReducedMotion();
-  const EASE = [0.16, 1, 0.3, 1] as const;
-
-  const t = {
-    heroCard: reduceMotion ? 0 : 0.85,
-    heroImage: reduceMotion ? 0 : 0.9,
-    left: reduceMotion ? 0 : 0.75,
-    proof: reduceMotion ? 0 : 0.6,
-  };
-
-  const vHeroCard = {
-    hidden: { opacity: 0, y: -26, scale: 0.965 },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: t.heroCard, ease: EASE },
-    },
-  };
-
-  const vHeroImage = {
-    hidden: { opacity: 0.9, x: -12, scale: 1.08, filter: 'blur(2px)' },
-    show: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: { duration: t.heroImage, ease: EASE, delay: reduceMotion ? 0 : 0.12 },
-    },
-  };
-
-  const vLeft = {
-    hidden: { opacity: 0, y: 16 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: t.left, ease: EASE, delay: reduceMotion ? 0 : 0.22 },
-    },
-  };
-
-  const vProofWrap = {
-    hidden: {},
-    show: {
-      transition: {
-        delayChildren: reduceMotion ? 0 : 0.62,
-        staggerChildren: reduceMotion ? 0 : 0.08,
-      },
-    },
-  };
-
-  const vProofItem = {
-    hidden: { opacity: 0, y: 14, scale: 0.985 },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: t.proof, ease: EASE },
-    },
-  };
-
   return (
-    <main className="flex min-w-0 flex-1 flex-col bg-background">
-      <div className="mx-auto max-w-5xl space-y-24 px-4 py-8 md:px-8 md:py-16">
+    <main className="flex min-w-0 flex-1 flex-col bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="mx-auto max-w-5xl space-y-24 px-4 py-10 md:px-8 md:py-16">
         {/* Hero */}
         <section
           className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between"
           aria-label="Hero"
         >
           {/* Left side builds after the picture card */}
-          <motion.div
+          <div
             className="flex-1 space-y-6"
-            variants={vLeft}
-            initial="hidden"
-            animate="show"
           >
             <div className="flex flex-wrap items-center gap-2">
               <div className="group relative inline-flex cursor-help items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-green-500 transition-colors hover:bg-green-500/20">
@@ -120,7 +52,7 @@ export function NextGenStartPage() {
             </div>
 
             <div>
-              <h1 className="text-5xl font-bold tracking-tighter text-foreground sm:text-6xl md:text-7xl">
+              <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl md:text-7xl">
                 {contact.name}.
               </h1>
               <p className="mt-4 text-xl font-medium text-primary">Senior Enterprise Product Designer</p>
@@ -150,84 +82,40 @@ export function NextGenStartPage() {
                 View CV
               </Link>
             </div>
-          </motion.div>
+          </div>
 
           {/* Picture card opens first, from above, scaling up */}
-          <motion.div
+          <div
             className="w-full max-w-md shrink-0 lg:w-[420px]"
-            variants={vHeroCard}
-            initial="hidden"
-            animate="show"
           >
             <div className="rounded-2xl border border-border bg-card p-2 shadow-sm transition-shadow hover:shadow-md">
               <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gradient-to-br from-muted via-muted/90 to-muted/70">
-                {/* Animated background layer inside the picture card */}
-                {!reduceMotion && (
-                  <motion.div
-                    className="absolute inset-0"
-                    style={{
-                      backgroundImage:
-                        'radial-gradient(800px 400px at 30% 30%, rgba(132,204,22,0.20), transparent 60%), radial-gradient(700px 500px at 70% 70%, rgba(132,204,22,0.10), transparent 60%)',
-                      backgroundSize: '200% 200%',
-                    }}
-                    animate={{
-                      backgroundPosition: ['0% 0%', '100% 100%'],
-                      opacity: [0.22, 0.36, 0.22],
-                    }}
-                    transition={{
-                      duration: 10,
-                      repeat: Infinity,
-                      repeatType: 'mirror',
-                      ease: 'linear',
-                    }}
-                  />
-                )}
 
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
 
                 <div className="absolute inset-0 flex items-center justify-center p-6">
-                  <motion.div
+                  <div
                     className="relative h-full w-full max-h-[280px] max-w-[280px] overflow-hidden rounded-full border border-border/50 shadow-2xl backdrop-blur-sm"
-                    variants={vHeroImage}
-                    initial="hidden"
-                    animate="show"
                   >
                     <Image
                       src={contact.profileImage}
                       alt={contact.name}
                       fill
                       priority
-                      className="object-cover object-center mix-blend-luminosity"
+                      className="object-cover object-center"
                     />
-
-                    {/* subtle shine sweep */}
-                    {!reduceMotion && (
-                      <motion.div
-                        className="pointer-events-none absolute inset-0"
-                        style={{
-                          background:
-                            'linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.10) 35%, transparent 70%)',
-                          transform: 'translateX(-60%)',
-                        }}
-                        animate={{ transform: ['translateX(-60%)', 'translateX(60%)'] }}
-                        transition={{ duration: 1.6, ease: EASE, delay: 0.35 }}
-                      />
-                    )}
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* Proof cards pop one after another */}
-        <motion.section
+        <section
           className="grid grid-cols-2 gap-4 lg:grid-cols-4"
-          variants={vProofWrap}
-          initial="hidden"
-          animate="show"
         >
-          <motion.div variants={vProofItem} className="group flex flex-col gap-2 rounded-xl border border-border bg-muted/20 p-6 transition-colors hover:bg-muted/40">
+          <div className="group flex flex-col gap-2 rounded-xl border border-border bg-muted/20 p-6 transition-colors hover:bg-muted/40">
             <div className="flex items-center justify-between">
               <Package className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
               <span className="rounded-full border border-border bg-background/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -237,9 +125,9 @@ export function NextGenStartPage() {
             <p className="text-xs uppercase tracking-widest text-muted-foreground">Enterprise tools shipped</p>
             <p className="text-2xl font-semibold tracking-tight text-foreground">3</p>
             <p className="text-xs text-muted-foreground">Compliance and diagnostic systems</p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={vProofItem} className="group flex flex-col gap-2 rounded-xl border border-border bg-muted/20 p-6 transition-colors hover:bg-muted/40">
+          <div className="group flex flex-col gap-2 rounded-xl border border-border bg-muted/20 p-6 transition-colors hover:bg-muted/40">
             <div className="flex items-center justify-between">
               <Users className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
               <span className="rounded-full border border-border bg-background/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -249,9 +137,9 @@ export function NextGenStartPage() {
             <p className="text-xs uppercase tracking-widest text-muted-foreground">Websites and apps shipped</p>
             <p className="text-2xl font-semibold tracking-tight text-foreground">30+</p>
             <p className="text-xs text-muted-foreground">Delivered in consulting teams</p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={vProofItem} className="group flex flex-col gap-2 rounded-xl border border-primary/20 bg-primary/5 p-6 transition-colors hover:bg-primary/10">
+          <div className="group flex flex-col gap-2 rounded-xl border border-primary/20 bg-primary/5 p-6 transition-colors hover:bg-primary/10">
             <div className="flex items-center justify-between">
               <Sparkles className="h-5 w-5 text-primary" />
               <span className="rounded-full border border-primary/20 bg-background/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-primary/80">
@@ -261,9 +149,9 @@ export function NextGenStartPage() {
             <p className="text-xs uppercase tracking-widest text-primary/70">Brands elevated</p>
             <p className="text-2xl font-semibold tracking-tight text-primary">10+</p>
             <p className="text-xs text-primary/70">Branding and design from scratch</p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={vProofItem} className="group flex flex-col gap-2 rounded-xl border border-border bg-muted/20 p-6 transition-colors hover:bg-muted/40">
+          <div className="group flex flex-col gap-2 rounded-xl border border-border bg-muted/20 p-6 transition-colors hover:bg-muted/40">
             <div className="flex items-center justify-between">
               <Zap className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
               <span className="rounded-full border border-border bg-background/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -273,8 +161,8 @@ export function NextGenStartPage() {
             <p className="text-xs uppercase tracking-widest text-muted-foreground">Product direction</p>
             <p className="text-2xl font-semibold tracking-tight text-foreground">UX/UI</p>
             <p className="text-xs text-muted-foreground">Product design and delivery ownership</p>
-          </motion.div>
-        </motion.section>
+          </div>
+        </section>
 
         {/* Core Capabilities */}
         <section className="space-y-6 pt-8">
@@ -283,8 +171,23 @@ export function NextGenStartPage() {
               Core Capabilities
             </h2>
             <p className="text-sm text-muted-foreground">
-              How I work. What teams get from me.
+              End-to-end product strength: from discovery and UX depth to technical execution and delivery leadership.
             </p>
+          </div>
+
+
+
+          <div className="rounded-2xl border border-border bg-card/70 p-5 shadow-sm">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              I combine <span className="font-medium text-foreground">deep product UX/UI expertise</span> with
+              <span className="font-medium text-foreground"> technical fluency</span> and
+              <span className="font-medium text-foreground"> process leadership</span> — so ideas become shippable outcomes.
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2 text-xs">
+              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">Research → Concept → Delivery</li>
+              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">AI-assisted execution</li>
+              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">Cross-functional collaboration</li>
+            </ul>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -386,7 +289,11 @@ export function NextGenStartPage() {
         </section>
 
         {/* Selected Works — now KoVoN + FFP */}
-        <section id="featured-projects" className="scroll-mt-24 space-y-8 pt-8">
+        <section
+          id="featured-projects"
+          className="scroll-mt-24 space-y-8 pt-8"
+          style={{ contentVisibility: 'auto', containIntrinsicSize: '800px' }}
+        >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
@@ -416,9 +323,7 @@ export function NextGenStartPage() {
                     className="h-12 w-12 text-muted-foreground/50 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/50"
                     strokeWidth={1.5}
                   />
-                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground/50">
-                    Compliance / Confidential
-                  </span>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs uppercase tracking-wide text-muted-foreground">
@@ -433,7 +338,11 @@ export function NextGenStartPage() {
                   <p className="mb-4 flex-1 text-sm text-muted-foreground">
                     Audit-driven system to track verification status, ownership, and evidence across parts and vehicle systems.
                   </p>
-                  <ul className="mt-auto flex flex-wrap gap-2">
+                  <div className="mt-auto flex items-center gap-2 pb-3 text-xs font-medium text-primary/90 transition-transform duration-300 group-hover:translate-x-0.5">
+                    Open case study
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </div>
+                  <ul className="flex flex-wrap gap-2">
                     <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
                       compliance
                     </li>
@@ -453,12 +362,13 @@ export function NextGenStartPage() {
               <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
-                    src="/projects/ffp_dashboard_hero.jpg"
+                    src="/images/cap-delivery.jpg"
                     alt="FFP Dashboard"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover opacity-90 transition-transform duration-500 group-hover:opacity-100 group-hover:scale-105"
+                    className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
                   />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <div className="mb-2 flex items-start justify-between gap-2">
@@ -479,7 +389,11 @@ export function NextGenStartPage() {
                   <p className="mb-4 flex-1 text-sm text-muted-foreground">
                     Multi-workflow expert tool to connect supplier issues, production findings, and root-cause correlation in one dashboard.
                   </p>
-                  <ul className="mt-auto flex flex-wrap gap-2">
+                  <div className="mt-auto flex items-center gap-2 pb-3 text-xs font-medium text-primary/90 transition-transform duration-300 group-hover:translate-x-0.5">
+                    Open case study
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </div>
+                  <ul className="flex flex-wrap gap-2">
                     <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
                       diagnostics
                     </li>

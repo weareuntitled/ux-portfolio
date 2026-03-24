@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BookOpen, Briefcase, Building2, Calendar, ChevronLeft, ChevronRight, ShieldCheck, Sparkles, Target, Wrench, X } from 'lucide-react';
 
@@ -15,6 +16,7 @@ type DefaultProject = {
   year?: string;
   client?: string;
   roles?: string[];
+  teamSize?: string;
   problem?: string;
   solution?: string;
   outcomes?: string[];
@@ -317,6 +319,47 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
               </motion.div>
             ) : null}
           </section>
+        ) : null}
+
+        {project.impactCards?.length ? (
+          <motion.section
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE, delay: 0.1 }}
+            className="rounded-2xl border border-border bg-background/40 p-5 backdrop-blur-2xl"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Facts</h2>
+              <span className="text-xs text-muted-foreground">Bento badges</span>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {project.impactCards.slice(0, 3).map((card) => (
+                <div key={card.label} className="rounded-xl border border-border bg-background/60 p-4">
+                  <p className="text-lg font-semibold tracking-tight">{card.value}</p>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-muted-foreground">{card.label}</p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        ) : null}
+
+        {project.links?.length ? (
+          <motion.section
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE, delay: 0.12 }}
+            className="flex flex-wrap gap-3"
+          >
+            {project.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex h-10 items-center justify-center rounded-md border border-border bg-background/50 px-4 text-sm font-medium hover:bg-background"
+              >
+                {link.label === 'Live demo' ? project.prototypeButtonLabel ?? 'Live demo' : link.label}
+              </Link>
+            ))}
+          </motion.section>
         ) : null}
 
         {project.galleryUrls?.length ? (
