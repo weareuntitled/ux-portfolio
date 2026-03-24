@@ -17,11 +17,22 @@ import {
   Workflow,
 } from 'lucide-react';
 import { contact } from '@/content/home';
+import { getProjectBySlug, type PortfolioProject } from '@/content/portfolio';
 import { EducationSection } from '@/components/landing/EducationSection';
 import { ExperienceTimelineSection } from '@/components/landing/ExperienceTimelineSection';
+import { isRemoteImageSrc } from '@/lib/project-assets';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+function coverUnoptimized(src: string) {
+  return isRemoteImageSrc(src) || src.toLowerCase().endsWith('.gif');
+}
+
+const selectedFeatured = getProjectBySlug('kovon');
+const selectedGrid = (['ffp-dashboard', 'emission-compliance', 'automation'] as const)
+  .map((slug) => getProjectBySlug(slug))
+  .filter((p): p is PortfolioProject => p != null);
 
 export function NextGenStartPage() {
   const reduceMotion = useReducedMotion();
@@ -239,52 +250,86 @@ export function NextGenStartPage() {
             viewport={{ once: true, margin: '-50px' }}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
           >
-            <motion.div
-              variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.6, ease: EASE } } }}
-              whileHover={reduceMotion ? undefined : { y: -4 }}
-            >
-              <Link href="/projects/ffp-dashboard" className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-                <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
-                  <div className="relative aspect-[2.4/1] w-full bg-muted">
-                    <Image src="/images/cap-delivery.jpg" alt="FFP diagnostic dashboard" fill sizes="100vw" className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100" />
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="mb-2 flex items-center gap-2">
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">Enterprise · 2024</p>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
-                        <Star className="h-3 w-3 fill-current" />
-                        Featured
-                      </span>
+            {selectedFeatured ? (
+              <motion.div
+                variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.6, ease: EASE } } }}
+                whileHover={reduceMotion ? undefined : { y: -4 }}
+              >
+                <Link
+                  href={`/projects/${selectedFeatured.slug}`}
+                  className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
+                    <div className="relative aspect-[2.4/1] w-full bg-muted">
+                      {selectedFeatured.moodImageUrl ? (
+                        <Image
+                          src={selectedFeatured.moodImageUrl}
+                          alt=""
+                          fill
+                          sizes="(max-width: 1280px) 100vw, 1024px"
+                          className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
+                          unoptimized={coverUnoptimized(selectedFeatured.moodImageUrl)}
+                        />
+                      ) : (
+                        <div className="flex h-full min-h-[140px] items-center justify-center bg-gradient-to-br from-muted via-muted/90 to-muted/70">
+                          <FileText className="h-12 w-12 text-muted-foreground/50" strokeWidth={1.5} />
+                        </div>
+                      )}
                     </div>
-                    <h3 className="mb-1 text-2xl font-semibold text-foreground transition-colors group-hover:text-primary">FFP</h3>
-                    <p className="text-sm text-muted-foreground">Unified diagnostic prototype aligning root-cause investigation with expert mental models.</p>
-                  </div>
-                </article>
-              </Link>
-            </motion.div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="mb-2 flex items-center gap-2">
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                          {selectedFeatured.category} · {selectedFeatured.year}
+                        </p>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
+                          <Star className="h-3 w-3 fill-current" />
+                          Featured
+                        </span>
+                      </div>
+                      <h3 className="mb-1 text-2xl font-semibold text-foreground transition-colors group-hover:text-primary">{selectedFeatured.title}</h3>
+                      <p className="text-sm text-muted-foreground">{selectedFeatured.oneLiner}</p>
+                    </div>
+                  </article>
+                </Link>
+              </motion.div>
+            ) : null}
 
             <div className="grid gap-6 md:grid-cols-3">
-              {[
-                { href: '/projects/kovon', title: 'KoVoN', meta: 'Enterprise · 2022–2024', body: 'Compliance hub replacing Excel silos with audit-ready COP tracking for 200+ users.', icon: FileText, tags: ['compliance', 'enterprise'] },
-                { href: '/projects/emission-compliance', title: 'Emission Compliance', meta: 'Enterprise · 2024', body: 'High-speed dashboard surfacing regulatory breaches via visual encoding and adjustable thresholds.', icon: FileText, tags: ['compliance', 'enterprise'] },
-                { href: '/projects/automation', title: 'SAP Automation', meta: 'Enterprise · 2024', body: 'Automated routine stopping malicious SAP overwrites, documented in a 36-page PDD for safe stakeholder review.', icon: Zap, tags: ['automation', 'sap'] },
-              ].map((item) => (
+              {selectedGrid.map((item) => (
                 <motion.div
-                  key={item.title}
+                  key={item.slug}
                   variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
                   whileHover={reduceMotion ? undefined : { y: -4 }}
                 >
-                  <Link href={item.href} className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-                    <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
-                      <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-t-xl bg-gradient-to-br from-muted via-muted/90 to-muted/70">
-                        <item.icon className="h-10 w-10 text-muted-foreground/60 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/60" strokeWidth={1.5} />
+                  <Link
+                    href={`/projects/${item.slug}`}
+                    className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  >
+                    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
+                      <div className="relative aspect-video w-full bg-muted">
+                        {item.moodImageUrl ? (
+                          <Image
+                            src={item.moodImageUrl}
+                            alt=""
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
+                            unoptimized={coverUnoptimized(item.moodImageUrl)}
+                          />
+                        ) : (
+                          <div className="flex h-full min-h-[160px] items-center justify-center bg-gradient-to-br from-muted via-muted/90 to-muted/70">
+                            <Workflow className="h-10 w-10 text-muted-foreground/50" strokeWidth={1.5} />
+                          </div>
+                        )}
                       </div>
                       <div className="flex flex-1 flex-col p-5">
-                        <p className="text-xs uppercase tracking-wide text-muted-foreground">{item.meta}</p>
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                          {item.category} · {item.year}
+                        </p>
                         <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">{item.title}</h3>
-                        <p className="mb-4 flex-1 text-sm text-muted-foreground">{item.body}</p>
+                        <p className="mb-4 flex-1 text-sm text-muted-foreground">{item.oneLiner}</p>
                         <ul className="mt-auto flex flex-wrap gap-2">
-                          {item.tags.map((tag) => (
+                          {(item.tags ?? []).map((tag) => (
                             <li key={tag} className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">{tag}</li>
                           ))}
                         </ul>
