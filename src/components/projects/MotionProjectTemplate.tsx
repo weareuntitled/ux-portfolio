@@ -1,10 +1,10 @@
-﻿'use client';
+'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ExternalLink, Film, Calendar, Briefcase, Sparkles } from 'lucide-react';
+import { BookOpen, Briefcase, Building2, Calendar, ChevronLeft, ChevronRight, ExternalLink, Film, Sparkles, X } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
 import { cn } from '@/lib/utils';
@@ -17,6 +17,8 @@ type MotionProject = {
   year?: string;
   client?: string;
   roles?: string[];
+  description?: string;
+  tags?: string[];
   galleryUrls?: string[];
   moodImageUrl?: string | null;
   category?: string;
@@ -39,26 +41,112 @@ function isGif(url: string) {
   return url.toLowerCase().endsWith('.gif');
 }
 
-function GalleryGrid({ urls }: { urls: string[] }) {
+function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (activeIndex === null) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveIndex(null);
+      if (e.key === 'ArrowLeft') {
+        setActiveIndex((prev) => {
+          if (prev === null) return null;
+          return prev > 0 ? prev - 1 : urls.length - 1;
+        });
+      }
+      if (e.key === 'ArrowRight') {
+        setActiveIndex((prev) => {
+          if (prev === null) return null;
+          return prev < urls.length - 1 ? prev + 1 : 0;
+        });
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [activeIndex, urls.length]);
+
   if (!urls?.length) return null;
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {urls.map((src) => (
-        <div key={src} className="relative overflow-hidden rounded-2xl border border-border bg-muted">
-          <div className="relative aspect-[16/10] w-full">
-            <Image
-              src={src}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 33vw"
-              unoptimized={isGif(src)}
-            />
+    <>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {urls.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            className="group relative overflow-hidden rounded-2xl border border-border bg-muted text-left transition-transform hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            onClick={() => setActiveIndex(i)}
+          >
+            <div className="relative aspect-[16/10] w-full">
+              <Image
+                src={src}
+                alt={`${title} visual ${i + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                unoptimized={isGif(src)}
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
+          </button>
+        ))}
+      </div>
+
+      {activeIndex !== null && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm">
+          <button
+            type="button"
+            onClick={() => setActiveIndex(null)}
+            className="absolute right-5 top-5 z-[101] rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          {urls.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() => setActiveIndex(activeIndex > 0 ? activeIndex - 1 : urls.length - 1)}
+                className="absolute left-4 top-1/2 z-[101] -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+              >
+                <ChevronLeft className="h-7 w-7" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveIndex(activeIndex < urls.length - 1 ? activeIndex + 1 : 0)}
+                className="absolute right-4 top-1/2 z-[101] -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+              >
+                <ChevronRight className="h-7 w-7" />
+              </button>
+            </>
+          )}
+          <div className="flex h-full w-full items-center justify-center p-6 md:p-12" onClick={() => setActiveIndex(null)}>
+            <div className="relative h-full w-full max-w-7xl">
+              <Image
+                src={urls[activeIndex]}
+                alt={`${title} expanded visual ${activeIndex + 1}`}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                quality={100}
+                priority
+              />
+            </div>
+          </div>
+          <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1 text-xs tracking-widest text-white">
+            {activeIndex + 1} / {urls.length}
           </div>
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 }
 
@@ -93,7 +181,7 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
 
         {project.client ? (
           <div className="flex items-center gap-2">
-            <Briefcase className="h-4 w-4" />
+            <Building2 className="h-4 w-4" />
             <span>{project.client}</span>
           </div>
         ) : null}
@@ -111,7 +199,18 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
               key={r}
               className="rounded-full border border-border bg-background/50 px-3 py-1 text-xs text-muted-foreground"
             >
+              <Briefcase className="mr-1 inline h-3 w-3" />
               {r}
+            </span>
+          ))}
+        </div>
+      ) : null}
+
+      {project.tags?.length ? (
+        <div className="flex flex-wrap gap-2 pt-1">
+          {project.tags.map((tag) => (
+            <span key={tag} className="rounded-full bg-muted px-2.5 py-1 text-[11px] text-muted-foreground">
+              {tag}
             </span>
           ))}
         </div>
@@ -128,7 +227,7 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
           )}
         >
           <ExternalLink className="h-4 w-4" />
-          Video auf YouTube ansehen
+          Watch on YouTube
         </Link>
       ) : null}
     </motion.aside>
@@ -168,6 +267,16 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
           </div>
         </motion.section>
 
+        {project.description ? (
+          <section className="rounded-2xl border border-border bg-background/40 p-5 backdrop-blur-2xl">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+              <BookOpen className="h-4 w-4" />
+              Description
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+          </section>
+        ) : null}
+
         {project.youtubeUrl ? (
           <motion.section
             initial={{ opacity: 0, y: 14 }}
@@ -202,7 +311,7 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
             className="space-y-4"
           >
             <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Gallery</h2>
-            <GalleryGrid urls={project.galleryUrls} />
+            <LightboxGallery urls={project.galleryUrls} title={project.title} />
           </motion.section>
         ) : null}
       </div>

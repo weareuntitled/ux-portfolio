@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { educationSnapshot, educationDetail } from '@/content/home';
+import { educationDetail, educationTimelineDetailed } from '@/content/home';
 
 export function EducationSection() {
   return (
@@ -15,9 +15,13 @@ export function EducationSection() {
         Education
       </h2>
       <div className="space-y-4 rounded-2xl border border-border bg-card p-6">
-        <div className="space-y-2 text-sm text-foreground">
-          {educationSnapshot.map((line, i) => (
-            <p key={i}>{line}</p>
+        <div className="space-y-3 text-sm text-foreground">
+          {educationTimelineDetailed.map((entry) => (
+            <div key={`${entry.degree}-${entry.period}`} className="rounded-xl border border-border bg-muted/30 p-3">
+              <p className="font-medium text-foreground">{entry.degree}</p>
+              <p className="text-muted-foreground">{entry.school}</p>
+              <p className="text-xs text-muted-foreground">{entry.period}{entry.grade ? ` | Grade: ${entry.grade}` : ''}</p>
+            </div>
           ))}
         </div>
         <Accordion type="single" collapsible className="w-full">

@@ -9,22 +9,22 @@ export const identityRole = 'Product Designer, UX UI';
 export const identitySubtitle = 'for Automotive Systems & Enterprise';
 export const identityOneSentence = 'Product Designer, UX UI for Automotive Systems and Enterprise tools.';
 export const identityTwoLines =
-  'Compliance workflows, dashboards, automation. Built in 8020 Consulting context.';
+  'Compliance workflows, enterprise dashboards, and automation systems.';
 /** Dense intro for About accordion */
 export const identitySupportLine =
-  'Enterprise tools for compliance, verification, dashboards, and automation. Built in the context of 8020 Consulting.';
+  'Enterprise product design for compliance, verification, dashboards, and automation.';
 export const identityContext =
-  'Context: 8020 Consulting. Product work across UX, Scrum, and process automation.';
+  'Built in automotive and enterprise consulting contexts across UX, Scrum, and process automation.';
 
 export const roleHeadline =
-  'Daniel Peters. product design - UX/UI - AI - Automation';
+  'Daniel Peters. Product Design — UX/UI — AI — Automation';
 
 /** Hero: H1 / H2 / Sub / Body (plan §3) */
 export const heroHeadline = 'Daniel Peters';
 export const heroH2 = 'Product Designer, UX UI';
 export const heroSub = 'for Automotive Systems & Enterprise';
 export const heroBody =
-  'I design complex enterprise tools in regulated environments. Built in 8020 Consulting context.';
+  'I design enterprise products for regulated environments, reducing cognitive load and improving delivery speed.';
 /** Micro line below hero CTAs */
 export const heroCtaMicroLine = 'Scroll for projects and case studies.';
 
@@ -65,8 +65,8 @@ export const featuredProjectSlugs = ['kovon', 'ffp-dashboard', 'emission-complia
 /** Display titles for featured projects (slug → title) */
 export const projectDisplayTitles: Record<string, string> = {
   kovon: 'KoVoN',
-  'ffp-dashboard': 'FFP Dashboard',
-  'emission-compliance': 'CAESAR', // Interaction & design exploration—reduce clutter, spot anomalies before reporting
+  'ffp-dashboard': 'FFP',
+  'emission-compliance': 'Emission Compliance',
   automation: 'SAP Bot',
 };
 
@@ -79,10 +79,10 @@ export function getProjectDisplayTitle(slug: string): string {
 }
 
 export const proofLine =
-  'Welcome to my sneak peek online portfolio. I work with awesome people for a greater vision of design aesthetics & art. Selected works 2019–2025. Available for work.';
+  'Selected work across enterprise product design, automation, and multidisciplinary execution.';
 
 export const experienceLine =
-  '9+ years of experience. Certified SAFe 6.0 Scrum Master. Design Management, Product Management, Strategic design, User Journeys, Workshops.';
+  'Senior Enterprise Product Designer focused on reducing cognitive load, accelerating delivery, and translating complex architecture into actionable product decisions.';
 
 export const proofStrip = [
   { label: 'Projects done', value: '45+' },
@@ -93,7 +93,7 @@ export const proofStrip = [
 ] as const;
 
 export const visionStatement =
-  'I work with awesome people for a greater vision of design aesthetics & art. My 3 key principles are:';
+  'My product design principles:';
 
 export const principles = [
   {
@@ -295,18 +295,18 @@ export const aboutStats = [
 ] as const;
 
 /** Section 3: About heading */
-export const aboutHeading = "More than just a job—it's a craft.";
+export const aboutHeading = 'Designing clarity in complex systems.';
 
 /** Education snapshot: 2 lines for main page */
 export const educationSnapshot = [
-  'MSc User Experience Design, Technische Hochschule Ingolstadt, grade 1.3, Mar 2022 – Mar 2024',
-  'BSc User Experience Design, Technische Hochschule Ingolstadt, Oct 2014 – Mar 2019',
+  'Master of Science, User Experience Design (Grade: 1.3) | TH Ingolstadt | 2020–2023',
+  'Bachelor of Science, User Experience Design | TH Ingolstadt | 2014–2019',
 ] as const;
 
 /** Education accordion: thesis, module highlights, certs */
 export const educationDetail = {
-  thesisTitle: 'Master thesis: The Influence of Environment Design on Attention & Learning. A Comparison of Abstract and Biophilic VR Environments.',
-  moduleHighlights: 'UX research, design systems, human-computer interaction, VR/AR studies.',
+  thesisTitle: 'Master thesis: The Influence of Environment Design on Attention & Learning in VR.',
+  moduleHighlights: 'Virtual, augmented, and mixed reality, AI, ethical design, participatory design, agile methods, design management, interaction design.',
   certification: `Certified SAFe 6 Scrum Master, valid until ${certification.validUntil}.`,
 } as const;
 
@@ -321,31 +321,81 @@ export const servicesGrid = [
 /** Experience snapshot: 3 company cards (verified dates). Main page only. */
 export const experienceSnapshot = [
   {
-    company: 'Achtzig20 GmbH (8020)',
-    titleOrProgression: 'Junior Consultant (04 Jul 2022 – 31 Jan 2024), Management Consultant (since 01 Feb 2024)',
-    dates: 'Since 04 Jul 2022',
-    scopeOneLine: 'Enterprise product UX, Scrum, compliance and automation tools.',
+    company: 'Untitled-ux',
+    titleOrProgression: 'User Experience Designer | Self-employed',
+    dates: 'Mar 2020 – Present',
+    scopeOneLine: 'From Zero to One product delivery for founders and SMEs across web, brand, and cross-media touchpoints.',
   },
   {
-    company: 'untitled-ux',
-    titleOrProgression: 'Freelance (UX, Motion, Branding)',
-    dates: 'Since Feb 2020',
-    scopeOneLine: 'UX, motion design, and branding for clients.',
+    company: '8020.eco',
+    titleOrProgression: 'Management Consultant (since Feb 2024), previously Junior',
+    dates: 'Jul 2022 – Present',
+    scopeOneLine: 'Strategic design and implementation of digital enterprise products in agile SAFe environments.',
   },
   {
     company: 'smartpatient',
-    titleOrProgression: 'UX internship (Product and Marketing team)',
+    titleOrProgression: 'User Experience Designer | Internship',
     dates: 'Aug 2016 – Jan 2017',
-    scopeOneLine: 'Product and marketing team, Munich.',
+    scopeOneLine: 'Early user-centered product development across research, app iteration, and content strategy.',
   },
 ] as const;
 
-/** 8020 accordion: Selected enterprise projects, Responsibilities, Methods */
-export const experience8020Accordion = {
-  selectedProjects: 'KoVoN, FFP Dashboard, CAESAR (emission compliance), SAP automation and part verification. Delivered UX research, design systems, and workflow redesign for automotive and enterprise clients.',
-  responsibilities: 'Lead design and research for enterprise tools; stakeholder workshops; Jira & Confluence trainings; Scrum facilitation for teams up to 4.',
-  methods: 'User research (shadowing, interviews), Figma design systems, clickable prototypes, iterative refinement with stakeholders.',
-} as const;
+export const experienceTimelineDetailed = [
+  {
+    company: 'Untitled-ux',
+    role: 'User Experience Designer | Self-employed',
+    period: 'Mar 2020 – Present',
+    location: 'Aichach-Friedberg, Bavaria, Germany',
+    summary:
+      'With untitled-ux, I help founders and SMEs translate their visions into tangible, market-ready products. I guide projects holistically from Zero to One, from initial strategic consulting to final go-live.',
+    bullets: [
+      'End-to-end web solutions (e.g., kathis-candybar.de, deinespanndecke.de).',
+      'Brand identity systems (e.g., rottmair.org).',
+      'Cross-media touchpoints across print and trade fairs.',
+      'Lean consulting for constrained budgets.',
+    ],
+  },
+  {
+    company: '8020.eco',
+    role: 'Management Consultant',
+    period: 'Jul 2022 – Present (Management Consultant since Feb 2024, previously Junior)',
+    location: 'Ingolstadt, Bavaria, Germany · Hybrid',
+    summary:
+      'Supporting automotive clients in the strategic design and implementation of digital enterprise products within an agile SAFe environment.',
+    bullets: [
+      'Predictable delivery: doubled accepted story points through developer-ready UI specifications.',
+      'Quality focus: systematic user testing reduced critical usability bugs by 80% up to MVP.',
+      'Process optimization: reduced cognitive load to minimize troubleshooting in complex SAP workflows.',
+      'Junior phase: web design, product management, and AR/VR prototyping.',
+    ],
+  },
+  {
+    company: 'smartpatient',
+    role: 'User Experience Designer | Internship',
+    period: 'Aug 2016 – Jan 2017',
+    location: 'Munich, Bavaria, Germany',
+    summary: 'Early practical experience in user-centered product development.',
+    bullets: [
+      'User research and testing, including in-person guerrilla testing.',
+      'App iteration by translating support tickets into UX requirements.',
+      'Content strategy and UI design, including infographics.',
+    ],
+  },
+] as const;
+
+export const educationTimelineDetailed = [
+  {
+    degree: 'Master of Science, User Experience Design',
+    school: 'TH Ingolstadt',
+    period: '2020–2023',
+    grade: '1.3',
+  },
+  {
+    degree: 'Bachelor of Science, User Experience Design',
+    school: 'TH Ingolstadt',
+    period: '2014–2019',
+  },
+] as const;
 
 /** Legacy: flat role | company | date (used on CV or fallback) */
 export const experienceTimeline = [

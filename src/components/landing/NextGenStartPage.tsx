@@ -13,23 +13,12 @@ import {
   Box,
   FileText,
   Star,
-  Info,
+  Workflow,
 } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { contact } from '@/content/home';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
-
-function HoverTooltip({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="group relative">
-      {children}
-      <div className="pointer-events-none invisible absolute left-0 top-full z-50 mt-2 w-[260px] rounded-md border border-border bg-popover px-3 py-2 text-xs leading-relaxed text-popover-foreground opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
-        {label}
-      </div>
-    </div>
-  );
-}
 
 export function NextGenStartPage() {
   const reduceMotion = useReducedMotion();
@@ -134,15 +123,15 @@ export function NextGenStartPage() {
               <h1 className="text-5xl font-bold tracking-tighter text-foreground sm:text-6xl md:text-7xl">
                 {contact.name}.
               </h1>
-              <p className="mt-4 text-xl font-medium text-primary">Product Designer, UX/UI</p>
+              <p className="mt-4 text-xl font-medium text-primary">Senior Enterprise Product Designer</p>
               <p className="mt-1 text-sm font-medium text-muted-foreground">
-                for Automotive & Enterprises
+                UX/UI for automotive and enterprise systems
               </p>
             </div>
 
             <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-              I design internal enterprise tools for compliance, diagnostics, and automation. Turning complex
-              systems into clear workflows that teams can run daily.
+              I design enterprise products for compliance, diagnostics, and automation, translating complex
+              architecture into clear workflows that teams can execute with confidence.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
@@ -287,7 +276,7 @@ export function NextGenStartPage() {
           </motion.div>
         </motion.section>
 
-        {/* Core Capabilities — with tooltips */}
+        {/* Core Capabilities */}
         <section className="space-y-6 pt-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
@@ -298,57 +287,62 @@ export function NextGenStartPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <HoverTooltip label="Discovery and alignment: shadowing, interviews, workflow mapping, requirements, stakeholder alignment, and decision framing.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Box className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <article className="group relative overflow-hidden rounded-full border border-border bg-card px-6 py-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+              <div className="flex min-h-16 items-center gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Box className="h-5 w-5" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Methodical thinking</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Strong UX foundation, structured discovery, alignment, and decisions. User and product centric.
-                  </p>
-                </div>
+                <h3 className="text-lg font-semibold text-foreground">Methodical Thinking</h3>
               </div>
-            </HoverTooltip>
+              <div className="pointer-events-none absolute inset-0 flex items-center rounded-full bg-black/60 px-8 opacity-0 transition-opacity group-hover:opacity-100">
+                <p className="text-sm leading-relaxed text-white">
+                  Discovery and alignment: shadowing, interviews, workflow mapping, requirements, stakeholder alignment, and decision framing.
+                </p>
+              </div>
+            </article>
 
-            <HoverTooltip label="Turn insights into shippable UI: interaction concept, information architecture, prototypes, handoff, and iteration with engineering constraints.">
-              <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Users className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-muted-foreground/70" />
+            <article className="group relative overflow-hidden rounded-full border border-border bg-card px-6 py-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+              <div className="flex min-h-16 items-center gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Users className="h-5 w-5" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Product-centric delivery</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Connect research, interaction concept, and constraints to ship enterprise workflows.
-                  </p>
-                </div>
+                <h3 className="text-lg font-semibold text-foreground">Product-Centric Delivery</h3>
               </div>
-            </HoverTooltip>
+              <div className="pointer-events-none absolute inset-0 flex items-center rounded-full bg-black/60 px-8 opacity-0 transition-opacity group-hover:opacity-100">
+                <p className="text-sm leading-relaxed text-white">
+                  Turn insights into shippable UI: interaction concept, information architecture, prototypes, handoff, and iteration with engineering constraints.
+                </p>
+              </div>
+            </article>
 
-            <HoverTooltip label="Fluent across systems: Jira, Confluence, Figma, prototyping, and technical collaboration. Comfortable translating process into automation-ready specs.">
-              <div className="flex flex-col justify-between rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-inner transition-all hover:bg-primary/10">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-background text-primary shadow-sm">
-                    <FileText className="h-5 w-5" />
-                  </div>
-                  <Info className="h-4 w-4 text-primary/70" />
+            <article className="group relative overflow-hidden rounded-full border border-border bg-card px-6 py-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+              <div className="flex min-h-16 items-center gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <FileText className="h-5 w-5" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-primary">Tools and systems fluency</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-primary/80">
-                    Jira, Confluence, Figma, prototyping, technical collaboration, plus automation mindset.
-                  </p>
-                </div>
+                <h3 className="text-lg font-semibold text-foreground">Tools and Systems Fluency</h3>
               </div>
-            </HoverTooltip>
+              <div className="pointer-events-none absolute inset-0 flex items-center rounded-full bg-black/60 px-8 opacity-0 transition-opacity group-hover:opacity-100">
+                <p className="text-sm leading-relaxed text-white">
+                  Fluent across systems: Jira, Confluence, Figma, prototyping, and technical collaboration. Comfortable translating process into automation-ready specs.
+                </p>
+              </div>
+            </article>
+
+            <article className="group relative overflow-hidden rounded-full border border-border bg-card px-6 py-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+              <div className="flex min-h-16 items-center gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Workflow className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">System Thinking</h3>
+              </div>
+              <div className="pointer-events-none absolute inset-0 flex items-center rounded-full bg-black/60 px-8 opacity-0 transition-opacity group-hover:opacity-100">
+                <p className="text-sm leading-relaxed text-white">
+                  Translate enterprise complexity into coherent architecture: clear ownership, scalable components, and low-cognitive-load decision paths.
+                </p>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -399,7 +393,7 @@ export function NextGenStartPage() {
                 Selected Works
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Strongest case studies across compliance and diagnostics.
+                Enterprise case studies focused on clarity, control, and delivery impact.
               </p>
             </div>
             <Link
@@ -414,9 +408,9 @@ export function NextGenStartPage() {
             {/* KoVoN */}
             <Link
               href="/projects/kovon"
-              className="group block h-full cursor-pointer rounded-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
-              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg">
+              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
                 <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-t-xl bg-gradient-to-br from-muted via-muted/90 to-muted/70">
                   <FileText
                     className="h-12 w-12 text-muted-foreground/50 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/50"
@@ -431,7 +425,7 @@ export function NextGenStartPage() {
                     Enterprise · 2022–2024
                   </p>
                   <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                    KoVoN Compliance Documentation Tool
+                    KoVoN
                   </h3>
                   <p className="mb-2 text-xs text-muted-foreground">
                     Role: Product and UX concept, Scrum facilitation
@@ -454,9 +448,9 @@ export function NextGenStartPage() {
             {/* FFP */}
             <Link
               href="/projects/ffp-dashboard"
-              className="group block h-full cursor-pointer rounded-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
-              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg">
+              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
                     src="/projects/ffp_dashboard_hero.jpg"
@@ -479,7 +473,7 @@ export function NextGenStartPage() {
                     </div>
                   </div>
                   <h3 className="mb-1 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                    Failure Fingerprint Dashboard
+                    FFP
                   </h3>
                   <p className="mb-2 text-xs text-muted-foreground">Role: UX UI Designer</p>
                   <p className="mb-4 flex-1 text-sm text-muted-foreground">

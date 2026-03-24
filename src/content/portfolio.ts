@@ -99,7 +99,7 @@ export const portfolio: PortfolioSource = {
     slug: 'kovon',
     title: 'KoVoN COP Pilot',
     navTitle: 'KoVoN COP pilot',
-    subtitle: 'Ending "Audit-Panic".',
+    subtitle: 'Ending Audit-Panic through Conformity of Production.',
     oneLiner: 'Angular pilot that replaced fragmented Excel silos with a transparent compliance hub.',
     category: 'Enterprise',
     year: '2022 - 2024',
@@ -107,8 +107,12 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('kovon'),
     galleryUrls: getGallery('kovon'),
     roles: ['Product Designer', 'Scrum Master'],
-    problem: 'The team was "flying blind" into audits because status was buried in email threads and local files.',
-    solution: 'I moved the team into a structured Angular environment that maps regulations to clear ownership.',
+    problem:
+      'Conformity of Production (COP) regulations require rigorous documentation of every vehicle part to meet strict UN standards. If an audit fails, vehicle production halts. The team was flying blind because the mapping of evolving regulations to tasks, and tracking the responsible external persons (outside IT) to verify parts, was buried in fragmented Excel silos.',
+    solution:
+      'I designed an enterprise-grade compliance hub that provides a highly maintainable framework to organize COP workflows. It enables seamless updates to both vehicle project structures and regulatory task requirements, assigns clear ownership to stakeholders, and streamlines reporting via secure read-only links.',
+    description:
+      'Replaced Excel tracking chaos with a centralized Angular platform. By structuring complex task hierarchies and providing read-only reporting links, the tool ensures 100% data confidence, clear accountability, and complete audit readiness for over 200 active users.',
     outcomes: ['Eliminated Excel tracking chaos.', '100% visibility for audits.', '200 active users.'],
     tags: ['compliance', 'enterprise', 'automotive'],
     impactCards: [{ label: 'Active Users', value: '200+' }, { label: 'Audit Risk', value: 'Eliminated' }],
@@ -130,8 +134,12 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('automation'),
     galleryUrls: getGallery('automation'),
     roles: ['Automation Manager', 'Process Analyst'],
-    problem: "Validated Audi data was being destroyed by VW platform updates, forcing weeks of manual rework.",
-    solution: 'A safe automated routine and PDD that allows admins to protect local data from corporate overwrites.',
+    problem:
+      '"Malicious Overwrites". Over-secure, legacy SAP automations from the 2000s were destroying validated Audi data during VW platform updates. Fixing these errors forced 10 experts to spend 2 hours each per week (eating up 60-70% of their workweek just fixing bugs).',
+    solution:
+      'We analyzed 18 processes and abstracted 5 core use cases, prioritizing the "low-hanging fruit" to save budget. We fully automated the primary workflow and designed an AI-assisted flow for the second to detect overrides and escalate only complex cases for human review.',
+    description:
+      'Successfully pitched and delivered an automated routine to protect local data. I created a highly detailed Process Design Document (PDD)—documenting every single click and step a bot must take—so responsible stakeholders could safely review and approve the routines. This ended manual rework cycles and restored data integrity across the inheritance tree.',
     outcomes: ['Ended manual rework cycles.', 'Integrity restored across the tree.'],
     tags: ['automation', 'sap'],
     impactCards: [{ label: 'Efficiency', value: 'High' }, { label: 'PDD Pages', value: '36' }],
@@ -150,8 +158,12 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('emission-compliance'),
     galleryUrls: getGallery('emission-compliance'),
     roles: ['UX Designer', 'UI Designer'],
-    problem: 'Table clutter buried anomalies, creating high regulatory risk.',
-    solution: 'Hierarchy-first design with consistent visual encoding and adjustable thresholds.',
+    problem:
+      'Critical compliance, contract, and physiological data was buried within cluttered tables, creating a high regulatory risk of overlooking anomalies.',
+    solution:
+      'Created an easy-to-scan visualization dashboard using hierarchy-first design, visual encoding, and adjustable thresholds.',
+    description:
+      'A high-speed reporting dashboard designed to surface critical breaches instantly. By translating complex data into a clear visual hierarchy, we drastically optimized scan speed and restored 100% control for the users, avoiding overlooked regulatory breaches.',
     tags: ['compliance', 'enterprise'],
     outcomeHighlight: { value: '100%', label: 'Control', description: 'Optimized scan speed to ensure zero overlooked breaches.', icon: 'BarChart3' },
     caseStudy: caseStudyCaesar,
@@ -168,8 +180,12 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('ffp-dashboard'),
     galleryUrls: getGallery('ffp-dashboard'),
     roles: ['UX/UI Designer'],
-    problem: 'Experts were context-hopping between data silos, slowing critical failure analysis.',
-    solution: 'A unified high-fidelity prototype following the expert "investigation story."',
+    problem:
+      'Experts were forced to context-hop between isolated data silos, hindering automotive diagnostics. I was brought in after six months of fragmented meetings to untangle the messy information architecture and user flows.',
+    solution:
+      'I gathered all ideas and structured them into a cohesive architectural flow. I abstracted elements into reusable modular components and mapped out complex workflows (e.g., holiday entry, overtime exit).',
+    description:
+      "Reshaped automotive diagnostics from symptom-first triage to root-cause synthesis. I created a unified high-fidelity prototype that perfectly aligns the UI with the experts' mental model, providing a true investigative story for the users.",
     tags: ['enterprise', 'diagnostics'],
     outcomeHighlight: { value: '1', label: 'Story', description: "Aligned the diagnostic UI with the expert's mental model.", icon: 'MousePointerClick' },
     portfolioKit: ffpKit,
@@ -191,6 +207,8 @@ export const portfolio: PortfolioSource = {
     roles: ['Lead UX/UI Designer', 'Scrum Master'],
     problem: 'Corporate design often lacks soul; creative work often lacks process.',
     solution: 'Balanced a 60% logic and 40% creative workflow to ship homologation MVPs.',
+    description:
+      "A showcase of hybrid design leadership for the VW Group. This showreel highlights how we led teams to deliver polished digital products and homologation MVPs for AUDI and VW, proving that corporate design doesn't have to lack soul, and creative work doesn't have to lack process (a balanced 60% logic / 40% creative workflow).",
     outcomeHighlight: { value: 'MVP', label: 'Shipped', description: 'Balanced strict process with premium visual standards.', icon: 'Layout' },
     caseStudy: { summary: 'Hybrid design leadership for the VW Group.' },
   },
@@ -211,6 +229,8 @@ export const portfolio: PortfolioSource = {
     context: 'Immersive visual storytelling for the electronic music scene and festivals.',
     problem: 'Standing out in the high-energy environment of music festivals requires bold, abstract, and rhythmic visual loops.',
     solution: 'Combined traditional 3D modeling with AI-driven animation workflows to create distinct visual identities for artists and stages.',
+    description:
+      'An immersive collection of recent 3D projects, event animations, and AI-driven workflows. This portfolio spans pictures, tutorials, campaigns, marketing assets, and Instagram edits tailored for the electronic music scene and festivals. By combining 3D modeling with AI, I created bold, rhythmic visual loops that stand out in a competitive industry.',
     outcomes: ['Delivered 3D and AI animations for music labels.', 'Created core visual assets for Kontrast Festival stages.'],
     tags: ['3d', 'motion', 'ai', 'events'],
     impactCards: [{ label: 'Deliverables', value: '3D & AI' }, { label: 'Span', value: '2021-2025' }],
@@ -231,6 +251,8 @@ export const portfolio: PortfolioSource = {
     roles: ['3D Artist', 'AI Architect'],
     problem: 'Manual rework for textures takes days per variant, stalling exploration.',
     solution: 'Fusing rough 3D modeling with local AI style generation.',
+    description:
+      'Manual texture rework in architectural visualization traditionally takes days per variant. I designed and implemented a local AI workflow combining rough 3D modeling with AI-driven style generation. This innovative approach reduced processing time from 3 days to just 3 hours, achieving a massive 24x speed increase.',
     outcomeHighlight: { value: '24x', label: 'Speedup', description: 'Generated style variants in 3 hours that usually take 3 days.', icon: 'Zap' },
     caseStudy: caseStudyArch,
   },
@@ -246,6 +268,10 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('tracklistify'),
     galleryUrls: getGallery('tracklistify'),
     roles: ['Indie Developer'],
+    description:
+      'An indie developer side-project focused on AI-driven DJ set analysis. Tracklistify Studio turns raw audio sets into actionable, accurate tracklists through advanced AI extraction, streamlining the workflow for music professionals.',
+    prototypeIframeUrl:
+      'http://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
     caseStudy: { summary: 'AI DJ set analysis.' },
   },
@@ -261,6 +287,10 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('fixundfertig'),
     galleryUrls: getGallery('fixundfertig'),
     roles: ['Developer'],
+    description:
+      'A personal admin automation tool developed to solve the headache of scattered receipts and invoices. By utilizing local OCR (Optical Character Recognition) extraction, the app unifies document intake and dramatically reduces manual data entry.',
+    prototypeIframeUrl:
+      'https://app.untitled-ux.de/share/read/eadba98795f9470d9c83faa722d4e72a',
     outcomeHighlight: { value: 'OCR', label: 'Intake', description: 'Ended manual receipt copying via custom engine.', icon: 'Scan' },
     caseStudy: { summary: 'Personal admin automation.' },
   },
@@ -276,6 +306,8 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('samani-rebranding'),
     galleryUrls: getGallery('samani-rebranding'),
     youtubeUrl: 'https://www.youtube.com/embed/vw8GUemVEH8',
+    description:
+      'A foolproof design system and self-sustaining label identity. I created a comprehensive After Effects and Figma template system that empowers non-designers to produce high-quality, on-brand content consistently over three years.',
     outcomeHighlight: { value: '3yrs', label: 'Content', description: 'Enabled a beginner to produce professional release videos for years.', icon: 'Box' },
     caseStudy: { summary: 'Self-sustaining label identity.' },
   },
@@ -291,6 +323,8 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('kontrast-festival'),
     galleryUrls: getGallery('kontrast-festival'),
     youtubeUrl: 'https://www.youtube.com/embed/Ufrnt73JJDU',
+    description:
+      'As Co-Founder and Design Lead, I spearheaded the visual identity and logistics for the Kontrast Festival over three years. I art-directed the chaos, managing a creative team and external partners to ensure consistent, 360-degree brand execution across all digital and physical touchpoints.',
     outcomeHighlight: { value: '360°', label: 'Directed', description: 'Led 5 core creatives under real-time festival conditions.', icon: 'Users' },
     caseStudy: { summary: 'Creative leadership under pressure.' },
   },
@@ -305,6 +339,8 @@ export const portfolio: PortfolioSource = {
     year: '2024',
     moodImageUrl: getPreviewImage('aidelsburger'),
     galleryUrls: getGallery('aidelsburger'),
+    description:
+      'A scalable brand metaphor for the industrial sector. This project transformed basic corporate typography into a high-impact, memorable identity metaphor, injecting modern branding practices into a traditional industry.',
     outcomeHighlight: { value: 'Meta', label: 'Phor', description: 'Replaced typographically limited logos with a soulful metaphor.', icon: 'Layout' },
     caseStudy: { summary: 'Industrial branding injection.' },
   },
@@ -324,6 +360,8 @@ export const portfolio: PortfolioSource = {
     context: 'A comprehensive collection of early work, including study projects, branding, and logos.',
     problem: 'Organizing diverse foundational work into a single written format to document early multidisciplinary growth.',
     solution: 'Built a structured written showcase highlighting versatility across web design and branding.',
+    description:
+      'A foundational written portfolio documenting four years (2018-2022) of multidisciplinary design studies, early branding projects, and logos. It structured diverse, early-career work into a cohesive narrative showcasing versatility.',
     outcomes: ['Successfully documented 4 years of multidisciplinary projects.'],
     tags: ['archive', 'design', 'written'],
     impactCards: [{ label: 'Format', value: 'Written' }, { label: 'Span', value: '2018-2022' }],
