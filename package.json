@@ -10,7 +10,9 @@
     "lint": "next lint",
     "seed": "curl -X POST \"http://localhost:3000/api/seed?secret=dev-preview-secret\"",
     "typecheck": "tsc --noEmit",
-    "update-images": "node scripts/update-gallery.mjs"
+    "update-images": "node scripts/update-gallery.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.76.1",
@@ -39,6 +41,7 @@
     "typecheck": "^0.1.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
