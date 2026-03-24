@@ -20,7 +20,10 @@ export function EducationSection() {
             <div key={`${entry.degree}-${entry.period}`} className="rounded-xl border border-border bg-muted/30 p-3">
               <p className="font-medium text-foreground">{entry.degree}</p>
               <p className="text-muted-foreground">{entry.school}</p>
-              <p className="text-xs text-muted-foreground">{entry.period}{entry.grade ? ` | Grade: ${entry.grade}` : ''}</p>
+              <p className="text-xs text-muted-foreground">
+                {entry.period}
+                {'grade' in entry && entry.grade ? ` | Grade: ${entry.grade}` : ''}
+              </p>
             </div>
           ))}
         </div>

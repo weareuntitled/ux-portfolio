@@ -1,9 +1,6 @@
 'use client';
 
 import {
-  FileText,
-  Globe,
-  Clock,
   Bot,
   LayoutGrid,
   Map,
@@ -12,7 +9,6 @@ import {
   GitBranch,
   UsersRound,
   FileJson,
-  Zap,
 } from 'lucide-react';
 import { VsystemKlevelsSection } from '@/components/automation/VsystemKlevelsSection';
 import { ScopeAndOperationSection } from '@/components/project/ScopeAndOperationSection';
