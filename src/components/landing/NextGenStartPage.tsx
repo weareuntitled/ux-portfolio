@@ -8,6 +8,8 @@ import {
   Sparkles,
   Zap,
   ExternalLink,
+  Box,
+  FileText,
   Star,
   Workflow,
 } from 'lucide-react';
@@ -175,21 +177,6 @@ export function NextGenStartPage() {
             </p>
           </div>
 
-
-
-          <div className="rounded-2xl border border-border bg-card/70 p-5 shadow-sm">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              I combine <span className="font-medium text-foreground">deep product UX/UI expertise</span> with
-              <span className="font-medium text-foreground"> technical fluency</span> and
-              <span className="font-medium text-foreground"> process leadership</span> — so ideas become shippable outcomes.
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-2 text-xs">
-              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">Research → Concept → Delivery</li>
-              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">AI-assisted execution</li>
-              <li className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">Cross-functional collaboration</li>
-            </ul>
-          </div>
-
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <article className="group relative overflow-hidden rounded-full border border-border bg-card px-6 py-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
               <div className="flex min-h-16 items-center gap-4">
@@ -323,32 +310,17 @@ export function NextGenStartPage() {
                     className="h-12 w-12 text-muted-foreground/50 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/50"
                     strokeWidth={1.5}
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Enterprise · 2022–2024
-                  </p>
-                  <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                    KoVoN
-                  </h3>
-                  <p className="mb-2 text-xs text-muted-foreground">
-                    Role: Product and UX concept, Scrum facilitation
-                  </p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Enterprise · 2022–2024</p>
+                  <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">KoVoN</h3>
+                  <p className="mb-2 text-xs text-muted-foreground">Product Design, Scrum</p>
                   <p className="mb-4 flex-1 text-sm text-muted-foreground">
-                    Audit-driven system to track verification status, ownership, and evidence across parts and vehicle systems.
+                    Compliance hub replacing Excel silos with audit-ready COP tracking for 200+ users.
                   </p>
-                  <div className="mt-auto flex items-center gap-2 pb-3 text-xs font-medium text-primary/90 transition-transform duration-300 group-hover:translate-x-0.5">
-                    Open case study
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </div>
-                  <ul className="flex flex-wrap gap-2">
-                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
-                      compliance
-                    </li>
-                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
-                      enterprise
-                    </li>
+                  <ul className="mt-auto flex flex-wrap gap-2">
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">compliance</li>
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">enterprise</li>
                   </ul>
                 </div>
               </article>
@@ -363,43 +335,82 @@ export function NextGenStartPage() {
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-muted">
                   <Image
                     src="/images/cap-delivery.jpg"
-                    alt="FFP Dashboard"
+                    alt="FFP diagnostic dashboard"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <div className="mb-2 flex items-start justify-between gap-2">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                        Enterprise · 2024
-                      </p>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-transparent bg-secondary px-2.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
-                        <Star className="h-3 w-3 fill-current" />
-                        Featured
-                      </span>
-                    </div>
+                  <div className="mb-2 flex items-center gap-2">
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground">Enterprise · 2024</p>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
+                      <Star className="h-3 w-3 fill-current" />
+                      Featured
+                    </span>
                   </div>
-                  <h3 className="mb-1 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                    FFP
-                  </h3>
-                  <p className="mb-2 text-xs text-muted-foreground">Role: UX UI Designer</p>
+                  <h3 className="mb-1 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">FFP</h3>
+                  <p className="mb-2 text-xs text-muted-foreground">UX/UI Design</p>
                   <p className="mb-4 flex-1 text-sm text-muted-foreground">
-                    Multi-workflow expert tool to connect supplier issues, production findings, and root-cause correlation in one dashboard.
+                    Unified diagnostic prototype aligning root-cause investigation with expert mental models.
                   </p>
-                  <div className="mt-auto flex items-center gap-2 pb-3 text-xs font-medium text-primary/90 transition-transform duration-300 group-hover:translate-x-0.5">
-                    Open case study
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </div>
-                  <ul className="flex flex-wrap gap-2">
-                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
-                      diagnostics
-                    </li>
-                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
-                      data-viz
-                    </li>
+                  <ul className="mt-auto flex flex-wrap gap-2">
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">diagnostics</li>
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">data-viz</li>
+                  </ul>
+                </div>
+              </article>
+            </Link>
+
+            {/* Emission Compliance */}
+            <Link
+              href="/projects/emission-compliance"
+              className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
+                <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-t-xl bg-gradient-to-br from-muted via-muted/90 to-muted/70">
+                  <FileText
+                    className="h-12 w-12 text-muted-foreground/50 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/50"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Enterprise · 2024</p>
+                  <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">Emission Compliance</h3>
+                  <p className="mb-2 text-xs text-muted-foreground">UX/UI Design</p>
+                  <p className="mb-4 flex-1 text-sm text-muted-foreground">
+                    High-speed dashboard surfacing regulatory breaches via visual encoding and adjustable thresholds.
+                  </p>
+                  <ul className="mt-auto flex flex-wrap gap-2">
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">compliance</li>
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">enterprise</li>
+                  </ul>
+                </div>
+              </article>
+            </Link>
+
+            {/* SAP Automation */}
+            <Link
+              href="/projects/automation"
+              className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              <article className="flex h-full flex-col rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
+                <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-t-xl bg-gradient-to-br from-muted via-muted/90 to-muted/70">
+                  <Zap
+                    className="h-12 w-12 text-muted-foreground/50 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/50"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Enterprise · 2024</p>
+                  <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">SAP Automation</h3>
+                  <p className="mb-2 text-xs text-muted-foreground">Process Analysis, Automation</p>
+                  <p className="mb-4 flex-1 text-sm text-muted-foreground">
+                    Automated routine stopping malicious SAP overwrites, documented in a 36-page PDD for safe stakeholder review.
+                  </p>
+                  <ul className="mt-auto flex flex-wrap gap-2">
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">automation</li>
+                    <li className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">sap</li>
                   </ul>
                 </div>
               </article>

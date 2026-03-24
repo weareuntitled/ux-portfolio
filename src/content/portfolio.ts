@@ -6,7 +6,6 @@ import type {
   BentoCardItem,
   TechnicalSpecItem,
   KovonConfig,
-  ContentTabItem,
 } from './portfolio.types';
 
 // 1. IMPORT DER GALLERY-MAP (Generated via scripts/update-gallery.mjs)

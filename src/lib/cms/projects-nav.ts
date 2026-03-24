@@ -16,6 +16,7 @@ export type NavProjectWithImage = {
  * We don’t actually need draftMode for the local content source,
  * but we keep the signature to avoid breaking imports.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function getProjectsForNav(_opts?: { draftMode?: boolean }): Promise<NavProjectWithImage[]> {
   const all = getAllProjects();
 

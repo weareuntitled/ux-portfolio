@@ -26,6 +26,9 @@ type DefaultProject = {
   galleryUrls?: string[];
   moodImageUrl?: string | null;
   category?: string;
+  impactCards?: { label: string; value: string }[];
+  links?: { label: string; href: string }[];
+  prototypeButtonLabel?: string;
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;

@@ -22,6 +22,7 @@ export type {
 
 /** Core project only (strip case study, portfolio kit, kovon, impactCards for legacy callers). */
 function toProject(p: ReturnType<typeof getAllProjects>[number]): Project {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { caseStudy: _cs, portfolioKit: _pk, kovon: _kv, impactCards: _ic, ...rest } = p;
   return rest;
 }
