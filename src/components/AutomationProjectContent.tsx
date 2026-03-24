@@ -91,44 +91,6 @@ const AUTOMATION_SCOPE = {
     },
   ],
 };
-import { ResultImpactCard } from '@/components/project/ResultImpactCard';
-
-const AUTOMATION_RESULT_IMPACT = {
-  title: 'The 36-Page PDD',
-  description:
-    'Instead of handing over vague user stories, we delivered a comprehensive 36-page PDD for Use Case 1. It eliminated all guesswork for the IT team, detailing the "As-Is" manual state and the "To-Be" automated logic.',
-  metrics: [
-    {
-      value: '36 Pages',
-      label: 'Technical Spec',
-      description:
-        'A complete architectural blueprint bridging business needs and SAP execution.',
-      icon: FileText,
-    },
-    {
-      value: '100%',
-      label: 'Clicks & Screens',
-      description:
-        'Documented every single click, edge-case, and SAP screenshot required for UC1.',
-      icon: Globe,
-    },
-    {
-      value: '1 Hour',
-      label: 'Dev Handoff',
-      description:
-        'The document was so precise, we aligned and overhanded the entire logic to SAP devs in a single 60-minute appointment.',
-      icon: Clock,
-    },
-    {
-      value: '~7,000h',
-      label: 'Saved Annually',
-      description:
-        'Calculated ROI: 45 experts recovering ~3 hours per week over a 52-week production cycle.',
-      icon: Zap,
-      highlight: true,
-    },
-  ],
-};
 
 export function AutomationProjectContent() {
   return (

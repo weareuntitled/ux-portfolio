@@ -8,6 +8,8 @@ import {
   Sparkles,
   Zap,
   ExternalLink,
+  Box,
+  FileText,
   Star,
   Workflow,
 } from 'lucide-react';
