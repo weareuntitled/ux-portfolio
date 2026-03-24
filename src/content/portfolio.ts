@@ -378,6 +378,52 @@ export const portfolio: PortfolioSource = {
     caseStudy: { summary: 'Creative leadership under pressure.' },
   },
 
+  deinespanndecke: {
+    id: '20',
+    slug: 'deinespanndecke',
+    title: 'DeineSpanndecke',
+    navTitle: 'DeineSpanndecke',
+    subtitle: 'Local SEO, relaunch & performance leads.',
+    oneLiner:
+      'Website and logo rebrand, WordPress relaunch, Typebot funnel, and paid social that turned ~€100 ad spend into high-value spanndecken leads.',
+    category: 'Branding',
+    year: '2024 – 2025',
+    client: 'Akustik Licht und Spanndecken GmbH (DeineSpanndecke), Augsburg',
+    moodImageUrl: getPreviewImage('deinespanndecke'),
+    galleryUrls: getGallery('deinespanndecke'),
+    roles: ['UX/UI Designer', 'Brand Designer'],
+    context: 'Delivered end-to-end as untitled-ux freelance: brand, web, automation touchpoints, and growth.',
+    problem:
+      'A long-standing TÜV-certified stretch-ceiling specialist needed a credible digital presence that matched in-person quality—better discovery in Augsburg, clearer positioning for private and commercial clients, and a reliable path from interest to qualified contact.',
+    solution:
+      'Refreshed the brand and site structure, relaunched on WordPress, implemented a Typebot-led engagement flow, and ran tightly scoped performance ads with SEO work aimed at local intent.',
+    description:
+      'Full digital refresh for DeineSpanndecke.de: visual identity refinement, responsive marketing site, conversational qualification via Typebot, and measurable acquisition. Paid campaigns with roughly €100 test spend generated leads for real projects typically quoted in the roughly €2,000–€5,000+ range. SEO efforts pushed the property to page one for “Spanndecken Augsburg,” peaking around position two at the top of the range.',
+    outcomes: [
+      'Page-one local SEO for core “Spanndecken Augsburg” queries (peak ~#2).',
+      'Performance ads (~€100 spend) delivered qualified leads aligned with multi-thousand-euro project value.',
+      'WordPress relaunch with updated branding and faster path to contact.',
+      'Typebot implementation to structure inquiries before handoff.',
+    ],
+    tags: ['branding', 'web', 'seo', 'performance', 'wordpress', 'typebot'],
+    impactCards: [
+      { label: 'Local SEO peak', value: '~#2' },
+      { label: 'Ad test budget', value: '~€100' },
+      { label: 'Lead value band', value: '€2k–5k+' },
+    ],
+    links: [{ label: 'Live demo', href: 'https://www.deinespanndecke.de/' }],
+    prototypeButtonLabel: 'Visit live site',
+    outcomeHighlight: {
+      value: '~#2',
+      label: 'Local SEO',
+      description: 'Page-one visibility for Spanndecken Augsburg, combined with lean paid tests and on-site conversion.',
+      icon: 'BarChart3',
+    },
+    caseStudy: {
+      summary: 'Rebrand, WordPress relaunch, Typebot, and local growth for a TÜV stretch-ceiling specialist.',
+    },
+  },
+
   aidelsburger: {
     id: '15',
     slug: 'aidelsburger',
