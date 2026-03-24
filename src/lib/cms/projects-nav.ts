@@ -1,5 +1,5 @@
 import type { ProjectCategory } from './types';
-import { getAllProjects } from '@/content/portfolio';
+import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 
 export type NavProjectWithImage = {
   slug: string;
@@ -23,7 +23,7 @@ export async function getProjectsForNav(_opts?: { draftMode?: boolean }): Promis
   return all.map((p) => ({
     slug: p.slug,
     title: p.title,
-    moodImageUrl: p.moodImageUrl ?? null,
+    moodImageUrl: getProjectCoverImage(p),
     category: p.category as ProjectCategory,
   }));
 }
@@ -35,7 +35,7 @@ export function getNavProjects(): NavProjectWithImage[] {
   return all.map((p) => ({
     slug: p.slug,
     title: p.title,
-    moodImageUrl: p.moodImageUrl ?? null,
+    moodImageUrl: getProjectCoverImage(p),
     category: p.category as ProjectCategory,
   }));
 }

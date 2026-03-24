@@ -24,7 +24,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 import { contact, identityName, identityRole, identityRoleSecondary } from '@/content/home';
-import { getAllProjects } from '@/content/portfolio';
+import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
 
 import { Breadcrumbs, type BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -88,7 +88,7 @@ function SidebarContent({
     return getAllProjects().map((p) => ({
       slug: p.slug,
       title: p.title,
-      moodImageUrl: p.moodImageUrl ?? null,
+      moodImageUrl: getProjectCoverImage(p),
       category: p.category,
     }));
   }, [compact, navProjectsProp]);

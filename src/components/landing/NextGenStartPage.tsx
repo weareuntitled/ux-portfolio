@@ -17,19 +17,16 @@ import {
   Workflow,
 } from 'lucide-react';
 import { contact, identityRolePrimary, identityRoleSecondary } from '@/content/home';
-import { getProjectBySlug, type PortfolioProject } from '@/content/portfolio';
+import { getProjectBySlug, getProjectCoverImage, type PortfolioProject } from '@/content/portfolio';
 import { EducationSection } from '@/components/landing/EducationSection';
 import { ExperienceTimelineSection } from '@/components/landing/ExperienceTimelineSection';
-import { isRemoteImageSrc } from '@/lib/project-assets';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function coverUnoptimized(src: string) {
-  return isRemoteImageSrc(src) || src.toLowerCase().endsWith('.gif');
-}
-
 const selectedFeatured = getProjectBySlug('kovon');
+const selectedFeaturedCover = selectedFeatured ? getProjectCoverImage(selectedFeatured) : null;
 const selectedGrid = (['ffp-dashboard', 'emission-compliance', 'automation'] as const)
   .map((slug) => getProjectBySlug(slug))
   .filter((p): p is PortfolioProject => p != null);
@@ -268,14 +265,14 @@ export function NextGenStartPage() {
                 >
                   <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
                     <div className="relative aspect-[2.4/1] w-full bg-muted">
-                      {selectedFeatured.moodImageUrl ? (
+                      {selectedFeaturedCover ? (
                         <Image
-                          src={selectedFeatured.moodImageUrl}
-                          alt=""
+                          src={selectedFeaturedCover}
+                          alt={`${selectedFeatured.title} cover`}
                           fill
                           sizes="(max-width: 1280px) 100vw, 1024px"
                           className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
-                          unoptimized={coverUnoptimized(selectedFeatured.moodImageUrl)}
+                          unoptimized={shouldUnoptimizeImage(selectedFeaturedCover)}
                         />
                       ) : (
                         <div className="flex h-full min-h-[140px] items-center justify-center bg-gradient-to-br from-muted via-muted/90 to-muted/70">
@@ -302,49 +299,52 @@ export function NextGenStartPage() {
             ) : null}
 
             <div className="grid gap-6 md:grid-cols-3">
-              {selectedGrid.map((item) => (
-                <motion.div
-                  key={item.slug}
-                  variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
-                  whileHover={reduceMotion ? undefined : { y: -4 }}
-                >
-                  <Link
-                    href={`/projects/${item.slug}`}
-                    className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              {selectedGrid.map((item) => {
+                const cover = getProjectCoverImage(item);
+                return (
+                  <motion.div
+                    key={item.slug}
+                    variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
+                    whileHover={reduceMotion ? undefined : { y: -4 }}
                   >
-                    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
-                      <div className="relative aspect-video w-full bg-muted">
-                        {item.moodImageUrl ? (
-                          <Image
-                            src={item.moodImageUrl}
-                            alt=""
-                            fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
-                            unoptimized={coverUnoptimized(item.moodImageUrl)}
-                          />
-                        ) : (
-                          <div className="flex h-full min-h-[160px] items-center justify-center bg-gradient-to-br from-muted via-muted/90 to-muted/70">
-                            <Workflow className="h-10 w-10 text-muted-foreground/50" strokeWidth={1.5} />
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-1 flex-col p-5">
-                        <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                          {item.category} · {item.year}
-                        </p>
-                        <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">{item.title}</h3>
-                        <p className="mb-4 flex-1 text-sm text-muted-foreground">{item.oneLiner}</p>
-                        <ul className="mt-auto flex flex-wrap gap-2">
-                          {(item.tags ?? []).map((tag) => (
-                            <li key={tag} className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">{tag}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </article>
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={`/projects/${item.slug}`}
+                      className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                    >
+                      <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
+                        <div className="relative aspect-video w-full bg-muted">
+                          {cover ? (
+                            <Image
+                              src={cover}
+                              alt={`${item.title} cover`}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                              className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
+                              unoptimized={shouldUnoptimizeImage(cover)}
+                            />
+                          ) : (
+                            <div className="flex h-full min-h-[160px] items-center justify-center bg-gradient-to-br from-muted via-muted/90 to-muted/70">
+                              <Workflow className="h-10 w-10 text-muted-foreground/50" strokeWidth={1.5} />
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex flex-1 flex-col p-5">
+                          <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                            {item.category} · {item.year}
+                          </p>
+                          <h3 className="mb-1 mt-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">{item.title}</h3>
+                          <p className="mb-4 flex-1 text-sm text-muted-foreground">{item.oneLiner}</p>
+                          <ul className="mt-auto flex flex-wrap gap-2">
+                            {(item.tags ?? []).map((tag) => (
+                              <li key={tag} className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">{tag}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </article>
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </section>

@@ -20,7 +20,8 @@ import {
 } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
-import { isRemoteImageSrc } from '@/lib/project-assets';
+import { getProjectCoverImage } from '@/content/portfolio';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 type DefaultProject = {
   slug: string;
@@ -47,13 +48,6 @@ type DefaultProject = {
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function isGif(url: string) {
-  return url.toLowerCase().endsWith('.gif');
-}
-
-function imageUnoptimized(src: string) {
-  return isGif(src) || isRemoteImageSrc(src);
-}
 
 function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -110,7 +104,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
-                unoptimized={isGif(src)}
+                unoptimized={shouldUnoptimizeImage(src)}
               />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
@@ -159,7 +153,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 sizes="100vw"
                 quality={100}
                 priority
-                unoptimized={imageUnoptimized(urls[activeIndex])}
+                unoptimized={shouldUnoptimizeImage(urls[activeIndex])}
               />
             </div>
           </div>
@@ -173,6 +167,8 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
 }
 
 export default function DefaultProjectTemplate({ project }: { project: DefaultProject }) {
+  const heroCover = getProjectCoverImage(project);
+
   const breadcrumbs = [
     { label: 'Daniel Peters', href: '/' },
     { label: 'Projects', href: '/projects' },
@@ -257,7 +253,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             {project.subtitle ? <p className="mt-2 text-base text-muted-foreground">{project.subtitle}</p> : null}
             {project.oneLiner ? <p className="mt-3 text-sm text-muted-foreground">{project.oneLiner}</p> : null}
 
-            {project.moodImageUrl ? (
+            {heroCover ? (
               <motion.button
                 type="button"
                 style={{ y: heroY }}
@@ -265,12 +261,12 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
               >
                 <div className="relative aspect-[16/8] w-full">
                   <Image
-                    src={project.moodImageUrl}
+                    src={heroCover}
                     alt=""
                     fill
                     className="object-cover"
                     sizes="100vw"
-                    unoptimized={imageUnoptimized(project.moodImageUrl)}
+                    unoptimized={shouldUnoptimizeImage(heroCover)}
                   />
                 </div>
               </motion.button>

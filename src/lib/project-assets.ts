@@ -16,3 +16,8 @@ export function resolveProjectAssetUrl(path: string): string {
 export function isRemoteImageSrc(src: string): boolean {
   return /^https?:\/\//i.test(src);
 }
+
+/** Remote URLs and GIFs skip the image optimizer (same rules as project galleries). */
+export function shouldUnoptimizeImage(src: string): boolean {
+  return isRemoteImageSrc(src) || src.toLowerCase().endsWith('.gif');
+}

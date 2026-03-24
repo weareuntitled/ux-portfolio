@@ -7,7 +7,8 @@ import { motion } from 'framer-motion';
 import { Search, Film, Layers3, FolderKanban } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
-import { getAllProjects } from '@/content/portfolio';
+import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 import { cn } from '@/lib/utils';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -54,6 +55,7 @@ export default function ProjectsPage() {
           {filtered.map((p, idx) => {
             const isMotion = p.category === 'Motion';
             const Icon = isMotion ? Film : FolderKanban;
+            const cover = getProjectCoverImage(p);
 
             return (
               <motion.div
@@ -70,13 +72,14 @@ export default function ProjectsPage() {
                   )}
                 >
                   <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
-                    {p.moodImageUrl ? (
+                    {cover ? (
                       <Image
-                        src={p.moodImageUrl}
-                        alt=""
+                        src={cover}
+                        alt={`${p.title} cover`}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                         sizes="(max-width: 1024px) 100vw, 33vw"
+                        unoptimized={shouldUnoptimizeImage(cover)}
                       />
                     ) : (
                       <div className="absolute inset-0 grid place-items-center text-muted-foreground">

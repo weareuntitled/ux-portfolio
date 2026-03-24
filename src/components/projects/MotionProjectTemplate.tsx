@@ -7,7 +7,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { BookOpen, Briefcase, Building2, Calendar, ChevronLeft, ChevronRight, ExternalLink, Film, Sparkles, X } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
-import { isRemoteImageSrc } from '@/lib/project-assets';
+import { getProjectCoverImage } from '@/content/portfolio';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 import { cn } from '@/lib/utils';
 
 type MotionProject = {
@@ -36,14 +37,6 @@ function toWatchUrl(youtubeUrl?: string) {
     if (id) return `https://youtu.be/${id}`;
   }
   return youtubeUrl;
-}
-
-function isGif(url: string) {
-  return url.toLowerCase().endsWith('.gif');
-}
-
-function imageUnoptimized(src: string) {
-  return isGif(src) || isRemoteImageSrc(src);
 }
 
 function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
@@ -98,7 +91,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
-                unoptimized={imageUnoptimized(src)}
+                unoptimized={shouldUnoptimizeImage(src)}
               />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
@@ -147,7 +140,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 sizes="100vw"
                 quality={100}
                 priority
-                unoptimized={imageUnoptimized(urls[activeIndex])}
+                unoptimized={shouldUnoptimizeImage(urls[activeIndex])}
               />
             </div>
           </div>
@@ -161,6 +154,8 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
 }
 
 export default function MotionProjectTemplate({ project }: { project: MotionProject }) {
+  const heroCover = getProjectCoverImage(project);
+
   const breadcrumbs = [
     { label: 'Daniel Peters', href: '/' },
     { label: 'Projects', href: '/projects' },
@@ -267,16 +262,16 @@ export default function MotionProjectTemplate({ project }: { project: MotionProj
             {project.subtitle ? <p className="mt-2 text-base text-muted-foreground">{project.subtitle}</p> : null}
             {project.oneLiner ? <p className="mt-3 text-sm text-muted-foreground">{project.oneLiner}</p> : null}
 
-            {project.moodImageUrl ? (
+            {heroCover ? (
               <motion.div style={{ y: heroY }} className="relative mt-6 overflow-hidden rounded-2xl border border-border bg-muted">
                 <div className="relative aspect-[16/8] w-full">
                   <Image
-                    src={project.moodImageUrl}
+                    src={heroCover}
                     alt=""
                     fill
                     className="object-cover"
                     sizes="100vw"
-                    unoptimized={imageUnoptimized(project.moodImageUrl)}
+                    unoptimized={shouldUnoptimizeImage(heroCover)}
                   />
                 </div>
               </motion.div>

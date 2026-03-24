@@ -31,6 +31,14 @@ export const getPreviewImage = (slug: string): string | null => {
   );
 };
 
+/** Same cover as project detail hero: preview image, else first gallery asset. */
+export function getProjectCoverImage(project: {
+  moodImageUrl?: string | null;
+  galleryUrls?: string[];
+}): string | null {
+  return project.moodImageUrl ?? project.galleryUrls?.[0] ?? null;
+}
+
 const caseStudyKovon: CaseStudySections = {
   summary: 'Ending audit-panic through digitized compliance tracking.',
   realProblem: "Data was split across isolated Excels; the team didn't know what was done as a critical audit deadline approached.",
