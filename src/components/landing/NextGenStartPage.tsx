@@ -121,14 +121,21 @@ export function NextGenStartPage() {
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: reduceMotion ? 0 : 0.9, ease: EASE }}
           >
-            <div className="rounded-2xl border border-border bg-card p-2 shadow-sm transition-shadow hover:shadow-md">
-              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gradient-to-br from-muted via-muted/90 to-muted/70">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                  <div className="relative h-full w-full max-h-[280px] max-w-[280px] overflow-hidden rounded-full border border-border/50 shadow-2xl backdrop-blur-sm">
-                    <Image src={contact.profileImage} alt={contact.name} fill priority className="object-cover object-center" sizes="(max-width: 1024px) 90vw, 420px" />
-                  </div>
-                </div>
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-1 ring-border/30 transition-shadow hover:shadow-md">
+              <div className="relative aspect-square w-full bg-muted">
+                <Image
+                  src={contact.profileImage}
+                  alt={contact.name}
+                  fill
+                  priority
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 90vw, 420px"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent dark:from-background/40"
+                  aria-hidden
+                />
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/[0.04] dark:ring-white/[0.06]" aria-hidden />
               </div>
             </div>
           </motion.div>
