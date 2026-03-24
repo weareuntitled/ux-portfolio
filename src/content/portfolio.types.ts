@@ -58,6 +58,8 @@ export type Project = {
   moodImageUrl?: string | null;
   workflow?: string;
   notes?: string;
+  description?: string;
+  prototypeIframeUrl?: string;
   impact?: ProjectImpactItem[];
   galleryUrls?: string[];
   cardCoverUrl?: string;
@@ -177,7 +179,7 @@ export type KovonConfig = {
 
 export type PortfolioProject = Project & {
   impactCards?: ImpactCardItem[];
-  caseStudy: CaseStudySections;
+  caseStudy?: CaseStudySections;
   portfolioKit?: PortfolioKitData;
   kovon?: KovonConfig;
 };

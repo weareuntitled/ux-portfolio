@@ -1,13 +1,7 @@
 'use client';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { experienceSnapshot, experience8020Accordion } from '@/content/home';
+import { experienceTimelineDetailed } from '@/content/home';
 import { cn } from '@/lib/utils';
 
 export function ExperienceTimelineSection() {
@@ -17,7 +11,7 @@ export function ExperienceTimelineSection() {
         Experience
       </h2>
       <div className="grid gap-4 md:grid-cols-1">
-        {experienceSnapshot.map((entry, i) => (
+        {experienceTimelineDetailed.map((entry, i) => (
           <Card
             key={entry.company}
             className={cn(
@@ -27,40 +21,18 @@ export function ExperienceTimelineSection() {
           >
             <CardHeader className="pb-2">
               <p className="font-semibold text-foreground">{entry.company}</p>
-              <p className="text-sm text-muted-foreground">{entry.titleOrProgression}</p>
-              <p className="text-xs tabular-nums text-muted-foreground">{entry.dates}</p>
-              <p className="text-sm text-muted-foreground">{entry.scopeOneLine}</p>
+              <p className="text-sm text-muted-foreground">{entry.role}</p>
+              <p className="text-xs tabular-nums text-muted-foreground">{entry.period}</p>
+              <p className="text-xs text-muted-foreground">{entry.location}</p>
             </CardHeader>
-            {entry.company.startsWith('Achtzig20') && (
-              <CardContent className="pt-0">
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="selected-projects" className="border-border">
-                    <AccordionTrigger className="text-sm font-medium">
-                      Selected enterprise projects
-                    </AccordionTrigger>
-                    <AccordionContent className="text-sm text-muted-foreground">
-                      {experience8020Accordion.selectedProjects}
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="responsibilities" className="border-border">
-                    <AccordionTrigger className="text-sm font-medium">
-                      Responsibilities
-                    </AccordionTrigger>
-                    <AccordionContent className="text-sm text-muted-foreground">
-                      {experience8020Accordion.responsibilities}
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="methods" className="border-border">
-                    <AccordionTrigger className="text-sm font-medium">
-                      Methods
-                    </AccordionTrigger>
-                    <AccordionContent className="text-sm text-muted-foreground">
-                      {experience8020Accordion.methods}
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </CardContent>
-            )}
+            <CardContent className="pt-0">
+              <p className="text-sm text-muted-foreground">{entry.summary}</p>
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+                {entry.bullets.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </CardContent>
           </Card>
         ))}
       </div>
