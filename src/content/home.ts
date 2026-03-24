@@ -1,13 +1,20 @@
 /**
  * Single source of truth for Home and CV.
- * Daniel Peters — Product Designer, UX UI for Automotive & Enterprises.
+ * Daniel Peters — UX & Product Design Consultant (enterprise SaaS, automation, SAP).
  */
 
 /** Left-side identity block: one sentence + two lines (rest in About accordion) */
 export const identityName = 'Daniel Peters';
-export const identityRole = 'Product Designer, UX UI';
-export const identitySubtitle = 'for Automotive Systems & Enterprise';
-export const identityOneSentence = 'Product Designer, UX UI for Automotive Systems and Enterprise tools.';
+/** Line 1 — hero / sidebar headline */
+export const identityRolePrimary = 'UX & Product Design Consultant';
+/** Line 2 — focus areas, credentials, availability (German tail intentional) */
+export const identityRoleSecondary =
+  'Enterprise SaaS · Workflow Automation · SAP | M.Sc. UX Design | Offen für Product Designer / UX Manager Positionen';
+/** Compact sidebar: same as primary (detail below in Dashboard) */
+export const identityRole = identityRolePrimary;
+export const identitySubtitle = 'Enterprise SaaS · Workflow Automation · SAP';
+export const identityOneSentence =
+  'UX & Product Design Consultant for enterprise SaaS, workflow automation, and SAP. M.Sc. UX Design. Open to Product Designer and UX Manager roles.';
 export const identityTwoLines =
   'Compliance workflows, enterprise dashboards, and automation systems.';
 /** Dense intro for About accordion */
@@ -17,12 +24,12 @@ export const identityContext =
   'Built in automotive and enterprise consulting contexts across UX, Scrum, and process automation.';
 
 export const roleHeadline =
-  'Daniel Peters. Product Design — UX/UI — AI — Automation';
+  'Daniel Peters · UX & Product Design Consultant · Enterprise SaaS · SAP · Automation';
 
 /** Hero: H1 / H2 / Sub / Body (plan §3) */
 export const heroHeadline = 'Daniel Peters';
-export const heroH2 = 'Product Designer, UX UI';
-export const heroSub = 'for Automotive Systems & Enterprise';
+export const heroH2 = identityRolePrimary;
+export const heroSub = identitySubtitle;
 export const heroBody =
   'I design enterprise products for regulated environments, reducing cognitive load and improving delivery speed.';
 /** Micro line below hero CTAs */
@@ -82,7 +89,7 @@ export const proofLine =
   'Selected work across enterprise product design, automation, and multidisciplinary execution.';
 
 export const experienceLine =
-  'Senior Enterprise Product Designer focused on reducing cognitive load, accelerating delivery, and translating complex architecture into actionable product decisions.';
+  'UX & Product Design Consultant for enterprise SaaS and workflow automation—including SAP. M.Sc. UX Design. I reduce cognitive load, speed up delivery, and turn complex architecture into clear product decisions. Offen für Product Designer- und UX-Manager-Rollen.';
 
 export const proofStrip = [
   { label: 'Projects done', value: '45+' },
@@ -282,7 +289,8 @@ export const contact = {
   name: 'Daniel Peters',
   email: 'djdanep@gmail.com',
   phone: '+173 523 1109',
-  tagline: 'Hi There — Selected works 2019–2025. Available for work.',
+  tagline:
+    'UX & Product Design Consultant — enterprise SaaS, automation & SAP. M.Sc. UX Design. Selected works 2019–2025.',
   /** Profile photo path (place your image in public/, e.g. profile.jpg) */
   profileImage: '/profile.jpg',
 } as const;

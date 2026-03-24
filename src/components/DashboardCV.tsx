@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-import { contact, identityName, identityRole } from '@/content/home';
+import { contact, identityName, identityRole, identityRoleSecondary } from '@/content/home';
 import { getAllProjects } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
 
@@ -210,9 +210,10 @@ function SidebarContent({
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-border bg-muted">
           <Image src={contact.profileImage} alt="" fill className="object-cover" sizes="40px" />
         </div>
-        <div>
+        <div className="min-w-0">
           <p className="font-semibold text-foreground">{identityName}</p>
-          <p className="text-xs text-muted-foreground">{identityRole}</p>
+          <p className="text-xs font-medium text-foreground/90">{identityRole}</p>
+          <p className="text-[10px] leading-snug text-muted-foreground">{identityRoleSecondary}</p>
         </div>
       </div>
 

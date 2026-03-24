@@ -16,7 +16,7 @@ import {
   Star,
   Workflow,
 } from 'lucide-react';
-import { contact } from '@/content/home';
+import { contact, identityRolePrimary, identityRoleSecondary } from '@/content/home';
 import { getProjectBySlug, type PortfolioProject } from '@/content/portfolio';
 import { EducationSection } from '@/components/landing/EducationSection';
 import { ExperienceTimelineSection } from '@/components/landing/ExperienceTimelineSection';
@@ -54,8 +54,8 @@ export function NextGenStartPage() {
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500" />
                 </span>
                 Available
-                <div className="pointer-events-none invisible absolute bottom-full left-0 z-50 mb-2 w-max rounded-md border border-border bg-popover px-3 py-2 text-xs normal-case tracking-normal text-popover-foreground opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                  Open for Product Design roles in Automotive & Enterprise.
+                <div className="pointer-events-none invisible absolute bottom-full left-0 z-50 mb-2 max-w-[min(90vw,320px)] rounded-md border border-border bg-popover px-3 py-2 text-xs normal-case tracking-normal text-popover-foreground opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  Offen für Product Designer- und UX-Manager-Rollen · Enterprise SaaS, SAP & Automation.
                 </div>
               </div>
               <span className="inline-flex items-center rounded-full border border-border bg-muted/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Automotive</span>
@@ -73,20 +73,20 @@ export function NextGenStartPage() {
                 {contact.name}.
               </motion.h1>
               <motion.p
-                className="mt-4 text-xl font-medium text-primary"
+                className="mt-4 text-pretty text-xl font-medium leading-snug text-primary sm:text-2xl"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.23, ease: EASE }}
               >
-                Senior Enterprise Product Designer
+                {identityRolePrimary}
               </motion.p>
               <motion.p
-                className="mt-1 text-sm font-medium text-muted-foreground"
+                className="mt-2 text-pretty text-sm font-medium leading-relaxed text-muted-foreground sm:text-base"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.31, ease: EASE }}
               >
-                UX/UI for automotive and enterprise systems
+                {identityRoleSecondary}
               </motion.p>
             </div>
 
