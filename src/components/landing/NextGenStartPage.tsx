@@ -17,6 +17,8 @@ import {
   Workflow,
 } from 'lucide-react';
 import { contact } from '@/content/home';
+import { EducationSection } from '@/components/landing/EducationSection';
+import { ExperienceTimelineSection } from '@/components/landing/ExperienceTimelineSection';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -294,6 +296,18 @@ export function NextGenStartPage() {
             </div>
           </motion.div>
         </section>
+
+        <motion.section
+          id="profile"
+          className="scroll-mt-24 space-y-16 pt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: reduceMotion ? 0 : 0.55, ease: EASE }}
+        >
+          <ExperienceTimelineSection />
+          <EducationSection />
+        </motion.section>
 
         <motion.footer
           className="mt-32 rounded-2xl border border-border bg-card px-6 py-16 text-center shadow-sm md:px-12 md:py-20"

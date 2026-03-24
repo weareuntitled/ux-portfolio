@@ -128,7 +128,11 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
             </>
           )}
           <div className="flex h-full w-full items-center justify-center p-6 md:p-12" onClick={() => setActiveIndex(null)}>
-            <div className="relative h-full w-full max-w-7xl">
+            <div
+              className="relative h-[80vh] w-full max-w-7xl"
+              onClick={(e) => e.stopPropagation()}
+              role="presentation"
+            >
               <Image
                 src={urls[activeIndex]}
                 alt={`${title} expanded visual ${activeIndex + 1}`}
@@ -137,6 +141,7 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
                 sizes="100vw"
                 quality={100}
                 priority
+                unoptimized={isGif(urls[activeIndex])}
               />
             </div>
           </div>

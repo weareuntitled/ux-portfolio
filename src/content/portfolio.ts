@@ -167,6 +167,7 @@ export const portfolio: PortfolioSource = {
       'Created an easy-to-scan visualization dashboard using hierarchy-first design, visual encoding, and adjustable thresholds.',
     description:
       'A high-speed reporting dashboard designed to surface critical breaches instantly. By translating complex data into a clear visual hierarchy, we drastically optimized scan speed and restored 100% control for the users, avoiding overlooked regulatory breaches.',
+    outcomes: ['Faster anomaly detection in dense regulatory tables.', 'Adjustable thresholds returned interpretive control to experts.'],
     tags: ['compliance', 'enterprise'],
     outcomeHighlight: { value: '100%', label: 'Control', description: 'Optimized scan speed to ensure zero overlooked breaches.', icon: 'BarChart3' },
     caseStudy: caseStudyCaesar,
@@ -189,6 +190,7 @@ export const portfolio: PortfolioSource = {
       'I gathered all ideas and structured them into a cohesive architectural flow. I abstracted elements into reusable modular components and mapped out complex workflows (e.g., holiday entry, overtime exit).',
     description:
       "Reshaped automotive diagnostics from symptom-first triage to root-cause synthesis. I created a unified high-fidelity prototype that perfectly aligns the UI with the experts' mental model, providing a true investigative story for the users.",
+    outcomes: ['Consolidated six months of fragmented input into one coherent flow.', 'Reusable modular patterns for holidays, overtime, and diagnostic workflows.'],
     tags: ['enterprise', 'diagnostics'],
     outcomeHighlight: { value: '1', label: 'Story', description: "Aligned the diagnostic UI with the expert's mental model.", icon: 'MousePointerClick' },
     portfolioKit: ffpKit,
@@ -212,6 +214,8 @@ export const portfolio: PortfolioSource = {
     solution: 'Balanced a 60% logic and 40% creative workflow to ship homologation MVPs.',
     description:
       "A showcase of hybrid design leadership for the VW Group. This showreel highlights how we led teams to deliver polished digital products and homologation MVPs for AUDI and VW, proving that corporate design doesn't have to lack soul, and creative work doesn't have to lack process (a balanced 60% logic / 40% creative workflow).",
+    outcomes: ['Delivered homologation-ready MVPs with VW Group stakeholders.', 'Scaled a repeatable 60/40 logic–creative workflow across product teams.'],
+    tags: ['motion', 'leadership', 'automotive'],
     outcomeHighlight: { value: 'MVP', label: 'Shipped', description: 'Balanced strict process with premium visual standards.', icon: 'Layout' },
     caseStudy: { summary: 'Hybrid design leadership for the VW Group.' },
   },
@@ -256,6 +260,8 @@ export const portfolio: PortfolioSource = {
     solution: 'Fusing rough 3D modeling with local AI style generation.',
     description:
       'Manual texture rework in architectural visualization traditionally takes days per variant. I designed and implemented a local AI workflow combining rough 3D modeling with AI-driven style generation. This innovative approach reduced processing time from 3 days to just 3 hours, achieving a massive 24x speed increase.',
+    outcomes: ['Cut variant exploration from three days to three hours per iteration.', 'Kept data local while still reaching high-end stylistic output.'],
+    tags: ['ai', '3d', 'architecture'],
     outcomeHighlight: { value: '24x', label: 'Speedup', description: 'Generated style variants in 3 hours that usually take 3 days.', icon: 'Zap' },
     caseStudy: caseStudyArch,
   },
@@ -271,8 +277,14 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('tracklistify'),
     galleryUrls: getGallery('tracklistify'),
     roles: ['Indie Developer'],
+    problem:
+      'DJs and curators often work from long recordings where track IDs are unclear; manual tracklisting is slow and error-prone.',
+    solution:
+      'Built an AI-assisted pipeline that ingests raw sets and proposes structured track lists editors can verify and export.',
     description:
       'An indie developer side-project focused on AI-driven DJ set analysis. Tracklistify Studio turns raw audio sets into actionable, accurate tracklists through advanced AI extraction, streamlining the workflow for music professionals.',
+    outcomes: ['Reduced manual listening loops for set documentation.', 'Prototype validates extraction quality on real-world recordings.'],
+    tags: ['ai', 'audio', 'side-project'],
     prototypeIframeUrl:
       'http://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
@@ -290,8 +302,14 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('fixundfertig'),
     galleryUrls: getGallery('fixundfertig'),
     roles: ['Developer'],
+    problem:
+      'Receipts and invoices lived across email, scans, and folders, forcing repetitive manual copying into bookkeeping tools.',
+    solution:
+      'Shipped a local-first intake flow with OCR so documents normalize into one structured pipeline before export.',
     description:
       'A personal admin automation tool developed to solve the headache of scattered receipts and invoices. By utilizing local OCR (Optical Character Recognition) extraction, the app unifies document intake and dramatically reduces manual data entry.',
+    outcomes: ['Unified scattered document sources into one review queue.', 'Cut repetitive typing for recurring invoice fields.'],
+    tags: ['automation', 'ocr', 'side-project'],
     prototypeIframeUrl:
       'https://app.untitled-ux.de/share/read/eadba98795f9470d9c83faa722d4e72a',
     outcomeHighlight: { value: 'OCR', label: 'Intake', description: 'Ended manual receipt copying via custom engine.', icon: 'Scan' },
@@ -309,8 +327,15 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('samani-rebranding'),
     galleryUrls: getGallery('samani-rebranding'),
     youtubeUrl: 'https://www.youtube.com/embed/vw8GUemVEH8',
+    roles: ['Brand Designer', 'Motion Designer'],
+    problem:
+      'A growing label needed release visuals and motion without hiring a designer for every drop.',
+    solution:
+      'Packaged typography, layout, and motion into After Effects and Figma templates non-designers could follow with guardrails.',
     description:
       'A foolproof design system and self-sustaining label identity. I created a comprehensive After Effects and Figma template system that empowers non-designers to produce high-quality, on-brand content consistently over three years.',
+    outcomes: ['Enabled consistent release packaging for three years.', 'Reduced dependency on ad-hoc design firefighting.'],
+    tags: ['branding', 'design-system', 'motion'],
     outcomeHighlight: { value: '3yrs', label: 'Content', description: 'Enabled a beginner to produce professional release videos for years.', icon: 'Box' },
     caseStudy: { summary: 'Self-sustaining label identity.' },
   },
@@ -326,8 +351,15 @@ export const portfolio: PortfolioSource = {
     moodImageUrl: getPreviewImage('kontrast-festival'),
     galleryUrls: getGallery('kontrast-festival'),
     youtubeUrl: 'https://www.youtube.com/embed/Ufrnt73JJDU',
+    roles: ['Co-Founder', 'Design Lead'],
+    problem:
+      'A multi-day festival needs coherent identity, signage, and digital surfaces while schedules and artists shift in real time.',
+    solution:
+      'Built a flexible visual system and coordination rituals so the team could swap assets and partners without breaking the brand.',
     description:
       'As Co-Founder and Design Lead, I spearheaded the visual identity and logistics for the Kontrast Festival over three years. I art-directed the chaos, managing a creative team and external partners to ensure consistent, 360-degree brand execution across all digital and physical touchpoints.',
+    outcomes: ['Scaled creative output across digital, print, and stage.', 'Kept brand continuity through three editions under live ops pressure.'],
+    tags: ['branding', 'events', 'leadership'],
     outcomeHighlight: { value: '360°', label: 'Directed', description: 'Led 5 core creatives under real-time festival conditions.', icon: 'Users' },
     caseStudy: { summary: 'Creative leadership under pressure.' },
   },
@@ -342,8 +374,15 @@ export const portfolio: PortfolioSource = {
     year: '2024',
     moodImageUrl: getPreviewImage('aidelsburger'),
     galleryUrls: getGallery('aidelsburger'),
+    roles: ['Brand Designer'],
+    problem:
+      'Industrial buyers saw the legacy wordmark as generic; the story behind the company name was invisible.',
+    solution:
+      'Reframed a known typo into a deliberate metaphor and built guidelines so the mark scales from digital to physical applications.',
     description:
       'A scalable brand metaphor for the industrial sector. This project transformed basic corporate typography into a high-impact, memorable identity metaphor, injecting modern branding practices into a traditional industry.',
+    outcomes: ['Gave sales and marketing a memorable narrative beyond the old logotype.', 'Documented usage so partners could apply the system consistently.'],
+    tags: ['branding', 'identity', 'industrial'],
     outcomeHighlight: { value: 'Meta', label: 'Phor', description: 'Replaced typographically limited logos with a soulful metaphor.', icon: 'Layout' },
     caseStudy: { summary: 'Industrial branding injection.' },
   },
