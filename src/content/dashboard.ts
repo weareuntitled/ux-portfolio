@@ -8,7 +8,7 @@ export type MetricItem = {
 export const metrics: MetricItem[] = [
   { title: 'Experience', value: '5+ Years', sub: 'UX/UI & Motion', trend: 'Senior Level' },
   { title: 'Projects', value: '25+', sub: 'Delivered', trend: 'High Volume' },
-  { title: 'Clients', value: 'Audi, Porsche', sub: 'MAN, VW', trend: 'Enterprise' },
+  { title: 'Clients', value: 'Enterprise OEMs', sub: 'Automotive', trend: 'Enterprise' },
   { title: 'Certifications', value: 'SAFe 6', sub: 'Scrum Master', trend: 'Valid 2026' },
 ];
 

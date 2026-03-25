@@ -38,7 +38,7 @@ export type Project = {
   subtitle?: string;
   roleLine?: string;
   oneLiner: string;
-  category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Archive'; // Alle 4 Kategorien
+  category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Performance marketing' | 'Archive';
   year: string;
   client?: string;
   roles?: string[];
@@ -56,6 +56,9 @@ export type Project = {
   prototype?: ProjectPrototype;
   prototypeButtonLabel?: string;
   moodImageUrl?: string | null;
+  /** Optional architecture / process diagram (shown full-width on case study) */
+  processDiagramUrl?: string | null;
+  processDiagramLabel?: string;
   workflow?: string;
   notes?: string;
   description?: string;

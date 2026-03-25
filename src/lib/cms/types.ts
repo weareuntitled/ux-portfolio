@@ -1,6 +1,12 @@
 import type { PortfolioProject } from '@/content/portfolio';
 
-export type ProjectCategory = 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Archive';
+export type ProjectCategory =
+  | 'Enterprise'
+  | 'Side'
+  | 'Branding'
+  | 'Motion'
+  | 'Performance marketing'
+  | 'Archive';
 
 export type CmsProject = {
   slug: string;

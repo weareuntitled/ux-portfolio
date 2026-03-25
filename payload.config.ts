@@ -125,6 +125,10 @@ const Projects: CollectionConfig = {
       options: [
         { label: 'Enterprise', value: 'Enterprise' },
         { label: 'Side', value: 'Side' },
+        { label: 'Branding', value: 'Branding' },
+        { label: 'Motion', value: 'Motion' },
+        { label: 'Performance marketing', value: 'Performance marketing' },
+        { label: 'Archive', value: 'Archive' },
       ],
     },
     {

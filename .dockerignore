@@ -3,6 +3,8 @@ node_modules
 .next
 .git
 .gitignore
+.claude
+.cursor
 *.log
 .env*
 .env.local

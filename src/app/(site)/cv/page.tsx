@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { CvBrandLogo } from '@/components/cv/CvBrandLogo';
 import { DashboardCV } from '@/components/DashboardCV';
 import { CvDownloadButton } from '@/components/CvDownloadButton';
 import { contact } from '@/content/home';
@@ -103,16 +104,21 @@ export default async function CVPage() {
             <div className="space-y-10">
               <article>
                 <header className="mb-3">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+                    <CvBrandLogo id="eco8020" label="8020.eco" />
+                    <div className="min-w-0 flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                     <h4 className="text-lg font-bold text-zinc-100">
                       Management Consultant
                     </h4>
                     <span className="font-mono text-sm text-zinc-400">Oct 2022 — Nov 2025</span>
                   </div>
-                  <p className="text-sm font-medium text-primary">8020 Consulting · Automotive Konzern</p>
+                  <p className="text-sm font-medium text-primary">8020 Consulting · Automotive Group</p>
                   <p className="mt-1 text-xs font-medium uppercase tracking-wide text-zinc-400">
                     Core roles: UX/UI Product Design · Scrum Master · Process Analyst
                   </p>
+                    </div>
+                  </div>
                 </header>
                 <p className="mb-3 text-sm text-zinc-400">
                   Management consulting for enterprise products across UX/UI, process analysis,
@@ -145,11 +151,16 @@ export default async function CVPage() {
 
               <article>
                 <header className="mb-3">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+                    <CvBrandLogo id="untitledUx" label="Untitled-ux" />
+                    <div className="min-w-0 flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                     <h4 className="text-lg font-bold text-zinc-100">UX/UI & Motion Designer</h4>
                     <span className="font-mono text-sm text-zinc-400">Feb 2020 — Present</span>
                   </div>
                   <p className="text-sm font-medium text-primary">Freelance & Agency Projects</p>
+                    </div>
+                  </div>
                 </header>
                 <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
                   <li>
@@ -173,11 +184,16 @@ export default async function CVPage() {
 
               <article>
                 <header className="mb-3">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+                    <CvBrandLogo id="kontrastFestival" label="Kontrast Festival" />
+                    <div className="min-w-0 flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                     <h4 className="text-lg font-bold text-zinc-100">Co-Founder & Design Lead</h4>
                     <span className="font-mono text-sm text-zinc-400">2019 — 2024</span>
                   </div>
                   <p className="text-sm font-medium text-primary">Kontrast Festival</p>
+                    </div>
+                  </div>
                 </header>
                 <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
                   <li>
@@ -212,10 +228,13 @@ export default async function CVPage() {
                 </span>
               </article>
 
-              <article className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-                <div>
+              <article className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+                <div className="flex min-w-0 flex-1 items-start gap-3">
+                  <CvBrandLogo id="thi" label="Technische Hochschule Ingolstadt" />
+                  <div>
                   <h4 className="text-base font-bold text-zinc-100">Master of Science (M.Sc.) UX Design</h4>
                   <p className="text-sm text-zinc-400">Technische Hochschule Ingolstadt</p>
+                  </div>
                 </div>
                 <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">
                   Mar 2022 — Mar 2024
@@ -234,10 +253,13 @@ export default async function CVPage() {
                 <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">2021</span>
               </article>
 
-              <article className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-                <div>
+              <article className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+                <div className="flex min-w-0 flex-1 items-start gap-3">
+                  <CvBrandLogo id="thi" label="Technische Hochschule Ingolstadt" />
+                  <div>
                   <h4 className="text-base font-bold text-zinc-100">Bachelor of Science (B.Sc.)</h4>
                   <p className="text-sm text-zinc-400">Technische Hochschule Ingolstadt</p>
+                  </div>
                 </div>
                 <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">
                   Oct 2014 — Mar 2019

@@ -17,6 +17,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { contact, identityRolePrimary, identityRoleSecondary } from '@/content/home';
+import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import { getProjectBySlug, getProjectCoverImage, type PortfolioProject } from '@/content/portfolio';
 import { EducationSection } from '@/components/landing/EducationSection';
 import { ExperienceTimelineSection } from '@/components/landing/ExperienceTimelineSection';
@@ -27,6 +28,8 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const selectedFeatured = getProjectBySlug('kovon');
 const selectedFeaturedCover = selectedFeatured ? getProjectCoverImage(selectedFeatured) : null;
+const kontrastProject = getProjectBySlug('kontrast-festival');
+const kontrastCover = kontrastProject ? getProjectCoverImage(kontrastProject) : null;
 const selectedGrid = (['ffp-dashboard', 'emission-compliance', 'automation'] as const)
   .map((slug) => getProjectBySlug(slug))
   .filter((p): p is PortfolioProject => p != null);
@@ -168,37 +171,47 @@ export function NextGenStartPage() {
         </motion.section>
 
         <section className="space-y-6 pt-16">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Core Capabilities</h2>
-            <p className="text-sm text-muted-foreground">End-to-end product strength: from discovery and UX depth to technical execution and delivery leadership.</p>
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl mb-3">Core Capabilities</h2>
+            <p className="text-base text-muted-foreground lg:text-lg">End-to-end product strength: from discovery and UX depth to technical execution and delivery leadership.</p>
           </div>
 
           <motion.div
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-50px' }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
           >
-            {[
-              { icon: Box, title: 'Methodical Thinking', body: 'Discovery and alignment: shadowing, interviews, workflow mapping, requirements, stakeholder alignment, and decision framing.' },
-              { icon: Users, title: 'Product-Centric Delivery', body: 'Turn insights into shippable UI: interaction concept, information architecture, prototypes, handoff, and iteration with engineering constraints.' },
-              { icon: FileText, title: 'Tools and Systems Fluency', body: 'Fluent across systems: Jira, Confluence, Figma, prototyping, and technical collaboration. Comfortable translating process into automation-ready specs.' },
-              { icon: Workflow, title: 'System Thinking', body: 'Translate enterprise complexity into coherent architecture: clear ownership, scalable components, and low-cognitive-load decision paths.' },
-            ].map((item) => (
+            {([
+              { icon: Box, title: 'Methodical Thinking', body: 'Discovery and alignment: shadowing, interviews, workflow mapping, requirements, stakeholder alignment, and decision framing.', img: '/images/capabilities/thinking.jpg' },
+              { icon: Users, title: 'Product-Centric Delivery', body: 'Turn insights into shippable UI: interaction concept, information architecture, prototypes, handoff, and iteration with engineering constraints.', img: '/images/capabilities/delivery.jpg' },
+              { icon: FileText, title: 'Tools and Systems Fluency', body: 'Fluent across systems: Jira, Confluence, Figma, prototyping, and technical collaboration. Comfortable translating process into automation-ready specs.', img: '/images/capabilities/tools.jpg' },
+              { icon: Workflow, title: 'System Thinking', body: 'Translate enterprise complexity into coherent architecture: clear ownership, scalable components, and low-cognitive-load decision paths.', img: '/images/capabilities/process.jpg' },
+            ] as const).map((item, i) => (
               <motion.article
                 key={item.title}
-                className="group relative overflow-hidden rounded-full border border-border bg-card px-6 py-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
-                variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
+                className="group relative overflow-hidden rounded-[2rem] border border-border/50 bg-card shadow-sm ring-1 ring-border/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:ring-primary/30"
+                variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
               >
-                <div className="flex min-h-16 items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
+                <div className="relative h-40 w-full overflow-hidden sm:h-44">
+                  <Image
+                    src={item.img}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
                 </div>
-                <div className="pointer-events-none absolute inset-0 flex items-center rounded-full bg-black/60 px-8 opacity-0 transition-opacity group-hover:opacity-100">
-                  <p className="text-sm leading-relaxed text-white">{item.body}</p>
+                <div className="relative z-10 p-8 pt-0 -mt-6">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-card shadow-sm ring-1 ring-border transition-transform duration-500 group-hover:scale-110" style={{ rotate: i % 2 === 0 ? '0deg' : '0deg' }}>
+                    <item.icon className="h-6 w-6 text-foreground" />
+                  </div>
+                  <h3 className="mb-3 text-xl font-semibold tracking-tight text-foreground">{item.title}</h3>
+                  <p className="text-base leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-foreground/80">
+                    {item.body}
+                  </p>
                 </div>
               </motion.article>
             ))}
@@ -215,22 +228,45 @@ export function NextGenStartPage() {
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Leadership</h2>
           </div>
-          <article className="group flex flex-col items-center justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:flex-row">
-            <div className="flex-1">
+          <article className="group relative overflow-hidden rounded-[2rem] border border-border/50 bg-card shadow-sm ring-1 ring-border/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:ring-primary/30">
+            <div className="relative h-48 w-full overflow-hidden sm:h-64">
+              {kontrastCover && (
+                <Image
+                  src={kontrastCover}
+                  alt="Kontrast Festival background"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent" />
+            </div>
+            <div className="relative z-10 p-8 pt-0 -mt-12">
+              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-card shadow-sm ring-1 ring-border transition-transform duration-500 group-hover:scale-110">
+                <BrandLogoMark id="kontrastFestival" label="Kontrast Festival Logo" size={40} className="h-8 w-auto text-foreground" />
+              </div>
               <div className="mb-2 flex items-center gap-2">
                 <span className="rounded bg-muted px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Operations & Scale</span>
               </div>
-              <h3 className="text-xl font-bold text-foreground transition-colors group-hover:text-primary">Kontrast Festival</h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                Co-founded and scaled a cultural event. Led cross-functional teams and built operational processes. Grew the event to <strong>4,000+ attendees</strong> and <strong>EUR250k+ revenue</strong>.
+              <h3 className="text-2xl font-bold text-foreground transition-colors group-hover:text-primary">Kontrast Festival</h3>
+              <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                Co-founded and scaled a cultural event — including end-to-end visual identity, signage, and campaign touchpoints. Led cross-functional teams and built operational processes. Grew the event to <strong>4,000+ attendees</strong> and <strong>EUR250k+ revenue</strong>.
               </p>
-              <a href="https://instagram.com/kontrastfestival.archive" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex h-10 items-center justify-center rounded-md bg-emerald-600 px-4 text-sm font-medium text-white transition-colors hover:bg-emerald-500">
-                Kontrast Festival Archive on Instagram
-              </a>
-            </div>
-            <div className="hidden shrink-0 items-center justify-center p-4 sm:flex">
-              <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary transition-transform group-hover:-rotate-3 group-hover:scale-105">
-                <Sparkles className="h-7 w-7" strokeWidth={2} />
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/projects/kontrast-festival"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-4 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  Case study
+                </Link>
+                <a
+                  href="https://instagram.com/kontrastfestival.archive"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 items-center justify-center rounded-md bg-emerald-600 px-4 text-sm font-medium text-white transition-colors hover:bg-emerald-500"
+                >
+                  Instagram archive
+                </a>
               </div>
             </div>
           </article>

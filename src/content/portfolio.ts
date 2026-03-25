@@ -48,7 +48,8 @@ const caseStudyKovon: CaseStudySections = {
 
 const caseStudyAutomation: CaseStudySections = {
   summary: 'Stopping "Malicious Overwrites" in enterprise SAP environments.',
-  realProblem: "Platform updates from VW were falsely overwriting Audi's validated data, forcing experts into weeks of manual rework.",
+  realProblem:
+    'Platform-wide updates were falsely overwriting locally validated data, forcing experts into weeks of manual rework.',
   approach: 'Mapped failure patterns and defined a safe SAP routine to block inheritance for irrelevant parts.',
   solutionConcept: 'A click-by-click PDD that ensures implementation stays safe and permanent for SAP administrators.',
 };
@@ -60,11 +61,24 @@ const caseStudyCaesar: CaseStudySections = {
   solutionConcept: 'A strict table hierarchy paired with a flexible settings concept for measurement values.',
 };
 
-const caseStudyArch: CaseStudySections = {
-  summary: 'Achieving a 24x speed increase in architectural visualization.',
-  realProblem: 'Traditional rendering cycles for different styles take over 3 days, blocking rapid client feedback.',
-  approach: 'Fusing rough 3D foundations in Blender with advanced local ComfyUI workflows.',
-  solutionConcept: 'A hybrid 3D + AI pipeline that produces high-end stylistic variants in 3 hours instead of 3 days.',
+const caseStudyStrategicAi: CaseStudySections = {
+  summary: 'Strategic AI advisory: POC to hybrid RAG, automation, and ROI-validated handover.',
+  realProblem:
+    'Consulted on transforming an isolated AI Proof of Concept into a production-ready direction for 500+ processes. Ran the full consulting cycle: use-case identification, prioritization, strategic conceptualization, and ROI validation.',
+  approach:
+    'Prioritized high-impact AI use cases across 500+ departments—moving from experimental pilots to business-critical automation. Designed the pivot from a fragile “Master Excel” to a Hybrid RAG stack: semantic vector search plus a structured metadata/taxonomy layer for dependable logic (e.g. process successors and responsibilities). Conceptualized an automated ETL via Power Automate to ingest and vectorize new PDFs weekly so the knowledge hub stays current without manual upkeep. Calculated strategic ROI (development vs. schooling hours) and delivered the blueprint for internal implementation.',
+  solutionConcept:
+    'A validated, scalable architecture with MS Copilot as the primary interface—avoiding custom UI spend and supporting high adoption.',
+};
+
+const caseStudyArchViz: CaseStudySections = {
+  summary: 'Local AI workflow cutting architectural visualization variant time from days to hours.',
+  realProblem:
+    'Manual texture rework in architectural visualization traditionally takes days per variant, blocking fast iteration on look-and-feel.',
+  approach:
+    'Designed and implemented a local pipeline that pairs rough 3D modeling with AI-driven style generation so variants can be explored without full manual repaint.',
+  solutionConcept:
+    'Reduced processing time from about 3 days to about 3 hours per variant—roughly a 24× speed increase—while keeping the workflow on local tooling.',
 };
 
 const ffpKit: PortfolioKitData = {
@@ -111,7 +125,7 @@ export const portfolio: PortfolioSource = {
     oneLiner: 'Angular pilot that replaced fragmented Excel silos with a transparent compliance hub.',
     category: 'Enterprise',
     year: '2022 - 2024',
-    client: 'Automotive (Konzern)',
+    client: 'Automotive (Group)',
     moodImageUrl: getPreviewImage('kovon'),
     galleryUrls: getGallery('kovon'),
     roles: ['Product Designer', 'Scrum Master'],
@@ -138,12 +152,12 @@ export const portfolio: PortfolioSource = {
     oneLiner: 'Restored data integrity by blocking faulty platform overwrites via automated routines.',
     category: 'Enterprise',
     year: '2024',
-    client: 'Automotive (Konzern)',
+    client: 'Automotive (Group)',
     moodImageUrl: getPreviewImage('automation'),
     galleryUrls: getGallery('automation'),
     roles: ['Automation Manager', 'Process Analyst'],
     problem:
-      '"Malicious Overwrites". Over-secure, legacy SAP automations from the 2000s were destroying validated Audi data during VW platform updates. Fixing these errors forced 10 experts to spend 2 hours each per week (eating up 60-70% of their workweek just fixing bugs).',
+      '"Malicious Overwrites". Over-secure, legacy SAP automations from the 2000s were destroying validated local data during OEM platform updates. Fixing these errors forced 10 experts to spend 2 hours each per week (eating up 60-70% of their workweek just fixing bugs).',
     solution:
       'We analyzed 18 processes and abstracted 5 core use cases, prioritizing the "low-hanging fruit" to save budget. We fully automated the primary workflow and designed an AI-assisted flow for the second to detect overrides and escalate only complex cases for human review.',
     description:
@@ -155,7 +169,12 @@ export const portfolio: PortfolioSource = {
       { label: 'Weekly time saved', value: '4h / expert' },
       { label: 'Experts impacted', value: '10' },
     ],
-    outcomeHighlight: { value: 'PDD', label: 'Safe', description: 'Stopped data destruction in the VW/Audi inheritance tree.', icon: 'Zap' },
+    outcomeHighlight: {
+      value: 'PDD',
+      label: 'Safe',
+      description: 'Stopped data destruction in the OEM platform inheritance tree.',
+      icon: 'Zap',
+    },
     caseStudy: caseStudyAutomation,
   },
 
@@ -211,22 +230,25 @@ export const portfolio: PortfolioSource = {
     slug: '8020-portfolio',
     title: '8020 Showreel 2025',
     subtitle: '60/40 Logic vs. Creative.',
-    oneLiner: 'Leading teams to deliver digital products for AUDI and VW with a hybrid design workflow.',
+    oneLiner: 'Leading teams to deliver digital products for enterprise OEM stakeholders with a hybrid design workflow.',
     category: 'Motion',
     year: '2025',
     client: '8020 Consulting',
     moodImageUrl: getPreviewImage('8020-portfolio'),
     galleryUrls: getGallery('8020-portfolio'),
-    youtubeUrl: 'https://www.youtube.com/embed/K7JhmqWGiZw',
+    youtubeUrl: 'https://www.youtube.com/embed/7U_PO2WGqFw',
     roles: ['Lead UX/UI Designer', 'Scrum Master'],
     problem: 'Corporate design often lacks soul; creative work often lacks process.',
     solution: 'Balanced a 60% logic and 40% creative workflow to ship homologation MVPs.',
     description:
-      "A showcase of hybrid design leadership for the VW Group. This showreel highlights how we led teams to deliver polished digital products and homologation MVPs for AUDI and VW, proving that corporate design doesn't have to lack soul, and creative work doesn't have to lack process (a balanced 60% logic / 40% creative workflow).",
-    outcomes: ['Delivered homologation-ready MVPs with VW Group stakeholders.', 'Scaled a repeatable 60/40 logic–creative workflow across product teams.'],
+      "A showcase of hybrid design leadership for a major automotive group. This showreel highlights how we led teams to deliver polished digital products and homologation MVPs for enterprise OEM stakeholders, proving that corporate design doesn't have to lack soul, and creative work doesn't have to lack process (a balanced 60% logic / 40% creative workflow).",
+    outcomes: [
+      'Delivered homologation-ready MVPs with OEM group stakeholders.',
+      'Scaled a repeatable 60/40 logic–creative workflow across product teams.',
+    ],
     tags: ['motion', 'leadership', 'automotive'],
     outcomeHighlight: { value: 'MVP', label: 'Shipped', description: 'Balanced strict process with premium visual standards.', icon: 'Layout' },
-    caseStudy: { summary: 'Hybrid design leadership for the VW Group.' },
+    caseStudy: { summary: 'Hybrid design leadership for a major automotive group.' },
   },
 
   '3dprojects': {
@@ -239,7 +261,7 @@ export const portfolio: PortfolioSource = {
     year: '2021 - 2025',
     moodImageUrl: getPreviewImage('3dprojects'),
     galleryUrls: getGallery('3dprojects'),
-    youtubeUrl: 'https://www.youtube.com/embed/7U_PO2WGqFw',
+    youtubeUrl: 'https://www.youtube.com/embed/K7JhmqWGiZw',
     roles: ['3D Artist', 'Motion Designer'],
     roleLine: '3D Animations and AI animations.',
     context: 'Immersive visual storytelling for the electronic music scene and festivals.',
@@ -258,21 +280,71 @@ export const portfolio: PortfolioSource = {
     id: '17',
     slug: 'architektur-ai',
     title: 'Architecture + AI',
-    subtitle: '3 Days down to 3 Hours.',
-    oneLiner: 'Local AI workflow achieving a 24x speed increase in variant exploration.',
-    category: 'Side',
+    navTitle: 'Architecture + AI',
+    subtitle: 'Local AI–accelerated arch-viz workflow.',
+    oneLiner:
+      'Rough 3D plus AI-driven style generation in a local pipeline—cutting variant turnaround from days to hours.',
+    category: 'Enterprise',
     year: '2025',
     moodImageUrl: getPreviewImage('architektur-ai'),
     galleryUrls: getGallery('architektur-ai'),
-    roles: ['3D Artist', 'AI Architect'],
-    problem: 'Manual rework for textures takes days per variant, stalling exploration.',
-    solution: 'Fusing rough 3D modeling with local AI style generation.',
+    roles: ['Designer', '3D Generalist'],
+    problem:
+      'Manual texture rework in architectural visualization traditionally takes days per variant, which slows exploration of different moods and client directions.',
+    solution:
+      'Designed and implemented a local AI workflow that combines rough 3D modeling with AI-driven style generation so variants can be produced without full manual rework each time.',
     description:
       'Manual texture rework in architectural visualization traditionally takes days per variant. I designed and implemented a local AI workflow combining rough 3D modeling with AI-driven style generation. This innovative approach reduced processing time from 3 days to just 3 hours, achieving a massive 24x speed increase.',
-    outcomes: ['Cut variant exploration from three days to three hours per iteration.', 'Kept data local while still reaching high-end stylistic output.'],
-    tags: ['ai', '3d', 'architecture'],
-    outcomeHighlight: { value: '24x', label: 'Speedup', description: 'Generated style variants in 3 hours that usually take 3 days.', icon: 'Zap' },
-    caseStudy: caseStudyArch,
+    outcomes: [
+      'Cut typical variant turnaround from about 3 days to about 3 hours (~24× faster).',
+      'Established a repeatable local pipeline for 3D bases plus generative style passes.',
+    ],
+    tags: ['ai', '3d', 'arch-viz', 'workflow', 'automation'],
+    outcomeHighlight: {
+      value: '24×',
+      label: 'Faster',
+      description: 'From three days of manual texture work to about three hours with the local AI-assisted workflow.',
+      icon: 'Zap',
+    },
+    caseStudy: caseStudyArchViz,
+  },
+
+  'strategic-ai-consulting': {
+    id: '21',
+    slug: 'strategic-ai-consulting',
+    title: 'Strategic AI Advisory',
+    navTitle: 'Strategic AI',
+    subtitle: 'From POC to Automated Architecture & ROI.',
+    oneLiner:
+      'End-to-end AI strategy consulting for 500+ processes: prioritization, hybrid RAG architecture, Power Automate ingestion, ROI validation, and Copilot as the primary interface.',
+    category: 'Enterprise',
+    year: '2025',
+    moodImageUrl: resolveProjectAssetUrl('/projects/architektur-ai_hero.jpg'),
+    galleryUrls: getGallery('strategic-ai-consulting'),
+    processDiagramUrl: resolveProjectAssetUrl('/projects/architektur-ai_gallery_08_process.png'),
+    processDiagramLabel: 'AI-assisted knowledge assistant — process architecture (summary)',
+    roles: ['AI Strategy Consultant'],
+    problem:
+      'An isolated AI Proof of Concept had to become a production-ready direction for 500+ processes. The mission was to run the full consulting arc—use-case identification, prioritization, strategic conceptualization, and ROI validation—so the program could scale beyond experiments without betting on costly custom UI.',
+    solution:
+      'Evaluated and prioritized high-impact AI use cases across 500+ departments, shifting the narrative from “experimental” AI to business-critical automation. Designed the technical pivot from a fragile “Master Excel” to a Hybrid RAG architecture: semantic vector search combined with a structured metadata/taxonomy layer so logic stays accurate (e.g. process successors and responsibilities). Conceptualized an automated ETL pipeline via Power Automate to ingest and vectorize new PDFs weekly, keeping the knowledge hub current without manual intervention. Calculated strategic ROI (development vs. schooling hours) and handed over a final blueprint to internal teams for implementation.',
+    description:
+      'Delivered strategic AI advisory from POC to a validated, scalable architecture. MS Copilot serves as the primary user interface—eliminating custom UI costs while targeting high adoption. The hybrid RAG and automation design address accuracy, freshness, and operability at enterprise scale; ROI framing and handover positioned internal owners to execute.',
+    outcomes: [
+      'Prioritized AI use cases across 500+ departments toward business-critical automation.',
+      'Hybrid RAG: vectors plus metadata/taxonomy for dependable process logic.',
+      'Weekly PDF ingestion and vectorization via Power Automate—minimal manual upkeep.',
+      'ROI validated (development vs. schooling); blueprint delivered for internal build-out.',
+      'Copilot-first interface: scalable adoption without a custom UI program.',
+    ],
+    tags: ['ai', 'rag', 'enterprise', 'consulting', 'microsoft', 'copilot', 'power-automate'],
+    outcomeHighlight: {
+      value: 'Hybrid RAG',
+      label: 'Architecture',
+      description: 'Semantic search plus taxonomy for accurate logic; automated pipeline to keep knowledge current.',
+      icon: 'Sparkles',
+    },
+    caseStudy: caseStudyStrategicAi,
   },
 
   tracklistify: {
@@ -300,6 +372,8 @@ export const portfolio: PortfolioSource = {
         href: 'https://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
       },
     ],
+    prototypeIframeUrl:
+      'https://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
     prototypeButtonLabel: 'Open Tracklistify',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
     caseStudy: { summary: 'AI DJ set analysis.' },
@@ -325,6 +399,7 @@ export const portfolio: PortfolioSource = {
     outcomes: ['Unified scattered document sources into one review queue.', 'Cut repetitive typing for recurring invoice fields.'],
     tags: ['automation', 'ocr', 'side-project'],
     links: [{ label: 'Live demo', href: 'https://app.untitled-ux.de/share/read/eadba98795f9470d9c83faa722d4e72a' }],
+    prototypeIframeUrl: 'https://app.untitled-ux.de/share/read/eadba98795f9470d9c83faa722d4e72a',
     prototypeButtonLabel: 'Open Fix und Fertig',
     outcomeHighlight: { value: 'OCR', label: 'Intake', description: 'Ended manual receipt copying via custom engine.', icon: 'Scan' },
     caseStudy: { summary: 'Personal admin automation.' },
@@ -383,44 +458,57 @@ export const portfolio: PortfolioSource = {
     slug: 'deinespanndecke',
     title: 'DeineSpanndecke',
     navTitle: 'DeineSpanndecke',
-    subtitle: 'Local SEO, relaunch & performance leads.',
+    subtitle: 'Performance marketing plus rebrand, WordPress & local SEO.',
     oneLiner:
-      'Website and logo rebrand, WordPress relaunch, Typebot funnel, and paid social that turned ~€100 ad spend into high-value spanndecken leads.',
-    category: 'Branding',
+      'End-to-end: refined logo and visual line, new WordPress marketing site with SEO-focused structure and copy, then Google Search and landing pages—hero Augsburg URL ~3.6% CTR, ~€1.37 campaign CPC, ~€570 spend in a measured window; qualified leads ~€100 vs. multi-thousand-euro jobs.',
+    category: 'Performance marketing',
     year: '2024 – 2025',
     client: 'Akustik Licht und Spanndecken GmbH (DeineSpanndecke), Augsburg',
     moodImageUrl: getPreviewImage('deinespanndecke'),
     galleryUrls: getGallery('deinespanndecke'),
-    roles: ['UX/UI Designer', 'Brand Designer'],
-    context: 'Delivered end-to-end as untitled-ux freelance: brand, web, automation touchpoints, and growth.',
+    roles: ['UX/UI Designer', 'Brand Designer', 'Performance marketing'],
+    context:
+      'Delivered end-to-end as untitled-ux freelance: identity touch-up, WordPress build, on-site SEO, conversational funneling, and paid acquisition—brand and growth in one engagement.',
     problem:
       'A long-standing TÜV-certified stretch-ceiling specialist needed a credible digital presence that matched in-person quality—better discovery in Augsburg, clearer positioning for private and commercial clients, and a reliable path from interest to qualified contact.',
     solution:
-      'Refreshed the brand and site structure, relaunched on WordPress, implemented a Typebot-led engagement flow, and ran tightly scoped performance ads with SEO work aimed at local intent.',
+      'Refined the wordmark and brand applications for a cohesive line across web and print, rebuilt the site on WordPress with clearer IA and conversion paths, tightened on-page SEO and local landing pages for high-intent queries, added a Typebot-led qualification step, and ran structured Google Search campaigns with dedicated LPs.',
     description:
-      'Full digital refresh for DeineSpanndecke.de: visual identity refinement, responsive marketing site, conversational qualification via Typebot, and measurable acquisition. Paid campaigns with roughly €100 test spend generated leads for real projects typically quoted in the roughly €2,000–€5,000+ range. SEO efforts pushed the property to page one for “Spanndecken Augsburg,” peaking around position two at the top of the range.',
+      'This project combined brand and performance: a refreshed logo and consistent visual language so digital and physical touchpoints read as one premium trade brand; a full WordPress relaunch with responsive layouts, service- and city-focused pages, and faster routes to contact; and deliberate SEO work—titles, headings, internal linking, and content aimed at “Spanndecken Augsburg” and related services—lifting the site to page one (peak around #2). On top of that foundation, Google Search ads and tailored landing URLs (#pricing, room services, contact) drove measurable demand: in a tracked window, about 414 clicks on ~6.9k impressions (~6% campaign CTR, ~€1.37 average CPC, ~€567 cost), with the primary /spanndecken-fachbetrieb-augsburg/ URL carrying most volume (~328 clicks, ~3.59% CTR, ~€447 cost). Qualified installation leads land around ~€100 acquisition cost in practice—still a strong ratio to typical project quotes in the roughly €2,000–€5,000+ range. Typebot helps structure inquiries before handoff to the team.',
     outcomes: [
-      'Page-one local SEO for core “Spanndecken Augsburg” queries (peak ~#2).',
-      'Performance ads (~€100 spend) delivered qualified leads aligned with multi-thousand-euro project value.',
-      'WordPress relaunch with updated branding and faster path to contact.',
-      'Typebot implementation to structure inquiries before handoff.',
+      'Logo and brand line aligned for web, ads, and on-site materials.',
+      'WordPress relaunch: clearer structure, service pages, and conversion-focused UX.',
+      'Local SEO: page-one visibility for core “Spanndecken Augsburg” queries (peak ~#2).',
+      'Google Ads (~€567 spend, sample period): ~€1.37 avg CPC; hero Augsburg LP ~3.59% CTR from ~9.1k impressions.',
+      'Economics: ~€100 cost per qualified lead vs. multi-thousand-euro average job value.',
+      'Typebot funnel to qualify and route leads before human follow-up.',
     ],
-    tags: ['branding', 'web', 'seo', 'performance', 'wordpress', 'typebot'],
+    tags: [
+      'performance marketing',
+      'google ads',
+      'seo',
+      'wordpress',
+      'rebranding',
+      'branding',
+      'typebot',
+      'local seo',
+    ],
     impactCards: [
       { label: 'Local SEO peak', value: '~#2' },
-      { label: 'Ad test budget', value: '~€100' },
-      { label: 'Lead value band', value: '€2k–5k+' },
+      { label: 'Hero LP CTR', value: '~3.6%' },
+      { label: 'Avg. CPC', value: '~€1.37' },
     ],
     links: [{ label: 'Live demo', href: 'https://www.deinespanndecke.de/' }],
     prototypeButtonLabel: 'Visit live site',
     outcomeHighlight: {
-      value: '~#2',
-      label: 'Local SEO',
-      description: 'Page-one visibility for Spanndecken Augsburg, combined with lean paid tests and on-site conversion.',
+      value: '~3.6%',
+      label: 'Hero LP CTR',
+      description: 'Augsburg specialist landing page in Google Ads; campaign ~€1.37 CPC and ~€570 spend in the same reporting window.',
       icon: 'BarChart3',
     },
     caseStudy: {
-      summary: 'Rebrand, WordPress relaunch, Typebot, and local growth for a TÜV stretch-ceiling specialist.',
+      summary:
+        'Performance marketing case built on a logo refresh, WordPress site, SEO, and Google Ads—with strong Augsburg LP metrics and workable CPL vs. job size.',
     },
   },
 

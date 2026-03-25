@@ -1,6 +1,7 @@
 'use client';
 
 import { Area, AreaChart, XAxis, YAxis } from 'recharts';
+import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { leadershipCard, marginTrendPoints } from '@/content/home';
@@ -14,7 +15,20 @@ export function LeadershipCardWithTrend() {
   return (
     <Card className="border-border bg-card">
       <CardHeader>
-        <CardTitle className="text-lg">{leadershipCard.title}</CardTitle>
+        <div className="flex flex-wrap items-center gap-3">
+          <CardTitle className="text-lg">{leadershipCard.title}</CardTitle>
+          <span
+            className="inline-flex rounded-md border border-border bg-muted/40 px-2 py-1"
+            title="Kontrast Festival wordmark"
+          >
+            <BrandLogoMark
+              id="kontrastFestival"
+              label="Kontrast Festival wordmark"
+              size={64}
+              className="h-7 w-auto max-w-[min(160px,40vw)]"
+            />
+          </span>
+        </div>
         <p className="text-sm text-muted-foreground">{leadershipCard.shortCopy}</p>
       </CardHeader>
       <CardContent className="space-y-4 pt-0">

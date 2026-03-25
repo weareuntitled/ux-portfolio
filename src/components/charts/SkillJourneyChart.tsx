@@ -54,8 +54,7 @@ import {
   specializationChipsWithIcons,
 } from "@/content/home";
 import { Badge } from "@/components/ui/badge";
-
-const thiLogo = "/icons/Technische_Hochschule_Ingolstadt_logo.png";
+import { brandLogos, type BrandLogoId } from "@/lib/brand-logos";
 
 const iconMap = {
   building: Building2,
@@ -75,6 +74,7 @@ const careerStations: Array<{
   detail: string;
   icon: LucideIcon;
   showThiLogo: boolean;
+  brandLogo?: BrandLogoId;
   company?: string;
   role?: string;
   proof?: string;
@@ -89,6 +89,7 @@ const careerStations: Array<{
     detail: "Management Consultant. Product UX, Scrum, automation, enterprise tools. KoVoN, FFP, CAESAR, SAP.",
     icon: Building2,
     showThiLogo: false,
+    brandLogo: "eco8020",
     company: credentialsTimeline[0].company,
     role: credentialsTimeline[0].role,
     proof: credentialsTimeline[0].proof,
@@ -102,6 +103,7 @@ const careerStations: Array<{
     detail: "UX, motion design, branding, web delivery. Client-facing ownership.",
     icon: Laptop,
     showThiLogo: false,
+    brandLogo: "untitledUx",
     company: credentialsTimeline[1].company,
     role: credentialsTimeline[1].role,
     proof: credentialsTimeline[1].proof,
@@ -122,6 +124,7 @@ const careerStations: Array<{
     detail: "Product and marketing team, Munich.",
     icon: Briefcase,
     showThiLogo: false,
+    brandLogo: "smartpatient",
     company: "smartpatient",
     role: "UX internship",
     proof: credentialsTimeline[2].proof,
@@ -157,6 +160,8 @@ const careerStations: Array<{
     detail: "Co-Founder & Design Lead. Culture brand, design, communication, creative team.",
     icon: Sparkles,
     showThiLogo: false,
+    brandLogo: "kontrastFestival",
+    company: "Kontrast Festival",
   },
 ];
 
@@ -209,10 +214,18 @@ export function CareerPhasesPanel({ inCard }: { inCard?: boolean }) {
                             </Badge>
                           )}
                           <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                          {station.showThiLogo && (
+                          {(station.showThiLogo || station.brandLogo) && (
                             <Image
-                              src={thiLogo}
-                              alt="TH Ingolstadt"
+                              src={
+                                station.brandLogo
+                                  ? brandLogos[station.brandLogo]
+                                  : brandLogos.thi
+                              }
+                              alt={
+                                station.showThiLogo
+                                  ? "TH Ingolstadt"
+                                  : (station.company ?? "Logo")
+                              }
                               width={16}
                               height={16}
                               className="h-4 w-4 shrink-0 object-contain"

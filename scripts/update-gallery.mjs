@@ -42,7 +42,12 @@ files.forEach((file) => {
 
   // If you renamed files to "<full-slug>_hero.jpg", firstToken will already be the full slug.
   // But if you still have older names like "Kontrast_01.png", mapping translates it.
-  const slug = SLUG_MAPPING[firstToken] || firstToken;
+  let slug = SLUG_MAPPING[firstToken] || firstToken;
+
+  // Consulting process diagram lives under architektur-ai_* filenames but belongs to the enterprise AI strategy case.
+  if (slug === 'architektur-ai' && nameNoExt.toLowerCase().includes('gallery_08_process')) {
+    slug = 'strategic-ai-consulting';
+  }
 
   if (!galleryMap[slug]) galleryMap[slug] = [];
   galleryMap[slug].push(`/projects/${file}`);

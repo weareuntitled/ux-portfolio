@@ -18,8 +18,18 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# local env files
-.env*.local
+# local env files (secrets — never commit)
+.env
+.env.*
+!.env.example
+
+# payload / local data
+/data/
+/uploads/
+
+# tooling
+.claude/
+.cursor/
 
 # vercel
 .vercel

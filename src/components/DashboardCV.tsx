@@ -16,6 +16,7 @@ import {
   Menu,
   Search,
   ChevronDown,
+  Sparkles,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -23,7 +24,7 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-import { contact, identityName, identityRole, identityRoleSecondary } from '@/content/home';
+import { contact, identityName, identityRole } from '@/content/home';
 import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
 
@@ -46,6 +47,7 @@ const navItems = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
   { label: 'CV', href: '/cv', icon: FileText },
   { label: 'Projects', href: '/projects', icon: FolderKanban },
+  { label: 'Kontrast Festival', href: '/projects/kontrast-festival', icon: Sparkles },
   { label: 'Contact', href: '/contact', icon: Mail },
 ];
 
@@ -62,18 +64,14 @@ export type DashboardCVProps = {
   showSearch?: boolean;
 };
 
-function SidebarContent({
-  navProjects: navProjectsProp,
-  compact = false,
-}: {
-  navProjects?: NavProjectWithImage[];
-  compact?: boolean;
-}) {
+function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavProjectWithImage[] }) {
   const pathname = usePathname();
 
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    Enterprise: true,
+    Enterprise: false,
     Motion: false,
+    Branding: false,
+    'Performance marketing': false,
     Side: false,
     Archive: false,
   });
@@ -83,7 +81,6 @@ function SidebarContent({
   };
 
   const navProjects: NavProjectWithImage[] = useMemo(() => {
-    if (compact) return [];
     if (navProjectsProp?.length) return navProjectsProp;
     return getAllProjects().map((p) => ({
       slug: p.slug,
@@ -91,14 +88,16 @@ function SidebarContent({
       moodImageUrl: getProjectCoverImage(p),
       category: p.category,
     }));
-  }, [compact, navProjectsProp]);
+  }, [navProjectsProp]);
 
-  const { enterprise, motionProjects, side, archive } = useMemo(() => {
+  const { enterprise, motionProjects, branding, performanceMarketing, side, archive } = useMemo(() => {
     const enterprise = navProjects.filter((p) => p.category === 'Enterprise');
     const motionProjects = navProjects.filter((p) => p.category === 'Motion');
+    const branding = navProjects.filter((p) => p.category === 'Branding');
+    const performanceMarketing = navProjects.filter((p) => p.category === 'Performance marketing');
     const side = navProjects.filter((p) => p.category === 'Side');
     const archive = navProjects.filter((p) => p.category === 'Archive');
-    return { enterprise, motionProjects, side, archive };
+    return { enterprise, motionProjects, branding, performanceMarketing, side, archive };
   }, [navProjects]);
 
   const EASE = [0.16, 1, 0.3, 1] as const;
@@ -213,29 +212,36 @@ function SidebarContent({
         <div className="min-w-0">
           <p className="font-semibold text-foreground">{identityName}</p>
           <p className="text-xs font-medium text-foreground/90">{identityRole}</p>
-          <p className="text-[10px] leading-snug text-muted-foreground">{identityRoleSecondary}</p>
         </div>
       </div>
 
       <nav className="space-y-1 overflow-y-auto no-scrollbar" aria-label="Sidebar navigation">
-        {navItems.map(({ label, href, icon }) => (
-          <NavRow
-            key={label}
-            label={label}
-            href={href}
-            icon={icon}
-            isActive={pathname === href || (href !== '/' && pathname?.startsWith(href))}
-          />
-        ))}
+        {navItems.map(({ label, href, icon }) => {
+          const isActive = (() => {
+            if (!pathname) return false;
+            if (href === '/') return pathname === '/';
+            if (href === '/projects/kontrast-festival') return pathname === href;
+            if (href === '/projects') {
+              return (
+                pathname === '/projects' ||
+                (pathname.startsWith('/projects/') && pathname !== '/projects/kontrast-festival')
+              );
+            }
+            return pathname === href || pathname.startsWith(`${href}/`);
+          })();
+          return (
+            <NavRow key={label} label={label} href={href} icon={icon} isActive={isActive} />
+          );
+        })}
 
-        {!compact && (
-          <>
-            <ProjectSection title="Enterprise" items={enterprise} />
-            <ProjectSection title="Motion" items={motionProjects} />
-            <ProjectSection title="Side" items={side} />
-            <ProjectSection title="Archive" items={archive} />
-          </>
-        )}
+        <>
+          <ProjectSection title="Enterprise" items={enterprise} />
+          <ProjectSection title="Motion" items={motionProjects} />
+          <ProjectSection title="Branding" items={branding} />
+          <ProjectSection title="Performance marketing" items={performanceMarketing} />
+          <ProjectSection title="Side" items={side} />
+          <ProjectSection title="Archive" items={archive} />
+        </>
       </nav>
 
       <div className="mt-auto border-t border-border pt-5 text-sm">
@@ -277,28 +283,31 @@ function DashboardCVImpl({
 
   return (
     <div className="min-h-screen text-foreground">
-      <div className="theme-container container flex flex-1 flex-col py-6">
-        <div className="flex flex-col overflow-hidden rounded-xl border border-white/10 bg-background/75">
+      <div className="theme-container flex flex-1 flex-col md:container md:py-6">
+        <div className="flex flex-col overflow-hidden border-border bg-background/75 md:rounded-xl md:border md:border-white/10">
           <div className="mx-auto grid min-h-screen w-full max-w-[1400px] items-start md:grid-cols-[16rem_1fr]">
             <aside className="sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar md:flex">
-              <SidebarContent navProjects={navProjects} compact={variant === 'landing'} />
+              <SidebarContent navProjects={navProjects} />
             </aside>
 
-            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-              <SheetTrigger className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-foreground shadow-md md:hidden">
-                <Menu className="h-5 w-5" />
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[280px] border-border bg-background p-5 overflow-y-auto no-scrollbar">
-                <div className="h-full pt-8">
-                  <SidebarContent navProjects={navProjects} compact={variant === 'landing'} />
-                </div>
-              </SheetContent>
-            </Sheet>
+            <main className="flex min-w-0 flex-col">
+              {/* Mobile Header */}
+              <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-background/95 p-4 backdrop-blur md:hidden">
+                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+                  <SheetTrigger className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-foreground shadow-sm">
+                    <Menu className="h-5 w-5" />
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-[280px] border-border bg-background p-5 overflow-y-auto no-scrollbar">
+                    <div className="h-full pt-8">
+                      <SidebarContent navProjects={navProjects} />
+                    </div>
+                  </SheetContent>
+                </Sheet>
+                <span className="text-sm font-semibold">{pageTitle}</span>
+                <div className="w-10" /> {/* Spacer for centering */}
+              </div>
 
-            <main className="min-w-0">
-              <section
-                className={cn('min-w-0 space-y-6 p-4 md:p-8', variant === 'landing' ? 'pt-6' : 'pt-20 md:pt-8')}
-              >
+              <section className="min-w-0 space-y-6 p-4 md:p-8">
                 {showHeader && (
                   <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
@@ -327,7 +336,7 @@ function DashboardCVImpl({
                 {rightRail ? (
                   <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start">
                     <div className="min-w-0">{children}</div>
-                    <aside className="hidden lg:block">{rightRail}</aside>
+                    <aside className="lg:sticky lg:top-8">{rightRail}</aside>
                   </div>
                 ) : (
                   children

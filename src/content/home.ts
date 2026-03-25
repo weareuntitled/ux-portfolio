@@ -3,6 +3,8 @@
  * Daniel Peters — UX & Product Design Consultant (enterprise SaaS, automation, SAP).
  */
 
+import type { BrandLogoId } from '@/lib/brand-logos';
+
 /** Left-side identity block: one sentence + two lines (rest in About accordion) */
 export const identityName = 'Daniel Peters';
 /** Line 1 — hero / sidebar headline */
@@ -156,16 +158,19 @@ export const ctaSecondary = [
 
 export const experienceChips = ['Design systems', 'Research', 'Agile delivery'] as const;
 
-export const clients = [
-  'Audi',
-  'Porsche',
-  'Volkswagen',
-  'MAN',
-  'Sentus',
-] as const;
+export const clients = ['Enterprise automotive', 'Sentus'] as const;
 
-/** Section 2: Trust Ticker — tools mastered (grayscale logos) or client names */
-export const trustTickerItems = ['Figma', 'React', 'Jira', 'Confluence', 'Adobe', 'Audi', 'Porsche', 'VW', 'MAN'] as const;
+/** Section 2: Trust Ticker — tools mastered (grayscale logos) or domain tags */
+export const trustTickerItems = [
+  'Figma',
+  'React',
+  'Jira',
+  'Confluence',
+  'Adobe',
+  'Enterprise SaaS',
+  'SAP',
+  'Automation',
+] as const;
 
 export const leadershipCard = {
   title: 'Leadership — Kontrast Festival',
@@ -196,7 +201,8 @@ export const aiAutomationCard = {
   highlights: [
     'GPT Agent MVP: AI Use Cases, maturity levels, conversation flows; AI experience for medical documentation (Arztbriefgenerierung).',
     'Bot automation consulting: one use case in production saves ~2–4h/week per specialist (based on stakeholder estimates).',
-    'ROI and technical feasibility for cross-domain AI concepts; handover to Audi AI Hub. Generative AI (ComfyUI, Lovable, ChatGPT) for ideation and rapid prototyping.',
+    'Strategic AI consulting: POC → hybrid RAG architecture, Power Automate ingestion, ROI validation, Copilot-first handover (500+ processes).',
+    'Personal Architecture + AI: local rough 3D + AI-driven style generation for arch-viz (~24× faster variants vs. manual texture rework). Generative AI (ComfyUI, Lovable, ChatGPT) for ideation and rapid prototyping.',
   ],
 } as const;
 
@@ -307,16 +313,52 @@ export const aboutHeading = 'Designing clarity in complex systems.';
 
 /** Education snapshot: 2 lines for main page */
 export const educationSnapshot = [
-  'Master of Science, User Experience Design (Grade: 1.3) | TH Ingolstadt | 2020–2023',
+  'Master of Science, User Experience Design (Grade: 1.3) | TH Ingolstadt | 2020–2024',
   'Bachelor of Science, User Experience Design | TH Ingolstadt | 2014–2019',
 ] as const;
 
-/** Education accordion: thesis, module highlights, certs */
-export const educationDetail = {
-  thesisTitle: 'Master thesis: The Influence of Environment Design on Attention & Learning in VR.',
-  moduleHighlights: 'Virtual, augmented, and mixed reality, AI, ethical design, participatory design, agile methods, design management, interaction design.',
-  certification: `Certified SAFe 6 Scrum Master, valid until ${certification.validUntil}.`,
-} as const;
+/** Master / bachelor theses — full copy for Education section accordion */
+export const educationAcademicTheses = [
+  {
+    label: 'Master Thesis',
+    grade: '1.0',
+    title:
+      'The Influence of Environment Design on Attention & Learning: A Comparison of Abstract and Biophilic VR Environments',
+    body:
+      'Evaluated the impact of nature-inspired (biophilic) vs. abstract Virtual Reality environments on cognitive load and learning performance. Supervised by Prof. Dr. Andreas Riener and Veronika Ritzer, the research demonstrated that biophilic design significantly improves focus and stress reduction in immersive systems.',
+  },
+  {
+    label: 'Bachelor Thesis',
+    title:
+      'Talking Cars: Evaluation of an Auditory Concept for Communication between Pedestrians and Autonomous Vehicles',
+    body:
+      'Developed and evaluated an auditory external Human-Machine Interface (eHMI) to bridge the communication gap between autonomous vehicles and pedestrians. Used a user-centered design process and empirical study to analyze the intuitiveness of natural speech versus abstract sounds.',
+  },
+] as const;
+
+/** Module highlights & projects — bullet list for Education section */
+export const educationModuleProjects = [
+  {
+    lead: 'Master Project (Grade: 1.0)',
+    detail:
+      'Conducted an industry-level study project for BSH, achieving high academic recognition and subsequent feature at the ICC.',
+    emphasize: ['BSH', 'ICC'] as const,
+  },
+  {
+    lead: 'Design Strategy and Management (Grade: 1.3)',
+    detail:
+      'Taught by Veronika Ritzer, focusing on the strategic alignment of design processes with corporate enterprise goals.',
+  },
+  {
+    lead: 'HCI & Interactive Systems',
+    detail:
+      'Core focus on complex interaction architecture under Prof. Riener, including Natural User Interfaces (Grade: 1.0) and Interaction Design (Grade: 1.7).',
+  },
+] as const;
+
+/** SAFe body line for Education accordion (title spelled out in UI) */
+export const educationCertificationBody =
+  `Scaled Agile Framework, valid until ${certification.validUntil}.` as const;
 
 /** Section 4: Services grid — 4 offerings, one is featured (inverted) */
 export const servicesGrid = [
@@ -337,56 +379,69 @@ export const experienceSnapshot = [
   {
     company: '8020.eco',
     titleOrProgression: 'Management Consultant (since Feb 2024), previously Junior',
-    dates: 'Jul 2022 – Present',
+    dates: 'Jul 2022 – Nov 2025',
     scopeOneLine: 'Strategic design and implementation of digital enterprise products in agile SAFe environments.',
   },
   {
     company: 'smartpatient',
-    titleOrProgression: 'User Experience Designer | Internship',
+    titleOrProgression: 'UX Design Intern',
     dates: 'Aug 2016 – Jan 2017',
     scopeOneLine: 'Early user-centered product development across research, app iteration, and content strategy.',
   },
 ] as const;
 
+/** Landing Experience section — row layout with optional /logos/*.png assets */
 export const experienceTimelineDetailed = [
   {
+    id: 'untitled-ux',
     company: 'Untitled-ux',
-    role: 'User Experience Designer | Self-employed',
+    headline: 'User Experience Designer',
+    subline: 'Untitled-ux · Self-employed',
     period: 'Mar 2020 – Present',
-    location: 'Aichach-Friedberg, Bavaria, Germany',
+    location: 'Aichach-Friedberg',
+    logoId: 'untitledUx' satisfies BrandLogoId,
+    logoAlt: 'Untitled-ux logo',
     summary:
       'With untitled-ux, I help founders and SMEs translate their visions into tangible, market-ready products. I guide projects holistically from Zero to One, from initial strategic consulting to final go-live.',
     bullets: [
-      'End-to-end web solutions (e.g., kathis-candybar.de, deinespanndecke.de).',
-      'Brand identity systems (e.g., rottmair.org).',
-      'Cross-media touchpoints across print and trade fairs.',
-      'Lean consulting for constrained budgets.',
+      'End-to-end web solutions (e.g., kathis-candybar.de, deinespanndecke.de)',
+      'Brand identity systems',
+      'Cross-media touchpoints across print and trade fairs',
+      'Lean consulting for constrained budgets',
     ],
   },
   {
+    id: '8020-eco',
     company: '8020.eco',
-    role: 'Management Consultant',
-    period: 'Jul 2022 – Present (Management Consultant since Feb 2024, previously Junior)',
-    location: 'Ingolstadt, Bavaria, Germany · Hybrid',
+    headline: 'Management Consultant',
+    subline: '8020.eco',
+    period: 'Jul 2022 – Nov 2025',
+    location: 'Ingolstadt · Hybrid',
+    logoId: 'eco8020' satisfies BrandLogoId,
+    logoAlt: '8020.eco logo',
     summary:
-      'Supporting automotive clients in the strategic design and implementation of digital enterprise products within an agile SAFe environment.',
+      'Supporting automotive clients in the strategic design and implementation of digital enterprise products within an agile SAFe environment. (Promoted from Junior to Management Consultant in Feb 2024).',
     bullets: [
-      'Predictable delivery: doubled accepted story points through developer-ready UI specifications.',
-      'Quality focus: systematic user testing reduced critical usability bugs by 80% up to MVP.',
-      'Process optimization: reduced cognitive load to minimize troubleshooting in complex SAP workflows.',
-      'Junior phase: web design, product management, and AR/VR prototyping.',
+      'Predictable delivery: doubled accepted story points through developer-ready UI specifications',
+      'Quality focus: systematic user testing reduced critical usability bugs by 80% up to MVP',
+      'Process optimization: reduced cognitive load to minimize troubleshooting in complex SAP workflows',
+      'Junior phase: web design, product management, and AR/VR prototyping',
     ],
   },
   {
+    id: 'smartpatient',
     company: 'smartpatient',
-    role: 'User Experience Designer | Internship',
+    headline: 'UX Design Intern',
+    subline: 'smartpatient',
     period: 'Aug 2016 – Jan 2017',
-    location: 'Munich, Bavaria, Germany',
+    location: 'Munich',
+    logoId: 'smartpatient' satisfies BrandLogoId,
+    logoAlt: 'smartpatient logo',
     summary: 'Early practical experience in user-centered product development.',
     bullets: [
-      'User research and testing, including in-person guerrilla testing.',
-      'App iteration by translating support tickets into UX requirements.',
-      'Content strategy and UI design, including infographics.',
+      'User research and testing, including in-person guerrilla testing',
+      'App iteration by translating support tickets into UX requirements',
+      'Content strategy and UI design, including infographics',
     ],
   },
 ] as const;
@@ -395,7 +450,7 @@ export const educationTimelineDetailed = [
   {
     degree: 'Master of Science, User Experience Design',
     school: 'TH Ingolstadt',
-    period: '2020–2023',
+    period: '2020–2024',
     grade: '1.3',
   },
   {

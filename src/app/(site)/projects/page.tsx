@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Search, Film, Layers3, FolderKanban } from 'lucide-react';
 
+import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import DashboardCV from '@/components/DashboardCV';
 import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
@@ -91,6 +92,17 @@ export default function ProjectsPage() {
                       <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
                       <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
                     </div>
+
+                    {p.slug === 'kontrast-festival' ? (
+                      <div className="absolute bottom-2 left-2 rounded-md border border-white/25 bg-black/45 p-1.5 shadow-sm backdrop-blur-sm">
+                        <BrandLogoMark
+                          id="kontrastFestival"
+                          label="Kontrast Festival"
+                          size={56}
+                          className="h-7 w-auto max-w-[100px] drop-shadow-sm"
+                        />
+                      </div>
+                    ) : null}
                   </div>
 
                   <div className="p-5">

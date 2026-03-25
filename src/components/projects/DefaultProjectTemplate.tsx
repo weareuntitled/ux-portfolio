@@ -19,8 +19,10 @@ import {
   X,
 } from 'lucide-react';
 
+import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import DashboardCV from '@/components/DashboardCV';
 import { getProjectCoverImage } from '@/content/portfolio';
+import { KontrastPostsBento } from '@/components/kontrast/KontrastPostsBento';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 type DefaultProject = {
@@ -44,6 +46,8 @@ type DefaultProject = {
   impactCards?: { label: string; value: string }[];
   links?: { label: string; href: string }[];
   prototypeButtonLabel?: string;
+  processDiagramUrl?: string | null;
+  processDiagramLabel?: string;
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -168,6 +172,13 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
 
 export default function DefaultProjectTemplate({ project }: { project: DefaultProject }) {
   const heroCover = getProjectCoverImage(project);
+  const galleryThumbs =
+    project.galleryUrls?.filter((u) => {
+      const low = u.toLowerCase();
+      if (low.includes('_hero')) return false;
+      if (project.processDiagramUrl && low.includes('gallery_08_process')) return false;
+      return true;
+    }) ?? [];
 
   const breadcrumbs = [
     { label: 'Daniel Peters', href: '/' },
@@ -246,12 +257,26 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
               {project.category || 'Project'}
             </p>
 
-            <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-4xl">
+            <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
+              {project.slug === 'kontrast-festival' ? (
+                <div className="flex shrink-0 flex-col items-center gap-2 rounded-xl border border-border bg-muted/30 p-3 sm:items-start">
+                  <BrandLogoMark
+                    id="kontrastFestival"
+                    label="Kontrast Festival wordmark"
+                    size={160}
+                    className="h-12 w-auto max-w-[200px] sm:h-14"
+                  />
+                </div>
+              ) : null}
+              <div className="min-w-0 flex-1">
+            <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">
               {project.title}
             </h1>
 
             {project.subtitle ? <p className="mt-2 text-base text-muted-foreground">{project.subtitle}</p> : null}
             {project.oneLiner ? <p className="mt-3 text-sm text-muted-foreground">{project.oneLiner}</p> : null}
+              </div>
+            </div>
 
             {heroCover ? (
               <motion.button
@@ -282,6 +307,36 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
           </section>
+        ) : null}
+
+        {project.slug === 'kontrast-festival' && <KontrastPostsBento />}
+
+        {project.processDiagramUrl ? (
+          <motion.section
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE, delay: 0.02 }}
+            className="rounded-2xl border border-border bg-background/40 p-5 backdrop-blur-2xl"
+          >
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+              <Wrench className="h-4 w-4" />
+              {project.processDiagramLabel ?? 'Process architecture'}
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Reference diagram: hybrid data pipeline (SQL + vector), orchestration, and Copilot as the delivery surface.
+            </p>
+            <div className="mt-4 overflow-hidden rounded-xl border border-border bg-muted/20 p-2">
+              <Image
+                src={project.processDiagramUrl}
+                alt={project.processDiagramLabel ?? `${project.title} process architecture diagram`}
+                width={2800}
+                height={1600}
+                className="mx-auto h-auto max-h-[min(78vh,1100px)] w-full object-contain"
+                sizes="(max-width: 1200px) 100vw, 1100px"
+                unoptimized={shouldUnoptimizeImage(project.processDiagramUrl)}
+              />
+            </div>
+          </motion.section>
         ) : null}
 
         {project.links?.length ? (
@@ -408,7 +463,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           </motion.section>
         ) : null}
 
-        {project.galleryUrls?.length ? (
+        {galleryThumbs.length ? (
           <motion.section
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -419,7 +474,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
               <Sparkles className="h-4 w-4 text-muted-foreground" />
               <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Gallery</h2>
             </div>
-            <LightboxGallery urls={project.galleryUrls} title={project.title} />
+            <LightboxGallery urls={galleryThumbs} title={project.title} />
           </motion.section>
         ) : null}
       </div>
