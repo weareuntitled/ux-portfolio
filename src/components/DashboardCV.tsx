@@ -25,6 +25,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 import { contact, identityName, identityRole } from '@/content/home';
+import uiCopy from '@/content/ui-copy.json';
 import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
 
@@ -43,13 +44,17 @@ const MotionLink = motion.create(
   Link as unknown as React.ComponentType<LinkLikeProps>
 );
 
-const navItems = [
-  { label: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { label: 'CV', href: '/cv', icon: FileText },
-  { label: 'Projects', href: '/projects', icon: FolderKanban },
-  { label: 'Kontrast Festival', href: '/projects/kontrast-festival', icon: Sparkles },
-  { label: 'Contact', href: '/contact', icon: Mail },
-];
+const sidebarIconMap: Record<string, LucideIcon> = {
+  LayoutDashboard,
+  FileText,
+  FolderKanban,
+  Sparkles,
+  Mail,
+};
+const navItems = uiCopy.sidebar.navItems.map((item) => ({
+  ...item,
+  icon: sidebarIconMap[item.icon] ?? LayoutDashboard,
+}));
 
 export type DashboardCVProps = {
   children: React.ReactNode;
@@ -67,14 +72,14 @@ export type DashboardCVProps = {
 function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavProjectWithImage[] }) {
   const pathname = usePathname();
 
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    Enterprise: false,
-    Motion: false,
-    Branding: false,
-    'Performance marketing': false,
-    Side: false,
-    Archive: false,
-  });
+  const initialExpanded = useMemo(
+    () =>
+      Object.fromEntries(
+        uiCopy.sidebar.projectSections.map((section) => [section, false])
+      ) as Record<string, boolean>,
+    []
+  );
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(initialExpanded);
 
   const toggleSection = (title: string) => {
     setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
@@ -90,14 +95,14 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
     }));
   }, [navProjectsProp]);
 
-  const { enterprise, motionProjects, branding, performanceMarketing, side, archive } = useMemo(() => {
+  const { enterprise, motionProjects, branding, web, side, archive } = useMemo(() => {
     const enterprise = navProjects.filter((p) => p.category === 'Enterprise');
     const motionProjects = navProjects.filter((p) => p.category === 'Motion');
     const branding = navProjects.filter((p) => p.category === 'Branding');
-    const performanceMarketing = navProjects.filter((p) => p.category === 'Performance marketing');
+    const web = navProjects.filter((p) => p.category === 'Web');
     const side = navProjects.filter((p) => p.category === 'Side');
     const archive = navProjects.filter((p) => p.category === 'Archive');
-    return { enterprise, motionProjects, branding, performanceMarketing, side, archive };
+    return { enterprise, motionProjects, branding, web, side, archive };
   }, [navProjects]);
 
   const EASE = [0.16, 1, 0.3, 1] as const;
@@ -167,11 +172,11 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
       <div className="mt-4 border-t border-border/50 pt-3">
         <button
           onClick={() => toggleSection(title)}
-          className="flex w-full items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground"
+          className="flex w-full items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground text-left"
         >
-          {title}
+          <span>{title}</span>
           <ChevronDown
-            className={cn('h-3 w-3 transition-transform duration-300', isExpanded ? 'rotate-0' : '-rotate-90')}
+            className={cn('h-3 w-3 shrink-0 transition-transform duration-300', isExpanded ? 'rotate-0' : '-rotate-90')}
           />
         </button>
 
@@ -235,12 +240,12 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         })}
 
         <>
-          <ProjectSection title="Enterprise" items={enterprise} />
-          <ProjectSection title="Motion" items={motionProjects} />
-          <ProjectSection title="Branding" items={branding} />
-          <ProjectSection title="Performance marketing" items={performanceMarketing} />
-          <ProjectSection title="Side" items={side} />
-          <ProjectSection title="Archive" items={archive} />
+          <ProjectSection title={uiCopy.sidebar.projectSections[0]} items={enterprise} />
+          <ProjectSection title={uiCopy.sidebar.projectSections[1]} items={motionProjects} />
+          <ProjectSection title={uiCopy.sidebar.projectSections[2]} items={branding} />
+          <ProjectSection title={uiCopy.sidebar.projectSections[3]} items={web} />
+          <ProjectSection title={uiCopy.sidebar.projectSections[4]} items={side} />
+          <ProjectSection title={uiCopy.sidebar.projectSections[5]} items={archive} />
         </>
       </nav>
 
@@ -321,7 +326,7 @@ function DashboardCVImpl({
                       <div className="relative w-full sm:w-64">
                         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
-                          placeholder="Search projects..."
+                          placeholder={uiCopy.sidebar.searchPlaceholder}
                           value={searchQuery}
                           onChange={(e) => onSearchChange?.(e.target.value)}
                           className="pl-9"

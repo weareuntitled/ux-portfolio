@@ -1,8 +1,8 @@
 # UX Portfolio
 
-## Edit project content (`src/content/projects.ts`)
+## Edit project content (`src/content/portfolio.ts`)
 
-Project cards and links are defined in `src/content/projects.ts`.
+Project cards and links are defined in `src/content/portfolio.ts` (optional copy overrides in `src/content/projects-copy.json`).
 
 Each project entry follows this shape:
 
@@ -23,7 +23,7 @@ Each project entry follows this shape:
 
 ### Add or update Figma embeds
 
-1. Open `src/content/projects.ts`.
+1. Open `src/content/portfolio.ts` (find the project by `slug`).
 2. Add `figmaEmbedUrl` with a full Figma embed URL.
 3. Optionally add `startingPointNodeId` if you want the embed to start at a specific node.
 
@@ -86,4 +86,4 @@ The app will be available on port 3000 behind the `caddy` reverse proxy defined 
 
 - A default OpenGraph placeholder image is acceptable until a branded image is available.
 - The site uses Next.js App Router metadata APIs in `src/app/layout.tsx` and page-level metadata in `src/app/page.tsx`.
-- `projects.ts` is the source of truth for project metadata and outbound links.
+- `portfolio.ts` is the source of truth for project metadata and outbound links.

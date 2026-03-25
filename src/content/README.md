@@ -4,7 +4,7 @@ This folder is ready for markdown, JSON, or typed content files used by the app.
 
 ## Projects (CMS)
 
-The `/projects` list, project detail pages, and the Projects section on the home page are driven by Payload CMS. The static data in `projects.ts` is used as a reference and for seeding.
+The `/projects` list, project detail pages, and the Projects section on the home page are driven by Payload CMS. The static data in `portfolio.ts` is used as a reference and for seeding.
 
 **To show projects on the site (required once per environment):**
 
@@ -21,7 +21,7 @@ Or call the API directly with your `PREVIEW_SECRET` from `.env` or `.env.local`:
 curl -X POST "http://localhost:3000/api/seed?secret=YOUR_PREVIEW_SECRET"
 ```
 
-Use POST (browser GET will not run the seed). This creates published project entries from `projects.ts` (KoVoN, CAESAR, FFP, Emission Compliance, etc.) if they don't already exist. After seeding, `/projects`, `/projects/[slug]`, and the home page Projects section show the project data. If the project list is empty, run the seed and refresh.
+Use POST (browser GET will not run the seed). This creates published project entries from `portfolio.ts` (KoVoN, CAESAR, FFP, Emission Compliance, etc.) if they don't already exist. After seeding, `/projects`, `/projects/[slug]`, and the home page Projects section show the project data. If the project list is empty, run the seed and refresh.
 
 ## Preview (Draft) mode
 

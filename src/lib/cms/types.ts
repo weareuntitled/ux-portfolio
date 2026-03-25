@@ -5,7 +5,7 @@ export type ProjectCategory =
   | 'Side'
   | 'Branding'
   | 'Motion'
-  | 'Performance marketing'
+  | 'Web'
   | 'Archive';
 
 export type CmsProject = {

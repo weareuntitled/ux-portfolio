@@ -1,0 +1,13 @@
+﻿{
+  "sidebar": {
+    "navItems": [
+      { "label": "Dashboard", "href": "/", "icon": "LayoutDashboard" },
+      { "label": "CV", "href": "/cv", "icon": "FileText" },
+      { "label": "Projects", "href": "/projects", "icon": "FolderKanban" },
+      { "label": "Kontrast Festival", "href": "/projects/kontrast-festival", "icon": "Sparkles" },
+      { "label": "Contact", "href": "/contact", "icon": "Mail" }
+    ],
+    "projectSections": ["Enterprise", "Motion", "Branding", "Web", "Side", "Archive"],
+    "searchPlaceholder": "Search projects..."
+  }
+}

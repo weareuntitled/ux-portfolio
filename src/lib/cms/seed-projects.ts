@@ -1,6 +1,14 @@
 import type { Payload } from 'payload';
-import type { Project } from '@/content/projects';
-import { projects as staticProjects } from '@/content/projects';
+import { getAllProjects, type PortfolioProject } from '@/content/portfolio';
+import type { Project } from '@/content/portfolio.types';
+
+function toCoreProject(p: PortfolioProject): Project {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { caseStudy: _cs, portfolioKit: _pk, kovon: _kv, impactCards: _ic, ...rest } = p;
+  return rest;
+}
+
+const staticProjects: Project[] = getAllProjects().map(toCoreProject);
 
 function toPayloadData(p: Project) {
   return {

@@ -11,6 +11,7 @@ import { resolveProjectAssetUrl } from '@/lib/project-assets';
 
 // 1. IMPORT DER GALLERY-MAP (Generated via scripts/update-gallery.mjs)
 import galleryMapRaw from './gallery-map.json';
+import projectsCopyRaw from './projects-copy.json';
 
 // ✅ strict type (no any)
 type GalleryMap = Record<string, string[]>;
@@ -284,9 +285,9 @@ export const portfolio: PortfolioSource = {
     subtitle: 'Local AI–accelerated arch-viz workflow.',
     oneLiner:
       'Rough 3D plus AI-driven style generation in a local pipeline—cutting variant turnaround from days to hours.',
-    category: 'Enterprise',
+    category: 'Side',
     year: '2025',
-    moodImageUrl: getPreviewImage('architektur-ai'),
+    moodImageUrl: getGallery('architektur-ai')[0],
     galleryUrls: getGallery('architektur-ai'),
     roles: ['Designer', '3D Generalist'],
     problem:
@@ -458,15 +459,15 @@ export const portfolio: PortfolioSource = {
     slug: 'deinespanndecke',
     title: 'DeineSpanndecke',
     navTitle: 'DeineSpanndecke',
-    subtitle: 'Performance marketing plus rebrand, WordPress & local SEO.',
+    subtitle: 'Web plus rebrand, WordPress & local SEO.',
     oneLiner:
       'End-to-end: refined logo and visual line, new WordPress marketing site with SEO-focused structure and copy, then Google Search and landing pages—hero Augsburg URL ~3.6% CTR, ~€1.37 campaign CPC, ~€570 spend in a measured window; qualified leads ~€100 vs. multi-thousand-euro jobs.',
-    category: 'Performance marketing',
+    category: 'Web',
     year: '2024 – 2025',
     client: 'Akustik Licht und Spanndecken GmbH (DeineSpanndecke), Augsburg',
     moodImageUrl: getPreviewImage('deinespanndecke'),
     galleryUrls: getGallery('deinespanndecke'),
-    roles: ['UX/UI Designer', 'Brand Designer', 'Performance marketing'],
+    roles: ['UX/UI Designer', 'Brand Designer', 'Web'],
     context:
       'Delivered end-to-end as untitled-ux freelance: identity touch-up, WordPress build, on-site SEO, conversational funneling, and paid acquisition—brand and growth in one engagement.',
     problem:
@@ -484,7 +485,7 @@ export const portfolio: PortfolioSource = {
       'Typebot funnel to qualify and route leads before human follow-up.',
     ],
     tags: [
-      'performance marketing',
+      'web',
       'google ads',
       'seo',
       'wordpress',
@@ -508,7 +509,7 @@ export const portfolio: PortfolioSource = {
     },
     caseStudy: {
       summary:
-        'Performance marketing case built on a logo refresh, WordPress site, SEO, and Google Ads—with strong Augsburg LP metrics and workable CPL vs. job size.',
+        'Web case built on a logo refresh, WordPress site, SEO, and Google Ads—with strong Augsburg LP metrics and workable CPL vs. job size.',
     },
   },
 
@@ -559,6 +560,17 @@ export const portfolio: PortfolioSource = {
     caseStudy: { summary: 'Written documentation of foundational design studies.' },
   },
 };
+
+type ProjectsCopyMap = Record<string, Partial<Project>>;
+const projectsCopy: ProjectsCopyMap = projectsCopyRaw as unknown as ProjectsCopyMap;
+
+// Central copy override layer:
+// Keep technical/media fields in this TS file, while editable project copy lives in `src/content/projects-copy.json`.
+for (const [slug, copy] of Object.entries(projectsCopy)) {
+  if (portfolio[slug]) {
+    Object.assign(portfolio[slug], copy);
+  }
+}
 
 export type PortfolioProject = (Project & {
   impactCards?: { label: string; value: string }[];

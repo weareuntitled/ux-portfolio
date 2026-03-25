@@ -8,7 +8,7 @@
     "dev": "node scripts/ensure-port-free.mjs && node scripts/update-gallery.mjs && node scripts/update-kontrast-manifest.mjs && next dev",
     "dev:clean": "node scripts/clean-next.mjs && node scripts/ensure-port-free.mjs && node scripts/update-gallery.mjs && node scripts/update-kontrast-manifest.mjs && next dev",
     "dev:force": "node scripts/update-gallery.mjs && node scripts/update-kontrast-manifest.mjs && next dev",
-    "prebuild": "node scripts/print-build-start.mjs",
+    "prebuild": "node scripts/print-build-start.mjs && node scripts/clean-next.mjs",
     "build": "node scripts/update-gallery.mjs && node scripts/update-kontrast-manifest.mjs && node --max-old-space-size=8192 ./node_modules/next/dist/bin/next build && node scripts/sync-standalone-assets.mjs",
     "start": "node scripts/start-standalone.mjs",
     "start:3001": "node scripts/start-standalone.mjs 3001",

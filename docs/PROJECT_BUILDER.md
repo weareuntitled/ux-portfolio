@@ -46,7 +46,7 @@ flowchart LR
 | `src/components/ProjectPortfolioKit.tsx` | **Project builder** layout: Hero, BrowserMockup, MetricCards, ProcessSteps, InsightCard, FeatureItems. Uses project + case study + portfolioKit. |
 | `src/components/PortfolioKit.tsx` | Reusable building blocks: ProjectHero, BrowserMockup, MetricCard, InsightCard, ProcessStep, ProcessSteps, FeatureItem. |
 | `src/content/caseStudies.ts` | Case study copy and portfolio kit data **keyed by project slug**. |
-| `src/content/projects.ts` | Static project list (fallback when CMS unavailable). |
+| `src/content/portfolio.ts` | Static project list (fallback when CMS unavailable). |
 | `src/lib/cms/` | CMS types, payload config, project resolution. |
 
 ---
@@ -55,14 +55,14 @@ flowchart LR
 
 ### 3.1 Project (ResolvedProject)
 
-Comes from **Payload CMS** (or static `projects.ts`). Used for:
+Comes from **Payload CMS** (or static `portfolio.ts`). Used for:
 
 - **Hero**: `title`, `oneLiner`, `roles[0]`, `year`, `tags`
 - **Prototype link**: `prototype.inAppPrototypeHref` or `#prototype` for Figma, or `links` "Live demo"
 - **Screenshot**: `moodImageUrl` (or placeholder)
 - **Metrics**: `impact[]` → first 3 shown as MetricCards (`label`, `value`)
 
-Relevant type: `ResolvedProject` in `src/lib/cms/types.ts` (alias of `Project` from `src/content/projects.ts`).
+Relevant type: `ResolvedProject` in `src/lib/cms/types.ts` (alias of `Project` from `src/content/portfolio.types.ts`).
 
 ### 3.2 Case study sections (CaseStudySections)
 
@@ -191,7 +191,7 @@ One feature/tech row: icon + title + description.
 
 ### Static only (no CMS)
 
-1. In `src/content/projects.ts`, add the project to the static list (slug, title, oneLiner, year, roles, tags, etc.).
+1. In `src/content/portfolio.ts`, add the project to the static list (slug, title, oneLiner, year, roles, tags, etc.).
 2. Same as steps 2–3 above for case study and portfolio kit in `caseStudies.ts`.
 
 ---

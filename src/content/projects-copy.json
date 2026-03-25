@@ -1,0 +1,85 @@
+﻿{
+  "kovon": {
+    "title": "KoVoN COP Pilot",
+    "navTitle": "KoVoN COP pilot",
+    "subtitle": "Securing Audit Readiness through Conformity of Production.",
+    "oneLiner": "Replaced fragmented Excel silos with a centralized Angular compliance hub, ensuring 100% data transparency and accountability."
+  },
+  "automation": {
+    "title": "SAP Automation",
+    "navTitle": "SAP automation",
+    "subtitle": "Protecting Data Integrity in SAP Environments.",
+    "oneLiner": "Eliminated manual rework by implementing automated routines that block faulty platform overwrites and safeguard core data."
+  },
+  "emission-compliance": {
+    "title": "Emission Dashboard",
+    "subtitle": "Accelerating Anomaly Detection.",
+    "oneLiner": "Designed a high-speed reporting dashboard using visual encoding to instantly surface critical breaches in complex datasets."
+  },
+  "ffp-dashboard": {
+    "title": "FFP Dashboard",
+    "subtitle": "Optimizing Expert Diagnostic Workflows.",
+    "oneLiner": "Transformed complex automotive diagnostics from symptom-first triage into a streamlined, root-cause synthesis UI."
+  },
+  "8020-portfolio": {
+    "title": "8020 Showreel 2025",
+    "subtitle": "The 60/40 Hybrid Design Workflow.",
+    "oneLiner": "Led cross-functional teams to deliver scalable digital products for automotive OEMs, balancing logical structure with creative execution."
+  },
+  "3dprojects": {
+    "title": "3D Portfolio",
+    "subtitle": "Immersive 3D & AI Visuals.",
+    "oneLiner": "A curated showcase of 3D modeling and AI-driven animations for events, marketing campaigns, and music labels."
+  },
+  "architektur-ai": {
+    "title": "Architecture + AI",
+    "navTitle": "Architecture + AI",
+    "subtitle": "AI-Accelerated Architectural Visualization.",
+    "oneLiner": "Combined rough 3D modeling with local AI style generation, reducing design turnaround time from days to mere hours.",
+    "category": "Side"
+  },
+  "strategic-ai-consulting": {
+    "title": "Strategic AI Advisory",
+    "navTitle": "Strategic AI",
+    "subtitle": "From Proof of Concept to Enterprise ROI.",
+    "oneLiner": "Delivered end-to-end AI strategy for 500+ processes, leveraging hybrid RAG architecture and Copilot to drive measurable business value."
+  },
+  "tracklistify": {
+    "title": "Tracklistify Studio",
+    "subtitle": "AI-Driven Audio Analysis.",
+    "oneLiner": "Built an indie tool that transforms raw audio sets into accurate, actionable tracklists using advanced AI extraction."
+  },
+  "fixundfertig": {
+    "title": "Fix und Fertig Invoicing",
+    "subtitle": "Streamlining Administrative Workflows.",
+    "oneLiner": "Developed a personal automation tool that unifies and processes receipts and invoices via local OCR extraction."
+  },
+  "samani-rebranding": {
+    "title": "Samani Rebranding",
+    "subtitle": "Accessible Brand & Design Systems.",
+    "oneLiner": "Engineered a scalable After Effects and Figma template system, empowering non-designers to consistently create on-brand content."
+  },
+  "kontrast-festival": {
+    "title": "Kontrast Festival",
+    "subtitle": "Leading Creative Operations.",
+    "oneLiner": "Spearheaded art direction, brand identity, and logistics over 3 years, managing creative teams and real-time media execution under pressure."
+  },
+  "deinespanndecke": {
+    "title": "DeineSpanndecke",
+    "navTitle": "DeineSpanndecke",
+    "subtitle": "End-to-End Digital Brand Overhaul.",
+    "oneLiner": "Delivered a complete digital transformation, combining a brand refresh with an SEO-optimized WordPress site to drive local conversions.",
+    "category": "Web"
+  },
+  "aidelsburger": {
+    "title": "Aidelsburger",
+    "subtitle": "Scalable Corporate Identity.",
+    "oneLiner": "Transformed traditional corporate typography into a high-impact, modern visual metaphor for the industrial sector."
+  },
+  "arbeitsprobe2022": {
+    "title": "Arbeitsprobe 2022",
+    "navTitle": "Portfolio 2022",
+    "subtitle": "Foundational Design Archive.",
+    "oneLiner": "A comprehensive written portfolio documenting multidisciplinary design studies and early-career projects from 2018 to 2022."
+  }
+}

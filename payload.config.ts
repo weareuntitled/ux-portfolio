@@ -76,7 +76,7 @@ const Media: CollectionConfig = {
   ],
 };
 
-// Projects collection: each portfolio project, roughly mirroring src/content/projects.ts
+// Projects collection: each portfolio project, roughly mirroring src/content/portfolio.ts
 const Projects: CollectionConfig = {
   slug: 'projects',
   labels: {
@@ -127,7 +127,7 @@ const Projects: CollectionConfig = {
         { label: 'Side', value: 'Side' },
         { label: 'Branding', value: 'Branding' },
         { label: 'Motion', value: 'Motion' },
-        { label: 'Performance marketing', value: 'Performance marketing' },
+        { label: 'Web', value: 'Web' },
         { label: 'Archive', value: 'Archive' },
       ],
     },

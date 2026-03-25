@@ -38,7 +38,7 @@ export type Project = {
   subtitle?: string;
   roleLine?: string;
   oneLiner: string;
-  category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Performance marketing' | 'Archive';
+  category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Web' | 'Archive';
   year: string;
   client?: string;
   roles?: string[];

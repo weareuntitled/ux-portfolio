@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -19,12 +20,44 @@ import {
 import { contact, identityRolePrimary, identityRoleSecondary } from '@/content/home';
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import { getProjectBySlug, getProjectCoverImage, type PortfolioProject } from '@/content/portfolio';
-import { EducationSection } from '@/components/landing/EducationSection';
-import { ExperienceTimelineSection } from '@/components/landing/ExperienceTimelineSection';
+// Central landing copy lives in src/content/landing-copy.json
+import landingCopy from '@/content/landing-copy.json';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
+
+/** Below-fold sections: separate JS chunks + defer parse on slow connections */
+function BelowFoldSkeleton() {
+  return (
+    <div
+      className="min-h-[200px] animate-pulse rounded-2xl border border-border bg-muted/20"
+      aria-hidden
+    />
+  );
+}
+
+const ExperienceTimelineSection = dynamic(
+  () =>
+    import('@/components/landing/ExperienceTimelineSection').then((m) => ({
+      default: m.ExperienceTimelineSection,
+    })),
+  { loading: () => <BelowFoldSkeleton /> },
+);
+
+const EducationSection = dynamic(
+  () => import('@/components/landing/EducationSection').then((m) => ({ default: m.EducationSection })),
+  { loading: () => <BelowFoldSkeleton /> },
+);
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 const EASE = [0.16, 1, 0.3, 1] as const;
+const iconMap: Record<string, React.ElementType> = {
+  Package,
+  Users,
+  Sparkles,
+  Zap,
+  Box,
+  FileText,
+  Workflow
+};
 
 const selectedFeatured = getProjectBySlug('kovon');
 const selectedFeaturedCover = selectedFeatured ? getProjectCoverImage(selectedFeatured) : null;
@@ -55,12 +88,14 @@ export function NextGenStartPage() {
                 </span>
                 Available
                 <div className="pointer-events-none invisible absolute bottom-full left-0 z-50 mb-2 max-w-[min(90vw,320px)] rounded-md border border-border bg-popover px-3 py-2 text-xs normal-case tracking-normal text-popover-foreground opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                  Offen für Product Designer- und UX-Manager-Rollen · Enterprise SaaS, SAP & Automation.
+                  {landingCopy.hero.availableTooltip}
                 </div>
               </div>
-              <span className="inline-flex items-center rounded-full border border-border bg-muted/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Automotive</span>
-              <span className="inline-flex items-center rounded-full border border-border bg-muted/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Enterprise</span>
-              <span className="inline-flex items-center rounded-full border border-border bg-muted/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">UX/UI</span>
+              {landingCopy.hero.chips.map((chip) => (
+                <span key={chip} className="inline-flex items-center rounded-full border border-border bg-muted/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  {chip}
+                </span>
+              ))}
             </div>
 
             <div>
@@ -96,7 +131,7 @@ export function NextGenStartPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.39, ease: EASE }}
             >
-              I design enterprise products for compliance, diagnostics, and automation, translating complex architecture into clear workflows that teams can execute with confidence.
+              {landingCopy.hero.description}
             </motion.p>
 
             <motion.div
@@ -128,6 +163,8 @@ export function NextGenStartPage() {
                   alt={contact.name}
                   fill
                   priority
+                  fetchPriority="high"
+                  quality={80}
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 90vw, 420px"
                 />
@@ -148,32 +185,30 @@ export function NextGenStartPage() {
           viewport={{ once: true, margin: '-50px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } } }}
         >
-          {[
-            { icon: Package, badge: 'Enterprise', k: 'Enterprise tools shipped', v: '3', d: 'Compliance and diagnostic systems' },
-            { icon: Users, badge: '8020', k: 'Websites and apps shipped', v: '30+', d: 'Delivered in consulting teams' },
-            { icon: Sparkles, badge: 'Freelance', k: 'Brands elevated', v: '10+', d: 'Branding and design from scratch', hi: true },
-            { icon: Zap, badge: 'Focus', k: 'Product direction', v: 'UX/UI', d: 'Product design and delivery ownership' },
-          ].map((item) => (
-            <motion.div
-              key={item.k}
-              className={`group flex flex-col gap-2 rounded-xl border p-6 transition-colors ${item.hi ? 'border-primary/20 bg-primary/5 hover:bg-primary/10' : 'border-border bg-muted/20 hover:bg-muted/40'}`}
-              variants={{ hidden: { opacity: 0, y: 14, scale: 0.985 }, show: { opacity: 1, y: 0, scale: 1, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
-            >
-              <div className="flex items-center justify-between">
-                <item.icon className={`h-5 w-5 ${item.hi ? 'text-primary' : 'text-muted-foreground transition-colors group-hover:text-primary'}`} />
-                <span className={`rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${item.hi ? 'border-primary/20 bg-background/40 text-primary/80' : 'border-border bg-background/40 text-muted-foreground'}`}>{item.badge}</span>
-              </div>
-              <p className={`text-xs uppercase tracking-widest ${item.hi ? 'text-primary/70' : 'text-muted-foreground'}`}>{item.k}</p>
-              <p className={`text-2xl font-semibold tracking-tight ${item.hi ? 'text-primary' : 'text-foreground'}`}>{item.v}</p>
-              <p className={`text-xs ${item.hi ? 'text-primary/70' : 'text-muted-foreground'}`}>{item.d}</p>
-            </motion.div>
-          ))}
+          {landingCopy.stats.map((item) => {
+            const Icon = iconMap[item.icon];
+            return (
+              <motion.div
+                key={item.k}
+                className={`group flex flex-col gap-2 rounded-xl border p-6 transition-colors ${item.hi ? 'border-primary/20 bg-primary/5 hover:bg-primary/10' : 'border-border bg-muted/20 hover:bg-muted/40'}`}
+                variants={{ hidden: { opacity: 0, y: 14, scale: 0.985 }, show: { opacity: 1, y: 0, scale: 1, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
+              >
+                <div className="flex items-center justify-between">
+                  {Icon && <Icon className={`h-5 w-5 ${item.hi ? 'text-primary' : 'text-muted-foreground transition-colors group-hover:text-primary'}`} />}
+                  <span className={`rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${item.hi ? 'border-primary/20 bg-background/40 text-primary/80' : 'border-border bg-background/40 text-muted-foreground'}`}>{item.badge}</span>
+                </div>
+                <p className={`text-xs uppercase tracking-widest ${item.hi ? 'text-primary/70' : 'text-muted-foreground'}`}>{item.k}</p>
+                <p className={`text-2xl font-semibold tracking-tight ${item.hi ? 'text-primary' : 'text-foreground'}`}>{item.v}</p>
+                <p className={`text-xs ${item.hi ? 'text-primary/70' : 'text-muted-foreground'}`}>{item.d}</p>
+              </motion.div>
+            );
+          })}
         </motion.section>
 
         <section className="space-y-6 pt-16">
           <div className="mb-6">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl mb-3">Core Capabilities</h2>
-            <p className="text-base text-muted-foreground lg:text-lg">End-to-end product strength: from discovery and UX depth to technical execution and delivery leadership.</p>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl mb-3">{landingCopy.coreCapabilities.title}</h2>
+            <p className="text-base text-muted-foreground lg:text-lg">{landingCopy.coreCapabilities.subtitle}</p>
           </div>
 
           <motion.div
@@ -183,38 +218,38 @@ export function NextGenStartPage() {
             viewport={{ once: true, margin: '-50px' }}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
           >
-            {([
-              { icon: Box, title: 'Methodical Thinking', body: 'Discovery and alignment: shadowing, interviews, workflow mapping, requirements, stakeholder alignment, and decision framing.', img: '/images/capabilities/thinking.jpg' },
-              { icon: Users, title: 'Product-Centric Delivery', body: 'Turn insights into shippable UI: interaction concept, information architecture, prototypes, handoff, and iteration with engineering constraints.', img: '/images/capabilities/delivery.jpg' },
-              { icon: FileText, title: 'Tools and Systems Fluency', body: 'Fluent across systems: Jira, Confluence, Figma, prototyping, and technical collaboration. Comfortable translating process into automation-ready specs.', img: '/images/capabilities/tools.jpg' },
-              { icon: Workflow, title: 'System Thinking', body: 'Translate enterprise complexity into coherent architecture: clear ownership, scalable components, and low-cognitive-load decision paths.', img: '/images/capabilities/process.jpg' },
-            ] as const).map((item, i) => (
-              <motion.article
-                key={item.title}
-                className="group relative overflow-hidden rounded-[2rem] border border-border/50 bg-card shadow-sm ring-1 ring-border/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:ring-primary/30"
-                variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
-              >
-                <div className="relative h-40 w-full overflow-hidden sm:h-44">
-                  <Image
-                    src={item.img}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
-                </div>
-                <div className="relative z-10 p-8 pt-0 -mt-6">
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-card shadow-sm ring-1 ring-border transition-transform duration-500 group-hover:scale-110" style={{ rotate: i % 2 === 0 ? '0deg' : '0deg' }}>
-                    <item.icon className="h-6 w-6 text-foreground" />
+            {landingCopy.coreCapabilities.items.map((item, i) => {
+              const Icon = iconMap[item.icon];
+              return (
+                <motion.article
+                  key={item.title}
+                  className="group relative overflow-hidden rounded-[2rem] border border-border/50 bg-card shadow-sm ring-1 ring-border/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:ring-primary/30"
+                  variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.55, ease: EASE } } }}
+                >
+                  <div className="relative h-40 w-full overflow-hidden sm:h-44">
+                    <Image
+                      src={item.img}
+                      alt=""
+                      fill
+                      quality={75}
+                      fetchPriority="low"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
                   </div>
-                  <h3 className="mb-3 text-xl font-semibold tracking-tight text-foreground">{item.title}</h3>
-                  <p className="text-base leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-foreground/80">
-                    {item.body}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
+                  <div className="relative z-10 p-8 pt-0 -mt-6">
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-card shadow-sm ring-1 ring-border transition-transform duration-500 group-hover:scale-110" style={{ rotate: i % 2 === 0 ? '0deg' : '0deg' }}>
+                      {Icon && <Icon className="h-6 w-6 text-foreground" />}
+                    </div>
+                    <h3 className="mb-3 text-xl font-semibold tracking-tight text-foreground">{item.title}</h3>
+                    <p className="text-base leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-foreground/80">
+                      {item.body}
+                    </p>
+                  </div>
+                </motion.article>
+              );
+            })}
           </motion.div>
         </section>
 
@@ -226,7 +261,7 @@ export function NextGenStartPage() {
           transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE }}
         >
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Leadership</h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">{landingCopy.leadership.title}</h2>
           </div>
           <article className="group relative overflow-hidden rounded-[2rem] border border-border/50 bg-card shadow-sm ring-1 ring-border/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:ring-primary/30">
             <div className="relative h-48 w-full overflow-hidden sm:h-64">
@@ -235,8 +270,11 @@ export function NextGenStartPage() {
                   src={kontrastCover}
                   alt="Kontrast Festival background"
                   fill
+                  quality={75}
+                  fetchPriority="low"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 1024px"
+                  unoptimized={shouldUnoptimizeImage(kontrastCover)}
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent" />
@@ -246,12 +284,13 @@ export function NextGenStartPage() {
                 <BrandLogoMark id="kontrastFestival" label="Kontrast Festival Logo" size={40} className="h-8 w-auto text-foreground" />
               </div>
               <div className="mb-2 flex items-center gap-2">
-                <span className="rounded bg-muted px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Operations & Scale</span>
+                <span className="rounded bg-muted px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{landingCopy.leadership.badge}</span>
               </div>
-              <h3 className="text-2xl font-bold text-foreground transition-colors group-hover:text-primary">Kontrast Festival</h3>
-              <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Co-founded and scaled a cultural event — including end-to-end visual identity, signage, and campaign touchpoints. Led cross-functional teams and built operational processes. Grew the event to <strong>4,000+ attendees</strong> and <strong>EUR250k+ revenue</strong>.
-              </p>
+              <h3 className="text-2xl font-bold text-foreground transition-colors group-hover:text-primary">{landingCopy.leadership.projectTitle}</h3>
+              <p 
+                className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground"
+                dangerouslySetInnerHTML={{ __html: landingCopy.leadership.bodyHtml }}
+              />
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href="/projects/kontrast-festival"
@@ -275,8 +314,8 @@ export function NextGenStartPage() {
         <section id="featured-projects" className="scroll-mt-24 space-y-8 pt-16">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Selected Works</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Enterprise case studies focused on clarity, control, and delivery impact.</p>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">{landingCopy.selectedWorks.title}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">{landingCopy.selectedWorks.subtitle}</p>
             </div>
             <Link href="/projects" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
               View all
@@ -306,6 +345,8 @@ export function NextGenStartPage() {
                           src={selectedFeaturedCover}
                           alt={`${selectedFeatured.title} cover`}
                           fill
+                          quality={75}
+                          fetchPriority="low"
                           sizes="(max-width: 1280px) 100vw, 1024px"
                           className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
                           unoptimized={shouldUnoptimizeImage(selectedFeaturedCover)}
@@ -354,6 +395,8 @@ export function NextGenStartPage() {
                               src={cover}
                               alt={`${item.title} cover`}
                               fill
+                              quality={75}
+                              fetchPriority="low"
                               sizes="(max-width: 768px) 100vw, 33vw"
                               className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
                               unoptimized={shouldUnoptimizeImage(cover)}
@@ -405,8 +448,8 @@ export function NextGenStartPage() {
           transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE }}
         >
           <div className="mx-auto max-w-2xl space-y-8">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Let’s connect</h2>
-            <p className="text-sm text-muted-foreground">If you want a Product Designer who can handle complex enterprise workflows, I’m happy to talk.</p>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">{landingCopy.footer.title}</h2>
+            <p className="text-sm text-muted-foreground">{landingCopy.footer.subtitle}</p>
             <div className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row">
               <a href={`mailto:${contact.email}`} className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:w-auto">
                 <Mail className="h-4 w-4" />

@@ -1,6 +1,6 @@
 'use client';
 
-import type { Project } from '@/content/projects';
+import type { Project } from '@/content/portfolio.types';
 
 type PrototypeShellProps = {
   project: Project;

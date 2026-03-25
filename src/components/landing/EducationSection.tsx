@@ -8,13 +8,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import {
-  educationAcademicTheses,
-  educationCertificationBody,
-  educationModuleProjects,
-  educationTimelineDetailed,
-} from '@/content/home';
+// Education copy: edit `src/content/landing-copy.json` → `education`
+import landingCopy from '@/content/landing-copy.json';
 import { brandLogos } from '@/lib/brand-logos';
+
+const edu = landingCopy.education;
 
 function detailWithEmphasis(detail: string, terms: readonly string[]): ReactNode[] {
   const out: ReactNode[] = [];
@@ -38,7 +36,7 @@ export function EducationSection() {
   return (
     <section className="space-y-6">
       <div className="flex flex-wrap items-center gap-3 md:gap-4">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Education</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">{edu.heading}</h2>
         <Image
           src={brandLogos.thi}
           alt="Technische Hochschule Ingolstadt"
@@ -50,7 +48,7 @@ export function EducationSection() {
       </div>
       <div className="space-y-4 rounded-2xl border border-border bg-card p-6">
         <div className="space-y-3 text-sm text-foreground">
-          {educationTimelineDetailed.map((entry) => (
+          {edu.timeline.map((entry) => (
             <div
               key={`${entry.degree}-${entry.period}`}
               className="rounded-xl border border-border bg-muted/30 p-3"
@@ -59,23 +57,28 @@ export function EducationSection() {
               <p className="text-muted-foreground">{entry.school}</p>
               <p className="text-xs text-muted-foreground">
                 {entry.period}
-                {'grade' in entry && entry.grade ? ` | Final Grade: ${entry.grade}` : ''}
+                {entry.grade ? ` | Final Grade: ${entry.grade}` : ''}
               </p>
             </div>
           ))}
         </div>
 
-        <Accordion type="single" collapsible defaultValue="certification" className="w-full">
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue={edu.defaultOpenAccordion}
+          className="w-full"
+        >
           <AccordionItem value="theses" className="border-border">
             <AccordionTrigger className="text-sm font-medium">
-              Academic Theses
+              {edu.academicThesesTitle}
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-muted-foreground">
-              {educationAcademicTheses.map((t) => (
+              {edu.academicTheses.map((t) => (
                 <div key={t.label}>
                   <p className="font-medium text-foreground">
                     {t.label}
-                    {'grade' in t && t.grade ? ` (Grade: ${t.grade})` : ''}
+                    {t.grade ? ` (Grade: ${t.grade})` : ''}
                   </p>
                   <p className="italic text-foreground/90">&ldquo;{t.title}&rdquo;</p>
                   <p className="mt-1 leading-relaxed">{t.body}</p>
@@ -86,15 +89,15 @@ export function EducationSection() {
 
           <AccordionItem value="modules" className="border-border">
             <AccordionTrigger className="text-sm font-medium">
-              Module Highlights & Projects
+              {edu.moduleProjectsTitle}
             </AccordionTrigger>
             <AccordionContent>
               <ul className="list-disc space-y-2 pl-4 text-sm text-muted-foreground">
-                {educationModuleProjects.map((item) => (
+                {edu.moduleProjects.map((item) => (
                   <li key={item.lead}>
                     <strong className="font-medium text-foreground">{item.lead}</strong>
                     {' — '}
-                    {'emphasize' in item && item.emphasize
+                    {item.emphasize?.length
                       ? detailWithEmphasis(item.detail, item.emphasize)
                       : item.detail}
                   </li>
@@ -105,13 +108,13 @@ export function EducationSection() {
 
           <AccordionItem value="certification" className="border-border">
             <AccordionTrigger className="text-sm font-medium">
-              Certification
+              {edu.certificationTitle}
             </AccordionTrigger>
             <AccordionContent>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                <strong className="font-medium text-foreground">Certified SAFe 6 Scrum Master</strong>
+                <strong className="font-medium text-foreground">{edu.certificationName}</strong>
                 {' — '}
-                {educationCertificationBody}
+                {edu.certificationBody}
               </p>
             </AccordionContent>
           </AccordionItem>
