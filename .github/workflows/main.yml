@@ -2,7 +2,7 @@ name: build-and-push-ghcr
 
 on:
   push:
-    branches: [main, "2026-02-12-mjl2"]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
