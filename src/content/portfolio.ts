@@ -221,6 +221,8 @@ export const portfolio: PortfolioSource = {
       "Reshaped automotive diagnostics from symptom-first triage to root-cause synthesis. I created a unified high-fidelity prototype that perfectly aligns the UI with the experts' mental model, providing a true investigative story for the users.",
     outcomes: ['Consolidated six months of fragmented input into one coherent flow.', 'Reusable modular patterns for holidays, overtime, and diagnostic workflows.'],
     tags: ['enterprise', 'diagnostics'],
+    links: [{ label: 'Live prototype', href: '/prototypes/ffp' }],
+    prototypeButtonLabel: 'Explore prototype',
     outcomeHighlight: { value: '1', label: 'Story', description: "Aligned the diagnostic UI with the expert's mental model.", icon: 'MousePointerClick' },
     portfolioKit: ffpKit,
     caseStudy: { summary: 'Investigative UI for automotive diagnostics.' },
@@ -590,6 +592,19 @@ export function getProjectBySlug(slug: string): PortfolioProject | null {
 
 export function getAllProjects(): PortfolioProject[] {
   return Object.values(portfolioIndex);
+}
+
+export function getAdjacentProjects(currentSlug: string): {
+  prev: PortfolioProject | null;
+  next: PortfolioProject | null;
+} {
+  const slugs = Object.keys(portfolioIndex);
+  const idx = slugs.indexOf(currentSlug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? portfolioIndex[slugs[idx - 1]] : null,
+    next: idx < slugs.length - 1 ? portfolioIndex[slugs[idx + 1]] : null,
+  };
 }
 
 export function getCaseStudySections(slug: string): CaseStudySections | null {
