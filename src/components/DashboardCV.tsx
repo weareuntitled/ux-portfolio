@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { EASE, DUR } from '@/lib/motion';
 
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -26,6 +27,7 @@ import { cn } from '@/lib/utils';
 
 import { contact, identityName, identityRole } from '@/content/home';
 import uiCopy from '@/content/ui-copy.json';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
 
@@ -105,11 +107,9 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
     return { enterprise, motionProjects, branding, web, side, archive };
   }, [navProjects]);
 
-  const EASE = [0.16, 1, 0.3, 1] as const;
-
   const vItem = {
-    hidden: { opacity: 0, x: -10 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
+    hidden: { opacity: 0, x: -10, filter: 'blur(4px)' },
+    show: { opacity: 1, x: 0, filter: 'blur(0px)', transition: { duration: DUR.sm, ease: EASE } },
   };
 
   const rowBase = 'relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors';
@@ -172,7 +172,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
       <div className="mt-4 border-t border-border/50 pt-3">
         <button
           onClick={() => toggleSection(title)}
-          className="flex w-full items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground text-left"
+          className="flex w-full items-center justify-between px-3 py-1.5 text-[11px] font-semibold capitalize tracking-wide text-muted-foreground/70 hover:text-foreground text-left"
         >
           <span>{title}</span>
           <ChevronDown
@@ -186,7 +186,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: EASE }}
+              transition={{ duration: DUR.xs, ease: EASE }}
               className="overflow-hidden"
             >
               <div className="space-y-1 py-1">
@@ -260,6 +260,10 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-foreground">
           <Mail className="h-4 w-4" /> {contact.email}
         </a>
+        <div className="mt-4 flex items-center justify-between">
+          <span className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground/50">Appearance</span>
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   );

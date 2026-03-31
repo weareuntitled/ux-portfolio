@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EASE, DUR } from '@/lib/motion';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
@@ -34,12 +35,13 @@ export function QualitySignalCard({
   level = 'high',
   highMeans,
 }: QualitySignalCardProps) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      whileHover={{ y: -2 }}
+      initial={reduce ? false : { opacity: 0, y: 20, filter: 'blur(6px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      transition={{ duration: reduce ? 0 : DUR.md, ease: EASE }}
+      whileHover={reduce ? undefined : { y: -2 }}
     >
       <Card className="group rounded-2xl border-border/70 bg-card/70 backdrop-blur">
         <CardHeader className="space-y-3">

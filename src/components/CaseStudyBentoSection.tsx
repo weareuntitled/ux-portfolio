@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EASE, DUR, VP } from '@/lib/motion';
 import { Cpu, Layers, Search, ShieldCheck, Zap } from 'lucide-react';
 import { getBentoCards } from '@/content/portfolio';
 import type { BentoCardVisual } from '@/content/portfolio.types';
@@ -53,7 +54,8 @@ function BentoVisual({ visual, value, items }: { visual?: BentoCardVisual; value
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '80%' }}
-            transition={{ duration: 1.5 }}
+            viewport={VP}
+            transition={{ duration: DUR.xl, ease: EASE }}
             className="h-full bg-primary"
           />
         </div>
@@ -61,7 +63,8 @@ function BentoVisual({ visual, value, items }: { visual?: BentoCardVisual; value
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '40%' }}
-            transition={{ duration: 1.5, delay: 0.2 }}
+            viewport={VP}
+            transition={{ duration: DUR.xl, ease: EASE, delay: 0.1 }}
             className="h-full bg-primary/70"
           />
         </div>
@@ -69,7 +72,8 @@ function BentoVisual({ visual, value, items }: { visual?: BentoCardVisual; value
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '60%' }}
-            transition={{ duration: 1.5, delay: 0.4 }}
+            viewport={VP}
+            transition={{ duration: DUR.xl, ease: EASE, delay: 0.2 }}
             className="h-full bg-primary/50"
           />
         </div>
@@ -131,7 +135,7 @@ export function CaseStudyBentoSection({ slug, heading, intro }: Props) {
               title={card.title}
               subtitle={card.subtitle}
               icon={Icon}
-              delay={i * 0.1}
+              delay={Math.min(i * 0.1, 0.3)}
               className={cn(card.colSpan === 2 && 'md:col-span-2')}
             >
               <BentoVisual visual={card.visual} value={card.value} items={card.items} />

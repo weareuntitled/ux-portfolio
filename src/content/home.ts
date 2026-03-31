@@ -8,7 +8,7 @@ import type { BrandLogoId } from '@/lib/brand-logos';
 export const identityName = 'Daniel Peters';
 export const identityRolePrimary = 'UX & Product Design Consultant';
 export const identityRoleSecondary =
-  'Enterprise SaaS · Workflow Automation · SAP | M.Sc. UX Design | Offen für Product Designer / UX Manager Positionen';
+  'Enterprise SaaS · Workflow Automation · SAP | M.Sc. UX Design';
 export const identityRole = identityRolePrimary;
 export const identitySubtitle = 'Enterprise SaaS · Workflow Automation · SAP';
 
@@ -33,7 +33,7 @@ export const experienceTimelineDetailed = [
     logoId: 'untitledUx' satisfies BrandLogoId,
     logoAlt: 'Untitled-ux logo',
     summary:
-      'With untitled-ux, I help founders and SMEs translate their visions into tangible, market-ready products. I guide projects holistically from Zero to One, from initial strategic consulting to final go-live.',
+      'With untitled-ux, I help founders and SMEs translate their ideas into user-tested, ready-to-launch digital products — from initial strategy to go-live.',
     bullets: [
       'End-to-end web solutions (e.g., kathis-candybar.de, deinespanndecke.de)',
       'Brand identity systems',
@@ -44,8 +44,8 @@ export const experienceTimelineDetailed = [
   {
     id: '8020-eco',
     company: '8020.eco',
-    headline: 'Management Consultant',
-    subline: '8020.eco',
+    headline: 'Interaction Designer',
+    subline: '8020.eco · Management Consultant',
     period: 'Jul 2022 – Nov 2025',
     location: 'Ingolstadt · Hybrid',
     logoId: 'eco8020' satisfies BrandLogoId,

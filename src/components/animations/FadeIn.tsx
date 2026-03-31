@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { EASE, DUR, VP } from '@/lib/motion';
 
 type FadeInProps = {
   children: React.ReactNode;
@@ -13,27 +14,23 @@ type FadeInProps = {
 };
 
 /**
- * Blur-in, spring-based reveal inspired by Apple product pages.
+ * Blur-in, ease-out reveal.
  *
- * Initial:   opacity 0, y 20px, blur(10px)
- * Final:     opacity 1, y 0,   blur(0px)
- * Transition: spring { stiffness: 50, damping: 20, mass: 1 }
+ * Initial:    opacity 0, y 20px, blur(6px)
+ * Final:      opacity 1, y 0,   blur(0px)
+ * Transition: 0.5s EASE (expo-out), respects prefers-reduced-motion
  */
 export function FadeIn({ children, className, style, delay = 0 }: FadeInProps) {
+  const reduce = useReducedMotion();
+
   return (
     <motion.div
       className={cn(className)}
       style={style}
-      initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+      initial={reduce ? false : { opacity: 0, y: 20, filter: 'blur(6px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        type: 'spring',
-        stiffness: 50,
-        damping: 20,
-        mass: 1,
-        delay,
-      }}
+      viewport={VP}
+      transition={{ duration: reduce ? 0 : DUR.md, ease: EASE, delay: reduce ? 0 : delay }}
     >
       {children}
     </motion.div>

@@ -1,29 +1,29 @@
 'use client';
 
 import * as React from 'react';
-import { motion, type Variants } from 'framer-motion';
+import { motion, type Variants, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { EASE, DUR, VP, STAGGER } from '@/lib/motion';
 
 export const staggerContainerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: STAGGER.md,
       delayChildren: 0.05,
     },
   },
 };
 
 export const staggerItemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
     y: 0,
+    filter: 'blur(0px)',
     transition: {
-      type: 'spring',
-      stiffness: 50,
-      damping: 20,
-      mass: 1,
+      duration: DUR.md,
+      ease: EASE,
     },
   },
 };
@@ -38,13 +38,15 @@ type StaggerContainerProps = {
  * Use together with `StaggerItem` for a waterfall / cascade effect.
  */
 export function StaggerContainer({ children, className }: StaggerContainerProps) {
+  const reduce = useReducedMotion();
+
   return (
     <motion.div
       className={cn(className)}
       variants={staggerContainerVariants}
-      initial="hidden"
+      initial={reduce ? false : 'hidden'}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={VP}
     >
       {children}
     </motion.div>
@@ -63,4 +65,3 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
     </motion.div>
   );
 }
-

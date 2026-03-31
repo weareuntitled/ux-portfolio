@@ -1,9 +1,10 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { EASE, DUR, VP } from '@/lib/motion';
 
 type Props = {
   title: string;
@@ -15,12 +16,14 @@ type Props = {
 };
 
 export function BentoCard({ title, subtitle, icon: Icon, children, className, delay = 0 }: Props) {
+  const reduce = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, delay }}
+      initial={reduce ? false : { opacity: 0, y: 20, filter: 'blur(6px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={VP}
+      transition={{ duration: reduce ? 0 : DUR.md, ease: EASE, delay: reduce ? 0 : delay }}
       className={cn(
         'group relative overflow-hidden rounded-2xl border border-border bg-card/50 p-6 transition-colors hover:bg-card',
         className
