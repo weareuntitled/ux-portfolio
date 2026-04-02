@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { EASE, DUR, VP } from '@/lib/motion';
 import { Cpu, Layers, Search, ShieldCheck, Zap } from 'lucide-react';
 import { getBentoCards } from '@/content/portfolio';

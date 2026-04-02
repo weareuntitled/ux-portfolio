@@ -8,7 +8,7 @@ import type { ResolvedProject } from '@/lib/cms/types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MacBookFrame } from '@/components/MacBookFrame';
-import { EASE, DUR, VP } from '@/lib/motion';
+import { EASE, DUR } from '@/lib/motion';
 
 type Props = {
   project: ResolvedProject;

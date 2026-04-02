@@ -4,7 +4,7 @@
  */
 
 export type ProjectLink = {
-  label: 'Live demo' | 'Case study' | 'GitHub';
+  label: 'Live demo' | 'Case study' | 'GitHub' | 'Live prototype';
   href: string;
 };
 
