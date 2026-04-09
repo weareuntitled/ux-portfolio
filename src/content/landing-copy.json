@@ -11,13 +11,13 @@
     { "icon": "Zap", "badge": "Discipline", "k": "Core Focus", "v": "UX/UI", "d": "Research, wireframes & end-to-end prototyping" }
   ],
   "coreCapabilities": {
-    "title": "The way I design.",
-    "subtitle": "I work best at the intersection of user needs, product goals, and the people building it.",
+    "title": "The way I work.",
+    "subtitle": "I work best where the problem is unclear, the stakes are real, and the team needs someone who can hold both the design and the delivery.",
     "items": [
-      { "icon": "Box", "title": "Problem Framing & Discovery", "body": "Transforming ambiguity into alignment: conducting user interviews, mapping workflows, and structuring requirements to drive informed design decisions.", "img": "/images/capabilities/thinking.jpg" },
-      { "icon": "Users", "title": "Prototyping & Interaction", "body": "Translating research into design: structuring information architectures, building high-fidelity prototypes, and preparing developer-ready specifications.", "img": "/images/capabilities/delivery.jpg" },
-      { "icon": "FileText", "title": "Collaboration & Alignment", "body": "Working closely with engineering and product management to align on requirements, coordinate design iterations, and keep delivery on track.", "img": "/images/capabilities/tools.jpg" },
-      { "icon": "Workflow", "title": "Simplifying Complexity", "body": "Designing for high cognitive loads: structuring data-heavy applications and automated workflows into accessible, user-friendly modules.", "img": "/images/capabilities/process.jpg" }
+      { "icon": "Box", "title": "Strategic Thinking & Concepting", "body": "I start by finding where the real problem actually is. That means asking uncomfortable questions, assessing risks early, and resisting the urge to jump to solutions. Once the picture is clear, I guide clients in the right direction with empathy, structured processes, and Scrum as the delivery backbone. And when we're heading for a wall, I say so.", "img": "/images/capabilities/thinking.jpg" },
+      { "icon": "Users", "title": "UX & Research", "body": "Talk to users, find the gaps, turn findings into requirements. I run testing at every stage so the design keeps getting sharper as the project moves forward.", "img": "/images/capabilities/delivery.jpg" },
+      { "icon": "Zap", "title": "Agile Delivery & Scrum", "body": "Certified Scrum Master with real sprint experience. I facilitate ceremonies, write developer-ready specs, and keep design and engineering moving in the same direction.", "img": "/images/capabilities/tools.jpg" },
+      { "icon": "Workflow", "title": "Process & Complexity", "body": "Some problems are messy by nature. I map how things actually work, find where the bloat is, and restructure it into something people can use without a manual.", "img": "/images/capabilities/process.jpg" }
     ]
   },
   "leadership": {
