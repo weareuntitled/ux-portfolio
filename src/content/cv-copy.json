@@ -27,9 +27,11 @@
   "experience": [
     {
       "logoId": "eco8020",
+      "logoLabel": "8020.eco",
       "title": "Product Designer & Consultant",
       "period": "Jul 2022 — Oct 2025",
       "companyLine": "8020.eco · Management Consultant",
+      "coreRoles": "Product Design · Agile Delivery · UX Strategy",
       "summary": "Acted as a hybrid between Product, Design, and Agile Management. Specialized in untangling messy enterprise processes and translating them into structured, shippable product increments.",
       "bullets": [
         "Chaos Management: Organized fragmented data and compliance requirements into a centralized, lean workflow (Audi KoVoN), significantly reducing operational ambiguity.",
@@ -40,6 +42,7 @@
     },
     {
       "logoId": "untitledUx",
+      "logoLabel": "Untitled UX",
       "title": "UX/UI Product Designer",
       "period": "Feb 2020 — Present",
       "companyLine": "Untitled-ux · Freelance",
@@ -51,6 +54,7 @@
     },
     {
       "logoId": "kontrastFestival",
+      "logoLabel": "Kontrast Festival",
       "title": "Co-Founder & Lead Organizer",
       "period": "2021 — 2024",
       "companyLine": "Leadership & Operations",
@@ -61,6 +65,7 @@
     },
     {
       "logoId": "smartpatient",
+      "logoLabel": "smartpatient",
       "title": "UX Design Intern",
       "period": "Aug 2016 — Jan 2017",
       "companyLine": "smartpatient (Digital Health)",

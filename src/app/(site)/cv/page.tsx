@@ -97,7 +97,7 @@ export default async function CVPage() {
                 <article key={`${entry.title}-${entry.period}`}>
                   <header className="mb-3">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-                      <CvBrandLogo id={entry.logoId as BrandLogoId} label={entry.logoLabel} />
+                      <CvBrandLogo id={entry.logoId as BrandLogoId} label={(entry as unknown as { logoLabel?: string }).logoLabel ?? ''} />
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                           <h4 className="text-lg font-bold text-zinc-100">{entry.title}</h4>
@@ -129,11 +129,13 @@ export default async function CVPage() {
             </h3>
 
             <div className="space-y-6">
-              {cvCopy.educationCredentials.map((entry) => (
+              {cvCopy.educationCredentials.map((entry) => {
+                const eduEntry = entry as unknown as { logoId?: string; logoLabel?: string; title: string; subtitle?: string; period: string; details?: string };
+                return (
                 <article key={`${entry.title}-${entry.period}`} className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
-                  <div className={entry.logoId ? 'flex min-w-0 flex-1 items-start gap-3' : ''}>
-                    {entry.logoId ? (
-                      <CvBrandLogo id={entry.logoId as BrandLogoId} label={entry.logoLabel ?? ''} />
+                  <div className={eduEntry.logoId ? 'flex min-w-0 flex-1 items-start gap-3' : ''}>
+                    {eduEntry.logoId ? (
+                      <CvBrandLogo id={eduEntry.logoId as BrandLogoId} label={eduEntry.logoLabel ?? ''} />
                     ) : null}
                     <div>
                       <h4 className="text-base font-bold text-zinc-100">{entry.title}</h4>
@@ -142,7 +144,7 @@ export default async function CVPage() {
                   </div>
                   <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">{entry.period}</span>
                 </article>
-              ))}
+              )})}
             </div>
           </section>
         </div>
