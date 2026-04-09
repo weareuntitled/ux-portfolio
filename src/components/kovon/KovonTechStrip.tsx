@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EASE, DUR, STAGGER, VP } from '@/lib/motion';
 import { FileDiff, GitFork, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SectionTitle } from '@/components/portfolio/PortfolioPrimitives';
@@ -25,6 +26,7 @@ const items = [
 ];
 
 export function KovonTechStrip({ className }: { className?: string }) {
+  const reduce = useReducedMotion();
   return (
     <section className={cn('space-y-4', className)}>
       <SectionTitle title="Tech" />
@@ -35,11 +37,11 @@ export function KovonTechStrip({ className }: { className?: string }) {
           return (
             <motion.div
               key={it.title}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.25, delay: i * 0.05 }}
-              whileHover={{ y: -2 }}
+              initial={reduce ? false : { opacity: 0, y: 16, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={VP}
+              transition={{ duration: reduce ? 0 : DUR.sm, ease: EASE, delay: reduce ? 0 : i * STAGGER.sm }}
+              whileHover={reduce ? undefined : { y: -2 }}
               className="flex items-center gap-4 rounded-xl border border-transparent bg-card/40 p-6 transition-colors hover:border-border hover:bg-muted/30"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">

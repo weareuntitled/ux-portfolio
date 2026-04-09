@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EASE, DUR, STAGGER, VP } from '@/lib/motion';
 import {
   ArrowRight,
   Database,
@@ -21,6 +22,7 @@ const steps = [
 ];
 
 export function KovonProcessStrip({ className }: { className?: string }) {
+  const reduce = useReducedMotion();
   return (
     <section className={cn('space-y-4', className)}>
       <SectionTitle title="The process" />
@@ -32,11 +34,11 @@ export function KovonProcessStrip({ className }: { className?: string }) {
             return (
               <div key={s.n} className="flex items-center">
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.25, delay: i * 0.04 }}
-                  whileHover={{ y: -2 }}
+                  initial={reduce ? false : { opacity: 0, y: 16, filter: 'blur(4px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  viewport={VP}
+                  transition={{ duration: reduce ? 0 : DUR.sm, ease: EASE, delay: reduce ? 0 : i * STAGGER.sm }}
+                  whileHover={reduce ? undefined : { y: -2 }}
                   className="flex items-center gap-3 rounded-xl border border-transparent bg-card/40 px-3 py-2 transition-colors hover:border-border hover:bg-muted/30"
                 >
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">

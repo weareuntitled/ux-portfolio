@@ -1,22 +1,22 @@
 {
   "hero": {
     "chips": ["Interaction Design", "Complex Workflows", "Prototyping"],
-    "availableTooltip": "Open to Interaction Design Roles · Focus on user-centered products.",
-    "description": "I design intuitive interfaces for complex workflows. By focusing on clear architecture and close collaboration with engineering, I help teams build software that is both powerful and easy to use."
+    "availableTooltip": "Open to Product Designer, UX Lead & Design Manager roles.",
+    "description": "I design interfaces for systems that fight back. Dense regulations, legacy workflows, expert users — I'm most useful when the problem is genuinely hard."
   },
   "stats": [
     { "icon": "Package", "badge": "Focus", "k": "Complex Systems", "v": "3", "d": "Diagnostic & compliance tools" },
-    { "icon": "Users", "badge": "Consulting", "k": "Shipped Products", "v": "30+", "d": "Delivered in agile cross-functional teams" },
+    { "icon": "Users", "badge": "Consulting", "k": "Products Delivered", "v": "30+", "d": "Enterprise tools across agile team setups" },
     { "icon": "Sparkles", "badge": "Freelance", "k": "Startups & SMEs", "v": "10+", "d": "End-to-end design & web execution", "hi": true },
     { "icon": "Zap", "badge": "Discipline", "k": "Core Focus", "v": "Interaction", "d": "User journeys, wireframes & prototyping" }
   ],
   "coreCapabilities": {
-    "title": "How I Work",
-    "subtitle": "Bridging the gap between user needs, technical feasibility, and agile delivery.",
+    "title": "The way I design.",
+    "subtitle": "User needs, technical constraints, and team dynamics — all at once.",
     "items": [
       { "icon": "Box", "title": "Problem Framing & Discovery", "body": "Transforming ambiguity into alignment: conducting user interviews, mapping workflows, and structuring requirements to drive informed design decisions.", "img": "/images/capabilities/thinking.jpg" },
-      { "icon": "Users", "title": "Prototyping & Interaction", "body": "Translating insights into functional software: crafting robust information architectures, high-fidelity prototypes, and clear developer handoffs.", "img": "/images/capabilities/delivery.jpg" },
-      { "icon": "FileText", "title": "Collaboration & Alignment", "body": "Working closely with engineering and product management: scaling design systems in Figma and orchestrating smooth workflows via Jira and Confluence.", "img": "/images/capabilities/tools.jpg" },
+      { "icon": "Users", "title": "Prototyping & Interaction", "body": "Translating research into design: structuring information architectures, building high-fidelity prototypes, and preparing developer-ready specifications.", "img": "/images/capabilities/delivery.jpg" },
+      { "icon": "FileText", "title": "Collaboration & Alignment", "body": "Working closely with engineering and product management to align on requirements, coordinate design iterations, and keep delivery on track.", "img": "/images/capabilities/tools.jpg" },
       { "icon": "Workflow", "title": "Simplifying Complexity", "body": "Designing for high cognitive loads: structuring data-heavy applications and automated workflows into accessible, user-friendly modules.", "img": "/images/capabilities/process.jpg" }
     ]
   },
@@ -24,15 +24,15 @@
     "title": "Leadership",
     "badge": "Design & Team Leadership",
     "projectTitle": "Kontrast Festival",
-    "bodyHtml": "Co-founded and scaled a regional cultural festival, leading the visual identity and digital experience. Managed a small multidisciplinary team and successfully grew the event to <strong>3,000+ attendees</strong>."
+    "bodyHtml": "Co-founded a regional cultural festival and led visual identity, digital experience, and team operations. Grew it from zero to <strong>3,000+ attendees</strong> over three years."
   },
   "selectedWorks": {
-    "title": "Selected Works",
+    "title": "Work",
     "subtitle": "Case studies showcasing how I collaborate with teams to build accessible and scalable digital products."
   },
   "footer": {
     "title": "Let’s connect",
-    "subtitle": "Looking for an Interaction Designer who focuses on the user to make complex technology accessible? Let’s talk."
+    "subtitle": "Complex system, tight deadline, difficult stakeholders? That’s when I’m most useful."
   },
   "education": {
     "heading": "Education",

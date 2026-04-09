@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EASE, DUR, VP } from '@/lib/motion';
 import { UserCircle2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -19,13 +20,14 @@ export function QuoteCard({
   avatarInitials = 'DP',
   className,
 }: QuoteCardProps) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
       className={cn('', className)}
-      initial={{ x: -24, opacity: 0 }}
-      whileInView={{ x: 0, opacity: 1 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ type: 'spring', stiffness: 240, damping: 24 }}
+      initial={reduce ? false : { opacity: 0, y: 20, filter: 'blur(6px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={VP}
+      transition={{ duration: reduce ? 0 : DUR.md, ease: EASE }}
     >
       <Card className="p-5">
         <div className="flex gap-4 items-start">

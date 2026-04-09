@@ -101,6 +101,18 @@ body {
     @apply border-border;
   }
 
+  /* Typography baseline — explicit leading and tracking for each level.
+     Component classes override these; this fills in the gaps. */
+  h1 {
+    @apply leading-tight tracking-tight;
+  }
+  h2, h3, h4 {
+    @apply leading-tight tracking-tight;
+  }
+  p {
+    @apply leading-relaxed;
+  }
+
   /* Focus ring in lime for keyboard accessibility (plan §11) */
   :focus-visible {
     outline: none;
@@ -142,6 +154,17 @@ body {
     background:
       radial-gradient(circle at top left, rgba(0, 0, 0, 0.2), transparent 60%),
       radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+  }
+
+  /* Light mode: barely-visible mesh, gentle lime tint — no dark overlay */
+  .portfolio-shell.light::before {
+    opacity: 0.08;
+    filter: invert(1) hue-rotate(180deg);
+  }
+  .portfolio-shell.light::after {
+    background:
+      radial-gradient(circle at top right, rgba(183, 230, 84, 0.07), transparent 55%),
+      radial-gradient(circle at bottom left, rgba(100, 100, 100, 0.04), transparent 60%);
   }
 }
 

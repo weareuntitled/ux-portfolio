@@ -2,7 +2,7 @@ name: build-and-push-ghcr
 
 on:
   push:
-    branches: [main, "2026-02-12-mjl2"]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -34,3 +34,20 @@ jobs:
             ghcr.io/weareuntitled/ux-portfolio:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  smoke-test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Watchtower to pull & restart
+        run: sleep 60
+      - name: Health check
+        run: |
+          for i in 1 2 3; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://portfolio.untitled-ux.de/api/health)
+            echo "Attempt $i: HTTP $STATUS"
+            [ "$STATUS" = "200" ] && exit 0
+            sleep 30
+          done
+          echo "Health check failed after 3 attempts"
+          exit 1

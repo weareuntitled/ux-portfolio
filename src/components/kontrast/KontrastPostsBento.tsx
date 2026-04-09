@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { EASE, DUR } from '@/lib/motion';
 
 import manifest from '@/content/kontrast-manifest.json';
 
@@ -87,7 +88,7 @@ export function KontrastPostsBento() {
                   initial={reduceMotion ? false : { opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={reduceMotion ? undefined : { opacity: 0, scale: 0.95 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: reduceMotion ? 0 : DUR.lg, ease: EASE }}
                 >
                   <Image
                     src={postSrc(filename)}

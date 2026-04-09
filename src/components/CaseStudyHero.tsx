@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Activity } from 'lucide-react';
 import type { ResolvedProject } from '@/lib/cms/types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MacBookFrame } from '@/components/MacBookFrame';
+import { EASE, DUR } from '@/lib/motion';
 
 type Props = {
   project: ResolvedProject;
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export function CaseStudyHero({ project, heroTagline }: Props) {
+  const reduce = useReducedMotion();
   const proto = project.prototype;
   const hasInApp = proto?.prototypeType === 'in-app' && proto?.inAppPrototypeHref;
   const hasFigma = Boolean(proto?.figmaEmbedUrl);
@@ -33,9 +35,9 @@ export function CaseStudyHero({ project, heroTagline }: Props) {
 
       <motion.div
         className="z-10 max-w-4xl space-y-6"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        initial={reduce ? false : { opacity: 0, y: 24, filter: 'blur(6px)' }}
+        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        transition={{ duration: reduce ? 0 : DUR.lg, ease: EASE }}
       >
         <Badge
           variant="outline"
@@ -84,9 +86,9 @@ export function CaseStudyHero({ project, heroTagline }: Props) {
       {/* MacBook hero image */}
       <motion.div
         className="mt-20 w-full px-4"
-        initial={{ opacity: 0, scale: 0.95, y: 50 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2, ease: 'circOut' }}
+        initial={reduce ? false : { opacity: 0, scale: 0.97, y: 40, filter: 'blur(8px)' }}
+        animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+        transition={{ duration: reduce ? 0 : DUR.xl, delay: reduce ? 0 : 0.2, ease: EASE }}
       >
         <MacBookFrame>
           <div className="relative flex h-full w-full items-center justify-center bg-[#111]">
