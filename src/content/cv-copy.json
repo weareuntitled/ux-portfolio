@@ -1,78 +1,82 @@
 ﻿{
   "meta": {
     "title": "CV | Daniel Peters",
-    "description": "CV and resume for Daniel Peters, Interaction Designer & Product Designer."
+    "description": "Senior UX & Product Design Consultant specializing in Agile Delivery and Complexity Reduction."
   },
   "header": {
     "name": "Daniel Peters",
-    "role": "Interaction Designer | M.Sc. User Experience Design",
-    "summary": "Strategic Interaction Designer specializing in simplifying high-complexity systems. I break down dense enterprise workflows into lean, intuitive experiences that bridge the gap between business requirements and technical feasibility. Passionate about user trust, AI/ML UX research, and building the open web.",
-    "coreRoles": "Interaction Design · Product Strategy · AI/ML UX Research",
+    "role": "UX & Product Design Consultant | Certified Scrum Master",
+    "summary": "Strategic Product Designer specializing in simplifying complex workflows and aligning cross-functional teams. I combine UX/UI expertise with a certified Scrum Master background to eliminate process inefficiencies and drive high-velocity product delivery.",
+    "coreRoles": "Product Design · Agile Delivery · Design Strategy",
     "location": "Augsburg / Munich (Hybrid)",
     "linkedinUrl": "https://www.linkedin.com/in/daniel-peters-055296203/",
     "linkedinLabel": "LinkedIn Profile ↗"
   },
   "coreCompetencies": [
-    "User-Centered Design (UCD)",
-    "Interaction Design (iOS, Android, Web)",
-    "AI/ML Experience Design",
-    "Cross-functional Collaboration (Eng/PM/Research)",
-    "Design Systems & Material Design",
-    "Information Architecture & Complexity Reduction",
-    "Rapid Prototyping & Motion Design",
-    "User Trust, Privacy & Security Design"
+    "Agile Product Delivery (Scrum/SAFe)",
+    "Complexity Deconstruction",
+    "Workflow & Process Optimization",
+    "User-Centered Product Design (UX/UI)",
+    "Stakeholder Alignment",
+    "Technical Feasibility & Risk Assessment"
   ],
   "experience": [
     {
       "logoId": "eco8020",
-      "title": "Interaction Designer (Management Consultant)",
+      "title": "Product Design Consultant & Agile Lead",
       "period": "Jul 2022 — Oct 2025",
-      "companyLine": "8020 Consulting · Automotive Enterprise Systems",
-      "summary": "Designed and shipped complex, data-heavy internal products for global automotive clients within a multi-disciplinary team of Engineers, PMs, and Researchers.",
+      "companyLine": "8020.eco · Management Consulting",
       "bullets": [
-        "Systemic Complexity: Transformed fragmented compliance and diagnostic data into intuitive user journeys for 200+ expert users, ensuring high data security and trust.",
-        "Cross-functional Leadership: Collaborated daily with Engineering and Product Management to align technical feasibility with user delight, doubling sprint velocity through high-precision UI specs.",
-        "User-Evidence Based Iteration: Led iterative design cycles based on qualitative research and usability testing, reducing critical UX friction points by 80% prior to MVP launch.",
-        "Scalable Design Systems: Evolved and maintained modular design libraries to ensure UI consistency across complex enterprise architectures."
+        "Strategic Alignment: Translated complex enterprise requirements into centralized, lean workflows, significantly reducing operational ambiguity for expert teams.",
+        "Efficiency: Doubled sprint velocity by leveraging Scrum Master expertise to deliver high-precision, technically validated UI specifications.",
+        "Optimization: Redesigned legacy SAP-integrated processes, eliminating bloat and generating measurable weekly time savings."
       ]
     },
     {
       "logoId": "untitledUx",
-      "title": "Product Designer (Freelance)",
+      "title": "Senior UX/UI Product Designer",
       "period": "Feb 2020 — Present",
-      "companyLine": "Independent Practice",
+      "companyLine": "Untitled-ux · Independent Practice",
       "bullets": [
-        "End-to-End Execution: Partnered with tech founders to launch 10+ digital products from concept to execution, focusing on lean UX and rapid market validation.",
-        "Technical Craft: Built responsive, high-fidelity prototypes and web experiences with a deep understanding of browser-based implementation (HTML/CSS/Webflow)."
+        "Lean MVP Strategy: Consulting founders on translating visions into market-ready products through rapid validation and technical scalability.",
+        "End-to-End Design: Delivering high-fidelity prototypes and user journeys with a focus on seamless developer handoff and optimized budgets."
+      ]
+    },
+    {
+      "logoId": "kontrastFestival",
+      "title": "Co-Founder & Operations Lead",
+      "period": "2021 — 2024",
+      "companyLine": "Leadership & Operations",
+      "bullets": [
+        "Organizational Leadership: Scaled a cultural initiative to 3,000+ attendees by managing complex logistics and cross-functional team alignment.",
+        "Experience Strategy: Directed the execution of all digital and physical touchpoints to ensure a structured service design."
       ]
     },
     {
       "logoId": "smartpatient",
-      "title": "UX Design & Research Intern",
+      "title": "UX Design Associate",
       "period": "Aug 2016 — Jan 2017",
       "companyLine": "smartpatient (Digital Health)",
       "bullets": [
-        "User Research: Conducted guerrilla testing and in-depth interviews to translate patient needs into intuitive health-tracking features.",
-        "Iterative Craft: Synthesized user support data into refined UI mockups, improving accessibility and user trust within a high-privacy health environment."
+        "Research Synthesis: Translated qualitative user data into actionable UX requirements and iterative design concepts for high-security health apps."
       ]
     }
   ],
   "educationCredentials": [
     {
-      "title": "Master of Science (M.Sc.) UX Design",
-      "subtitle": "TH Ingolstadt | Grade 1.3 (Top of Class)",
-      "period": "Mar 2021 — Mar 2024",
-      "details": "Focus on HCI, AI/ML UX, and Ethical Design. Thesis on Attention & Learning in VR."
+      "title": "M.Sc. User Experience Design",
+      "subtitle": "TH Ingolstadt | Grade 1.3",
+      "period": "2021 — 2024"
     },
     {
-      "title": "Scientific Recognition: AI / NLP Research",
-      "subtitle": "Published in ICNLSP: Research on Natural Language Processing & Human Interface",
-      "period": "2021"
+      "title": "Certified SAFe 6.0 Scrum Master",
+      "subtitle": "Agile Delivery & Leadership",
+      "period": "Valid until 2026"
     },
     {
-      "title": "Bachelor of Science (B.Sc.) UX Design",
-      "subtitle": "TH Ingolstadt | Interaction Design Focus",
-      "period": "Oct 2014 — Mar 2019"
+      "title": "B.Sc. User Experience Design",
+      "subtitle": "TH Ingolstadt",
+      "period": "2014 — 2019"
     }
   ]
 }
