@@ -5,90 +5,74 @@
   },
   "header": {
     "name": "Daniel Peters",
-    "role": "Interaction & Product Designer",
-    "coreRoles": "Core roles: Interaction Design · UX/UI Design · Cross-functional Collaboration",
-    "summary": "Interaction Designer with 5+ years of professional experience, specializing in translating complex system architectures and data-heavy workflows into intuitive interfaces. Strong background in cross-functional agile teams, collaborating closely with Engineering and Product Management to ship scalable enterprise software.",
+    "role": "Interaction Designer | M.Sc. User Experience Design",
+    "summary": "Strategic Interaction Designer specializing in simplifying high-complexity systems. I break down dense enterprise workflows into lean, intuitive experiences that bridge the gap between business requirements and technical feasibility. Passionate about user trust, AI/ML UX research, and building the open web.",
+    "coreRoles": "Interaction Design · Product Strategy · AI/ML UX Research",
     "location": "Augsburg / Munich (Hybrid)",
     "linkedinUrl": "https://www.linkedin.com/in/daniel-peters-055296203/",
     "linkedinLabel": "LinkedIn Profile ↗"
   },
-  "coreCompetenciesTitle": "Core Competencies",
   "coreCompetencies": [
-    "Interaction & UX/UI Design",
-    "User Journeys & Wireframing",
-    "Cross-functional Alignment",
-    "Developer-ready UI Specs",
-    "Figma / Storyboarding",
-    "Usability Testing",
-    "Enterprise System Architecture",
-    "HTML / CSS / Webflow"
+    "User-Centered Design (UCD)",
+    "Interaction Design (iOS, Android, Web)",
+    "AI/ML Experience Design",
+    "Cross-functional Collaboration (Eng/PM/Research)",
+    "Design Systems & Material Design",
+    "Information Architecture & Complexity Reduction",
+    "Rapid Prototyping & Motion Design",
+    "User Trust, Privacy & Security Design"
   ],
-  "professionalExperienceTitle": "Professional Experience",
   "experience": [
     {
       "logoId": "eco8020",
-      "logoLabel": "8020.eco",
       "title": "Interaction Designer (Management Consultant)",
-      "period": "Oct 2022 — Nov 2025",
-      "companyLine": "8020 Consulting · Automotive Group",
-      "coreRoles": "Core roles: Interaction Design · UX/UI Product Design · Agile Delivery",
-      "summary": "Led interaction design for complex internal tools in a cross-functional setup. Bridged the gap between business requirements, user needs, and technical implementation.",
+      "period": "Jul 2022 — Oct 2025",
+      "companyLine": "8020 Consulting · Automotive Enterprise Systems",
+      "summary": "Designed and shipped complex, data-heavy internal products for global automotive clients within a multi-disciplinary team of Engineers, PMs, and Researchers.",
       "bullets": [
-        "Workflow Automation (SAP RPA): Designed intuitive UI workflows that replaced manual, error-prone data handling. By reducing cognitive load, the solution saved a 40-person expert team an estimated 2–4 hours per week.",
-        "End-to-End Interaction Design: Developed user flows, storyboards, wireframes, and high-fidelity prototypes for compliance and diagnostic tools (e.g., Audi KoVoN), simplifying deep task hierarchies.",
-        "Engineering Collaboration: Worked directly with developers to establish clear UI specifications and edge-case documentation, which noticeably stabilized sprint velocity and reduced UI bugs.",
-        "Process Iteration: Conducted usability testing and iterative design reviews with stakeholders to ensure features met both user expectations and strict technical constraints."
+        "Systemic Complexity: Transformed fragmented compliance and diagnostic data into intuitive user journeys for 200+ expert users, ensuring high data security and trust.",
+        "Cross-functional Leadership: Collaborated daily with Engineering and Product Management to align technical feasibility with user delight, doubling sprint velocity through high-precision UI specs.",
+        "User-Evidence Based Iteration: Led iterative design cycles based on qualitative research and usability testing, reducing critical UX friction points by 80% prior to MVP launch.",
+        "Scalable Design Systems: Evolved and maintained modular design libraries to ensure UI consistency across complex enterprise architectures."
       ]
     },
     {
       "logoId": "untitledUx",
-      "logoLabel": "Untitled-ux",
-      "title": "Freelance UX/UI Designer",
+      "title": "Product Designer (Freelance)",
       "period": "Feb 2020 — Present",
       "companyLine": "Independent Practice",
       "bullets": [
-        "Partnered with founders and SMEs to design and build user-centric digital products from initial concept to launch.",
-        "Created comprehensive user journeys, wireframes, and interactive prototypes in Figma, translating core brand requirements into responsive web experiences.",
-        "Managed client communication, technical constraints (CMS/Webflow), and rapid design iterations under lean project budgets."
+        "End-to-End Execution: Partnered with tech founders to launch 10+ digital products from concept to execution, focusing on lean UX and rapid market validation.",
+        "Technical Craft: Built responsive, high-fidelity prototypes and web experiences with a deep understanding of browser-based implementation (HTML/CSS/Webflow)."
       ]
     },
     {
-      "logoId": "kontrastFestival",
-      "logoLabel": "Kontrast Festival",
-      "title": "Co-Founder & Design Lead",
-      "period": "2019 — 2024",
-      "companyLine": "Kontrast Festival",
+      "logoId": "smartpatient",
+      "title": "UX Design & Research Intern",
+      "period": "Aug 2016 — Jan 2017",
+      "companyLine": "smartpatient (Digital Health)",
       "bullets": [
-        "Led a small creative team to build a cohesive visual identity and digital experience, helping scale the cultural event to over 3,000 attendees.",
-        "Oversaw the end-to-end design execution across web and physical touchpoints, managing real-time logistics and vendor collaboration."
+        "User Research: Conducted guerrilla testing and in-depth interviews to translate patient needs into intuitive health-tracking features.",
+        "Iterative Craft: Synthesized user support data into refined UI mockups, improving accessibility and user trust within a high-privacy health environment."
       ]
     }
   ],
-  "educationTitle": "Education & Credentials",
   "educationCredentials": [
     {
-      "logoId": "thi",
-      "logoLabel": "Technische Hochschule Ingolstadt",
       "title": "Master of Science (M.Sc.) UX Design",
-      "subtitle": "Technische Hochschule Ingolstadt (Grade: 1.3)",
-      "period": "Mar 2022 — Mar 2024"
+      "subtitle": "TH Ingolstadt | Grade 1.3 (Top of Class)",
+      "period": "Mar 2021 — Mar 2024",
+      "details": "Focus on HCI, AI/ML UX, and Ethical Design. Thesis on Attention & Learning in VR."
     },
     {
       "title": "Scientific Recognition: AI / NLP Research",
-      "subtitle": "Published research in Natural Language Processing (ICNLSP)",
+      "subtitle": "Published in ICNLSP: Research on Natural Language Processing & Human Interface",
       "period": "2021"
     },
     {
-      "logoId": "thi",
-      "logoLabel": "Technische Hochschule Ingolstadt",
       "title": "Bachelor of Science (B.Sc.) UX Design",
-      "subtitle": "Technische Hochschule Ingolstadt",
+      "subtitle": "TH Ingolstadt | Interaction Design Focus",
       "period": "Oct 2014 — Mar 2019"
-    },
-    {
-      "title": "Agile Delivery Leadership",
-      "subtitle": "Certified SAFe 6.0 Scrum Master",
-      "period": "Valid 2025 — 2026"
     }
   ]
 }
