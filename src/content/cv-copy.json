@@ -12,6 +12,7 @@
     "linkedinUrl": "https://www.linkedin.com/in/daniel-peters-055296203/",
     "linkedinLabel": "LinkedIn Profile ↗"
   },
+  "coreCompetenciesTitle": "Core Competencies",
   "coreCompetencies": [
     "Agile Product Delivery (Scrum/SAFe)",
     "Complexity Deconstruction",
@@ -20,6 +21,7 @@
     "Stakeholder Alignment",
     "Technical Feasibility & Risk Assessment"
   ],
+  "professionalExperienceTitle": "Professional Experience",
   "experience": [
     {
       "logoId": "eco8020",
@@ -62,6 +64,7 @@
       ]
     }
   ],
+  "educationTitle": "Education & Credentials",
   "educationCredentials": [
     {
       "title": "M.Sc. User Experience Design",
