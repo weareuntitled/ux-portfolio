@@ -8,16 +8,16 @@ import type { BrandLogoId } from '@/lib/brand-logos';
 export const identityName = 'Daniel Peters';
 export const identityRolePrimary = 'UX & Product Design Consultant';
 export const identityRoleSecondary =
-  'Enterprise SaaS · Workflow Automation · SAP | M.Sc. UX Design';
+  'UX/UI · Product Thinking · AI-curious | M.Sc. UX Design';
 export const identityRole = identityRolePrimary;
-export const identitySubtitle = 'Enterprise SaaS · Workflow Automation · SAP';
+export const identitySubtitle = 'UX/UI · Product · AI-curious';
 
 export const contact = {
   name: 'Daniel Peters',
   email: 'djdanep@gmail.com',
   phone: '+173 523 1109',
   tagline:
-    'UX & Product Design Consultant — enterprise SaaS, automation & SAP. M.Sc. UX Design. Selected works 2019–2025.',
+    'UX Designer & Consultant — I work best on hard problems, with good teams. M.Sc. UX Design. Selected works 2019–2025.',
   profileImage: '/profile.jpg',
 } as const;
 
@@ -26,7 +26,7 @@ export const experienceTimelineDetailed = [
   {
     id: 'untitled-ux',
     company: 'Untitled-ux',
-    headline: 'User Experience Designer',
+    headline: 'UX/UI Designer & Consultant',
     subline: 'Untitled-ux · Self-employed',
     period: 'Mar 2020 – Present',
     location: 'Aichach-Friedberg',
@@ -44,7 +44,7 @@ export const experienceTimelineDetailed = [
   {
     id: '8020-eco',
     company: '8020.eco',
-    headline: 'Interaction Designer',
+    headline: 'Product Designer & UX Consultant',
     subline: '8020.eco · Management Consultant',
     period: 'Jul 2022 – Nov 2025',
     location: 'Ingolstadt · Hybrid',

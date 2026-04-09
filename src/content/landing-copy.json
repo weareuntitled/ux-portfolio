@@ -1,18 +1,18 @@
 {
   "hero": {
-    "chips": ["Interaction Design", "Complex Workflows", "Prototyping"],
-    "availableTooltip": "Open to Product Designer, UX Lead & Design Manager roles.",
-    "description": "I design interfaces for systems that fight back. Dense regulations, legacy workflows, expert users — I'm most useful when the problem is genuinely hard."
+    "chips": ["UX/UI Design", "Product Thinking", "AI-curious"],
+    "availableTooltip": "Open to UX/UI Designer, Product Designer & Design Lead roles.",
+    "description": "I design interfaces for things that are genuinely hard to design. Complex systems, expert users, tight constraints — I do my best work as part of a good team."
   },
   "stats": [
     { "icon": "Package", "badge": "Focus", "k": "Complex Systems", "v": "3", "d": "Diagnostic & compliance tools" },
     { "icon": "Users", "badge": "Consulting", "k": "Products Delivered", "v": "30+", "d": "Enterprise tools across agile team setups" },
     { "icon": "Sparkles", "badge": "Freelance", "k": "Startups & SMEs", "v": "10+", "d": "End-to-end design & web execution", "hi": true },
-    { "icon": "Zap", "badge": "Discipline", "k": "Core Focus", "v": "Interaction", "d": "User journeys, wireframes & prototyping" }
+    { "icon": "Zap", "badge": "Discipline", "k": "Core Focus", "v": "UX/UI", "d": "Research, wireframes & end-to-end prototyping" }
   ],
   "coreCapabilities": {
     "title": "The way I design.",
-    "subtitle": "User needs, technical constraints, and team dynamics — all at once.",
+    "subtitle": "I work best at the intersection of user needs, product goals, and the people building it.",
     "items": [
       { "icon": "Box", "title": "Problem Framing & Discovery", "body": "Transforming ambiguity into alignment: conducting user interviews, mapping workflows, and structuring requirements to drive informed design decisions.", "img": "/images/capabilities/thinking.jpg" },
       { "icon": "Users", "title": "Prototyping & Interaction", "body": "Translating research into design: structuring information architectures, building high-fidelity prototypes, and preparing developer-ready specifications.", "img": "/images/capabilities/delivery.jpg" },
