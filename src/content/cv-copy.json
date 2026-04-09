@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "CV | Daniel Peters",
-    "description": "Senior UX & Product Design Consultant specializing in Agile Delivery and Complexity Reduction."
+    "description": "UX and Product Design Consultant. Certified Scrum Master. Specializing in agile delivery and complex product problems."
   },
   "header": {
     "name": "Daniel Peters",
     "role": "UX & Product Design Consultant | Certified Scrum Master",
-    "summary": "Strategic Product Designer specializing in simplifying complex workflows and aligning cross-functional teams. I combine UX/UI expertise with a certified Scrum Master background to eliminate process inefficiencies and drive high-velocity product delivery.",
+    "summary": "I'm a Product Designer and Certified Scrum Master. That combination is rare, and it's what lets me bridge Design and Engineering without losing either side. I turn complex requirements into structured, shippable product. Teams move faster. The right thing gets built.",
     "coreRoles": "Product Design · Agile Delivery · Design Strategy",
     "location": "Augsburg / Munich (Hybrid)",
     "linkedinUrl": "https://www.linkedin.com/in/daniel-peters-055296203/",
@@ -14,12 +14,12 @@
   },
   "coreCompetenciesTitle": "Core Competencies",
   "coreCompetencies": [
-    "Agile Product Delivery (Scrum/SAFe)",
-    "Complexity Deconstruction",
-    "Workflow & Process Optimization",
-    "User-Centered Product Design (UX/UI)",
+    "Product Design (UX/UI)",
+    "Agile Delivery (Scrum/SAFe)",
+    "Process Design",
     "Stakeholder Alignment",
-    "Technical Feasibility & Risk Assessment"
+    "Technical Feasibility",
+    "Information Architecture"
   ],
   "professionalExperienceTitle": "Professional Experience",
   "experience": [
@@ -30,9 +30,10 @@
       "period": "Jul 2022 — Oct 2025",
       "companyLine": "8020.eco · Management Consulting",
       "bullets": [
-        "Strategic Alignment: Translated complex enterprise requirements into centralized, lean workflows, significantly reducing operational ambiguity for expert teams.",
-        "Efficiency: Doubled sprint velocity by leveraging Scrum Master expertise to deliver high-precision, technically validated UI specifications.",
-        "Optimization: Redesigned legacy SAP-integrated processes, eliminating bloat and generating measurable weekly time savings."
+        "Led product design and sprint ceremonies across multiple parallel projects. Primary role as embedded Scrum-driven Product Designer on a long-running enterprise engagement.",
+        "Mapped and restructured complex client-facing and internal processes. Turned fragmented workflows into lean, buildable structures that teams could actually use.",
+        "Served as Motion Design Lead on a second project track. Owned the full motion output end to end.",
+        "Designed and built web presences including HTML embeds across a third project stream."
       ]
     },
     {
@@ -42,8 +43,9 @@
       "period": "Feb 2020 — Present",
       "companyLine": "Untitled-ux · Independent Practice",
       "bullets": [
-        "Lean MVP Strategy: Consulting founders on translating visions into market-ready products through rapid validation and technical scalability.",
-        "End-to-End Design: Delivering high-fidelity prototypes and user journeys with a focus on seamless developer handoff and optimized budgets."
+        "Design performance marketing assets, motion design, and brand identities for early-stage clients.",
+        "Run end-to-end UX work: user testing, feature design, prototyping, and iteration cycles.",
+        "Developed an outreach concept and designed infographic content for a UK market campaign."
       ]
     },
     {
@@ -53,8 +55,8 @@
       "period": "2021 — 2024",
       "companyLine": "Leadership & Operations",
       "bullets": [
-        "Organizational Leadership: Scaled a cultural initiative to 3,000+ attendees by managing complex logistics and cross-functional team alignment.",
-        "Experience Strategy: Directed the execution of all digital and physical touchpoints to ensure a structured service design."
+        "Co-founded and grew a cultural event to 3,000+ attendees. Managed logistics, vendors, and a full ops team.",
+        "Owned every digital and physical touchpoint. Structured experience from first ticket to last act."
       ]
     },
     {
@@ -64,7 +66,7 @@
       "period": "Aug 2016 — Jan 2017",
       "companyLine": "smartpatient (Digital Health)",
       "bullets": [
-        "Research Synthesis: Translated qualitative user data into actionable UX requirements and iterative design concepts for high-security health apps."
+        "Turned qualitative user research into concrete UX requirements and screen concepts for a sensitive health application."
       ]
     }
   ],
