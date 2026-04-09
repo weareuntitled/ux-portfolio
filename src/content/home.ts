@@ -8,16 +8,16 @@ import type { BrandLogoId } from '@/lib/brand-logos';
 export const identityName = 'Daniel Peters';
 export const identityRolePrimary = 'UX & Product Design Consultant';
 export const identityRoleSecondary =
-  'UX/UI · Product Thinking · AI-curious | M.Sc. UX Design';
+  'Product Design · Agile Delivery · Design Strategy | Certified Scrum Master';
 export const identityRole = identityRolePrimary;
-export const identitySubtitle = 'UX/UI · Product · AI-curious';
+export const identitySubtitle = 'Product Design · Agile Delivery · Design Strategy';
 
 export const contact = {
   name: 'Daniel Peters',
   email: 'djdanep@gmail.com',
   phone: '+173 523 1109',
   tagline:
-    'UX Designer & Consultant — I work best on hard problems, with good teams. M.Sc. UX Design. Selected works 2019–2025.',
+    'UX & Product Design Consultant. Certified Scrum Master. I bridge Design and Engineering to turn complex requirements into shippable product.',
   profileImage: '/profile.jpg',
 } as const;
 

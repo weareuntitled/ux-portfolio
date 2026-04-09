@@ -1,8 +1,8 @@
 {
   "hero": {
-    "chips": ["UX/UI Design", "Product Thinking", "AI-curious"],
-    "availableTooltip": "Open to UX/UI Designer, Product Designer & Design Lead roles.",
-    "description": "I design interfaces for things that are genuinely hard to design. Complex systems, expert users, tight constraints — I do my best work as part of a good team."
+    "chips": ["Product Design", "Agile Delivery", "Design Strategy"],
+    "availableTooltip": "Open to Product Designer, UX Consultant & Design Lead roles.",
+    "description": "I'm a Product Designer and Certified Scrum Master. That combination is rare, and it's what lets me bridge Design and Engineering without losing either side. I turn complex requirements into structured, shippable product. Teams move faster. The right thing gets built."
   },
   "stats": [
     { "icon": "Package", "badge": "Focus", "k": "Complex Systems", "v": "3", "d": "Diagnostic & compliance tools" },
