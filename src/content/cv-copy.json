@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "CV | Daniel Peters",
-    "description": "CV and resume for Daniel Peters, UX & Product Design Consultant specializing in Agile Delivery and Complexity Reduction."
+    "description": "Senior UX & Product Design Consultant specializing in Agile Delivery and Complexity Reduction."
   },
   "header": {
     "name": "Daniel Peters",
     "role": "UX & Product Design Consultant | Certified Scrum Master",
-    "summary": "Strategic Product Designer specializing in organizing chaos and breaking down complex requirements into lean, functional workflows. I bridge the gap between Product, Design, and Engineering by combining a core UX/UI focus with a certified Scrum Master background to drive efficient, high-velocity delivery.",
-    "coreRoles": "Product Design · Agile Delivery (Scrum/SAFe) · Design Strategy",
+    "summary": "Strategic Product Designer specializing in simplifying complex workflows and aligning cross-functional teams. I combine UX/UI expertise with a certified Scrum Master background to eliminate process inefficiencies and drive high-velocity product delivery.",
+    "coreRoles": "Product Design · Agile Delivery · Design Strategy",
     "location": "Augsburg / Munich (Hybrid)",
     "linkedinUrl": "https://www.linkedin.com/in/daniel-peters-055296203/",
     "linkedinLabel": "LinkedIn Profile ↗"
@@ -15,88 +15,75 @@
   "coreCompetenciesTitle": "Core Competencies",
   "coreCompetencies": [
     "Agile Product Delivery (Scrum/SAFe)",
-    "Complexity Deconstruction & Analysis",
+    "Complexity Deconstruction",
     "Workflow & Process Optimization",
-    "Product Design (UX/UI)",
-    "Stakeholder Alignment & Chaos Management",
-    "Information Architecture",
-    "Developer-ready UI Specifications",
-    "Technical Feasibility Assessment"
+    "User-Centered Product Design (UX/UI)",
+    "Stakeholder Alignment",
+    "Technical Feasibility & Risk Assessment"
   ],
   "professionalExperienceTitle": "Professional Experience",
   "experience": [
     {
       "logoId": "eco8020",
       "logoLabel": "8020.eco",
-      "title": "Product Designer & Consultant",
+      "title": "Product Design Consultant & Agile Lead",
       "period": "Jul 2022 — Oct 2025",
-      "companyLine": "8020.eco · Management Consultant",
-      "coreRoles": "Product Design · Agile Delivery · UX Strategy",
-      "summary": "Acted as a hybrid between Product, Design, and Agile Management. Specialized in untangling messy enterprise processes and translating them into structured, shippable product increments.",
+      "companyLine": "8020.eco · Management Consulting",
       "bullets": [
-        "Chaos Management: Organized fragmented data and compliance requirements into a centralized, lean workflow (Audi KoVoN), significantly reducing operational ambiguity.",
-        "Agile Execution: Leveraged Scrum Master expertise to align cross-functional teams, doubling sprint velocity by delivering high-precision, technically feasible UI specifications.",
-        "Process Optimization: Analyzed and restructured complex SAP-integrated workflows, stripping away bloat to save expert teams 2–4 hours of manual troubleshooting weekly.",
-        "Systemic Design: Scaled internal diagnostic tools by bridging the gap between business goals and engineering constraints, ensuring products are both user-centered and easy to build."
+        "Strategic Alignment: Translated complex enterprise requirements into centralized, lean workflows, significantly reducing operational ambiguity for expert teams.",
+        "Efficiency: Doubled sprint velocity by leveraging Scrum Master expertise to deliver high-precision, technically validated UI specifications.",
+        "Optimization: Redesigned legacy SAP-integrated processes, eliminating bloat and generating measurable weekly time savings."
       ]
     },
     {
       "logoId": "untitledUx",
       "logoLabel": "Untitled UX",
-      "title": "UX/UI Product Designer",
+      "title": "Senior UX/UI Product Designer",
       "period": "Feb 2020 — Present",
-      "companyLine": "Untitled-ux · Freelance",
+      "companyLine": "Untitled-ux · Independent Practice",
       "bullets": [
-        "Lean Product Strategy: Helping tech founders translate vague ideas into structured, user-validated MVPs by focusing on core value and process efficiency.",
-        "End-to-End Execution: Designing high-fidelity prototypes and user journeys with a deep understanding of browser-based implementation and technical constraints.",
-        "Project Orchestration: Managing multi-stakeholder communication and lean budgets to ensure rapid go-live cycles."
+        "Lean MVP Strategy: Consulting founders on translating visions into market-ready products through rapid validation and technical scalability.",
+        "End-to-End Design: Delivering high-fidelity prototypes and user journeys with a focus on seamless developer handoff and optimized budgets."
       ]
     },
     {
       "logoId": "kontrastFestival",
       "logoLabel": "Kontrast Festival",
-      "title": "Co-Founder & Lead Organizer",
+      "title": "Co-Founder & Operations Lead",
       "period": "2021 — 2024",
       "companyLine": "Leadership & Operations",
       "bullets": [
-        "Operational Leadership: Co-founded and scaled a cultural event to 3,000+ attendees by managing complex logistics, team operations, and vendor alignment.",
-        "Systemic Design: Oversaw all digital and physical touchpoints, ensuring a seamless and structured experience for attendees and staff alike."
+        "Organizational Leadership: Scaled a cultural initiative to 3,000+ attendees by managing complex logistics and cross-functional team alignment.",
+        "Experience Strategy: Directed the execution of all digital and physical touchpoints to ensure a structured service design."
       ]
     },
     {
       "logoId": "smartpatient",
       "logoLabel": "smartpatient",
-      "title": "UX Design Intern",
+      "title": "UX Design Associate",
       "period": "Aug 2016 — Jan 2017",
       "companyLine": "smartpatient (Digital Health)",
       "bullets": [
-        "Requirement Synthesis: Translated complex user feedback and support data into concrete UX requirements and iterative screen concepts.",
-        "Evidence-based Testing: Validated health-tracking features through qualitative research to ensure high accessibility and user trust."
+        "Research Synthesis: Translated qualitative user data into actionable UX requirements and iterative design concepts for high-security health apps."
       ]
     }
   ],
   "educationTitle": "Education & Credentials",
   "educationCredentials": [
     {
-      "title": "Master of Science, User Experience Design",
-      "subtitle": "TH Ingolstadt | Grade 1.3 (Top of Class)",
-      "period": "Mar 2021 — Mar 2024",
-      "details": "Focus on HCI, Agile Methods, and Design Strategy. Thesis on VR environments."
+      "title": "M.Sc. User Experience Design",
+      "subtitle": "TH Ingolstadt | Grade 1.3",
+      "period": "2021 — 2024"
     },
     {
-      "title": "Scientific Recognition: AI / NLP Research",
-      "subtitle": "Published in ICNLSP: Research on Natural Language Processing & Human Interface",
-      "period": "2021"
-    },
-    {
-      "title": "Agile Certification",
-      "subtitle": "Certified SAFe 6.0 Scrum Master",
+      "title": "Certified SAFe 6.0 Scrum Master",
+      "subtitle": "Agile Delivery & Leadership",
       "period": "Valid until 2026"
     },
     {
-      "title": "Bachelor of Science, User Experience Design",
+      "title": "B.Sc. User Experience Design",
       "subtitle": "TH Ingolstadt",
-      "period": "Oct 2014 — Mar 2019"
+      "period": "2014 — 2019"
     }
   ]
 }

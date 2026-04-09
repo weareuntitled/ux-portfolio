@@ -104,15 +104,9 @@ export default async function CVPage() {
                           <span className="font-mono text-sm text-zinc-400">{entry.period}</span>
                         </div>
                         <p className="text-sm font-medium text-primary">{entry.companyLine}</p>
-                        {entry.coreRoles ? (
-                          <p className="mt-1 text-xs font-medium uppercase tracking-wide text-zinc-400">
-                            {entry.coreRoles}
-                          </p>
-                        ) : null}
                       </div>
                     </div>
                   </header>
-                  {entry.summary ? <p className="mb-3 text-sm text-zinc-400">{entry.summary}</p> : null}
                   <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
                     {entry.bullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
