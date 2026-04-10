@@ -24,6 +24,24 @@ export const contact = {
 /** Landing Experience section — row layout with optional /logos/*.png assets */
 export const experienceTimelineDetailed = [
   {
+    id: '8020-eco',
+    company: '8020.eco',
+    headline: 'Product Design Consultant & Agile Lead',
+    subline: '8020.eco · Management Consulting',
+    period: 'Jul 2022 – Oct 2025',
+    location: 'Ingolstadt · Hybrid',
+    logoId: 'eco8020' satisfies BrandLogoId,
+    logoAlt: '8020.eco logo',
+    summary:
+      'Embedded across multiple parallel project tracks. Primary role as Scrum-driven Product Designer on a long-running enterprise engagement, plus Motion Design Lead and web delivery on two further tracks.',
+    bullets: [
+      'Led product design and sprint ceremonies across multiple parallel projects',
+      'Mapped and restructured complex client-facing and internal processes into lean, buildable workflows',
+      'Served as Motion Design Lead on a second project track. Owned the full motion output end to end',
+      'Designed and built web presences including HTML embeds across a third project stream',
+    ],
+  },
+  {
     id: 'untitled-ux',
     company: 'Untitled-ux',
     headline: 'Senior UX/UI Product Designer',
@@ -41,21 +59,19 @@ export const experienceTimelineDetailed = [
     ],
   },
   {
-    id: '8020-eco',
-    company: '8020.eco',
-    headline: 'Product Design Consultant & Agile Lead',
-    subline: '8020.eco · Management Consulting',
-    period: 'Jul 2022 – Oct 2025',
-    location: 'Ingolstadt · Hybrid',
-    logoId: 'eco8020' satisfies BrandLogoId,
-    logoAlt: '8020.eco logo',
+    id: 'kontrast-festival',
+    company: 'Kontrast Festival',
+    headline: 'Co-Founder & Operations Lead',
+    subline: 'Leadership & Operations',
+    period: '2021 – 2024',
+    location: 'Augsburg',
+    logoId: 'kontrastFestival' satisfies BrandLogoId,
+    logoAlt: 'Kontrast Festival logo',
     summary:
-      'Embedded across multiple parallel project tracks. Primary role as Scrum-driven Product Designer on a long-running enterprise engagement, plus Motion Design Lead and web delivery on two further tracks.',
+      'Co-founded and scaled a regional cultural festival from zero to 3,000+ attendees. Responsible for all operations, team management, and digital and physical experience design.',
     bullets: [
-      'Led product design and sprint ceremonies across multiple parallel projects',
-      'Mapped and restructured complex client-facing and internal processes into lean, buildable workflows',
-      'Served as Motion Design Lead on a second project track. Owned the full motion output end to end',
-      'Designed and built web presences including HTML embeds across a third project stream',
+      'Managed logistics, vendors, and a full ops team across three editions',
+      'Owned every digital and physical touchpoint from first ticket to last act',
     ],
   },
   {
