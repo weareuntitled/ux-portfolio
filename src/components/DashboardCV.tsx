@@ -9,6 +9,7 @@ import {
   Box,
   Fingerprint,
   FileText,
+  Film,
   FolderKanban,
   Github,
   LayoutDashboard,
@@ -49,6 +50,7 @@ const MotionLink = motion.create(
 const sidebarIconMap: Record<string, LucideIcon> = {
   LayoutDashboard,
   FileText,
+  Film,
   FolderKanban,
   Sparkles,
   Mail,

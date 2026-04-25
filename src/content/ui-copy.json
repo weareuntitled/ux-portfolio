@@ -4,6 +4,7 @@
       { "label": "Dashboard", "href": "/", "icon": "LayoutDashboard" },
       { "label": "CV", "href": "/cv", "icon": "FileText" },
       { "label": "Projects", "href": "/projects", "icon": "FolderKanban" },
+      { "label": "Motion", "href": "/motion", "icon": "Film" },
       { "label": "Kontrast Festival", "href": "/projects/kontrast-festival", "icon": "Sparkles" },
       { "label": "Contact", "href": "/contact", "icon": "Mail" }
     ],

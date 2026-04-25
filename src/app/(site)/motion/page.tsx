@@ -27,7 +27,7 @@ const SHOWREELS = [
   {
     slug: '3dprojects',
     title: '3D Design Reel',
-    subtitle: 'Recent 3D projects and event animations.',
+    subtitle: '3D-Projekte und Event-Animationen aus den letzten Monaten.',
     youtubeId: 'K7JhmqWGiZw',
   },
 ];

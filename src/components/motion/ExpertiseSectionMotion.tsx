@@ -66,11 +66,10 @@ export default function ExpertiseSectionMotion() {
           Motion & Beyond
         </h2>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-          Ich gestalte komplette Animationsprojekte und visuelle Welten für Marken und Kampagnen.
-          Das ist Premium Motion Design, das direkt funktioniert. Ich verantworte den gesamten
-          kreativen Prozess von der ersten Idee bis zur finalen Auslieferung. Es gibt keine halben
-          Sachen und keinen Agentur Overhead. Das ist reines und durchdachtes Design von Anfang bis
-          Ende.
+          Ich gestalte Animationsprojekte und visuelle Welten, bei denen Konzept und Umsetzung in
+          einer Hand liegen. Kein Briefing verschwindet in der Agentur-Mühle, kein Zwischenstand
+          landet wochenlang in der Warteschleife. Was ich anfange, liefere ich aus — und zwar so,
+          dass es auf Anhieb funktioniert.
         </p>
       </motion.div>
 
@@ -102,10 +101,10 @@ export default function ExpertiseSectionMotion() {
             <p className="text-xs font-mono tracking-widest text-primary mb-2">01</p>
             <p className="text-sm font-semibold leading-snug">Explainer</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Ich produziere Erklärvideos für komplexe Produkte oder animierte Grafiken für
-              Dokumentationen. Ich übersetze trockene Briefings in visuelles Storytelling, das sofort
-              klickt. Der Weg führt vom Skript direkt in die Animation. Das spart Zeit und vermeidet
-              endlose Korrekturschleifen.
+              Komplexe Produkte haben es verdient, gut erklärt zu werden — nicht nur aufgelistet.
+              Ich übersetze trockene Briefings in Animationen, die sofort klicken, weil Skript und
+              Animation aus derselben Hand kommen. Keine endlosen Schleifen, keine
+              Übersetzungsverluste zwischen Konzept und Umsetzung.
             </p>
           </div>
         </motion.div>
@@ -130,9 +129,9 @@ export default function ExpertiseSectionMotion() {
             <p className="text-xs font-mono tracking-widest text-primary mb-2">02</p>
             <p className="text-sm font-semibold leading-snug">3D Renderings</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Das sind detaillierte Produktvisualisierungen und künstlerische Welten für Kampagnen.
-              Statt ewigem Warten auf Renderings setze ich auf schlanke Pipelines in Blender und der
-              Unreal Engine. Das Ergebnis ist lean, schnell und hochwertig.
+              Produktvisualisierungen und visuelle Welten für Kampagnen, die nach echten Shots
+              aussehen — weil die Physik stimmt und die Pipeline es zulässt. In Blender und Unreal
+              arbeite ich so, dass Renderings nicht zum Bottleneck werden, sondern zum Argument.
             </p>
           </div>
         </motion.div>
@@ -157,9 +156,10 @@ export default function ExpertiseSectionMotion() {
             <p className="text-xs font-mono tracking-widest text-primary mb-2">03</p>
             <p className="text-sm font-semibold leading-snug">Pitch Videos</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Für interne Townhalls oder große Marketing Kampagnen entwickle ich emotionale Videos.
-              Ich liefere Bewegtbild und Styleframes, die Ideen verkaufen und Stakeholder sofort
-              abholen. Genau das braucht man für wichtige Präsentationen und große Events.
+              Wer eine Idee vor großem Publikum pitchen will, braucht mehr als Folien. Ich entwickle
+              Styleframes und Bewegtbild, das eine Idee nicht erklärt, sondern erfahrbar macht —
+              für Townhalls, Kampagnenlaunchs und Präsentationen, bei denen der erste Eindruck
+              entscheidet.
             </p>
           </div>
         </motion.div>
@@ -184,9 +184,9 @@ export default function ExpertiseSectionMotion() {
             <p className="text-xs font-mono tracking-widest text-primary mb-2">04</p>
             <p className="text-sm font-semibold leading-snug">AD Banners & Social</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              In diesem Bereich entstehen animierte Werbebanner und Assets für Social Media Werbung.
-              Ich konzipiere die Kampagnen extrem modular. Dadurch bleiben sie auch beim massenhaften
-              Rollout auf allen Kanälen immer strikt on brand.
+              Animierte Banner und Social-Assets, die beim Rollout über Dutzende Formate und Kanäle
+              nicht auseinanderfallen. Das setzt ein modulares Konzept von Anfang an voraus — keinen
+              Umbau am Ende. Ich baue beides zusammen, damit das Ergebnis in jedem Format stimmt.
             </p>
           </div>
         </motion.div>
@@ -211,10 +211,9 @@ export default function ExpertiseSectionMotion() {
             <p className="text-xs font-mono tracking-widest text-primary mb-2">05</p>
             <p className="text-sm font-semibold leading-snug">AI Videos & Workflows</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Clevere Prozess Pipelines und KI generierte Inhalte machen Projekte einfach deutlich
-              schneller. KI ist für mich kein Buzzword, sondern Teil der täglichen Arbeit. Mit
-              ComfyUI, Kling und eigenen Claude Skripten automatisiere ich lästige Prozesse. So hole
-              ich Frame für Frame visuell das absolute Maximum heraus.
+              KI ist kein Trend, den man im Portfolio erwähnt — sie ist fester Teil meiner täglichen
+              Arbeit. Mit ComfyUI, Kling und eigenen Skripten automatisiere ich das, was andere
+              manuell lösen, und gewinne so Zeit für die Frames, auf die es wirklich ankommt.
             </p>
           </div>
         </motion.div>
