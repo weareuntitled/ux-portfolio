@@ -40,7 +40,8 @@ function OffsetLottie({ animationData, speed = 1, startFrame = 0, targetDuration
       autoplay
       loop
       style={style}
-      rendererSettings={assetsPath ? { assetsPath } : undefined}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rendererSettings={assetsPath ? ({ assetsPath } as any) : undefined}
     />
   );
 }
