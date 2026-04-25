@@ -6,6 +6,8 @@ export type NavProjectWithImage = {
   title: string;
   moodImageUrl: string | null;
   category: ProjectCategory;
+  /** Where the sidebar row should link. Defaults to /projects/<slug> when omitted. */
+  href?: string;
 };
 
 /**

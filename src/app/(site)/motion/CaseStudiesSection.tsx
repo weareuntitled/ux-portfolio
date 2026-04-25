@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Play, Lock, ArrowRight } from 'lucide-react';
 
 import { fadeUpVariant, staggerVariant, VP, STAGGER } from '@/lib/motion';
+import { MOTION_PROJECTS, type MotionProject } from '@/content/motion-projects';
 
 // ---------------------------------------------------------------------------
 // Data
@@ -21,60 +22,21 @@ interface ProjectCard {
   nda?: boolean;
 }
 
-const PROJECT_CARDS: ProjectCard[] = [
-  {
-    slug: 'samani',
-    label: 'Music Label · Social Content',
-    title: 'Samani Music Label',
-    description: 'Modulares Content-System aus Templates und AE-Baukasten — unendliche Variationen, konsistenter Look.',
-    youtubeThumb: 'vw8GUemVEH8',
-  },
-  {
-    slug: 'kontrast',
-    label: 'Festival · Aftermovie',
-    title: 'Kontrast Festival',
-    description: 'Kompletter visueller Auftritt: Social Reels, 3D-Ads, Line-up-Content und Director des Aftermovies.',
-    youtubeThumb: 'Ufrnt73JJDU',
-  },
-  {
-    slug: 'ensinger',
-    label: '3D Motion & Webdesign',
-    title: 'Ensinger Mineralbrunnen',
-    description: '3D Hero-Shot für Maracuja-Launch mit akkuraten Fluid-Renderings und HTML5-Banner-Rollout.',
-    video: '/motion/Ensinger/FINAL_Ensinger_hero_landscape_1080p.mp4',
-  },
-  {
-    slug: 'audi',
-    label: 'Illustration & Motion · 2021–2025',
-    title: 'Audi – Digitaler Adventskalender',
-    description: 'Eigenillustration und Animation für den Audi Adventskalender — seit 2021 jedes Jahr neu.',
-    video: '/motion/AUDI_christmacalender/Audi_Digitaler_Adventskalender_Video3_rentier02.mp4',
-  },
-  {
-    slug: 'explainer-automotive',
-    label: 'Erklärvideo · NDA',
-    title: 'Automotive Software',
-    description: 'Komplexes Software-Tool für Zertifizierungsprozesse — von Konzept und Skript bis zur Animation.',
-    video: '/motion/Explainer_automotive/20220721_MAIN_EV@LUTION.mp4',
-    nda: true,
-  },
-  {
-    slug: 'explainer-schooling',
-    label: 'Video Series · NDA',
-    title: 'Corporate Schooling',
-    description: 'Skalierbare Erklärvideo-Reihe für modulare Schnellschulung — fast null Korrekturschleifen.',
-    video: '/motion/Explainer_Schooling/MAN_TPL-CSM_Revision01.mp4',
-    nda: true,
-  },
-  {
-    slug: 'pitch-videos',
-    label: 'Pitch Video · NDA',
-    title: 'Townhall Pitch',
-    description: 'Visuelle Konzeption und Styleframes für einen Townhall-Pitch vor großem internem Publikum.',
-    video: '/motion/Pitch%20videos/Animation_AI_01.mp4',
-    nda: true,
-  },
-];
+function toCard(p: MotionProject): ProjectCard {
+  // NDA badge folds into the label so the card communicates restrictions before opening.
+  const label = p.nda ? `${p.label} · NDA` : p.label;
+  return {
+    slug: p.slug,
+    label,
+    title: p.title,
+    description: p.teaser,
+    video: p.video ?? p.videos?.[0],
+    youtubeThumb: p.youtubeId,
+    nda: p.nda,
+  };
+}
+
+const PROJECT_CARDS: ProjectCard[] = MOTION_PROJECTS.map(toCard);
 
 // ---------------------------------------------------------------------------
 // ProjectCard

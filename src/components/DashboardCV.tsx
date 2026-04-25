@@ -31,6 +31,7 @@ import uiCopy from '@/content/ui-copy.json';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
+import { MOTION_PROJECTS } from '@/content/motion-projects';
 
 import { Breadcrumbs, type BreadcrumbItem } from '@/components/Breadcrumbs';
 import type { LucideIcon } from 'lucide-react';
@@ -99,15 +100,31 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
     }));
   }, [navProjectsProp]);
 
+  // Motion-page projects live under /motion/[slug] and are not part of the portfolio
+  // collection, so they need a separate href and are merged in alongside any
+  // portfolio projects already categorized as Motion (the showreels).
+  const motionPageProjects: NavProjectWithImage[] = useMemo(
+    () =>
+      MOTION_PROJECTS.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        moodImageUrl: null,
+        category: 'Motion' as const,
+        href: `/motion/${p.slug}`,
+      })),
+    []
+  );
+
   const { enterprise, motionProjects, branding, web, side, archive } = useMemo(() => {
     const enterprise = navProjects.filter((p) => p.category === 'Enterprise');
-    const motionProjects = navProjects.filter((p) => p.category === 'Motion');
+    const portfolioMotion = navProjects.filter((p) => p.category === 'Motion');
+    const motionProjects = [...portfolioMotion, ...motionPageProjects];
     const branding = navProjects.filter((p) => p.category === 'Branding');
     const web = navProjects.filter((p) => p.category === 'Web');
     const side = navProjects.filter((p) => p.category === 'Side');
     const archive = navProjects.filter((p) => p.category === 'Archive');
     return { enterprise, motionProjects, branding, web, side, archive };
-  }, [navProjects]);
+  }, [navProjects, motionPageProjects]);
 
   const vItem = {
     hidden: { opacity: 0, x: -10, filter: 'blur(4px)' },
@@ -192,16 +209,19 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
               className="overflow-hidden"
             >
               <div className="space-y-1 py-1">
-                {items.map((project) => (
-                  <NavRow
-                    key={project.slug}
-                    label={project.title}
-                    href={`/projects/${project.slug}`}
-                    icon={Box}
-                    isActive={pathname === `/projects/${project.slug}`}
-                    leading={<ProjectLeading moodImageUrl={project.moodImageUrl ?? null} slug={project.slug} />}
-                  />
-                ))}
+                {items.map((project) => {
+                  const href = project.href ?? `/projects/${project.slug}`;
+                  return (
+                    <NavRow
+                      key={`${project.category}:${project.slug}`}
+                      label={project.title}
+                      href={href}
+                      icon={Box}
+                      isActive={pathname === href}
+                      leading={<ProjectLeading moodImageUrl={project.moodImageUrl ?? null} slug={project.slug} />}
+                    />
+                  );
+                })}
               </div>
             </motion.div>
           )}
