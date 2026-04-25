@@ -48,6 +48,11 @@ const EducationSection = dynamic(
   { loading: () => <BelowFoldSkeleton /> },
 );
 
+const FaqSection = dynamic(
+  () => import('@/components/landing/FaqSection').then((m) => ({ default: m.FaqSection })),
+  { loading: () => <BelowFoldSkeleton /> },
+);
+
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 const iconMap: Record<string, React.ElementType> = {
   Package,
@@ -467,6 +472,8 @@ export function NextGenStartPage() {
           <ExperienceTimelineSection />
           <EducationSection />
         </motion.section>
+
+        <FaqSection />
 
         <motion.footer
           className="mt-32 rounded-2xl border border-border bg-card px-6 py-16 text-center shadow-sm md:px-12 md:py-20"

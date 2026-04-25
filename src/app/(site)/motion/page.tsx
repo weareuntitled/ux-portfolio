@@ -27,6 +27,7 @@ import DashboardCV from '@/components/DashboardCV';
 import { cn } from '@/lib/utils';
 import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant, drawPathVariant } from '@/lib/motion';
 import CaseStudiesSection from './CaseStudiesSection';
+import { FaqSection } from '@/components/landing/FaqSection';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -626,6 +627,11 @@ export default function MotionPage() {
         {/* 5 · CASE STUDIES                                                    */}
         {/* ------------------------------------------------------------------ */}
         <CaseStudiesSection />
+
+        {/* ------------------------------------------------------------------ */}
+        {/* 6 · FAQ                                                              */}
+        {/* ------------------------------------------------------------------ */}
+        <FaqSection />
 
       </div>
     </DashboardCV>
