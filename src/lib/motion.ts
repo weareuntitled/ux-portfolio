@@ -71,7 +71,7 @@ export const fadeUpVariant = (delay = 0) => ({
 });
 
 /** Stagger container — wraps a list of fadeUpVariant children. */
-export const staggerVariant = (stagger = STAGGER.md, delay = 0.05) => ({
+export const staggerVariant = (stagger: number = STAGGER.md, delay: number = 0.05) => ({
   hidden: {},
   show: {
     transition: { staggerChildren: stagger, delayChildren: delay },
@@ -96,5 +96,15 @@ export const scaleInVariant = (delay = 0) => ({
     scale: 1,
     filter: 'blur(0px)',
     transition: { duration: DUR.xl, ease: EASE, delay },
+  },
+});
+
+/** SVG path draw — animates strokeDashoffset via pathLength 0→1. */
+export const drawPathVariant = (delay = 0) => ({
+  hidden: { pathLength: 0, opacity: 0 },
+  show: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.8, ease: 'easeInOut' as const, delay },
   },
 });

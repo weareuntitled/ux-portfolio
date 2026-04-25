@@ -10,13 +10,12 @@ import pitchData from '../../../public/motion/pitch.json';
 import threeDData from '../../../public/motion/3D.json';
 import aiData from '../../../public/motion/AI.json';
 
-import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/motion';
+import { DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/motion';
 
 // ---------------------------------------------------------------------------
 // OffsetLottie
 // ---------------------------------------------------------------------------
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function OffsetLottie({ animationData, speed = 1, startFrame = 0, targetDuration, style, assetsPath }: { animationData: unknown; speed?: number; startFrame?: number; targetDuration?: number; style?: React.CSSProperties; assetsPath?: string }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lottieRef = useRef<any>(null);
@@ -27,9 +26,11 @@ function OffsetLottie({ animationData, speed = 1, startFrame = 0, targetDuration
     if (targetDuration) {
       const native = player.getDuration(false) as number;
       if (native > 0) player.setSpeed(native / targetDuration);
+    } else if (speed !== 1) {
+      player.setSpeed(speed);
     }
     if (startFrame > 0) player.goToAndPlay(startFrame, true);
-  }, [startFrame, targetDuration]);
+  }, [startFrame, targetDuration, speed]);
 
   return (
     <Lottie

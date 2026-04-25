@@ -7,7 +7,7 @@ import { Play, Lock, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 import DashboardCV from '@/components/DashboardCV';
-import { fadeUpVariant, staggerVariant, scaleInVariant, VP, STAGGER } from '@/lib/motion';
+import { fadeUpVariant, staggerVariant, scaleInVariant, STAGGER } from '@/lib/motion';
 
 // ---------------------------------------------------------------------------
 // Project data
