@@ -53,6 +53,11 @@ function ProjectCard({ slug, label, title, description, video, youtubeThumb, nda
   const handleLeave = useCallback(() => {
     if (ref.current) { ref.current.pause(); ref.current.currentTime = 0; }
   }, []);
+  const handleMetadata = useCallback(() => {
+    if (ref.current && ref.current.duration > 0) {
+      ref.current.currentTime = 0.1;
+    }
+  }, []);
 
   // YouTube thumbnail fallbacks
   const thumbnailOptions = youtubeThumb ? [
@@ -114,10 +119,11 @@ function ProjectCard({ slug, label, title, description, video, youtubeThumb, nda
             <video
               ref={ref}
               src={video}
-              preload="none"
+              preload="metadata"
               muted
               loop
               playsInline
+              onLoadedMetadata={handleMetadata}
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
           )}
@@ -155,7 +161,7 @@ function ProjectCard({ slug, label, title, description, video, youtubeThumb, nda
 export default function CaseStudiesSection() {
   return (
     <div className="space-y-6">
-      <motion.div variants={fadeUpVariant(0)} initial="hidden" whileInView="show" viewport={VP} className="space-y-1">
+      <motion.div variants={fadeUpVariant(0)} initial="hidden" whileInView="show" viewport={VP} className="mb-12 space-y-1">
         <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground/70">Case Studies</p>
         <h2 className="text-xl font-semibold tracking-tight">Ausgewählte Projekte</h2>
       </motion.div>

@@ -1,9 +1,10 @@
 ﻿import type { Metadata } from 'next';
+import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
+
 import { CvBrandLogo } from '@/components/cv/CvBrandLogo';
 import { DashboardCV } from '@/components/DashboardCV';
 import { CvDownloadButton } from '@/components/CvDownloadButton';
 import { contact } from '@/content/home';
-// Central CV copy lives in src/content/cv-copy.json
 import cvCopy from '@/content/cv-copy.json';
 import { getProjectsForNav } from '@/lib/cms/projects-nav';
 import type { BrandLogoId } from '@/lib/brand-logos';
@@ -30,10 +31,14 @@ export default async function CVPage() {
       ]}
       pageTitle="CV"
     >
-      <main className="flex min-w-0 flex-1 flex-col bg-background">
-        <div className="mx-auto max-w-4xl space-y-12 px-4 py-12 md:px-8 md:py-20">
-          <header className="flex flex-col gap-6 border-b border-white/5 pb-8 sm:flex-row sm:items-start sm:justify-between">
+      <div className="space-y-8">
+        {/* Hero Card */}
+        <section className="overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div>
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
+                Curriculum Vitae
+              </p>
               <h1 className="text-4xl font-bold tracking-tighter text-foreground sm:text-5xl">
                 {cvCopy.header.name}
               </h1>
@@ -48,84 +53,93 @@ export default async function CVPage() {
               </p>
             </div>
 
-            <div className="flex shrink-0 flex-col items-start gap-1 text-sm text-muted-foreground sm:items-end">
-              <a
-                href={`mailto:${contact.email}`}
-                className="transition-colors hover:text-primary"
-              >
-                {contact.email}
+            <div className="flex shrink-0 flex-col gap-2 text-sm text-muted-foreground">
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-2 transition-colors hover:text-primary">
+                <Mail className="h-4 w-4" /> {contact.email}
               </a>
-              <a href={`tel:${contact.phone}`} className="transition-colors hover:text-primary">
-                {contact.phone}
+              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 transition-colors hover:text-primary">
+                <Phone className="h-4 w-4" /> {contact.phone}
               </a>
-              <span>{cvCopy.header.location}</span>
+              <span className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" /> {cvCopy.header.location}
+              </span>
               <a
                 href={cvCopy.header.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 transition-colors hover:text-primary"
+                className="flex items-center gap-2 transition-colors hover:text-primary"
               >
-                {cvCopy.header.linkedinLabel}
+                <Linkedin className="h-4 w-4" /> {cvCopy.header.linkedinLabel}
               </a>
-              <CvDownloadButton className="mt-4 inline-flex h-9 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background shadow transition-colors hover:bg-foreground/80" />
+              <CvDownloadButton className="mt-2 inline-flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-transform hover:scale-[1.01] active:scale-[0.99]" />
             </div>
-          </header>
+          </div>
+        </section>
 
-          <section>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted-foreground">
-              {cvCopy.coreCompetenciesTitle}
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {cvCopy.coreCompetencies.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded border border-white/5 bg-card/50 px-3 py-1 text-xs font-medium text-foreground/80"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </section>
+        {/* Core Competencies Card */}
+        <section className="rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
+            Core Competencies
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {cvCopy.coreCompetencies.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-full border border-white/5 bg-white/5 px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:border-primary/20 hover:text-primary"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
 
-          <section>
-            <h3 className="mb-6 border-b border-white/5 pb-2 text-sm font-bold uppercase tracking-widest text-muted-foreground">
-              {cvCopy.professionalExperienceTitle}
-            </h3>
+        {/* Experience Card */}
+        <section className="rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+          <p className="mb-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
+            {cvCopy.professionalExperienceTitle}
+          </p>
 
-            <div className="space-y-10">
-              {cvCopy.experience.map((entry) => (
-                <article key={`${entry.title}-${entry.period}`}>
-                  <header className="mb-3">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-                      <CvBrandLogo id={entry.logoId as BrandLogoId} label={(entry as unknown as { logoLabel?: string }).logoLabel ?? ''} />
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-                          <h4 className="text-lg font-bold text-foreground">{entry.title}</h4>
-                          <span className="font-mono text-sm text-muted-foreground">{entry.period}</span>
-                        </div>
-                        <p className="text-sm font-medium text-primary">{entry.companyLine}</p>
+          <div className="relative space-y-0">
+            {/* Timeline rail */}
+            <div className="absolute left-[7px] top-2 bottom-2 w-px bg-primary/20" />
+
+            {cvCopy.experience.map((entry) => (
+              <article key={`${entry.title}-${entry.period}`} className="relative pb-10 pl-6">
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-2 border-primary/40 bg-[#0f0f12]" />
+
+                <header className="mb-3">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+                    <CvBrandLogo id={entry.logoId as BrandLogoId} label={(entry as unknown as { logoLabel?: string }).logoLabel ?? ''} />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+                        <h4 className="text-lg font-bold text-foreground">{entry.title}</h4>
+                        <span className="font-mono text-sm text-muted-foreground">{entry.period}</span>
                       </div>
+                      <p className="text-sm font-medium text-primary">{entry.companyLine}</p>
                     </div>
-                  </header>
-                  <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-foreground/80 marker:text-muted-foreground">
-                    {entry.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </section>
+                  </div>
+                </header>
+                <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-foreground/80 marker:text-muted-foreground">
+                  {entry.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
 
-          <section>
-            <h3 className="mb-6 border-b border-white/5 pb-2 text-sm font-bold uppercase tracking-widest text-muted-foreground">
-              {cvCopy.educationTitle}
-            </h3>
+        {/* Education Card */}
+        <section className="rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+          <p className="mb-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
+            {cvCopy.educationTitle}
+          </p>
 
-            <div className="space-y-6">
-              {cvCopy.educationCredentials.map((entry) => {
-                const eduEntry = entry as unknown as { logoId?: string; logoLabel?: string; title: string; subtitle?: string; period: string; details?: string };
-                return (
+          <div className="space-y-6">
+            {cvCopy.educationCredentials.map((entry) => {
+              const eduEntry = entry as unknown as { logoId?: string; logoLabel?: string; title: string; subtitle?: string; period: string; details?: string };
+              return (
                 <article key={`${entry.title}-${entry.period}`} className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
                   <div className={eduEntry.logoId ? 'flex min-w-0 flex-1 items-start gap-3' : ''}>
                     {eduEntry.logoId ? (
@@ -138,11 +152,11 @@ export default async function CVPage() {
                   </div>
                   <span className="mt-1 font-mono text-sm text-muted-foreground/60 sm:mt-0">{entry.period}</span>
                 </article>
-              )})}
-            </div>
-          </section>
-        </div>
-      </main>
+              );
+            })}
+          </div>
+        </section>
+      </div>
     </DashboardCV>
   );
 }

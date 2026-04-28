@@ -16,7 +16,7 @@ function Highlight({ children }: { children: React.ReactNode }) {
 
 function TechItemPill({ item, index }: { item: TechItem; index: number }) {
   const reduceMotion = useReducedMotion();
-  const iconUrl = deviconUrl(item.slug, item.variant ?? 'original');
+  const iconUrl = item.iconUrl ?? deviconUrl(item.slug ?? '', item.variant ?? 'original');
 
   return (
     <motion.div

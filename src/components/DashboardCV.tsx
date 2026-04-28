@@ -330,14 +330,19 @@ function DashboardCVImpl({
 
   return (
       <div className="min-h-screen text-foreground">
-      {/* Top Navigation — always visible */}
-      <nav className="fixed top-0 right-0 z-50 px-4 py-3 md:px-6 md:py-4">
-        <ul className="flex items-center gap-0.5 rounded-full border border-border/50 bg-background/80 px-2 py-1.5 backdrop-blur-md md:gap-1 md:border-none md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none">
+      {/* Top Navigation — left side beside sidebar */}
+      <nav
+        className={cn(
+          "fixed top-0 z-50 px-4 py-3 md:px-6 md:py-4 transition-all duration-300",
+          sidebarOpen ? "left-[16rem]" : "left-0"
+        )}
+      >
+        <ul className="flex items-center gap-1 rounded-full border border-border/50 bg-background/80 px-2 py-1.5 backdrop-blur-md md:gap-6 md:border-none md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none">
           <li><Link href="/" className="relative px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:px-3 md:text-sm">Home</Link></li>
           <li><Link href="/projects" className="relative px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:text-primary/80 md:px-3 md:text-sm">Works</Link></li>
           <li><Link href="/motion" className="relative px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:px-3 md:text-sm">Motion</Link></li>
           <li><Link href="/cv" className="relative px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:px-3 md:text-sm">CV</Link></li>
-          <li><Link href="/contact" className="ml-1 inline-flex items-center rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow transition-transform hover:scale-105 md:ml-2 md:px-4 md:text-sm">Contact</Link></li>
+          <li><Link href="/contact" className="ml-1 inline-flex items-center rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow transition-transform hover:scale-105 md:ml-0 md:px-4 md:text-sm">Contact</Link></li>
         </ul>
       </nav>
       <div className={cn("theme-container flex flex-1 flex-col", !isFullWidth && "md:container md:py-6")}>

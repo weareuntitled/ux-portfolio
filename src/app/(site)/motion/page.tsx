@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Play, PlayCircle } from 'lucide-react';
+import { Play, PlayCircle, ChevronRight } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
 import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/motion';
@@ -214,14 +214,26 @@ export default function MotionPage() {
   ];
 
   return (
-    <DashboardCV variant="fullwidth" breadcrumbs={breadcrumbs} pageTitle="Motion" showSearch={false}>
+    <DashboardCV variant="fullwidth" breadcrumbs={breadcrumbs} showSearch={false}>
       <div className="space-y-16 pb-16">
+
+        {/* Page header — title + breadcrumbs */}
+        <div className="space-y-3 pt-4">
+          <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+            Motion Work
+          </h1>
+          <nav className="flex items-center gap-1 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">Daniel Peters</Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-foreground">Motion</span>
+          </nav>
+        </div>
 
         {/* ------------------------------------------------------------------ */}
         {/* 1 · VIDEO HERO                                                      */}
         {/* ------------------------------------------------------------------ */}
         <motion.div
-          className="relative -mx-4 overflow-hidden rounded-2xl sm:-mx-6 lg:mx-0"
+          className="relative overflow-hidden rounded-2xl"
           style={{ minHeight: '60vh' }}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -252,9 +264,6 @@ export default function MotionPage() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
               Motion Design
             </p>
-            <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-white drop-shadow-md sm:text-5xl">
-              Motion Work
-            </h1>
           </motion.div>
         </motion.div>
 

@@ -137,10 +137,10 @@ export function HeroSection() {
         {/* Profile photo — right side, full section height with soft wash + floating animation */}
         {/* Profile photo — pushed far right, very subtle */}
         <motion.div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[30vw] max-w-[380px] translate-x-1/4 md:block"
+          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[35vw] max-w-[440px] translate-x-1/4 md:block"
           initial={{ opacity: 0, x: 40 }}
           animate={{
-            opacity: 0.18,
+            opacity: 0.26,
             x: 0,
             y: [0, -8, 0, 4, 0],
           }}
@@ -164,8 +164,8 @@ export function HeroSection() {
               alt={contact.name}
               fill
               priority
-              className="object-cover object-top blur-[2px]"
-              sizes="380px"
+              className="object-cover object-top"
+              sizes="440px"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
             <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />

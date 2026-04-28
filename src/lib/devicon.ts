@@ -10,9 +10,10 @@ export function deviconUrl(slug: string, variant: 'original' | 'plain' | 'origin
 
 export interface TechItem {
   name: string;
-  slug: string;
+  slug?: string;
   level: 'Advanced' | 'Intermediate' | 'Basic';
   variant?: 'original' | 'plain' | 'original-wordmark' | 'plain-wordmark';
+  iconUrl?: string;
 }
 
 export interface TechCategory {
@@ -38,9 +39,9 @@ export const TECH_STACK: TechCategory[] = [
     items: [
       { name: 'Gemini', slug: 'google', level: 'Advanced', variant: 'original' },
       { name: 'OpenCode', slug: 'vscode', level: 'Advanced', variant: 'original' },
-      { name: 'Claude', slug: 'openai', level: 'Advanced', variant: 'original' },
-      { name: 'n8n', slug: 'docker', level: 'Intermediate', variant: 'original' },
-      { name: 'LangChain', slug: 'python', level: 'Intermediate', variant: 'original' },
+      { name: 'Claude', iconUrl: 'https://cdn.simpleicons.org/anthropic/white', level: 'Advanced' },
+      { name: 'n8n', iconUrl: 'https://cdn.simpleicons.org/n8n/white', level: 'Intermediate' },
+      { name: 'LangChain', iconUrl: 'https://cdn.simpleicons.org/langchain/white', level: 'Intermediate' },
     ],
   },
   {
@@ -57,7 +58,7 @@ export const TECH_STACK: TechCategory[] = [
     title: 'Animation / 3D',
     items: [
       { name: 'Blender', slug: 'blender', level: 'Intermediate', variant: 'original' },
-      { name: 'ComfyUI', slug: 'comfyui', level: 'Intermediate', variant: 'plain' },
+      { name: 'ComfyUI', iconUrl: 'https://cdn.simpleicons.org/comfyui/white', level: 'Intermediate' },
       { name: 'After Effects', slug: 'aftereffects', level: 'Advanced', variant: 'plain' },
       { name: 'Premiere', slug: 'premierepro', level: 'Advanced', variant: 'plain' },
       { name: 'Unity', slug: 'unity', level: 'Basic', variant: 'original' },
