@@ -144,7 +144,7 @@ export function HeroSection() {
 
         {/* Availability pill */}
         <motion.div
-          className="mb-6 flex items-center justify-center gap-3"
+          className="mb-4 flex items-center justify-center gap-3"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.1, ease: EASE }}
@@ -158,6 +158,25 @@ export function HeroSection() {
               Available to work
             </span>
           </div>
+        </motion.div>
+
+        {/* Title / Credentials */}
+        <motion.div
+          className="mb-4 text-center"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.15, ease: EASE }}
+        >
+          <p 
+            className="font-mono text-xs tracking-wide text-muted-foreground/80"
+            style={{ fontFamily: "'Bitcount', var(--font-mono), monospace" }}
+          >
+            <span className="text-foreground font-semibold">M.Sc. UX Designer</span>
+            <span className="mx-2 text-muted-foreground/40">|</span>
+            <span>3 years agency</span>
+            <span className="mx-2 text-muted-foreground/40">|</span>
+            <span>8 years freelance</span>
+          </p>
         </motion.div>
 
         {/* Handle + Location */}
