@@ -17,11 +17,12 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 
 ## Key Features
 
-- **Homepage:** Full-width editorial hero with WebGL animated gradient, profile photo wash effect, 3D flip word animation with hand-drawn SVG strikethrough, full-width project showcase, staggered text marquee, motion portfolio with YouTube embeds, compact tool pills, inverted About section, accordion Experience + Education timelines
-- **Navigation:** Fixed top-right nav (always visible, Works accent color, Contact as button), sidebar nav with Motion section, hamburger menu on mobile
-- **Projects:** Cinematic 21:9 cards with category badges and outcome highlights (mobile-optimized)
+- **Homepage:** Full-width editorial hero with WebGL animated gradient, profile photo wash effect (subtle, blurred, floating), 3D flip word animation with thick hand-drawn SVG strikethrough, project showcase at ~80% width, dual staggered text marquees (ALL CAPS), motion portfolio with YouTube embeds, compact tool pills, merged dark inverse About+Tools section (`bg-[#0f0f12]`), accordion Experience + Education timelines
+- **Navigation:** Global top-right nav (always visible, Works accent color, Contact as filled button), sidebar nav with Motion section, hamburger menu on mobile
+- **Projects:** Cinematic 21:9 cards with category badges and outcome highlights (mobile-optimized, ~80% desktop width)
 - **Motion Portfolio:** Separate video-driven section (`/motion/[slug]`) with YouTube embeds, client logos marquee
 - **Kontrast:** Two-column grid variation with stats cards and YouTube aftermovie overlay
+- **DashboardCV variants:** `default`, `landing`, `project`, `fullwidth` (edge-to-edge for Motion/Projects pages)
 - **CV:** Detailed experience timeline, education, certifications
 - **Contact:** AI-powered chat agent with context-aware responses
 
@@ -29,7 +30,7 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 
 | Route | Description |
 |---|---|
-| `/` | Homepage (hero w/ WebGL bg → logos → projects → Kontrast marquee → motion → tools → about → experience + education → footer) |
+| `/` | Homepage (hero w/ WebGL bg → logos → projects → Kontrast → marquee → motion → marquee → About+Tools → experience → education → footer) |
 | `/projects` | Project grid with search/filter |
 | `/projects/[slug]` | Individual case study with prototype tabs |
 | `/motion` | Motion design portfolio with client logos, showreels |
@@ -61,7 +62,11 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 | Marquee | `TextMarqueeSection.tsx` | 3 staggered scrolling rows |
 | Motion Portfolio | `MotionPortfolioSection.tsx` | YouTube facade cards |
 | Tech Stack | `TechStackSection.tsx` | Compact pill tags |
-| About | `AboutSection.tsx` | White bg, centered, "Behind the Screens" |
+| Marquee 1 | `TextMarqueeSection.tsx` | Staggered ALL CAPS rows before Motion |
+| Motion Portfolio | `MotionPortfolioSection.tsx` | YouTube facade cards (8020 Showreel, 3D Design Reel) |
+| Marquee 2 | `TextMarqueeSection.tsx` | Staggered ALL CAPS rows before About |
+| About + Tools | `AboutToolsSection.tsx` | Merged dark inverse section (`bg-[#0f0f12]`), profile photo, tool pills |
+| Tech Stack | `TechStackSection.tsx` | Compact pill tags |
 | Experience | `ExperienceTimelineSection.tsx` | Accordion with logos |
 | Education | `EducationSection.tsx` | Matches Experience accordion style |
 | Footer | `NextGenStartPage.tsx` | Inverse accent CTA |
@@ -143,3 +148,9 @@ BASE_URL=https://portfolio.untitled-ux.de
 - Mobile project cards: smaller fonts, category/one-liner hidden
 - Education accordion matching Experience timeline style
 - Fixed Devicon icons (Claude→OpenAI, n8n→Docker, LangChain→Python)
+- `DashboardCV` global top-right nav (always visible, `variant="fullwidth"` for Motion/Projects pages)
+- Merged About + Tools into single dark inverse section (`bg-[#0f0f12]`) with centered profile photo
+- Dual `TextMarqueeSection` instances (ALL CAPS) before Motion and before About
+- Education restyled as accordion matching Experience timeline
+- Removed all `<!-- -->` HTML comment pre-titles from section headers
+- **Design coherence fixes:** thicker SVG strikethrough (`strokeWidth="2.5"`), subtler hero photo (`opacity: 0.18`, `blur-[2px]`, pushed further right), seamless hero→logos transition (removed `pb-8` wrapper), project cards at `w-[90%] max-w-6xl` (~80% visual width), `M.Sc. UX Designer` in normal font weight
