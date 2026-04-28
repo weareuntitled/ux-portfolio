@@ -66,7 +66,7 @@ export function AboutToolsSection() {
           viewport={{ once: true }}
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.1, ease: EASE }}
         >
-          <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-white/20 bg-muted ring-2 ring-primary/20 md:h-28 md:w-28">
+          <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border border-white/5 bg-muted ring-2 ring-primary/20 md:h-28 md:w-28">
             <Image
               src={contact.profileImage}
               alt={contact.name}

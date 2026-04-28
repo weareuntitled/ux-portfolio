@@ -55,13 +55,13 @@ const EDU_ENTRIES: EduEntry[] = [
 function EduLogo({ src, alt }: { src?: string | typeof brandLogos.thi; alt?: string }) {
   if (!src) {
     return (
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-muted/40">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/5 bg-muted/40">
         <span className="font-mono text-[10px] font-bold text-muted-foreground">EDU</span>
       </div>
     );
   }
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-muted/40">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/5 bg-muted/40">
       <Image src={src} alt={alt ?? ''} width={40} height={40} className="h-full w-full object-contain p-1" unoptimized />
     </div>
   );

@@ -1,24 +1,25 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Mail, ExternalLink } from 'lucide-react';
+import { Mail, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { contact } from '@/content/home';
 import { EASE, DUR } from '@/lib/motion';
 
 import { HeroSection } from '@/components/landing/HeroSection';
 import { ClientLogos } from '@/components/landing/ClientLogos';
-import { ProjectShowcase } from '@/components/landing/ProjectShowcase';
+import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
 import { KontrastBanner } from '@/components/landing/KontrastBanner';
-import { MotionPortfolioSection } from '@/components/landing/MotionPortfolioSection';
 import { AboutToolsSection } from '@/components/landing/AboutToolsSection';
 import { TextMarqueeSection } from '@/components/landing/TextMarqueeSection';
+import { getProjectBySlug } from '@/content/portfolio';
 
 /** Below-fold sections: separate JS chunks + defer parse on slow connections */
 function BelowFoldSkeleton() {
   return (
     <div
-      className="min-h-[200px] animate-pulse rounded-2xl border border-border bg-muted/20"
+      className="min-h-[200px] animate-pulse rounded-2xl border border-white/5 bg-muted/20"
       aria-hidden
     />
   );
@@ -39,6 +40,64 @@ const EducationSection = dynamic(
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 
+// Featured projects for scroll-lock treatment
+const FEATURED_PROJECTS = [
+  { slug: 'kovon', title: 'KoVoN COP Pilot', outcome: 'Eliminated Excel tracking chaos · 100% audit-ready visibility · 200 active users' },
+  { slug: 'ffp-dashboard', title: 'FFP Dashboard', outcome: 'Consolidated 6 months of fragmented input · Symptom-first triage flow · Modular reusable patterns' },
+];
+
+function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title: string; outcome: string }) {
+  const project = getProjectBySlug(slug);
+  const reduceMotion = useReducedMotion();
+
+  if (!project || !project.galleryUrls?.length) return null;
+
+  const slides: ScrollLockSlide[] = project.galleryUrls.map((src, i) => ({
+    src,
+    label: `${title} — Screen ${i + 1}`,
+  }));
+
+  return (
+    <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
+      {/* Left: Sticky meta */}
+      <motion.div
+        className="lg:sticky lg:top-24 lg:self-start space-y-4"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+      >
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">Case Study</p>
+          <h3 className="mt-2 text-3xl font-bold tracking-[-0.04em] text-foreground md:text-4xl">{title}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.oneLiner}</p>
+        </div>
+        
+        <div className="flex flex-wrap gap-2">
+          {outcome.split(' · ').map((item, i) => (
+            <span key={i} className="rounded-full border border-white/5 bg-[#0f0f12] px-3 py-1.5 font-mono text-[9px] uppercase tracking-widest text-primary/80">
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <Link
+          href={`/projects/${slug}`}
+          className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+        >
+          View case study
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </Link>
+      </motion.div>
+
+      {/* Right: Scroll-lock gallery */}
+      <div className="min-h-[400vh]">
+        <ScrollLockGallery slides={slides} title={title} />
+      </div>
+    </div>
+  );
+}
+
 export function NextGenStartPage() {
   const reduceMotion = useReducedMotion();
 
@@ -50,8 +109,41 @@ export function NextGenStartPage() {
       {/* 2. Client Logos — Full width, seamless from hero */}
       <ClientLogos />
 
-      {/* 3. Featured Projects — Full width */}
-      <ProjectShowcase />
+      {/* 3. Featured Projects — Scroll-lock galleries */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          {/* Section header */}
+          <motion.div
+            className="mb-16 flex items-end justify-between"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+          >
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">Selected Work</p>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                2 / 4 Enterprise Projects
+              </h2>
+            </div>
+            <Link
+              href="/projects"
+              className="hidden font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground sm:block"
+            >
+              View all →
+            </Link>
+          </motion.div>
+
+          {/* Project 1 — KoVoN */}
+          <div className="mb-32">
+            <FeaturedProjectSection {...FEATURED_PROJECTS[0]} />
+          </div>
+
+          {/* Project 2 — FFP Dashboard */}
+          <div>
+            <FeaturedProjectSection {...FEATURED_PROJECTS[1]} />
+          </div>
+        </div>
+      </section>
 
       {/* 4. Kontrast Festival — Light emphasis */}
       <KontrastBanner />
@@ -62,16 +154,7 @@ export function NextGenStartPage() {
         speed={30}
       />
 
-      {/* 6. Motion Portfolio — Light */}
-      <MotionPortfolioSection />
-
-      {/* 7. Marquee — Behind the Screens */}
-      <TextMarqueeSection
-        words={['BEHIND THE SCREENS', 'UX DESIGN', 'SCRUM MASTER', 'FREELANCE', 'ENTERPRISE', 'AUTOMATION']}
-        speed={35}
-      />
-
-      {/* 8. About + Tools — Inverse dark */}
+      {/* 6. About + Tools — Inverse dark */}
       <AboutToolsSection />
 
       {/* 9. Experience Timeline */}

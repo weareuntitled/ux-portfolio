@@ -56,7 +56,7 @@ export default async function ContactPage() {
             </p>
           </header>
 
-          <Card className="border-border/60 bg-card/75 shadow-md backdrop-blur-xl dark:border-border/50 dark:bg-card/55">
+          <Card className="border-white/5 bg-card/75 shadow-md backdrop-blur-xl dark:border-white/5 dark:bg-card/55">
             <CardContent className="space-y-6 p-7 sm:p-8">
               <div className="flex items-start gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">

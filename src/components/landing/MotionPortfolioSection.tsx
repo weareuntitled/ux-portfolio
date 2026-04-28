@@ -72,7 +72,7 @@ export function MotionPortfolioSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="border-b border-border bg-background py-16 md:py-24">
+    <section className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           {/* Left: Content */}
@@ -95,7 +95,7 @@ export function MotionPortfolioSection() {
               {SHOWREELS.map((reel) => (
                 <div
                   key={reel.slug}
-                  className="flex items-center gap-3 rounded-lg border border-border/30 bg-card/50 px-4 py-3"
+                  className="flex items-center gap-3 rounded-lg border border-white/5 bg-card/50 px-4 py-3"
                 >
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
                     <Play className="h-3.5 w-3.5 fill-primary text-primary" />
@@ -112,7 +112,7 @@ export function MotionPortfolioSection() {
               href={MOTION_PORTFOLIO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:bg-primary/5"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/5 bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:bg-primary/5"
             >
               <Film className="h-4 w-4" />
               View Motion Portfolio

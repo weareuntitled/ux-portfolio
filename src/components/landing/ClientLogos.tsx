@@ -51,7 +51,7 @@ function AudiRings({ className }: { className?: string }) {
 
 function ClientLogoItem({ logo }: { logo: ClientLogo }) {
   const wrap =
-    'opacity-60 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
+    'opacity-50 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
 
   if (logo.type === 'audi') {
     return (
@@ -103,12 +103,8 @@ function ClientLogoItem({ logo }: { logo: ClientLogo }) {
 
 export function ClientLogos() {
   return (
-    <section className="space-y-6">
-      <p className="px-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70 sm:px-6 md:px-8">
-        Brands &amp; Clients
-      </p>
-
-      <div className="relative w-full overflow-hidden border-y border-border/10 bg-gradient-to-b from-transparent via-muted/5 to-muted/10 py-6">
+    <section className="w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden py-8">
         <div className="animate-marquee flex items-center gap-16 px-6 md:gap-20">
           {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
             <ClientLogoItem key={i} logo={logo} />

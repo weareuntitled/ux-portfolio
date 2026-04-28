@@ -16,6 +16,7 @@ import {
 
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import DashboardCV from '@/components/DashboardCV';
+import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
 import { getProjectCoverImage, getAdjacentProjects } from '@/content/portfolio';
 import { KontrastPostsBento } from '@/components/kontrast/KontrastPostsBento';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
@@ -170,7 +171,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           animate={{ opacity: 1 }}
           transition={{ duration: DUR.lg, ease: EASE }}
           className="relative -mx-4 -mt-4 overflow-hidden md:-mx-8 md:-mt-8"
-          style={{ height: 'clamp(260px, 38vw, 480px)' }}
+          style={{ minHeight: '60vh', maxHeight: '80vh' }}
         >
           {heroCover ? (
             <Image
@@ -200,7 +201,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                 {project.category || 'Project'}
               </p>
             )}
-            <h1 className="text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl font-bold leading-[1.1] tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl">
               {project.title}
             </h1>
             {project.subtitle && (
@@ -209,153 +210,128 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           </div>
         </motion.section>
 
-        {/* ── Main grid: meta left (3) + narrative right (9) ───────────── */}
-        <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-20">
-
-          {/* ── Meta column ────────────────────────────────────────────── */}
-          <motion.aside
-            initial={reduce ? false : { opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: DUR.md, ease: EASE, delay: 0.1 }}
-            className="flex flex-col gap-8 lg:col-span-3 lg:sticky lg:top-8 lg:self-start"
-          >
-            {project.year && (
+        {/* ── Meta strip: full-width horizontal band ─────────────────── */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: DUR.md, ease: EASE, delay: 0.1 }}
+          className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-white/5 py-6"
+        >
+          {project.year && (
+            <div>
+              <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Year</span>
+              <p className="text-sm font-medium text-foreground">{project.year}</p>
+            </div>
+          )}
+          {project.client && (
+            <>
+              <span className="text-white/20">·</span>
               <div>
-                <p className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Timeline</p>
-                <p className="text-sm font-medium text-foreground">{project.year}</p>
-              </div>
-            )}
-            {project.client && (
-              <div>
-                <p className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Client</p>
+                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Client</span>
                 <p className="text-sm font-medium text-foreground">{project.client}</p>
               </div>
-            )}
-            {project.roles?.length ? (
+            </>
+          )}
+          {project.roles?.length ? (
+            <>
+              <span className="text-white/20">·</span>
               <div>
-                <p className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Role</p>
-                <div className="space-y-0.5">
-                  {project.roles.map((r) => (
-                    <p key={r} className="text-sm font-medium text-foreground">{r}</p>
-                  ))}
-                </div>
+                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Role</span>
+                <p className="text-sm font-medium text-foreground">{project.roles.join(' · ')}</p>
               </div>
-            ) : null}
-            {project.tags?.length ? (
-              <div>
-                <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Tags</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">{tag}</span>
-                  ))}
-                </div>
+            </>
+          ) : null}
+          {project.tags?.length ? (
+            <>
+              <span className="text-white/20">·</span>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="rounded-full bg-muted/50 px-2.5 py-1 text-xs text-muted-foreground">{tag}</span>
+                ))}
               </div>
-            ) : null}
-            {project.links?.length ? (
-              <div>
-                <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Links</p>
-                <div className="flex flex-col gap-2">
-                  {project.links.map((link) => {
-                    const external = /^https?:\/\//i.test(link.href);
-                    const label = link.label === 'Live demo' ? project.prototypeButtonLabel ?? 'Live demo' : link.label;
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        target={external ? '_blank' : undefined}
-                        rel={external ? 'noopener noreferrer' : undefined}
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
-                      >
-                        {label}
-                        {external && <ExternalLink className="h-3 w-3 opacity-70" aria-hidden />}
-                      </Link>
-                    );
-                  })}
-                </div>
+            </>
+          ) : null}
+        </motion.div>
+
+        {/* ── Narrative: centered single column ───────────────────────── */}
+        <motion.article
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: DUR.md, ease: EASE, delay: 0.14 }}
+          className="mx-auto mt-16 max-w-3xl space-y-16"
+        >
+
+          {/* Description / oneLiner intro */}
+          {(project.oneLiner || project.description) && (
+            <div className="space-y-4">
+              {project.oneLiner && (
+                <p className="text-lg font-light leading-relaxed text-muted-foreground">{project.oneLiner}</p>
+              )}
+              {project.description && project.description !== project.oneLiner && (
+                <p className="text-base leading-relaxed text-muted-foreground/80">{project.description}</p>
+              )}
+            </div>
+          )}
+
+          {/* Challenge / Problem */}
+          {project.problem && (
+            <div>
+              <p className="mb-5 text-[10px] font-medium uppercase tracking-widest text-primary">The Challenge</p>
+              <p className="text-base font-light leading-relaxed text-muted-foreground">{project.problem}</p>
+            </div>
+          )}
+
+          {/* Impact numbers */}
+          {project.impactCards?.length ? (
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VP}
+              transition={{ duration: DUR.md, ease: EASE }}
+              className="border-y border-white/5 py-12"
+            >
+              <div className="grid gap-10 sm:grid-cols-3">
+                {project.impactCards.slice(0, 3).map((card, i) => (
+                  <motion.div
+                    key={card.label}
+                    initial={reduce ? false : { opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={VP}
+                    transition={{ duration: DUR.md, ease: EASE, delay: i * 0.1 }}
+                    className="flex flex-col"
+                  >
+                    <span className="text-6xl font-light tracking-[-0.04em] text-primary md:text-7xl">{card.value}</span>
+                    <span className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground/70">{card.label}</span>
+                  </motion.div>
+                ))}
               </div>
-            ) : null}
-          </motion.aside>
+            </motion.div>
+          ) : null}
 
-          {/* ── Narrative column ────────────────────────────────────────── */}
-          <motion.article
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.md, ease: EASE, delay: 0.14 }}
-            className="space-y-16 lg:col-span-9"
-          >
+          {/* Solution */}
+          {project.solution && (
+            <div>
+              <p className="mb-5 text-[10px] font-medium uppercase tracking-widest text-primary">The Solution</p>
+              <p className="text-base font-light leading-relaxed text-muted-foreground">{project.solution}</p>
+            </div>
+          )}
 
-            {/* Description / oneLiner intro */}
-            {(project.oneLiner || project.description) && (
-              <div className="space-y-4">
-                {project.oneLiner && (
-                  <p className="text-lg font-light leading-relaxed text-muted-foreground">{project.oneLiner}</p>
-                )}
-                {project.description && project.description !== project.oneLiner && (
-                  <p className="text-base leading-relaxed text-muted-foreground/80">{project.description}</p>
-                )}
-              </div>
-            )}
+          {/* Outcomes */}
+          {project.outcomes?.length ? (
+            <div>
+              <p className="mb-5 text-[10px] font-medium uppercase tracking-widest text-primary">Outcomes</p>
+              <ul className="space-y-4">
+                {project.outcomes.map((o) => (
+                  <li key={o} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
+                    <p className="text-base font-light leading-relaxed text-muted-foreground">{o}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
 
-            {/* Challenge / Problem */}
-            {project.problem && (
-              <div>
-                <p className="mb-5 text-[10px] font-medium uppercase tracking-widest text-primary">The Challenge</p>
-                <p className="text-base font-light leading-relaxed text-muted-foreground">{project.problem}</p>
-              </div>
-            )}
-
-            {/* Impact numbers — inline, between challenge and solution */}
-            {project.impactCards?.length ? (
-              <motion.div
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={VP}
-                transition={{ duration: DUR.md, ease: EASE }}
-                className="border-y border-border/40 py-10"
-              >
-                <div className="grid gap-10 sm:grid-cols-3">
-                  {project.impactCards.slice(0, 3).map((card, i) => (
-                    <motion.div
-                      key={card.label}
-                      initial={reduce ? false : { opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={VP}
-                      transition={{ duration: DUR.md, ease: EASE, delay: i * 0.1 }}
-                      className="flex flex-col"
-                    >
-                      <span className="text-5xl font-light tracking-tighter text-primary md:text-6xl">{card.value}</span>
-                      <span className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground/70">{card.label}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ) : null}
-
-            {/* Solution */}
-            {project.solution && (
-              <div>
-                <p className="mb-5 text-[10px] font-medium uppercase tracking-widest text-primary">The Solution</p>
-                <p className="text-base font-light leading-relaxed text-muted-foreground">{project.solution}</p>
-              </div>
-            )}
-
-            {/* Outcomes */}
-            {project.outcomes?.length ? (
-              <div>
-                <p className="mb-5 text-[10px] font-medium uppercase tracking-widest text-primary">Outcomes</p>
-                <ul className="space-y-4">
-                  {project.outcomes.map((o) => (
-                    <li key={o} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
-                      <p className="text-base font-light leading-relaxed text-muted-foreground">{o}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-
-          </motion.article>
-        </div>
+        </motion.article>
 
         {/* ── Kontrast social archive ──────────────────────────────────── */}
         {project.slug === 'kontrast-festival' && (
@@ -364,22 +340,30 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           </div>
         )}
 
-        {/* ── Gallery: full-bleed band ─────────────────────────────────── */}
+        {/* ── Gallery: ScrollLock full-bleed band ─────────────────────── */}
         {galleryThumbs.length > 0 && (
           <motion.section
             initial={reduce ? false : { opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VP}
             transition={{ duration: DUR.md, ease: EASE }}
-            className="-mx-4 mt-16 bg-muted/20 px-4 py-14 md:-mx-8 md:px-8 md:py-16"
+            className="-mx-4 mt-20 bg-muted/10 px-4 py-14 md:-mx-8 md:px-8 md:py-16"
           >
-            <div className="mb-8 flex items-end justify-between">
+            <div className="mx-auto max-w-7xl mb-8 flex items-end justify-between">
               <div>
                 <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-primary">Gallery</p>
                 <h2 className="text-xl font-semibold leading-tight tracking-tight text-foreground">Selected Screens</h2>
               </div>
             </div>
-            <LightboxGallery urls={galleryThumbs} title={project.title} />
+            <div className="min-h-[400vh]">
+              <ScrollLockGallery
+                slides={galleryThumbs.map((src, i): ScrollLockSlide => ({
+                  src,
+                  label: `${project.title} — Screen ${i + 1}`,
+                }))}
+                title={project.title}
+              />
+            </div>
           </motion.section>
         )}
 
@@ -395,7 +379,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             <p className="mb-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
               {project.processDiagramLabel ?? 'Process architecture'}
             </p>
-            <div className="overflow-hidden rounded-xl border border-border bg-muted/20 p-2">
+            <div className="overflow-hidden rounded-xl border border-white/5 bg-muted/20 p-2">
               <Image
                 src={project.processDiagramUrl}
                 alt={project.processDiagramLabel ?? `${project.title} process`}
@@ -413,7 +397,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
         {project.prototypeIframeUrl && (
           <section className="mt-16">
             <p className="mb-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Live prototype</p>
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted">
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/5 bg-muted">
               <iframe
                 className="absolute inset-0 h-full w-full"
                 src={project.prototypeIframeUrl}
@@ -429,7 +413,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
         {(prev || next) && (
           <nav
             aria-label="Project navigation"
-            className="mt-16 flex items-start justify-between border-t border-border pt-8"
+            className="mt-16 flex items-start justify-between border-t border-white/5 pt-8"
           >
             {prev ? (
               <Link href={`/projects/${prev.slug}`} className="group flex max-w-[45%] flex-col gap-1">

@@ -32,23 +32,23 @@ export default async function CVPage() {
     >
       <main className="flex min-w-0 flex-1 flex-col bg-background">
         <div className="mx-auto max-w-4xl space-y-12 px-4 py-12 md:px-8 md:py-20">
-          <header className="flex flex-col gap-6 border-b border-zinc-800 pb-8 sm:flex-row sm:items-start sm:justify-between">
+          <header className="flex flex-col gap-6 border-b border-white/5 pb-8 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h1 className="text-4xl font-bold tracking-tighter text-zinc-100 sm:text-5xl">
+              <h1 className="text-4xl font-bold tracking-tighter text-foreground sm:text-5xl">
                 {cvCopy.header.name}
               </h1>
               <h2 className="mt-2 text-xl font-medium text-primary">
                 {cvCopy.header.role}
               </h2>
-              <p className="mt-2 text-sm font-medium text-zinc-300">
+              <p className="mt-2 text-sm font-medium text-foreground/80">
                 {cvCopy.header.coreRoles}
               </p>
-              <p className="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
                 {cvCopy.header.summary}
               </p>
             </div>
 
-            <div className="flex shrink-0 flex-col items-start gap-1 text-sm text-zinc-400 sm:items-end">
+            <div className="flex shrink-0 flex-col items-start gap-1 text-sm text-muted-foreground sm:items-end">
               <a
                 href={`mailto:${contact.email}`}
                 className="transition-colors hover:text-primary"
@@ -67,19 +67,19 @@ export default async function CVPage() {
               >
                 {cvCopy.header.linkedinLabel}
               </a>
-              <CvDownloadButton className="mt-4 inline-flex h-9 items-center justify-center gap-2 rounded-md bg-zinc-100 px-4 text-sm font-semibold text-zinc-900 shadow transition-colors hover:bg-zinc-300" />
+              <CvDownloadButton className="mt-4 inline-flex h-9 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-semibold text-background shadow transition-colors hover:bg-foreground/80" />
             </div>
           </header>
 
           <section>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-zinc-500">
+            <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted-foreground">
               {cvCopy.coreCompetenciesTitle}
             </h3>
             <div className="flex flex-wrap gap-2">
               {cvCopy.coreCompetencies.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded border border-zinc-800 bg-zinc-900/80 px-3 py-1 text-xs font-medium text-zinc-300"
+                  className="rounded border border-white/5 bg-card/50 px-3 py-1 text-xs font-medium text-foreground/80"
                 >
                   {skill}
                 </span>
@@ -88,7 +88,7 @@ export default async function CVPage() {
           </section>
 
           <section>
-            <h3 className="mb-6 border-b border-zinc-800 pb-2 text-sm font-bold uppercase tracking-widest text-zinc-500">
+            <h3 className="mb-6 border-b border-white/5 pb-2 text-sm font-bold uppercase tracking-widest text-muted-foreground">
               {cvCopy.professionalExperienceTitle}
             </h3>
 
@@ -100,14 +100,14 @@ export default async function CVPage() {
                       <CvBrandLogo id={entry.logoId as BrandLogoId} label={(entry as unknown as { logoLabel?: string }).logoLabel ?? ''} />
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-                          <h4 className="text-lg font-bold text-zinc-100">{entry.title}</h4>
-                          <span className="font-mono text-sm text-zinc-400">{entry.period}</span>
+                          <h4 className="text-lg font-bold text-foreground">{entry.title}</h4>
+                          <span className="font-mono text-sm text-muted-foreground">{entry.period}</span>
                         </div>
                         <p className="text-sm font-medium text-primary">{entry.companyLine}</p>
                       </div>
                     </div>
                   </header>
-                  <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-zinc-300 marker:text-zinc-600">
+                  <ul className="list-outside list-disc space-y-2 pl-4 text-sm text-foreground/80 marker:text-muted-foreground">
                     {entry.bullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
                     ))}
@@ -118,7 +118,7 @@ export default async function CVPage() {
           </section>
 
           <section>
-            <h3 className="mb-6 border-b border-zinc-800 pb-2 text-sm font-bold uppercase tracking-widest text-zinc-500">
+            <h3 className="mb-6 border-b border-white/5 pb-2 text-sm font-bold uppercase tracking-widest text-muted-foreground">
               {cvCopy.educationTitle}
             </h3>
 
@@ -132,11 +132,11 @@ export default async function CVPage() {
                       <CvBrandLogo id={eduEntry.logoId as BrandLogoId} label={eduEntry.logoLabel ?? ''} />
                     ) : null}
                     <div>
-                      <h4 className="text-base font-bold text-zinc-100">{entry.title}</h4>
-                      {entry.subtitle ? <p className="text-sm text-zinc-400">{entry.subtitle}</p> : null}
+                      <h4 className="text-base font-bold text-foreground">{entry.title}</h4>
+                      {entry.subtitle ? <p className="text-sm text-muted-foreground">{entry.subtitle}</p> : null}
                     </div>
                   </div>
-                  <span className="mt-1 font-mono text-sm text-zinc-500 sm:mt-0">{entry.period}</span>
+                  <span className="mt-1 font-mono text-sm text-muted-foreground/60 sm:mt-0">{entry.period}</span>
                 </article>
               )})}
             </div>

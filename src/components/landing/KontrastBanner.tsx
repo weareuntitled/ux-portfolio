@@ -18,7 +18,7 @@ export function KontrastBanner() {
   if (!kontrast) return null;
 
   return (
-    <section className="border-y border-border bg-muted/30 py-16 md:py-24">
+    <section className="bg-muted/30 py-16 md:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           {/* Left: Content */}
@@ -38,7 +38,7 @@ export function KontrastBanner() {
 
             {/* Quick stats */}
             <div className="mt-6 space-y-2">
-              <div className="flex items-center gap-3 rounded-lg border border-border/30 bg-card/50 px-4 py-3">
+              <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-card/50 px-4 py-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <Users className="h-3.5 w-3.5 text-primary" />
                 </div>
@@ -47,7 +47,7 @@ export function KontrastBanner() {
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Over 3 editions</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 rounded-lg border border-border/30 bg-card/50 px-4 py-3">
+              <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-card/50 px-4 py-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <Sparkles className="h-3.5 w-3.5 text-primary" />
                 </div>
@@ -56,7 +56,7 @@ export function KontrastBanner() {
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Digital + physical touchpoints</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 rounded-lg border border-border/30 bg-card/50 px-4 py-3">
+              <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-card/50 px-4 py-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <Calendar className="h-3.5 w-3.5 text-primary" />
                 </div>
@@ -69,7 +69,7 @@ export function KontrastBanner() {
 
             <Link
               href="/projects/kontrast-festival"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:bg-primary/5"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/5 bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:bg-primary/5"
             >
               View Case Study
               <ArrowUpRight className="h-3 w-3 text-muted-foreground" />

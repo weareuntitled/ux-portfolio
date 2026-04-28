@@ -12,7 +12,7 @@ function ExperienceLogo({ logoId, alt }: { logoId: BrandLogoId; alt: string }) {
   const src = brandLogos[logoId];
 
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-muted/40">
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/5 bg-muted/40">
       <Image
         src={src}
         alt={alt}

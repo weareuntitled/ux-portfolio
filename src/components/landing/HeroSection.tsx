@@ -8,19 +8,17 @@ import { WebGLGradientBackground } from './WebGLGradientBackground';
 import { contact } from '@/content/home';
 
 const COMPLEXITY_WORDS = [
-  { label: 'chaos', color: '#ef4444' },
-  { label: 'noise', color: '#f97316' },
-  { label: 'mess', color: '#eab308' },
-  { label: 'complexity', color: '#22c55e' },
+  { label: 'Complexity' },
+  { label: 'Mess' },
+  { label: 'Friction' },
+  { label: 'Fragmentation' },
 ];
 
 /** Animated hand-drawn strikethrough line using SVG */
 function HandDrawnStrikethrough({ 
-  isVisible, 
-  color = 'hsl(var(--primary))' 
+  isVisible 
 }: { 
-  isVisible: boolean; 
-  color?: string;
+  isVisible: boolean;
 }) {
   return (
     <svg
@@ -36,7 +34,7 @@ function HandDrawnStrikethrough({
       <motion.path
         d="M0,6 Q25,2 50,6 T100,6"
         fill="none"
-        stroke={color}
+        stroke="hsl(var(--primary))"
         strokeWidth="2.5"
         strokeLinecap="round"
         initial={{ pathLength: 0, opacity: 0 }}
@@ -78,8 +76,7 @@ function FlipWord3D({
         {word.label}
       </span>
       <HandDrawnStrikethrough 
-        isVisible={showStrikethrough && !isFlipping} 
-        color={word.color}
+        isVisible={showStrikethrough && !isFlipping}
       />
     </span>
   );
@@ -132,7 +129,7 @@ export function HeroSection() {
   }, [cycleWord, reduceMotion]);
 
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-20 pb-8 text-center">
+    <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-4 md:px-8 pt-20 pb-8 text-center">
       {/* WebGL animated gradient background */}
       <WebGLGradientBackground />
 
@@ -145,7 +142,7 @@ export function HeroSection() {
           animate={{
             opacity: 0.18,
             x: 0,
-            y: [0, -6, 0, 4, 0],
+            y: [0, -8, 0, 4, 0],
           }}
           transition={{
             opacity: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
@@ -183,7 +180,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.1, ease: EASE }}
         >
-          <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-white/5 px-4 py-2 backdrop-blur-md">
+          <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-accent/10 px-4 py-2 backdrop-blur-md">
             <div className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
@@ -192,22 +189,6 @@ export function HeroSection() {
               Available to work
             </span>
           </div>
-        </motion.div>
-
-        {/* Title / Credentials */}
-        <motion.div
-          className="mb-4 text-center"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.15, ease: EASE }}
-        >
-          <p className="font-mono text-xs tracking-wide text-muted-foreground/80">
-            <span className="text-foreground font-semibold">M.Sc. UX Designer</span>
-            <span className="mx-2 text-muted-foreground/40">|</span>
-            <span>3 years agency</span>
-            <span className="mx-2 text-muted-foreground/40">|</span>
-            <span>8 years freelance</span>
-          </p>
         </motion.div>
 
         {/* Handle + Location */}
@@ -230,10 +211,10 @@ export function HeroSection() {
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: reduceMotion ? 0 : 0.3, ease: EASE }}
         >
           <h1 
-            className="text-[12vw] leading-[0.9] font-bold tracking-tighter text-foreground sm:text-[8vw] md:text-[7vw]"
+            className="text-[12vw] leading-[0.9] font-bold tracking-[-0.04em] text-foreground sm:text-[8vw] md:text-[7vw]"
             style={{ fontFamily: 'var(--font-display), var(--font-sans), sans-serif' }}
           >
-            <span className="block">Solving &amp;</span>
+            <span className="block">Solving</span>
             <span className="block" style={{ perspective: '1000px' }}>
               <FlipWord3D 
                 word={currentWord} 
@@ -241,7 +222,7 @@ export function HeroSection() {
                 showStrikethrough={showStrikethrough}
               />
             </span>
-            <span className="block text-primary">by design.</span>
+            <span className="block text-primary">with Structure.</span>
           </h1>
         </motion.div>
 
@@ -253,7 +234,7 @@ export function HeroSection() {
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.5, ease: EASE }}
         >
           <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-            Currently at <span className="text-foreground font-medium">Untitled-ux</span>, bridging design and engineering for enterprise teams. Certified Scrum Master with 7+ years shipping complex products.
+            M.Sc. UX Designer & Certified Scrum Master. I bridge the gap between design and engineering to transform messy enterprise requirements into shippable, high-impact products.
           </p>
         </motion.div>
       </div>

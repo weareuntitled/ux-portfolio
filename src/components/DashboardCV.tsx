@@ -351,7 +351,7 @@ function DashboardCVImpl({
           >
             <aside
               className={cn(
-                'sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar transition-all duration-300 md:flex',
+                'sticky top-0 hidden h-screen flex-col border-r border-white/5 bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar transition-all duration-300 md:flex',
                 !sidebarOpen && 'w-0 overflow-hidden p-0 opacity-0'
               )}
             >

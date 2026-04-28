@@ -69,7 +69,7 @@ function FaqItemRow({ item, reduceMotion }: { item: FaqItem; reduceMotion: boole
   return (
     <motion.div
       variants={fadeUpVariant()}
-      className="relative border-b border-border last:border-b-0"
+      className="relative border-b border-white/5 last:border-b-0"
     >
       {/* Left accent bar */}
       <AnimatePresence>

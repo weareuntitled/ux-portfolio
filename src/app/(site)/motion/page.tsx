@@ -9,6 +9,8 @@ import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/mot
 import CaseStudiesSection from './CaseStudiesSection';
 import { FaqSection } from '@/components/landing/FaqSection';
 import ExpertiseSectionMotion from '@/components/motion/ExpertiseSectionMotion';
+import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
+import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -115,59 +117,6 @@ function ClientLogoItem({ logo }: { logo: ClientLogo }) {
 }
 
 // ---------------------------------------------------------------------------
-// ShowreelCard — YouTube facade with editorial layout
-// ---------------------------------------------------------------------------
-
-function ShowreelCard({ youtubeId, title, subtitle }: { youtubeId: string; title: string; subtitle: string }) {
-  const [active, setActive] = React.useState(false);
-  const thumb = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
-
-  return (
-    <div className="group relative w-full overflow-hidden rounded-2xl bg-black" style={{ aspectRatio: '16/9' }}>
-      {active ? (
-        <iframe
-          src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0`}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="absolute inset-0 h-full w-full border-0"
-        />
-      ) : (
-        <>
-          {/* Thumbnail */}
-          <Image
-            src={thumb}
-            alt={title}
-            fill
-            unoptimized
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-          />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-          {/* Play button */}
-          <button
-            onClick={() => setActive(true)}
-            aria-label={`Play ${title}`}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/80 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20 hover:border-white"
-          >
-            <svg viewBox="0 0 24 24" fill="white" className="h-7 w-7 translate-x-0.5">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </button>
-
-          {/* Title overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50 mb-1">{subtitle}</p>
-            <h3 className="text-2xl font-black tracking-tight text-white leading-tight">{title}</h3>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
 // Page
 // ---------------------------------------------------------------------------
 
@@ -235,18 +184,11 @@ export default function MotionPage() {
           initial="hidden"
           whileInView="show"
           viewport={VP}
-          className="space-y-4"
+          className="mt-8"
         >
-          <motion.p
-            variants={fadeUpVariant(0)}
-            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70"
-          >
-            Kunden &amp; Marken
-          </motion.p>
-
           <motion.div
             variants={fadeUpVariant(0.1)}
-            className="relative overflow-hidden rounded-xl bg-black/20 py-5"
+            className="relative w-full overflow-hidden py-8"
           >
             <div className="animate-marquee items-center gap-12 px-6">
               {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
@@ -259,7 +201,7 @@ export default function MotionPage() {
         </motion.section>
 
         {/* ------------------------------------------------------------------ */}
-        {/* 4 · FEATURED SHOWREELS                                              */}
+        {/* 4 · FEATURED SHOWREELS — scroll-lock gallery                       */}
         {/* ------------------------------------------------------------------ */}
         <motion.section
           variants={staggerVariant(STAGGER.md, 0.1)}
@@ -273,12 +215,16 @@ export default function MotionPage() {
             <h2 className="text-4xl font-black tracking-tight leading-none">Featured Work</h2>
           </motion.div>
 
-          <div className="space-y-4">
-            {SHOWREELS.map((reel, idx) => (
-              <motion.div key={reel.slug} variants={fadeUpVariant(idx * 0.1)}>
-                <ShowreelCard youtubeId={reel.youtubeId} title={reel.title} subtitle={reel.subtitle} />
-              </motion.div>
-            ))}
+          {/* Scroll-locked gallery with YouTube thumbnails */}
+          <div className="min-h-[200vh]">
+            <ScrollLockGallery
+              slides={SHOWREELS.map((reel): ScrollLockSlide => ({
+                src: `https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`,
+                label: reel.title,
+                caption: reel.subtitle,
+              }))}
+              title="Featured Showreels"
+            />
           </div>
         </motion.section>
 
