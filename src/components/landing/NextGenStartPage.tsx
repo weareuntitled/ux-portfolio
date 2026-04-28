@@ -24,6 +24,7 @@ import { getProjectBySlug, getProjectCoverImage, type PortfolioProject } from '@
 import landingCopy from '@/content/landing-copy.json';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
 import { EASE, DUR } from '@/lib/motion';
+import { ClientLogos } from '@/components/landing/ClientLogos';
 
 /** Below-fold sections: separate JS chunks + defer parse on slow connections */
 function BelowFoldSkeleton() {
@@ -45,11 +46,6 @@ const ExperienceTimelineSection = dynamic(
 
 const EducationSection = dynamic(
   () => import('@/components/landing/EducationSection').then((m) => ({ default: m.EducationSection })),
-  { loading: () => <BelowFoldSkeleton /> },
-);
-
-const FaqSection = dynamic(
-  () => import('@/components/landing/FaqSection').then((m) => ({ default: m.FaqSection })),
   { loading: () => <BelowFoldSkeleton /> },
 );
 
@@ -473,7 +469,15 @@ export function NextGenStartPage() {
           <EducationSection />
         </motion.section>
 
-        <FaqSection />
+        <motion.section
+          className="pt-16"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+        >
+          <ClientLogos />
+        </motion.section>
 
         <motion.footer
           className="mt-32 rounded-2xl border border-border bg-card px-6 py-16 text-center shadow-sm md:px-12 md:py-20"

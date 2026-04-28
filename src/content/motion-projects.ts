@@ -25,6 +25,8 @@ export interface MotionProject {
   videos?: string[];
   /** YouTube embed id. When set, used for hero + thumbnail. */
   youtubeId?: string;
+  /** Sidebar thumbnail image URL. Falls back to YouTube mqdefault when omitted. */
+  thumbnail?: string;
   nda?: boolean;
 }
 

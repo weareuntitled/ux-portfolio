@@ -108,7 +108,11 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
       MOTION_PROJECTS.map((p) => ({
         slug: p.slug,
         title: p.title,
-        moodImageUrl: null,
+        moodImageUrl:
+          p.thumbnail ??
+          (p.youtubeId
+            ? `https://img.youtube.com/vi/${p.youtubeId}/mqdefault.jpg`
+            : null),
         category: 'Motion' as const,
         href: `/motion/${p.slug}`,
       })),
