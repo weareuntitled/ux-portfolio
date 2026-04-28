@@ -308,21 +308,49 @@ function DashboardCVImpl({
   showSearch = true,
 }: DashboardCVProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
     setSheetOpen(false);
   }, [pathname]);
 
+  // Persist sidebar state
+  useEffect(() => {
+    const saved = localStorage.getItem('sidebar-open');
+    if (saved !== null) setSidebarOpen(saved === 'true');
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('sidebar-open', String(sidebarOpen));
+  }, [sidebarOpen]);
+
   const showHeader = variant !== 'landing';
 
   return (
     <div className="min-h-screen text-foreground">
+      {/* Desktop sidebar toggle — always visible */}
+      <button
+        onClick={() => setSidebarOpen((v) => !v)}
+        className="fixed top-4 left-4 z-50 hidden h-10 w-10 items-center justify-center rounded-lg border border-border bg-background/95 text-foreground shadow-sm backdrop-blur transition-colors hover:bg-accent md:flex"
+        aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
       <div className="theme-container flex flex-1 flex-col md:container md:py-6">
         <div className="flex flex-col overflow-hidden border-border bg-background/75 md:rounded-xl md:border md:border-white/10">
-          <div className="mx-auto grid min-h-screen w-full max-w-[1400px] items-start md:grid-cols-[16rem_1fr]">
-            <aside className="sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar md:flex">
-              <SidebarContent navProjects={navProjects} />
+          <div
+            className="mx-auto grid min-h-screen w-full max-w-[1400px] items-start transition-all duration-300"
+            style={{ gridTemplateColumns: sidebarOpen ? '16rem 1fr' : '0fr 1fr' }}
+          >
+            <aside
+              className={cn(
+                'sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar transition-all duration-300 md:flex',
+                sidebarOpen ? 'opacity-100' : 'w-0 overflow-hidden p-0 opacity-0'
+              )}
+            >
+              {sidebarOpen && <SidebarContent navProjects={navProjects} />}
             </aside>
 
             <main className="flex min-w-0 flex-col">
