@@ -374,11 +374,11 @@ function DashboardCVImpl({
 
               <section className="min-w-0 space-y-6 p-4">
                 {showHeader && (
-                  <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-2 sm:px-0">
+                  <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-0">
                     <div>
                       <Breadcrumbs items={breadcrumbs} />
                       {variant !== 'project' && (
-                        <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">{pageTitle}</h1>
+                        <h1 className="mt-1 text-2xl font-light tracking-tight text-muted-foreground sm:text-3xl sm:font-light">{pageTitle}</h1>
                       )}
                     </div>
 

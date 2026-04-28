@@ -60,12 +60,12 @@ export default function ExpertiseSectionMotion() {
       className="space-y-0"
     >
       {/* Hero block */}
-      <motion.div variants={fadeUpVariant(0)} className="space-y-4">
+      <motion.div variants={fadeUpVariant(0)} className="mb-16 space-y-6">
         <p className="text-xs font-mono uppercase tracking-widest text-primary">Expertise</p>
-        <h2 className="text-5xl font-semibold tracking-tight leading-none md:text-7xl">
+        <h2 className="text-4xl font-light tracking-tight leading-none text-foreground md:text-6xl lg:text-7xl">
           Motion & Beyond
         </h2>
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+        <p className="max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
           Ich gestalte Animationsprojekte und visuelle Welten, bei denen Konzept und Umsetzung in
           einer Hand liegen. Kein Briefing verschwindet in der Agentur-Mühle, kein Zwischenstand
           landet wochenlang in der Warteschleife. Was ich anfange, liefere ich aus — und zwar so,
@@ -73,10 +73,10 @@ export default function ExpertiseSectionMotion() {
         </p>
       </motion.div>
 
-      <motion.div variants={fadeUpVariant(0.1)} className="border-b border-border/50 mt-10 mb-8" />
+      <motion.div variants={fadeUpVariant(0.1)} className="border-b border-border/50 my-12" />
 
       {/* Bento grid */}
-      <div className="grid auto-rows-[minmax(240px,auto)] grid-cols-1 gap-3 md:grid-cols-3">
+      <div className="grid auto-rows-[minmax(280px,auto)] grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
 
         {/* 01 Explainer — col-span-2 */}
         <motion.div
@@ -97,10 +97,10 @@ export default function ExpertiseSectionMotion() {
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-background/98 via-background/60 to-transparent" />
-          <div className="relative z-10 flex h-full flex-col justify-end p-5">
-            <p className="text-xs font-mono tracking-widest text-primary mb-2">01</p>
-            <p className="text-sm font-semibold leading-snug">Explainer</p>
-            <p className="mt-1 text-xs leading-snug text-muted-foreground">
+          <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
+            <p className="text-xs font-mono tracking-widest text-primary mb-3">01</p>
+            <p className="text-base font-medium leading-snug">Explainer</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Komplexe Produkte haben es verdient, gut erklärt zu werden — nicht nur aufgelistet.
               Ich übersetze trockene Briefings in Animationen, die sofort klicken, weil Skript und
               Animation aus derselben Hand kommen. Keine endlosen Schleifen, keine
@@ -125,10 +125,10 @@ export default function ExpertiseSectionMotion() {
             </div>
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95" />
-          <div className="relative z-10 flex h-full flex-col justify-end p-5">
-            <p className="text-xs font-mono tracking-widest text-primary mb-2">02</p>
-            <p className="text-sm font-semibold leading-snug">3D Renderings</p>
-            <p className="mt-1 text-xs leading-snug text-muted-foreground">
+          <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
+            <p className="text-xs font-mono tracking-widest text-primary mb-3">02</p>
+            <p className="text-base font-medium leading-snug">3D Renderings</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Produktvisualisierungen und visuelle Welten für Kampagnen, die nach echten Shots
               aussehen — weil die Physik stimmt und die Pipeline es zulässt. In Blender und Unreal
               arbeite ich so, dass Renderings nicht zum Bottleneck werden, sondern zum Argument.
