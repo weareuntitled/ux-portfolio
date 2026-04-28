@@ -7,7 +7,7 @@ import { contact } from '@/content/home';
 
 function Highlight({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-sm bg-primary-foreground/10 px-1 py-0.5 text-primary-foreground transition-colors hover:bg-primary-foreground/20">
+    <span className="rounded-sm bg-primary/10 px-1 py-0.5 text-primary transition-colors hover:bg-primary/20">
       {children}
     </span>
   );
@@ -17,54 +17,53 @@ export function AboutSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="bg-primary py-20 text-primary-foreground md:py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-background py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-6 text-center">
         {/* Pre-title */}
         <motion.div
-          className="mb-4 flex items-center gap-3"
+          className="mb-4 flex items-center justify-center gap-3"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
         >
-          <span className="font-mono text-xs text-primary-foreground/50">{'<!-- About me -->'}</span>
+          <span className="font-mono text-xs text-muted-foreground/60">{'<!-- About me -->'}</span>
         </motion.div>
 
-        {/* Title + Photo row */}
-        <div className="mb-10 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
-          <motion.h2
-            className="font-display text-3xl font-bold tracking-tight text-primary-foreground md:text-4xl"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
-          >
-            Behind the <span className="text-primary-foreground/60">Screens</span>
-          </motion.h2>
+        {/* Title */}
+        <motion.h2
+          className="mb-10 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+        >
+          Behind the <span className="text-primary">Screens</span>
+        </motion.h2>
 
-          <motion.div
-            className="shrink-0"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.1, ease: EASE }}
-          >
-            <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-primary-foreground/20 bg-primary-foreground/10 ring-2 ring-primary-foreground/10 md:h-24 md:w-24">
-              <Image
-                src={contact.profileImage}
-                alt={contact.name}
-                fill
-                className="object-cover"
-                sizes="96px"
-              />
-            </div>
-          </motion.div>
-        </div>
+        {/* Photo centered */}
+        <motion.div
+          className="mx-auto mb-10"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.1, ease: EASE }}
+        >
+          <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-border bg-muted ring-2 ring-primary/20 md:h-28 md:w-28">
+            <Image
+              src={contact.profileImage}
+              alt={contact.name}
+              fill
+              className="object-cover"
+              sizes="112px"
+            />
+          </div>
+        </motion.div>
 
         {/* Content split */}
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 text-left md:grid-cols-2 md:text-center">
           <motion.div
-            className="space-y-4 text-base leading-relaxed text-primary-foreground/80"
+            className="space-y-4 text-base leading-relaxed text-muted-foreground"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -80,7 +79,7 @@ export function AboutSection() {
           </motion.div>
 
           <motion.div
-            className="space-y-4 text-base leading-relaxed text-primary-foreground/80"
+            className="space-y-4 text-base leading-relaxed text-muted-foreground"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

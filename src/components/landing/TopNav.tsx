@@ -6,18 +6,17 @@ import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
-  { label: 'Works', href: '/projects' },
+  { label: 'Works', href: '/projects', accent: true },
   { label: 'Motion', href: '/motion' },
   { label: 'CV', href: '/cv' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 export function TopNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 right-0 z-50 hidden px-6 py-4 md:block">
-      <ul className="flex items-center gap-1">
+    <nav className="fixed top-0 right-0 z-50 px-4 py-3 md:px-6 md:py-4">
+      <ul className="flex items-center gap-0.5 rounded-full border border-border/50 bg-background/80 px-2 py-1.5 backdrop-blur-md md:gap-1 md:border-none md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
           return (
@@ -25,10 +24,10 @@ export function TopNav() {
               <Link
                 href={item.href}
                 className={cn(
-                  'relative px-3 py-1.5 text-sm font-medium transition-colors',
-                  isActive
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
+                  'relative px-2.5 py-1.5 text-xs font-medium transition-colors md:px-3 md:text-sm',
+                  item.accent && !isActive && 'text-primary hover:text-primary/80',
+                  !item.accent && isActive && 'text-foreground',
+                  !item.accent && !isActive && 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 {isActive && (
@@ -39,6 +38,14 @@ export function TopNav() {
             </li>
           );
         })}
+        <li>
+          <Link
+            href="/contact"
+            className="ml-1 inline-flex items-center rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow transition-transform hover:scale-105 md:ml-2 md:px-4 md:text-sm"
+          >
+            Contact
+          </Link>
+        </li>
       </ul>
     </nav>
   );

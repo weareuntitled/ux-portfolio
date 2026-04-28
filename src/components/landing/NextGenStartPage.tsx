@@ -14,6 +14,7 @@ import { KontrastBanner } from '@/components/landing/KontrastBanner';
 import { TechStackSection } from '@/components/landing/TechStackSection';
 import { MotionPortfolioSection } from '@/components/landing/MotionPortfolioSection';
 import { AboutSection } from '@/components/landing/AboutSection';
+import { TextMarqueeSection } from '@/components/landing/TextMarqueeSection';
 
 /** Below-fold sections: separate JS chunks + defer parse on slow connections */
 function BelowFoldSkeleton() {
@@ -64,7 +65,10 @@ export function NextGenStartPage() {
       {/* 4. Kontrast Festival — Light emphasis */}
       <KontrastBanner />
 
-      {/* 5. Motion Portfolio — Light */}
+      {/* 5. Staggered text marquee */}
+      <TextMarqueeSection />
+
+      {/* 6. Motion Portfolio — Light */}
       <MotionPortfolioSection />
 
       {/* 6. Tech Stack — Compact */}

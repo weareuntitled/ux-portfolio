@@ -58,33 +58,33 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
         </div>
 
         {/* Content overlay at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
           <div className="flex items-end justify-between gap-4">
             <div className="max-w-3xl">
-              {/* Category badge */}
-              <span className="mb-2 inline-block rounded-full border border-border/50 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm">
+              {/* Category badge — hidden on mobile */}
+              <span className="mb-1 hidden rounded-full border border-border/50 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm sm:mb-2 sm:inline-block">
                 {project.category}
               </span>
 
-              <h3 className="font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-2xl md:text-3xl">
+              <h3 className="font-display text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-xl md:text-2xl lg:text-3xl">
                 {project.title}
               </h3>
 
-              {/* One-liner */}
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground/90">
+              {/* One-liner — hidden on mobile */}
+              <p className="mt-1 hidden text-sm leading-relaxed text-muted-foreground/90 sm:block">
                 {project.oneLiner}
               </p>
 
               {/* Outcomes / deliverables */}
               {outcome && (
-                <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-primary/80">
+                <p className="mt-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 sm:mt-2 sm:text-[10px]">
                   {outcome}
                 </p>
               )}
             </div>
             <div className="hidden shrink-0 sm:flex">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border/50 bg-background/80 backdrop-blur-sm transition-colors group-hover:border-primary/50 group-hover:bg-primary/10">
-                <ArrowUpRight className="h-5 w-5 text-foreground transition-colors group-hover:text-primary" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border/50 bg-background/80 backdrop-blur-sm transition-colors group-hover:border-primary/50 group-hover:bg-primary/10 md:h-12 md:w-12">
+                <ArrowUpRight className="h-4 w-4 text-foreground transition-colors group-hover:text-primary md:h-5 md:w-5" />
               </div>
             </div>
           </div>

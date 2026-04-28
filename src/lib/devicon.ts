@@ -38,9 +38,9 @@ export const TECH_STACK: TechCategory[] = [
     items: [
       { name: 'Gemini', slug: 'google', level: 'Advanced', variant: 'original' },
       { name: 'OpenCode', slug: 'vscode', level: 'Advanced', variant: 'original' },
-      { name: 'Claude', slug: 'claude', level: 'Advanced', variant: 'plain' },
-      { name: 'n8n', slug: 'n8n', level: 'Intermediate', variant: 'original' },
-      { name: 'LangChain', slug: 'langchain', level: 'Intermediate', variant: 'original' },
+      { name: 'Claude', slug: 'openai', level: 'Advanced', variant: 'original' },
+      { name: 'n8n', slug: 'docker', level: 'Intermediate', variant: 'original' },
+      { name: 'LangChain', slug: 'python', level: 'Intermediate', variant: 'original' },
     ],
   },
   {

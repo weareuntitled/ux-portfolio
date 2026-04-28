@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { EASE, DUR } from '@/lib/motion';
 import { WebGLGradientBackground } from './WebGLGradientBackground';
+import { contact } from '@/content/home';
 
 const COMPLEXITY_WORDS = [
   { label: 'chaos', color: '#ef4444' },
@@ -79,7 +81,7 @@ function FlipWord3D({
       </span>
       <HandDrawnStrikethrough 
         isVisible={showStrikethrough && !isFlipping} 
-        width={word.label.length * 14}
+        width={word.label.length * 16 + 8}
         color={word.color}
       />
     </span>
@@ -138,6 +140,32 @@ export function HeroSection() {
       <WebGLGradientBackground />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center">
+        {/* Profile photo — right side with soft wash */}
+        <motion.div
+          className="pointer-events-none absolute -right-6 top-1/2 hidden h-[50vh] w-[40vw] max-w-[400px] -translate-y-1/2 opacity-60 md:block"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 0.5, x: 0 }}
+          transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE }}
+        >
+          <div
+            className="relative h-full w-full"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 70%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 70%, transparent 100%)',
+            }}
+          >
+            <Image
+              src={contact.profileImage}
+              alt={contact.name}
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="400px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
+          </div>
+        </motion.div>
+
         {/* Availability pill */}
         <motion.div
           className="mb-4 flex items-center justify-center gap-3"
