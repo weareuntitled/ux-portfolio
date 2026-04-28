@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
 RUN npm install --os=linux --cpu=x64 sharp --legacy-peer-deps
+RUN npm install @libsql/linux-x64-gnu --legacy-peer-deps
 
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
