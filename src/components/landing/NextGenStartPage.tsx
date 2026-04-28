@@ -458,6 +458,16 @@ export function NextGenStartPage() {
         </section>
 
         <motion.section
+          className="pt-16"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+        >
+          <ClientLogos />
+        </motion.section>
+
+        <motion.section
           id="profile"
           className="scroll-mt-24 space-y-16 pt-20"
           initial={{ opacity: 0, y: 20 }}
@@ -467,16 +477,6 @@ export function NextGenStartPage() {
         >
           <ExperienceTimelineSection />
           <EducationSection />
-        </motion.section>
-
-        <motion.section
-          className="pt-16"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
-        >
-          <ClientLogos />
         </motion.section>
 
         <motion.footer
