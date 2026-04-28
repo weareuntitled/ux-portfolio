@@ -86,7 +86,7 @@ function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title:
         </Link>
       </motion.div>
 
-      {/* Right: Card-style gallery grid */}
+      {/* Right: Single large thumbnail card */}
       <motion.div
         className="space-y-4"
         initial={{ opacity: 0, x: 20 }}
@@ -94,34 +94,27 @@ function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title:
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {project.galleryUrls.slice(0, 6).map((src, i) => (
-            <motion.div
-              key={i}
-              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE, delay: Math.min(i * 0.03, 0.25) }}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <Image
-                  src={src}
-                  alt={`${title} — Screen ${i + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  unoptimized={shouldUnoptimizeImage(src)}
-                />
-                
-                {/* Hover effect overlay */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
-                  <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <Link 
+          href={`/projects/${slug}`}
+          className="group block overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+        >
+          <div className="relative aspect-[21/9] w-full overflow-hidden">
+            <Image
+              src={project.galleryUrls[0]}
+              alt={`${title} — Cover`}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              sizes="(max-width: 1024px) 100vw, 66vw"
+              unoptimized={shouldUnoptimizeImage(project.galleryUrls[0])}
+            />
+            
+            {/* Hover effect overlay */}
+            <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+              <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
+            </div>
+          </div>
+        </Link>
       </motion.div>
     </div>
   );
