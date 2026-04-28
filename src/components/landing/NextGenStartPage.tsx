@@ -7,13 +7,11 @@ import { contact } from '@/content/home';
 import { EASE, DUR } from '@/lib/motion';
 
 import { HeroSection } from '@/components/landing/HeroSection';
-import { TopNav } from '@/components/landing/TopNav';
 import { ClientLogos } from '@/components/landing/ClientLogos';
 import { ProjectShowcase } from '@/components/landing/ProjectShowcase';
 import { KontrastBanner } from '@/components/landing/KontrastBanner';
-import { TechStackSection } from '@/components/landing/TechStackSection';
 import { MotionPortfolioSection } from '@/components/landing/MotionPortfolioSection';
-import { AboutSection } from '@/components/landing/AboutSection';
+import { AboutToolsSection } from '@/components/landing/AboutToolsSection';
 import { TextMarqueeSection } from '@/components/landing/TextMarqueeSection';
 
 /** Below-fold sections: separate JS chunks + defer parse on slow connections */
@@ -46,9 +44,6 @@ export function NextGenStartPage() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col">
-      {/* Top Navigation — Desktop only */}
-      <TopNav />
-
       {/* 1. Hero — Full width */}
       <HeroSection />
 
@@ -72,19 +67,16 @@ export function NextGenStartPage() {
       {/* 6. Motion Portfolio — Light */}
       <MotionPortfolioSection />
 
-      {/* 7. About — White */}
-      <AboutSection />
-
-      {/* 8. Marquee — Behind the Screens */}
+      {/* 7. Marquee — Behind the Screens */}
       <TextMarqueeSection
         words={['BEHIND THE SCREENS', 'UX DESIGN', 'SCRUM MASTER', 'FREELANCE', 'ENTERPRISE', 'AUTOMATION']}
         speed={35}
       />
 
-      {/* 9. Tech Stack — White */}
-      <TechStackSection />
+      {/* 8. About + Tools — Inverse dark */}
+      <AboutToolsSection />
 
-      {/* 10. Experience Timeline */}
+      {/* 9. Experience Timeline */}
       <motion.section
         className="scroll-mt-24 space-y-16 py-20 md:py-28"
         initial={{ opacity: 0, y: 20 }}
@@ -98,7 +90,7 @@ export function NextGenStartPage() {
         </div>
       </motion.section>
 
-      {/* 9. Footer CTA — Accent/Inverse */}
+      {/* 10. Footer CTA — Accent/Inverse */}
       <motion.footer
         className="bg-primary px-6 py-20 text-center md:px-12 md:py-28"
         initial={{ opacity: 0, y: 30 }}

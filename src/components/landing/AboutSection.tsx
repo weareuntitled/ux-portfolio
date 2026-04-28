@@ -19,18 +19,7 @@ export function AboutSection() {
   return (
     <section className="bg-background py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 text-center">
-        {/* Pre-title */}
-        <motion.div
-          className="mb-4 flex items-center justify-center gap-3"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
-        >
-          <span className="font-mono text-xs text-muted-foreground/60">{'<!-- About me -->'}</span>
-        </motion.div>
 
-        {/* Title */}
         <motion.h2
           className="mb-10 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl"
           initial={{ opacity: 0, y: 16 }}

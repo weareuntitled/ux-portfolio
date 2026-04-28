@@ -178,7 +178,7 @@ export default function MotionPage() {
   ];
 
   return (
-    <DashboardCV variant="default" breadcrumbs={breadcrumbs} pageTitle="Motion" showSearch={false}>
+    <DashboardCV variant="fullwidth" breadcrumbs={breadcrumbs} pageTitle="Motion" showSearch={false}>
       <div className="space-y-16 pb-16">
 
         {/* ------------------------------------------------------------------ */}

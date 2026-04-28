@@ -28,9 +28,7 @@ export function KontrastBanner() {
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
           >
-            <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
-              {'<!-- Side Project -->'}
-            </p>
+
             <h2 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
               <span className="text-primary">Kontrast</span> Festival
             </h2>

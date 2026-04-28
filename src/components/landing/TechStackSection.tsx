@@ -38,16 +38,6 @@ export function TechStackSection() {
   return (
     <section className="border-b border-border bg-background py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          className="mb-6 flex items-center gap-3"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
-        >
-          <span className="font-mono text-xs text-muted-foreground/60">{'<!-- Tools & Stack -->'}</span>
-        </motion.div>
-
         {TECH_STACK.map((category, catIndex) => (
           <div key={category.title} className={catIndex > 0 ? 'mt-6' : ''}>
             <motion.h3

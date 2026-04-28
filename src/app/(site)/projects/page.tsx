@@ -38,7 +38,7 @@ export default function ProjectsPage() {
 
   return (
     <DashboardCV
-      variant="default"
+      variant="fullwidth"
       breadcrumbs={breadcrumbs}
       pageTitle="Projects"
       searchQuery={q}

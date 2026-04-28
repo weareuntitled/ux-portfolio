@@ -138,17 +138,28 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center">
         {/* Profile photo — right side, full section height with soft wash */}
+        {/* Profile photo — right side, full section height with soft wash + floating animation */}
         <motion.div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[35vw] max-w-[420px] opacity-50 md:block"
+          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[35vw] max-w-[420px] md:block"
           initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 0.45, x: 0 }}
-          transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE }}
+          animate={{
+            opacity: 0.45,
+            x: 0,
+            y: [0, -8, 0, 6, 0],
+          }}
+          transition={{
+            opacity: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
+            x: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
+            y: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
+          }}
         >
           <div
             className="relative h-full w-full"
             style={{
-              maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
+              maskImage:
+                'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 60%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 60%, transparent 100%)',
             }}
           >
             <Image
@@ -160,6 +171,8 @@ export function HeroSection() {
               sizes="420px"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
           </div>
         </motion.div>
 
@@ -188,10 +201,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.15, ease: EASE }}
         >
-          <p 
-            className="font-mono text-xs tracking-wide text-muted-foreground/80"
-            style={{ fontFamily: "'Bitcount', var(--font-mono), monospace", fontWeight: 300 }}
-          >
+          <p className="font-mono text-xs tracking-wide text-muted-foreground/80">
             <span className="text-foreground font-semibold">M.Sc. UX Designer</span>
             <span className="mx-2 text-muted-foreground/40">|</span>
             <span>3 years agency</span>
