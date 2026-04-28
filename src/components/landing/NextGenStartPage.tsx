@@ -47,10 +47,8 @@ export function NextGenStartPage() {
       {/* 1. Hero — Full width */}
       <HeroSection />
 
-      {/* 2. Client Logos — Full width */}
-      <div className="pb-8">
-        <ClientLogos />
-      </div>
+      {/* 2. Client Logos — Full width, seamless from hero */}
+      <ClientLogos />
 
       {/* 3. Featured Projects — Full width */}
       <ProjectShowcase />

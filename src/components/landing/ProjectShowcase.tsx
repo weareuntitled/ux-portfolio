@@ -99,7 +99,7 @@ export function ProjectShowcase() {
 
   return (
     <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+      <div className="mx-auto w-[90%] max-w-6xl px-4 sm:px-6">
         {/* Section header */}
         <motion.div
           className="mb-10 flex items-end justify-between"

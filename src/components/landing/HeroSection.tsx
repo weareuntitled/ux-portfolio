@@ -37,7 +37,7 @@ function HandDrawnStrikethrough({
         d="M0,6 Q25,2 50,6 T100,6"
         fill="none"
         stroke={color}
-        strokeWidth="1"
+        strokeWidth="2.5"
         strokeLinecap="round"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ 
@@ -68,7 +68,7 @@ function FlipWord3D({
         className="inline-block transition-all duration-300"
         style={{
           fontFamily: "'Bitcount', var(--font-mono), monospace",
-          fontWeight: 300,
+          fontWeight: 400,
           fontStyle: 'italic',
           transform: isFlipping ? 'rotateX(-90deg)' : 'rotateX(0deg)',
           transformStyle: 'preserve-3d',
@@ -137,29 +137,29 @@ export function HeroSection() {
       <WebGLGradientBackground />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center">
-        {/* Profile photo — right side, full section height with soft wash */}
         {/* Profile photo — right side, full section height with soft wash + floating animation */}
+        {/* Profile photo — pushed far right, very subtle */}
         <motion.div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[35vw] max-w-[420px] md:block"
-          initial={{ opacity: 0, x: 30 }}
+          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[30vw] max-w-[380px] translate-x-1/4 md:block"
+          initial={{ opacity: 0, x: 40 }}
           animate={{
-            opacity: 0.45,
+            opacity: 0.18,
             x: 0,
-            y: [0, -8, 0, 6, 0],
+            y: [0, -6, 0, 4, 0],
           }}
           transition={{
             opacity: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
             x: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
-            y: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
+            y: { duration: 7, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
           <div
             className="relative h-full w-full"
             style={{
               maskImage:
-                'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 60%, transparent 100%)',
+                'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 55%, transparent 100%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 60%, transparent 100%)',
+                'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 55%, transparent 100%)',
             }}
           >
             <Image
@@ -167,12 +167,12 @@ export function HeroSection() {
               alt={contact.name}
               fill
               priority
-              className="object-cover object-top"
-              sizes="420px"
+              className="object-cover object-top blur-[2px]"
+              sizes="380px"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
           </div>
         </motion.div>
 

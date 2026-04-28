@@ -108,14 +108,14 @@ export function ClientLogos() {
         Brands &amp; Clients
       </p>
 
-      <div className="relative w-full overflow-hidden bg-muted/30 py-6 dark:bg-black/20">
+      <div className="relative w-full overflow-hidden border-y border-border/10 bg-gradient-to-b from-transparent via-muted/5 to-muted/10 py-6">
         <div className="animate-marquee flex items-center gap-16 px-6 md:gap-20">
           {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
             <ClientLogoItem key={i} logo={logo} />
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
       </div>
     </section>
   );
