@@ -372,7 +372,7 @@ function DashboardCVImpl({
                 <div className="w-10" /> {/* Spacer for centering */}
               </div>
 
-              <section className="min-w-0 space-y-6 p-4 md:p-8">
+              <section className="min-w-0 space-y-6 p-4">
                 {showHeader && (
                   <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
