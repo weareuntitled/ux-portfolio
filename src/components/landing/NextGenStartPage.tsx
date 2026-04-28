@@ -106,25 +106,27 @@ function ContactFooterSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-[#0f0f12] py-20 text-white md:py-28">
-      {/* Gradient wash */}
-      <div className="pointer-events-none absolute inset-0 opacity-50">
-        <div className="absolute -left-32 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary/20 blur-[120px]" />
-        <div className="absolute -right-32 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
-      </div>
+    <section className="relative overflow-hidden bg-[#0f0f12]">
+      {/* Inner padding container */}
+      <div className="mx-auto max-w-2xl py-20 px-4 text-white md:py-28 md:px-6">
+        {/* Gradient wash */}
+        <div className="pointer-events-none absolute inset-0 opacity-50">
+          <div className="absolute -left-32 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary/20 blur-[120px]" />
+          <div className="absolute -right-32 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
+        </div>
 
-      {/* Noise overlay */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-overlay">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+        {/* Noise overlay */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-overlay">
+          <div
+            className="h-full w-full"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
 
-      <div className="relative z-10 mx-auto max-w-2xl px-4 text-center sm:px-6">
-        <motion.div
+        <div className="relative z-10 text-center">
+          <motion.div
           className="mx-auto mb-8"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -197,6 +199,7 @@ function ContactFooterSection() {
             Send a message
           </a>
         </motion.div>
+        </div>
       </div>
     </section>
   );

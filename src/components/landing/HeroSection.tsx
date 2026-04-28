@@ -154,9 +154,9 @@ export function HeroSection() {
             className="relative h-full w-full"
             style={{
               maskImage:
-                'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 55%, transparent 100%)',
+                'radial-gradient(circle at center, black 0%, black 40%, transparent 100%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 55%, transparent 100%)',
+                'radial-gradient(circle at center, black 0%, black 40%, transparent 100%)',
             }}
           >
             <Image
@@ -164,12 +164,10 @@ export function HeroSection() {
               alt={contact.name}
               fill
               priority
-              className="object-cover object-top"
+              className="object-cover object-top blur-[1px]"
               sizes="440px"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
-            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
           </div>
         </motion.div>
 
@@ -234,7 +232,7 @@ export function HeroSection() {
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.5, ease: EASE }}
         >
           <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-            M.Sc. UX Designer & Certified Scrum Master. I bridge the gap between design and engineering to transform messy enterprise requirements into shippable, high-impact products.
+            <span className="text-primary">Product Designer</span> with AI expertise. Designing interfaces, systems, and workflows for enterprise teams. <span className="text-primary">UX Designer</span> · <span className="text-primary">Certified Scrum Master</span> · <span className="text-primary">Motion</span>.
           </p>
         </motion.div>
       </div>
