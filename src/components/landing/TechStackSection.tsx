@@ -30,19 +30,8 @@ function TechItemCard({ item, index }: { item: TechItem; index: number }) {
           alt={item.name}
           width={40}
           height={40}
-          className="object-contain opacity-80 transition-opacity group-hover:opacity-100"
+          className="object-contain brightness-0 opacity-70 transition-opacity group-hover:opacity-100 dark:invert"
           unoptimized
-          onError={(e) => {
-            // Fallback: hide image and show initials
-            (e.target as HTMLImageElement).style.display = 'none';
-            const parent = (e.target as HTMLImageElement).parentElement;
-            if (parent) {
-              const fallback = document.createElement('div');
-              fallback.className = 'flex h-10 w-10 items-center justify-center rounded-md bg-muted font-mono text-xs font-bold text-muted-foreground';
-              fallback.textContent = item.name.slice(0, 2).toUpperCase();
-              parent.appendChild(fallback);
-            }
-          }}
         />
       </div>
       <div className="text-center">

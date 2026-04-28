@@ -1,19 +1,23 @@
 'use client';
 
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import { experienceTimelineDetailed } from '@/content/home';
 import { brandLogos, type BrandLogoId } from '@/lib/brand-logos';
+import { EASE, DUR } from '@/lib/motion';
 
 function ExperienceLogo({ logoId, alt }: { logoId: BrandLogoId; alt: string }) {
   const src = brandLogos[logoId];
 
   return (
-    <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted/40">
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-muted/40">
       <Image
         src={src}
         alt={alt}
-        width={48}
-        height={48}
+        width={40}
+        height={40}
         className="h-full w-full object-contain p-1"
         unoptimized
       />
@@ -21,36 +25,79 @@ function ExperienceLogo({ logoId, alt }: { logoId: BrandLogoId; alt: string }) {
   );
 }
 
-export function ExperienceTimelineSection() {
+function ExperienceItem({ entry, index }: { entry: typeof experienceTimelineDetailed[0]; index: number }) {
+  const [isOpen, setIsOpen] = useState(index === 0);
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className="mx-auto max-w-4xl px-4 py-12 font-sans antialiased sm:px-6 md:py-16">
-      <h2 className="mb-12 text-3xl font-semibold tracking-tight text-foreground md:mb-16">Experience</h2>
+    <motion.div
+      className="border-b border-border/50 last:border-0"
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: reduceMotion ? 0 : DUR.md, delay: index * 0.08, ease: EASE }}
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex w-full items-center justify-between gap-4 py-4 text-left transition-colors hover:bg-accent/30"
+      >
+        <div className="flex items-center gap-4">
+          <ExperienceLogo logoId={entry.logoId} alt={entry.logoAlt} />
+          <div>
+            <h3 className="font-semibold tracking-tight text-foreground">{entry.headline}</h3>
+            <p className="text-xs text-muted-foreground">{entry.subline} · {entry.period}</p>
+          </div>
+        </div>
+        <ChevronDown
+          className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+        />
+      </button>
 
-      <div className="space-y-16 md:space-y-20">
-        {experienceTimelineDetailed.map((entry) => (
-          <div key={entry.id} className="flex flex-col md:flex-row md:gap-10">
-            <div className="mb-3 shrink-0 md:mb-0 md:w-1/4">
-              <p className="text-sm font-medium tabular-nums text-muted-foreground">{entry.period}</p>
-              <p className="mt-1 text-sm text-muted-foreground/80">{entry.location}</p>
-            </div>
-
-            <div className="md:w-3/4">
-              <div className="mb-5 flex items-center gap-4">
-                <ExperienceLogo logoId={entry.logoId} alt={entry.logoAlt} />
-                <div>
-                  <h3 className="text-xl font-semibold tracking-tight text-foreground">{entry.headline}</h3>
-                  <p className="mt-0.5 text-sm font-medium text-muted-foreground">{entry.subline}</p>
-                </div>
-              </div>
-
-              <p className="mb-5 text-base leading-relaxed text-foreground/90">{entry.summary}</p>
-              <ul className="list-disc space-y-2.5 pl-5 text-base leading-relaxed text-foreground/90 marker:text-muted-foreground/40">
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : DUR.sm, ease: EASE }}
+            className="overflow-hidden"
+          >
+            <div className="pb-5 pl-14">
+              <p className="mb-3 text-sm leading-relaxed text-muted-foreground">{entry.summary}</p>
+              <ul className="space-y-1.5">
                 {entry.bullets.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="flex items-start gap-2 text-sm text-foreground/80">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+export function ExperienceTimelineSection() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 md:py-16">
+      <motion.h2
+        className="mb-8 font-display text-3xl font-bold tracking-tight text-foreground"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+      >
+        Experience
+      </motion.h2>
+
+      <div>
+        {experienceTimelineDetailed.map((entry, idx) => (
+          <ExperienceItem key={entry.id} entry={entry} index={idx} />
         ))}
       </div>
     </section>

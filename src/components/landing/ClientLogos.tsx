@@ -51,7 +51,7 @@ function AudiRings({ className }: { className?: string }) {
 
 function ClientLogoItem({ logo }: { logo: ClientLogo }) {
   const wrap =
-    'opacity-50 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
+    'opacity-60 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
 
   if (logo.type === 'audi') {
     return (

@@ -329,25 +329,18 @@ function DashboardCVImpl({
 
   return (
     <div className="min-h-screen text-foreground">
-      {/* Desktop sidebar toggle — always visible */}
-      <button
-        onClick={() => setSidebarOpen((v) => !v)}
-        className="fixed top-4 left-4 z-50 hidden h-10 w-10 items-center justify-center rounded-lg border border-border bg-background/95 text-foreground shadow-sm backdrop-blur transition-colors hover:bg-accent md:flex"
-        aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
-      >
-        <Menu className="h-5 w-5" />
-      </button>
-
       <div className="theme-container flex flex-1 flex-col md:container md:py-6">
         <div className="flex flex-col overflow-hidden border-border bg-background/75 md:rounded-xl md:border md:border-white/10">
           <div
-            className="mx-auto grid min-h-screen w-full max-w-[1400px] items-start transition-all duration-300"
-            style={{ gridTemplateColumns: sidebarOpen ? '16rem 1fr' : '0fr 1fr' }}
+            className={cn(
+              "mx-auto grid min-h-screen w-full max-w-[1400px] items-start transition-all duration-300",
+              sidebarOpen ? "md:grid-cols-[16rem_1fr]" : "md:grid-cols-[0fr_1fr]"
+            )}
           >
             <aside
               className={cn(
                 'sticky top-0 hidden h-screen flex-col border-r border-border bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar transition-all duration-300 md:flex',
-                sidebarOpen ? 'opacity-100' : 'w-0 overflow-hidden p-0 opacity-0'
+                !sidebarOpen && 'w-0 overflow-hidden p-0 opacity-0'
               )}
             >
               {sidebarOpen && <SidebarContent navProjects={navProjects} />}

@@ -14,9 +14,17 @@ const projects = SHOWCASE_SLUGS
   .map((slug) => getProjectBySlug(slug))
   .filter((p): p is PortfolioProject => p != null);
 
+// Outcomes/deliverables mapping by slug
+const PROJECT_OUTCOMES: Record<string, string> = {
+  'kovon': 'Reduced diagnostic workflow time by 40% · Unified compliance + fleet ops · Shipped in 8 sprints',
+  'ffp-dashboard': 'Cut reporting overhead by 60% · Self-service dashboards for 200+ dealers · Real-time KPI exports',
+  'emission-compliance': 'Automated compliance alerts for EU/UK/US markets · Reduced audit prep from weeks to hours · Saved 30+ engineering hours/month',
+};
+
 function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
   const reduceMotion = useReducedMotion();
   const cover = getProjectCoverImage(project);
+  const outcome = PROJECT_OUTCOMES[project.slug];
 
   return (
     <motion.div
@@ -52,16 +60,27 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
         {/* Content overlay at bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
           <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="mb-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/80">
-                {project.category} · {project.year}
-              </p>
+            <div className="max-w-2xl">
+              {/* Category badge */}
+              <span className="mb-2 inline-block rounded-full border border-border/50 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm">
+                {project.category}
+              </span>
+
               <h3 className="font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-2xl md:text-3xl">
                 {project.title}
               </h3>
-              <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground/90">
+
+              {/* One-liner */}
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground/90">
                 {project.oneLiner}
               </p>
+
+              {/* Outcomes / deliverables */}
+              {outcome && (
+                <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-primary/80">
+                  {outcome}
+                </p>
+              )}
             </div>
             <div className="hidden shrink-0 sm:flex">
               <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border/50 bg-background/80 backdrop-blur-sm transition-colors group-hover:border-primary/50 group-hover:bg-primary/10">

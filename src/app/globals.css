@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Bitcount';
+  src: url('/fonts/BitcountGridDouble-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -43,6 +51,17 @@ body {
 
 .animate-blink {
   animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes variable-font {
+  0%, 100% { font-weight: 400; font-variation-settings: 'wght' 400; }
+  25% { font-weight: 700; font-variation-settings: 'wght' 700; }
+  50% { font-weight: 900; font-variation-settings: 'wght' 900; }
+  75% { font-weight: 600; font-variation-settings: 'wght' 600; }
+}
+
+.animate-variable-font {
+  animation: variable-font 4s ease-in-out infinite;
 }
 
 @layer utilities {

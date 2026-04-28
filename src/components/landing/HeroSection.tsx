@@ -1,12 +1,108 @@
 'use client';
 
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { EASE, DUR } from '@/lib/motion';
-import { contact, identityRolePrimary } from '@/content/home';
+import { contact } from '@/content/home';
+
+const HEADLINE_LINES = [
+  { prefix: 'Solving &', target: 'Simplifying', suffix: 'by design.' },
+  { prefix: 'Designing', target: 'complexity', suffix: 'away.' },
+  { prefix: 'Building', target: 'systems', suffix: 'that scale.' },
+];
+
+const COMPLEXITY_STYLES = [
+  { font: "'Bitcount', monospace", decoration: 'line-through', label: 'chaos' },
+  { font: "'Bitcount', monospace", decoration: 'underline', label: 'noise' },
+  { font: "'Bitcount', monospace", decoration: 'overline', label: 'mess' },
+  { font: "'Bitcount', monospace", decoration: 'line-through', label: 'complexity' },
+];
+
+function ScrambleText({ text, isActive, onComplete }: { text: string; isActive: boolean; onComplete?: () => void }) {
+  const [display, setDisplay] = useState('');
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+  useEffect(() => {
+    if (!isActive) {
+      setDisplay('');
+      return;
+    }
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplay(
+        text
+          .split('')
+          .map((char, idx) => {
+            if (idx < iteration) return text[idx];
+            if (char === ' ') return ' ';
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join('')
+      );
+      if (iteration >= text.length) {
+        clearInterval(interval);
+        setTimeout(() => onComplete?.(), 500);
+      }
+      iteration += 1 / 2;
+    }, 40);
+    return () => clearInterval(interval);
+  }, [isActive, text, onComplete]);
+
+  return <span className="inline-block min-w-[1ch]">{display}</span>;
+}
+
+function FlipWord3D({ style }: { style: typeof COMPLEXITY_STYLES[0] }) {
+  return (
+    <span
+      className="inline-block transition-all duration-500"
+      style={{
+        fontFamily: style.font,
+        textDecoration: style.decoration,
+        textDecorationColor: 'hsl(var(--primary))',
+        textDecorationThickness: '2px',
+        fontStyle: 'italic',
+      }}
+    >
+      {style.label}
+    </span>
+  );
+}
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
+  const [lineIndex, setLineIndex] = useState(0);
+  const [phase, setPhase] = useState<'typing' | 'waiting' | 'deleting'>('typing');
+  const [styleIndex, setStyleIndex] = useState(0);
+  const [isFlipping, setIsFlipping] = useState(false);
+
+  const currentLine = HEADLINE_LINES[lineIndex];
+
+  const cycleLine = useCallback(() => {
+    setPhase('typing');
+    setLineIndex((prev) => (prev + 1) % HEADLINE_LINES.length);
+  }, []);
+
+  const cycleStyle = useCallback(() => {
+    setIsFlipping(true);
+    setTimeout(() => {
+      setStyleIndex((prev) => {
+        let next;
+        do {
+          next = Math.floor(Math.random() * COMPLEXITY_STYLES.length);
+        } while (next === prev);
+        return next;
+      });
+      setIsFlipping(false);
+    }, 300);
+  }, []);
+
+  // Auto-cycle styles every 3 seconds
+  useEffect(() => {
+    if (reduceMotion) return;
+    const interval = setInterval(cycleStyle, 3000);
+    return () => clearInterval(interval);
+  }, [cycleStyle, reduceMotion]);
 
   return (
     <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-20 pb-8 text-center">
@@ -26,7 +122,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
         {/* Profile photo */}
         <motion.div
           className="mb-8"
@@ -76,7 +172,7 @@ export function HeroSection() {
           <span className="font-mono text-xs">Augsburg / Munich</span>
         </motion.div>
 
-        {/* Main Headline */}
+        {/* Main Headline with typewriter/scramble */}
         <motion.div
           className="mb-10 w-full"
           initial={{ opacity: 0, y: 20 }}
@@ -84,16 +180,21 @@ export function HeroSection() {
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: reduceMotion ? 0 : 0.3, ease: EASE }}
         >
           <h1 className="font-display text-[12vw] leading-[0.9] font-bold tracking-tighter text-foreground sm:text-[8vw] md:text-[7vw]">
-            <span className="block">Solving &amp;</span>
-            <span className="block">Simplifying</span>
             <span className="block">
-              <span className="relative inline-block">
-                <span className="italic text-muted-foreground line-through decoration-primary decoration-2">
-                  complexity
-                </span>
+              <ScrambleText text={currentLine.prefix} isActive={phase === 'typing'} />
+            </span>
+            <span className="block" style={{ perspective: '1000px' }}>
+              <span
+                className="inline-block transition-transform duration-300"
+                style={{
+                  transform: isFlipping ? 'rotateX(-90deg)' : 'rotateX(0deg)',
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                <FlipWord3D style={COMPLEXITY_STYLES[styleIndex]} />
               </span>
             </span>
-            <span className="block text-primary">by design.</span>
+            <span className="block text-primary">{currentLine.suffix}</span>
           </h1>
         </motion.div>
 
