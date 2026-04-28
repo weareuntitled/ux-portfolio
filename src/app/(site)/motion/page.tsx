@@ -10,7 +10,6 @@ import CaseStudiesSection from './CaseStudiesSection';
 import { FaqSection } from '@/components/landing/FaqSection';
 import ExpertiseSectionMotion from '@/components/motion/ExpertiseSectionMotion';
 import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
-import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
 
 // ---------------------------------------------------------------------------
 // Constants

@@ -152,6 +152,7 @@ export function ScrollLockGallery({ slides, title, subtitle }: ScrollLockGallery
           </div>
         </motion.div>
       </div>
+      </div>
     </>
   );
 }
