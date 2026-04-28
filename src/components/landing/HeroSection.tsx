@@ -1,142 +1,143 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { EASE, DUR } from '@/lib/motion';
-import { contact } from '@/content/home';
+import { WebGLGradientBackground } from './WebGLGradientBackground';
 
-const HEADLINE_LINES = [
-  { prefix: 'Solving &', target: 'Simplifying', suffix: 'by design.' },
-  { prefix: 'Designing', target: 'complexity', suffix: 'away.' },
-  { prefix: 'Building', target: 'systems', suffix: 'that scale.' },
+const COMPLEXITY_WORDS = [
+  { label: 'chaos', color: '#ef4444' },
+  { label: 'noise', color: '#f97316' },
+  { label: 'mess', color: '#eab308' },
+  { label: 'complexity', color: '#22c55e' },
 ];
 
-const COMPLEXITY_STYLES = [
-  { font: "'Bitcount', monospace", decoration: 'line-through', label: 'chaos' },
-  { font: "'Bitcount', monospace", decoration: 'underline', label: 'noise' },
-  { font: "'Bitcount', monospace", decoration: 'overline', label: 'mess' },
-  { font: "'Bitcount', monospace", decoration: 'line-through', label: 'complexity' },
-];
-
-function ScrambleText({ text, isActive, onComplete }: { text: string; isActive: boolean; onComplete?: () => void }) {
-  const [display, setDisplay] = useState('');
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
-  useEffect(() => {
-    if (!isActive) {
-      setDisplay('');
-      return;
-    }
-    let iteration = 0;
-    const interval = setInterval(() => {
-      setDisplay(
-        text
-          .split('')
-          .map((char, idx) => {
-            if (idx < iteration) return text[idx];
-            if (char === ' ') return ' ';
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join('')
-      );
-      if (iteration >= text.length) {
-        clearInterval(interval);
-        setTimeout(() => onComplete?.(), 500);
-      }
-      iteration += 1 / 2;
-    }, 40);
-    return () => clearInterval(interval);
-  }, [isActive, text, onComplete]);
-
-  return <span className="inline-block min-w-[1ch]">{display}</span>;
+/** Animated hand-drawn strikethrough line using SVG */
+function HandDrawnStrikethrough({ 
+  isVisible, 
+  width = 120,
+  color = 'hsl(var(--primary))' 
+}: { 
+  isVisible: boolean; 
+  width?: number;
+  color?: string;
+}) {
+  return (
+    <svg
+      className="absolute left-0 top-1/2 pointer-events-none overflow-visible"
+      style={{ 
+        width: `${width}px`, 
+        height: '12px',
+        transform: 'translateY(-40%)',
+      }}
+      viewBox={`0 0 ${width} 12`}
+      preserveAspectRatio="none"
+    >
+      <motion.path
+        d={`M0,6 Q${width * 0.25},2 ${width * 0.5},6 T${width},6`}
+        fill="none"
+        stroke={color}
+        strokeWidth="1"
+        strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ 
+          pathLength: isVisible ? 1 : 0, 
+          opacity: isVisible ? 0.7 : 0 
+        }}
+        transition={{ 
+          pathLength: { duration: 0.4, ease: "easeOut" },
+          opacity: { duration: 0.2 }
+        }}
+      />
+    </svg>
+  );
 }
 
-function FlipWord3D({ style }: { style: typeof COMPLEXITY_STYLES[0] }) {
+function FlipWord3D({ 
+  word, 
+  isFlipping,
+  showStrikethrough 
+}: { 
+  word: typeof COMPLEXITY_WORDS[0]; 
+  isFlipping: boolean;
+  showStrikethrough: boolean;
+}) {
   return (
-    <span
-      className="inline-block transition-all duration-500"
-      style={{
-        fontFamily: style.font,
-        textDecoration: style.decoration,
-        textDecorationColor: 'hsl(var(--primary))',
-        textDecorationThickness: '2px',
-        fontStyle: 'italic',
-      }}
-    >
-      {style.label}
+    <span className="relative inline-block">
+      <span
+        className="inline-block transition-all duration-300"
+        style={{
+          fontFamily: "'Bitcount', var(--font-mono), monospace",
+          fontWeight: 100,
+          fontStyle: 'italic',
+          transform: isFlipping ? 'rotateX(-90deg)' : 'rotateX(0deg)',
+          transformStyle: 'preserve-3d',
+          perspective: '1000px',
+        }}
+      >
+        {word.label}
+      </span>
+      <HandDrawnStrikethrough 
+        isVisible={showStrikethrough && !isFlipping} 
+        width={word.label.length * 14}
+        color={word.color}
+      />
     </span>
   );
 }
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
-  const [lineIndex, setLineIndex] = useState(0);
-  const [phase, setPhase] = useState<'typing' | 'waiting' | 'deleting'>('typing');
-  const [styleIndex, setStyleIndex] = useState(0);
+  const [wordIndex, setWordIndex] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [showStrikethrough, setShowStrikethrough] = useState(true);
 
-  const currentLine = HEADLINE_LINES[lineIndex];
+  const currentWord = COMPLEXITY_WORDS[wordIndex];
 
-  const cycleStyle = useCallback(() => {
-    setIsFlipping(true);
+  const cycleWord = useCallback(() => {
+    // Hide strikethrough first
+    setShowStrikethrough(false);
+    
+    // Start flip
     setTimeout(() => {
-      setStyleIndex((prev) => {
-        let next;
-        do {
-          next = Math.floor(Math.random() * COMPLEXITY_STYLES.length);
-        } while (next === prev);
-        return next;
-      });
-      setIsFlipping(false);
-    }, 300);
+      setIsFlipping(true);
+      
+      // Change word mid-flip
+      setTimeout(() => {
+        setWordIndex((prev) => {
+          let next;
+          do {
+            next = Math.floor(Math.random() * COMPLEXITY_WORDS.length);
+          } while (next === prev);
+          return next;
+        });
+        
+        // End flip
+        setTimeout(() => {
+          setIsFlipping(false);
+          
+          // Show strikethrough after flip completes
+          setTimeout(() => {
+            setShowStrikethrough(true);
+          }, 100);
+        }, 150);
+      }, 150);
+    }, 200);
   }, []);
 
-  // Auto-cycle styles every 3 seconds
+  // Auto-cycle every 4 seconds
   useEffect(() => {
     if (reduceMotion) return;
-    const interval = setInterval(cycleStyle, 3000);
+    const interval = setInterval(cycleWord, 4000);
     return () => clearInterval(interval);
-  }, [cycleStyle, reduceMotion]);
+  }, [cycleWord, reduceMotion]);
 
   return (
     <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-20 pb-8 text-center">
-      {/* Ambient light orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="absolute top-[-10%] right-[-10%] h-[600px] w-[600px] rounded-full bg-primary/10 blur-[120px] animate-pulse-slow"
-          style={{ animationDelay: '0s' }}
-        />
-        <div
-          className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-white/5 blur-[100px] animate-pulse-slow"
-          style={{ animationDelay: '2s' }}
-        />
-        <div
-          className="absolute top-[10%] left-[30%] h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] animate-pulse-slow"
-          style={{ animationDelay: '4s' }}
-        />
-      </div>
+      {/* WebGL animated gradient background */}
+      <WebGLGradientBackground />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
-        {/* Profile photo */}
-        <motion.div
-          className="mb-8"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: reduceMotion ? 0 : DUR.lg, ease: EASE }}
-        >
-          <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-border bg-muted ring-2 ring-primary/20">
-            <Image
-              src={contact.profileImage}
-              alt={contact.name}
-              fill
-              priority
-              className="object-cover"
-              sizes="96px"
-            />
-          </div>
-        </motion.div>
-
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center">
         {/* Availability pill */}
         <motion.div
           className="mb-4 flex items-center justify-center gap-3"
@@ -164,7 +165,7 @@ export function HeroSection() {
         >
           <p 
             className="font-mono text-xs tracking-wide text-muted-foreground/80"
-            style={{ fontFamily: "'Bitcount', var(--font-mono), monospace" }}
+            style={{ fontFamily: "'Bitcount', var(--font-mono), monospace", fontWeight: 100 }}
           >
             <span className="text-foreground font-semibold">M.Sc. UX Designer</span>
             <span className="mx-2 text-muted-foreground/40">|</span>
@@ -186,35 +187,32 @@ export function HeroSection() {
           <span className="font-mono text-xs">Augsburg / Munich</span>
         </motion.div>
 
-        {/* Main Headline with typewriter/scramble */}
+        {/* Main Headline */}
         <motion.div
           className="mb-10 w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: reduceMotion ? 0 : 0.3, ease: EASE }}
         >
-          <h1 className="font-display text-[12vw] leading-[0.9] font-bold tracking-tighter text-foreground sm:text-[8vw] md:text-[7vw]">
-            <span className="block">
-              <ScrambleText text={currentLine.prefix} isActive={phase === 'typing'} />
-            </span>
+          <h1 
+            className="text-[12vw] leading-[0.9] font-bold tracking-tighter text-foreground sm:text-[8vw] md:text-[7vw]"
+            style={{ fontFamily: 'var(--font-display), var(--font-sans), sans-serif' }}
+          >
+            <span className="block">Solving &amp;</span>
             <span className="block" style={{ perspective: '1000px' }}>
-              <span
-                className="inline-block transition-transform duration-300"
-                style={{
-                  transform: isFlipping ? 'rotateX(-90deg)' : 'rotateX(0deg)',
-                  transformStyle: 'preserve-3d',
-                }}
-              >
-                <FlipWord3D style={COMPLEXITY_STYLES[styleIndex]} />
-              </span>
+              <FlipWord3D 
+                word={currentWord} 
+                isFlipping={isFlipping}
+                showStrikethrough={showStrikethrough}
+              />
             </span>
-            <span className="block text-primary">{currentLine.suffix}</span>
+            <span className="block text-primary">by design.</span>
           </h1>
         </motion.div>
 
         {/* Body copy */}
         <motion.div
-          className="max-w-xl"
+          className="max-w-2xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.5, ease: EASE }}

@@ -84,7 +84,7 @@ export function ExperienceTimelineSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 md:py-16">
+    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
       <motion.h2
         className="mb-8 font-display text-3xl font-bold tracking-tight text-foreground"
         initial={{ opacity: 0, y: 16 }}

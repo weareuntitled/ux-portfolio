@@ -14,11 +14,11 @@ const projects = SHOWCASE_SLUGS
   .map((slug) => getProjectBySlug(slug))
   .filter((p): p is PortfolioProject => p != null);
 
-// Outcomes/deliverables mapping by slug
+// Outcomes/deliverables mapping by slug (aligned with portfolio.ts case studies)
 const PROJECT_OUTCOMES: Record<string, string> = {
-  'kovon': 'Reduced diagnostic workflow time by 40% · Unified compliance + fleet ops · Shipped in 8 sprints',
-  'ffp-dashboard': 'Cut reporting overhead by 60% · Self-service dashboards for 200+ dealers · Real-time KPI exports',
-  'emission-compliance': 'Automated compliance alerts for EU/UK/US markets · Reduced audit prep from weeks to hours · Saved 30+ engineering hours/month',
+  'kovon': 'Eliminated Excel tracking chaos · 100% audit-ready visibility · 200 active users',
+  'ffp-dashboard': 'Consolidated 6 months of fragmented input · Symptom-first triage flow · Modular reusable patterns',
+  'emission-compliance': 'Faster anomaly detection in dense tables · Adjustable thresholds · Zero overlooked breaches',
 };
 
 function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
@@ -60,7 +60,7 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
         {/* Content overlay at bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
           <div className="flex items-end justify-between gap-4">
-            <div className="max-w-2xl">
+            <div className="max-w-3xl">
               {/* Category badge */}
               <span className="mb-2 inline-block rounded-full border border-border/50 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm">
                 {project.category}

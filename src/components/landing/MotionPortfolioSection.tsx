@@ -1,16 +1,72 @@
 'use client';
 
+import React from 'react';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Film, Play, ExternalLink } from 'lucide-react';
 import { EASE, DUR } from '@/lib/motion';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
 
-const REELS = [
-  { title: '8020 Showreel 2025', label: 'Corporate' },
-  { title: '3D Design Reel', label: 'Motion' },
-  { title: 'Kontrast Aftermovie', label: 'Festival' },
+const SHOWREELS = [
+  {
+    slug: '8020-portfolio',
+    title: '8020 Showreel 2025',
+    subtitle: 'Corporate',
+    youtubeId: '7U_PO2WGqFw',
+  },
+  {
+    slug: '3dprojects',
+    title: '3D Design Reel',
+    subtitle: 'Motion',
+    youtubeId: 'K7JhmqWGiZw',
+  },
 ];
+
+function YouTubeCard({ youtubeId, title, subtitle }: { youtubeId: string; title: string; subtitle: string }) {
+  const [active, setActive] = React.useState(false);
+  const thumb = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+
+  return (
+    <div className="group relative w-full overflow-hidden rounded-2xl bg-black" style={{ aspectRatio: '16/9' }}>
+      {active ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0`}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full border-0"
+        />
+      ) : (
+        <>
+          <Image
+            src={thumb}
+            alt={title}
+            fill
+            unoptimized
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+          <button
+            onClick={() => setActive(true)}
+            aria-label={`Play ${title}`}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full border-2 border-white/80 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20 hover:border-white md:h-16 md:w-16"
+          >
+            <svg viewBox="0 0 24 24" fill="white" className="h-6 w-6 translate-x-0.5 md:h-7 md:w-7">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
+
+          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">{subtitle}</p>
+            <h3 className="text-xl font-bold tracking-tight text-white md:text-2xl">{title}</h3>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 export function MotionPortfolioSection() {
   const reduceMotion = useReducedMotion();
@@ -38,9 +94,9 @@ export function MotionPortfolioSection() {
 
             {/* Reel list */}
             <div className="mt-6 space-y-2">
-              {REELS.map((reel) => (
+              {SHOWREELS.map((reel) => (
                 <div
-                  key={reel.title}
+                  key={reel.slug}
                   className="flex items-center gap-3 rounded-lg border border-border/30 bg-card/50 px-4 py-3"
                 >
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
@@ -48,7 +104,7 @@ export function MotionPortfolioSection() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground">{reel.title}</p>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{reel.label}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{reel.subtitle}</p>
                   </div>
                 </div>
               ))}
@@ -66,22 +122,22 @@ export function MotionPortfolioSection() {
             </a>
           </motion.div>
 
-          {/* Right: Visual */}
+          {/* Right: Showreel video cards */}
           <motion.div
-            className="relative aspect-video overflow-hidden rounded-2xl border border-border/50 bg-muted"
+            className="space-y-4"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: reduceMotion ? 0 : DUR.md, delay: 0.1, ease: EASE }}
           >
-            <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-muted via-muted/90 to-background">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <Film className="h-8 w-8 text-primary" />
-              </div>
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                Motion & 3D Reel
-              </p>
-            </div>
+            {SHOWREELS.map((reel) => (
+              <YouTubeCard
+                key={reel.slug}
+                youtubeId={reel.youtubeId}
+                title={reel.title}
+                subtitle={reel.subtitle}
+              />
+            ))}
           </motion.div>
         </div>
       </div>

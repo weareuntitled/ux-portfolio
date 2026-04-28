@@ -4,8 +4,24 @@
 
 @font-face {
   font-family: 'Bitcount';
-  src: url('/fonts/BitcountGridDouble-Variable.ttf') format('truetype');
-  font-weight: 100 900;
+  src: url('/fonts/BitcountGridDouble-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount';
+  src: url('/fonts/BitcountGridDouble-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount';
+  src: url('/fonts/BitcountGridDouble-Regular.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }

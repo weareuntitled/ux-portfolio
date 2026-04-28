@@ -53,7 +53,7 @@ export function NextGenStartPage() {
 
       {/* 2. Client Logos — Full width */}
       <div className="pb-8">
-        <div className="mx-auto max-w-5xl px-4 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <ClientLogos />
         </div>
       </div>
@@ -64,11 +64,11 @@ export function NextGenStartPage() {
       {/* 4. Kontrast Festival — Light emphasis */}
       <KontrastBanner />
 
-      {/* 5. Tech Stack — White/Light */}
-      <TechStackSection />
-
-      {/* 6. Motion Portfolio — Light */}
+      {/* 5. Motion Portfolio — Light */}
       <MotionPortfolioSection />
+
+      {/* 6. Tech Stack — Compact */}
+      <TechStackSection />
 
       {/* 7. About — Dark */}
       <AboutSection />
@@ -81,7 +81,7 @@ export function NextGenStartPage() {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
       >
-        <div className="mx-auto max-w-5xl px-4 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <ExperienceTimelineSection />
           <EducationSection />
         </div>
@@ -95,7 +95,7 @@ export function NextGenStartPage() {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
       >
-        <div className="mx-auto max-w-2xl space-y-8">
+        <div className="mx-auto max-w-3xl space-y-8">
           <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-primary-foreground md:text-4xl">
             Let&apos;s connect
           </h2>

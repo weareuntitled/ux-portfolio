@@ -329,11 +329,12 @@ function DashboardCVImpl({
 
   return (
     <div className="min-h-screen text-foreground">
-      <div className="theme-container flex flex-1 flex-col md:container md:py-6">
-        <div className="flex flex-col overflow-hidden border-border bg-background/75 md:rounded-xl md:border md:border-white/10">
+      <div className={cn("theme-container flex flex-1 flex-col", variant !== 'landing' && "md:container md:py-6")}>
+        <div className={cn("flex flex-col overflow-hidden border-border bg-background/75", variant !== 'landing' && "md:rounded-xl md:border md:border-white/10")}>
           <div
             className={cn(
-              "mx-auto grid min-h-screen w-full max-w-[1400px] items-start transition-all duration-300",
+              "grid min-h-screen w-full items-start transition-all duration-300",
+              variant === 'landing' ? "max-w-none" : "mx-auto max-w-[1400px]",
               sidebarOpen ? "md:grid-cols-[16rem_1fr]" : "md:grid-cols-[0fr_1fr]"
             )}
           >
