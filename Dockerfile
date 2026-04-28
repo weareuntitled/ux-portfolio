@@ -2,7 +2,7 @@
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
+COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
 RUN npm install --os=linux --cpu=x64 sharp --legacy-peer-deps
 
@@ -18,11 +18,14 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# 1. Wir kopieren den von Next.js generierten, eigenständigen Server
+# Install wget for healthcheck (not included in slim image)
+RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+
+# 1. Von Next.js generierter, eigenständiger Server
 COPY --from=builder /app/.next/standalone ./
-# 2. Wir kopieren die statischen Assets (CSS, JS)
+# 2. Statische Assets (CSS, JS)
 COPY --from=builder /app/.next/static ./.next/static
-# 3. Wir kopieren den Public-Ordner (Bilder, CVs etc.)
+# 3. Public-Ordner (Bilder, Videos, CVs etc.)
 COPY --from=builder /app/public ./public
 
 EXPOSE 3000
