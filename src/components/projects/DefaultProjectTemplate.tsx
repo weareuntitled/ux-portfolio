@@ -1,18 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { EASE, DUR, STAGGER, VP } from '@/lib/motion';
-import {
-  ArrowLeft,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  X,
-} from 'lucide-react';
+import { EASE, DUR, VP } from '@/lib/motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import DashboardCV from '@/components/DashboardCV';
@@ -45,94 +38,6 @@ type DefaultProject = {
   processDiagramUrl?: string | null;
   processDiagramLabel?: string;
 };
-
-// ---------------------------------------------------------------------------
-// Lightbox gallery
-// ---------------------------------------------------------------------------
-function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const reduce = useReducedMotion();
-
-  useEffect(() => {
-    if (activeIndex === null) {
-      document.body.style.overflow = '';
-      return;
-    }
-    document.body.style.overflow = 'hidden';
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setActiveIndex(null);
-      if (e.key === 'ArrowLeft') setActiveIndex((p) => (p === null ? null : p > 0 ? p - 1 : urls.length - 1));
-      if (e.key === 'ArrowRight') setActiveIndex((p) => (p === null ? null : p < urls.length - 1 ? p + 1 : 0));
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => { window.removeEventListener('keydown', onKeyDown); document.body.style.overflow = ''; };
-  }, [activeIndex, urls.length]);
-
-  if (!urls?.length) return null;
-
-  return (
-    <>
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {urls.map((src, i) => (
-          <motion.button
-            key={src}
-            type="button"
-            initial={reduce ? false : { opacity: 0, y: 14, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={VP}
-            transition={{ duration: DUR.md, ease: EASE, delay: Math.min(i * STAGGER.sm, 0.3) }}
-            className="group relative overflow-hidden rounded-md bg-muted text-left transition-transform duration-500 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            onClick={() => setActiveIndex(i)}
-          >
-            <div className="relative aspect-[4/3] w-full">
-              <Image
-                src={src}
-                alt={`${title} screen ${i + 1}`}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw"
-                unoptimized={shouldUnoptimizeImage(src)}
-              />
-            </div>
-          </motion.button>
-        ))}
-      </div>
-
-      {activeIndex !== null && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm">
-          <button type="button" onClick={() => setActiveIndex(null)}
-            className="absolute right-5 top-5 z-[101] rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20">
-            <X className="h-6 w-6" />
-          </button>
-          {urls.length > 1 && (
-            <>
-              <button type="button"
-                onClick={() => setActiveIndex(activeIndex > 0 ? activeIndex - 1 : urls.length - 1)}
-                className="absolute left-4 top-1/2 z-[101] -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20">
-                <ChevronLeft className="h-7 w-7" />
-              </button>
-              <button type="button"
-                onClick={() => setActiveIndex(activeIndex < urls.length - 1 ? activeIndex + 1 : 0)}
-                className="absolute right-4 top-1/2 z-[101] -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20">
-                <ChevronRight className="h-7 w-7" />
-              </button>
-            </>
-          )}
-          <div className="flex h-full w-full items-center justify-center p-6 md:p-12" onClick={() => setActiveIndex(null)}>
-            <div className="relative h-[80vh] w-full max-w-7xl" onClick={(e) => e.stopPropagation()} role="presentation">
-              <Image src={urls[activeIndex]} alt={`${title} screen ${activeIndex + 1}`} fill
-                className="object-contain" sizes="100vw" quality={100} priority
-                unoptimized={shouldUnoptimizeImage(urls[activeIndex])} />
-            </div>
-          </div>
-          <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1 text-xs tracking-widest text-white">
-            {activeIndex + 1} / {urls.length}
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
 
 // ---------------------------------------------------------------------------
 // Main template
@@ -361,7 +266,6 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                   src,
                   label: `${project.title} — Screen ${i + 1}`,
                 }))}
-                title={project.title}
               />
             </div>
           </motion.section>

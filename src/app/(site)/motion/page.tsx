@@ -222,7 +222,6 @@ export default function MotionPage() {
                 label: reel.title,
                 caption: reel.subtitle,
               }))}
-              title="Featured Showreels"
             />
           </div>
         </motion.section>

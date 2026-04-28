@@ -92,7 +92,7 @@ function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title:
 
       {/* Right: Scroll-lock gallery */}
       <div className="min-h-[400vh]">
-        <ScrollLockGallery slides={slides} title={title} />
+        <ScrollLockGallery slides={slides} />
       </div>
     </div>
   );
