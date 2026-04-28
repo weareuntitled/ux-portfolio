@@ -1,0 +1,36 @@
+# Stage 1: Build
+FROM node:20-bookworm-slim AS builder
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Regenerate lockfile to fix version mismatches, then install
+RUN npm install --legacy-peer-deps && \
+    npm install --os=linux --cpu=x64 sharp --legacy-peer-deps
+
+# Copy rest of the code
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build
+
+# Stage 2: Run (Standalone Modus)
+FROM node:20-bookworm-slim AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Copy standalone build from builder stage
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD wget -qO- http://localhost:3000/api/health || exit 1
+
+# Standalone uses "server.js" instead of the heavy Next-CLI command
+CMD ["node", "server.js"]
