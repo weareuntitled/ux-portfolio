@@ -57,7 +57,7 @@ export default function ExpertiseSectionMotion() {
       initial="hidden"
       whileInView="show"
       viewport={VP}
-      className="space-y-0"
+      className="space-y-0 px-4 sm:px-0"
     >
       {/* Hero block */}
       <motion.div variants={fadeUpVariant(0)} className="mb-16 space-y-6">

@@ -215,11 +215,11 @@ export default function MotionPage() {
 
   return (
     <DashboardCV variant="fullwidth" breadcrumbs={breadcrumbs} showSearch={false}>
-      <div className="space-y-16 pb-16">
+      <div className="space-y-16 pb-16 px-4 sm:px-6">
 
         {/* Page header — title + breadcrumbs */}
         <div className="space-y-3 pt-4">
-          <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="text-3xl font-light tracking-tight text-foreground sm:text-4xl">
             Motion Work
           </h1>
           <nav className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -280,7 +280,7 @@ export default function MotionPage() {
           initial="hidden"
           whileInView="show"
           viewport={VP}
-          className="mt-8"
+          className="mt-8 px-4 sm:px-0"
         >
           <motion.div
             variants={fadeUpVariant(0.1)}

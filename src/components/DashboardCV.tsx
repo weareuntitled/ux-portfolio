@@ -372,13 +372,13 @@ function DashboardCVImpl({
                 <div className="w-10" /> {/* Spacer for centering */}
               </div>
 
-              <section className="min-w-0 space-y-6 p-4">
+              <section className="min-w-0 space-y-6 p-0">
                 {showHeader && (
-                  <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-0">
-                    <div>
+                  <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="px-4 sm:px-0">
                       <Breadcrumbs items={breadcrumbs} />
                       {variant !== 'project' && (
-                        <h1 className="mt-1 text-2xl font-light tracking-tight text-muted-foreground sm:text-3xl sm:font-light">{pageTitle}</h1>
+                        <h1 className="mt-1 text-xl font-light tracking-tight text-foreground/60 sm:text-2xl">{pageTitle}</h1>
                       )}
                     </div>
 
@@ -400,11 +400,11 @@ function DashboardCVImpl({
 
                 {rightRail ? (
                   <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start">
-                    <div className="min-w-0">{children}</div>
+                    <div className="min-w-0 px-4 sm:px-0">{children}</div>
                     <aside className="lg:sticky lg:top-8">{rightRail}</aside>
                   </div>
                 ) : (
-                  children
+                  <div className="px-4 sm:px-0">{children}</div>
                 )}
               </section>
             </main>
