@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { notFound } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Play, Lock, ArrowLeft } from 'lucide-react';
+import { Play, Pause, Lock, ArrowLeft, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
 
 import DashboardCV from '@/components/DashboardCV';
@@ -63,19 +63,72 @@ function YouTubeFacade({ videoId }: { videoId: string }) {
 
 function ReelCard({ src }: { src: string }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  
+  const togglePlay = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    if (ref.current) {
+      if (isPlaying) {
+        ref.current.pause();
+      } else {
+        ref.current.play().catch(() => {});
+      }
+      setIsPlaying(!isPlaying);
+    }
+  }, [isPlaying]);
+  
+  const toggleMute = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (ref.current) {
+      ref.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  }, [isMuted]);
+  
+  const handleVideoEnded = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
   return (
     <div
       className="group relative cursor-pointer overflow-hidden rounded-xl bg-muted ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/50"
       style={{ aspectRatio: '9/16' }}
-      onMouseEnter={() => ref.current?.play().catch(() => {})}
-      onMouseLeave={() => { if (ref.current) { ref.current.pause(); ref.current.currentTime = 0; } }}
+      onClick={togglePlay}
     >
-      <video ref={ref} src={src} preload="none" muted loop playsInline className="h-full w-full object-cover" />
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-100 transition-opacity duration-300 group-hover:opacity-0">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm">
-          <Play className="h-3.5 w-3.5 translate-x-0.5 fill-white text-white" />
+      <video 
+        ref={ref} 
+        src={src} 
+        preload="metadata" 
+        muted={isMuted} 
+        playsInline 
+        className="h-full w-full object-cover"
+        onEnded={handleVideoEnded}
+      />
+      
+      {/* Play/Pause overlay */}
+      <div className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-black/70 backdrop-blur-sm">
+          {isPlaying ? (
+            <Pause className="h-3.5 w-3.5 fill-white text-white" />
+          ) : (
+            <Play className="h-3.5 w-3.5 translate-x-0.5 fill-white text-white" />
+          )}
         </div>
       </div>
+      
+      {/* Mute/Unmute button */}
+      <button
+        className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Unmute' : 'Mute'}
+      >
+        {isMuted ? (
+          <VolumeX className="h-3 w-3 text-white" />
+        ) : (
+          <Volume2 className="h-3 w-3 text-white" />
+        )}
+      </button>
     </div>
   );
 }
@@ -86,20 +139,71 @@ function ReelCard({ src }: { src: string }) {
 
 function VideoBlock({ src }: { src: string }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  
+  const togglePlay = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    if (ref.current) {
+      if (isPlaying) {
+        ref.current.pause();
+      } else {
+        ref.current.play().catch(() => {});
+      }
+      setIsPlaying(!isPlaying);
+    }
+  }, [isPlaying]);
+  
+  const toggleMute = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (ref.current) {
+      ref.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  }, [isMuted]);
+  
+  const handleVideoEnded = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
   return (
     <div
       className="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-2xl bg-muted"
-      onMouseEnter={() => ref.current?.play().catch(() => {})}
-      onMouseLeave={() => {
-        if (ref.current) { ref.current.pause(); ref.current.currentTime = 0; }
-      }}
+      onClick={togglePlay}
     >
-      <video ref={ref} src={src} preload="none" muted loop playsInline className="h-full w-full object-cover" />
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-100 transition-opacity duration-500 group-hover:opacity-0">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm">
-          <Play className="h-4 w-4 translate-x-0.5 fill-white text-white" />
+      <video 
+        ref={ref} 
+        src={src} 
+        preload="metadata" 
+        muted={isMuted} 
+        playsInline 
+        className="h-full w-full object-cover"
+        onEnded={handleVideoEnded}
+      />
+      
+      {/* Play/Pause overlay */}
+      <div className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black/70 backdrop-blur-sm">
+          {isPlaying ? (
+            <Pause className="h-4 w-4 fill-white text-white" />
+          ) : (
+            <Play className="h-4 w-4 translate-x-0.5 fill-white text-white" />
+          )}
         </div>
       </div>
+      
+      {/* Mute/Unmute button */}
+      <button
+        className="absolute bottom-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Unmute' : 'Mute'}
+      >
+        {isMuted ? (
+          <VolumeX className="h-4 w-4 text-white" />
+        ) : (
+          <Volume2 className="h-4 w-4 text-white" />
+        )}
+      </button>
     </div>
   );
 }
