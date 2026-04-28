@@ -33,7 +33,7 @@ const SAMANI_REELS = [
   '/motion/SAMANI/SnapInsta.to_AQO-Ns7OrZgpftppuzPXgofG5BCV6Zg6jtatIIh-WVTp1OBAHvDthHJd3K0SGVgUrkUZvSnYi-_gfNzKUu_ry54YA08_kn8N2NEPs7A.mp4',
   '/motion/SAMANI/SnapInsta.to_AQPAvN5pqG2-SFZRne34AeGxZQAbilBknn4ZFa4I40VQP9udNnFRgRR-5IhInFPYG0SLol0SBc8z6PnssV98prjK8j4OpYDOhcbKvWQ.mp4',
   '/motion/SAMANI/SnapInsta.to_AQPKSKVo0VuxX_kTth0PlKkmjQU2W6Gape_YdMwRTQBGXAR9yesrf2w14z0gvDYBT7_sNN497y-Mf5PIpXzQaCjdSD7AmwLEWp1Pw1E.mp4',
-  '/motion/SAMANI/SnapInsta.to_AQPVAc4ezaPVdtps3Y0iQVR7cBL_ofprCJpPfSUrJsAqyjP8H8oCQpqkmePttyekF_FWbrtHNZhlWgTNsqQqFNnnpRvgyLqZ1k2pzY.mp4',
+  '/motion/SAMANI/SnapInsta.to_AQPVAc4ezaPVdtps3Y0iQVR7cBL_ofprCJpPfSUrJsAqyjP8H8oCYfpqkmePttyekF_FWbrtHNZhlWgTNsqQqFNnnpRvgyLqZ1k2pzY.mp4',
 ];
 
 const KONTRAST_REELS = [

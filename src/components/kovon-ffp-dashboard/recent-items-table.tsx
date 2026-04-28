@@ -1,10 +1,10 @@
 'use client';
 
 import { Star, Fingerprint, Shield } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import type { Transition, Variants } from "framer-motion";
 import {
   Table,
-  TableBody,
   TableCell,
   TableHead,
   TableHeader,
@@ -61,32 +61,32 @@ function TypeIcon({ type }: { type: "ffp" | "diss" }) {
     return (
       <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
         <Fingerprint className="h-4 w-4 text-primary-foreground" />
-      </span>
+      </span >
     );
   }
   return (
     <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
       <Shield className="h-4 w-4 text-primary-foreground" />
-    </span>
+    </span >
   );
 }
 
-// FIX: 'any' wurde durch 'Variants' ersetzt
+const rowTransition: Transition = {
+  type: "spring",
+  stiffness: 50,
+  damping: 20,
+  mass: 1,
+};
+
 const rowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { 
-      type: "spring",
-      stiffness: 50,
-      damping: 20,
-      mass: 1,
-    } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: rowTransition,
   },
 };
 
-// FIX: 'any' wurde durch 'Variants' ersetzt
 const bodyVariants: Variants = {
   hidden: {},
   visible: { 
@@ -95,10 +95,7 @@ const bodyVariants: Variants = {
       delayChildren: 0.05,
     } 
   },
-};
-
-const MotionTableRow = motion(TableRow);
-const MotionTableBody = motion(TableBody);
+} satisfies Variants;
 
 export function RecentItemsTable() {
   return (
@@ -127,14 +124,14 @@ export function RecentItemsTable() {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <MotionTableBody
+          <motion.tbody
             variants={bodyVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
             {recentItems.map((item) => (
-              <MotionTableRow
+              <motion.tr
                 key={item.id}
                 variants={rowVariants}
                 className="cursor-pointer border-b border-border transition-colors hover:bg-secondary"
@@ -156,9 +153,9 @@ export function RecentItemsTable() {
                 <TableCell className="text-right font-medium text-foreground">
                   {item.lastEdited}
                 </TableCell>
-              </MotionTableRow>
+              </motion.tr>
             ))}
-          </MotionTableBody>
+          </motion.tbody>
         </Table>
       </div>
     </section>
