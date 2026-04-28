@@ -9,7 +9,7 @@ import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/mot
 import CaseStudiesSection from './CaseStudiesSection';
 import { FaqSection } from '@/components/landing/FaqSection';
 import ExpertiseSectionMotion from '@/components/motion/ExpertiseSectionMotion';
-import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -214,16 +214,44 @@ export default function MotionPage() {
             <h2 className="text-4xl font-black tracking-tight leading-none">Featured Work</h2>
           </motion.div>
 
-          {/* Scroll-locked gallery with YouTube thumbnails */}
-          <div className="min-h-[200vh]">
-            <ScrollLockGallery
-              slides={SHOWREELS.map((reel): ScrollLockSlide => ({
-                src: `https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`,
-                label: reel.title,
-                caption: reel.subtitle,
-              }))}
-            />
-          </div>
+          {/* Full-width horizontal scroll gallery with YouTube thumbnails */}
+          <motion.div variants={fadeUpVariant(0.1)} className="relative">
+            <div className="flex gap-6 overflow-x-auto pb-4 no-scrollbar">
+              {SHOWREELS.map((reel, i) => (
+                <div
+                  key={i}
+                  className="relative aspect-video w-[85vw] sm:w-[70vw] lg:w-[60vw] xl:w-[50vw] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] shadow-[0_4px_12px_rgba(0,0,0,0.5),0_1px_2px_rgba(255,255,255,0.1)]"
+                >
+                  <Image
+                    src={`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`}
+                    alt={reel.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 60vw, 50vw"
+                    unoptimized={shouldUnoptimizeImage(`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`)}
+                  />
+                  {/* Play button overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/40">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/30">
+                      <svg className="ml-1 h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  {/* Title overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 py-4">
+                    <p className="text-sm font-medium text-white">{reel.title}</p>
+                    {reel.subtitle && (
+                      <p className="mt-1 text-xs text-white/70">{reel.subtitle}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Scroll hint */}
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent" />
+          </motion.div>
         </motion.section>
 
         {/* ------------------------------------------------------------------ */}

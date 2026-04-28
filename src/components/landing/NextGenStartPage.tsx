@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Mail, ExternalLink, ArrowUpRight } from 'lucide-react';
@@ -9,11 +10,11 @@ import { EASE, DUR } from '@/lib/motion';
 
 import { HeroSection } from '@/components/landing/HeroSection';
 import { ClientLogos } from '@/components/landing/ClientLogos';
-import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
 import { KontrastBanner } from '@/components/landing/KontrastBanner';
 import { AboutToolsSection } from '@/components/landing/AboutToolsSection';
 import { TextMarqueeSection } from '@/components/landing/TextMarqueeSection';
 import { getProjectBySlug } from '@/content/portfolio';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 /** Below-fold sections: separate JS chunks + defer parse on slow connections */
 function BelowFoldSkeleton() {
@@ -52,11 +53,6 @@ function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title:
 
   if (!project || !project.galleryUrls?.length) return null;
 
-  const slides: ScrollLockSlide[] = project.galleryUrls.map((src, i) => ({
-    src,
-    label: `${title} — Screen ${i + 1}`,
-  }));
-
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
       {/* Left: Sticky meta */}
@@ -90,10 +86,35 @@ function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title:
         </Link>
       </motion.div>
 
-      {/* Right: Scroll-lock gallery */}
-      <div className="min-h-[400vh]">
-        <ScrollLockGallery slides={slides} />
-      </div>
+      {/* Right: Full-width horizontal scroll gallery */}
+      <motion.div
+        className="relative"
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+      >
+        <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+          {project.galleryUrls.map((src, i) => (
+            <div
+              key={i}
+              className="relative aspect-[4/3] w-[85vw] sm:w-[70vw] lg:w-[50vw] xl:w-[40vw] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] shadow-[0_4px_12px_rgba(0,0,0,0.5),0_1px_2px_rgba(255,255,255,0.1)]"
+            >
+              <Image
+                src={src}
+                alt={`${title} — Screen ${i + 1}`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 50vw, 40vw"
+                unoptimized={shouldUnoptimizeImage(src)}
+              />
+            </div>
+          ))}
+        </div>
+        
+        {/* Scroll hint */}
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent" />
+      </motion.div>
     </div>
   );
 }
