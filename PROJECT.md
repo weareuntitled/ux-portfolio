@@ -6,8 +6,8 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 
 - **Framework:** Next.js 14 (App Router)
 - **Styling:** Tailwind CSS + shadcn/ui components
-- **Typography:** Manrope (display), Inter (body), IBM Plex Mono (labels)
-- **Animation:** Framer Motion
+- **Typography:** Manrope (display), Inter (body), IBM Plex Mono (labels), Bitcount (hero)
+- **Animation:** Framer Motion, WebGL (hero gradient)
 - **Backend:** Payload CMS (headless CMS)
 - **Database:** SQLite (Turso/LibSQL via `drizzle-orm`)
 - **Auth:** Better Auth
@@ -17,10 +17,11 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 
 ## Key Features
 
-- **Homepage:** Dark editorial hero with animated orbs, full-width project showcase, tech stack grid, "Behind the Screens" about section
-- **Sidebar:** Collapsible navigation (desktop) / Sheet drawer (mobile), persisted state in localStorage
-- **Projects:** Case studies with interactive dashboards (Kovon FFP, Emission Compliance, Automation)
-- **Motion Portfolio:** Separate video-driven section (`/motion/[slug]`) with YouTube embeds
+- **Homepage:** Full-width editorial hero with WebGL animated gradient, profile photo wash effect, 3D flip word animation with hand-drawn SVG strikethrough, full-width project showcase, staggered text marquee, motion portfolio with YouTube embeds, compact tool pills, inverted About section, accordion Experience + Education timelines
+- **Navigation:** Fixed top-right nav (always visible, Works accent color, Contact as button), sidebar nav with Motion section, hamburger menu on mobile
+- **Projects:** Cinematic 21:9 cards with category badges and outcome highlights (mobile-optimized)
+- **Motion Portfolio:** Separate video-driven section (`/motion/[slug]`) with YouTube embeds, client logos marquee
+- **Kontrast:** Two-column grid variation with stats cards and YouTube aftermovie overlay
 - **CV:** Detailed experience timeline, education, certifications
 - **Contact:** AI-powered chat agent with context-aware responses
 
@@ -28,7 +29,7 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 
 | Route | Description |
 |---|---|
-| `/` | Homepage (hero → logos → projects → tech stack → about → experience → footer) |
+| `/` | Homepage (hero w/ WebGL bg → logos → projects → Kontrast marquee → motion → tools → about → experience + education → footer) |
 | `/projects` | Project grid with search/filter |
 | `/projects/[slug]` | Individual case study with prototype tabs |
 | `/motion` | Motion design portfolio with client logos, showreels |
@@ -39,12 +40,31 @@ Personal portfolio for Daniel Peters — UX & Product Design Consultant.
 
 ## Content Sources
 
-- `src/content/home.ts` — Identity, contact info, experience timeline
-- `src/content/landing-copy.json` — Homepage copy, education, stats
-- `src/content/portfolio.ts` — Project metadata, gallery images, cover images
+- `src/content/home.ts` — Identity, contact info, experience timeline data
+- `src/content/landing-copy.json` — Homepage copy, education data
+- `src/content/portfolio.ts` — Project metadata, gallery images, cover images, case studies
 - `src/content/motion-projects.ts` — Motion project data, video URLs, YouTube IDs
 - `src/content/ui-copy.json` — Sidebar labels, navigation items
+- `src/lib/devicon.ts` — Tech stack data with Devicon CDN URLs
 - Payload CMS — Blog posts, media uploads, project data
+
+## Homepage Sections (Top to Bottom)
+
+| Section | Component | Notes |
+|---|---|---|
+| WebGL Background | `WebGLGradientBackground.tsx` | Dark navy noise shader, GPU-accelerated |
+| Navigation | `TopNav.tsx` | Fixed top-right, always visible, Contact as button |
+| Hero | `HeroSection.tsx` | 3D flip word animation, Bitcount font, profile photo wash |
+| Client Logos | `ClientLogos.tsx` | Infinite marquee |
+| Projects | `ProjectShowcase.tsx` | Cinematic 21:9 cards, mobile-optimized |
+| Kontrast | `KontrastBanner.tsx` | Two-column grid, stats, aftermovie overlay |
+| Marquee | `TextMarqueeSection.tsx` | 3 staggered scrolling rows |
+| Motion Portfolio | `MotionPortfolioSection.tsx` | YouTube facade cards |
+| Tech Stack | `TechStackSection.tsx` | Compact pill tags |
+| About | `AboutSection.tsx` | White bg, centered, "Behind the Screens" |
+| Experience | `ExperienceTimelineSection.tsx` | Accordion with logos |
+| Education | `EducationSection.tsx` | Matches Experience accordion style |
+| Footer | `NextGenStartPage.tsx` | Inverse accent CTA |
 
 ## Build & Deploy
 
@@ -105,15 +125,21 @@ BASE_URL=https://portfolio.untitled-ux.de
 
 ## Known Issues
 
-- Some Devicon icons may 404 (OpenCode, ComfyUI, n8n, LangChain) — fallback renders text initials
 - Sidebar prefers `localStorage` state; if missing, defaults to open
 - `HOSTNAME=0.0.0.0` required in Docker container to prevent 502 from Caddy
+- Bitcount pixel font files in `public/fonts/` (Thin, Light, Regular weights)
 
 ## Recent Changes
 
 - Added `HOSTNAME=0.0.0.0` to Dockerfile runner stage
-- Replaced monolithic homepage with sectioned components
-- Added collapsible sidebar with hamburger toggle
-- Tech stack grid with Devicon icons and skill levels
-- Full-width cinematic project cards
-- Inverse accent-colored footer CTA
+- WebGL animated gradient background (`WebGLGradientBackground.tsx`)
+- Bitcount pixel font for hero word animation with 3D flip + SVG strikethrough
+- Profile photo with CSS mask wash effect in hero
+- TopNav: always visible, Works accent color, Contact as button
+- Text marquee (`TextMarqueeSection.tsx`) before Motion section
+- Kontrast section: two-column grid with stats + YouTube aftermovie overlay
+- About section: white background, centered title/photo, inverted CTA
+- Compact tool pills replacing large grid cards
+- Mobile project cards: smaller fonts, category/one-liner hidden
+- Education accordion matching Experience timeline style
+- Fixed Devicon icons (Claude→OpenAI, n8n→Docker, LangChain→Python)
