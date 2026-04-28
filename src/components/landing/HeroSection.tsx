@@ -17,26 +17,24 @@ const COMPLEXITY_WORDS = [
 /** Animated hand-drawn strikethrough line using SVG */
 function HandDrawnStrikethrough({ 
   isVisible, 
-  width = 120,
   color = 'hsl(var(--primary))' 
 }: { 
   isVisible: boolean; 
-  width?: number;
   color?: string;
 }) {
   return (
     <svg
       className="absolute left-0 top-1/2 pointer-events-none overflow-visible"
       style={{ 
-        width: `${width}px`, 
+        width: '100%', 
         height: '12px',
         transform: 'translateY(-40%)',
       }}
-      viewBox={`0 0 ${width} 12`}
+      viewBox="0 0 100 12"
       preserveAspectRatio="none"
     >
       <motion.path
-        d={`M0,6 Q${width * 0.25},2 ${width * 0.5},6 T${width},6`}
+        d="M0,6 Q25,2 50,6 T100,6"
         fill="none"
         stroke={color}
         strokeWidth="1"
@@ -70,7 +68,7 @@ function FlipWord3D({
         className="inline-block transition-all duration-300"
         style={{
           fontFamily: "'Bitcount', var(--font-mono), monospace",
-          fontWeight: 100,
+          fontWeight: 300,
           fontStyle: 'italic',
           transform: isFlipping ? 'rotateX(-90deg)' : 'rotateX(0deg)',
           transformStyle: 'preserve-3d',
@@ -81,7 +79,6 @@ function FlipWord3D({
       </span>
       <HandDrawnStrikethrough 
         isVisible={showStrikethrough && !isFlipping} 
-        width={word.label.length * 16 + 8}
         color={word.color}
       />
     </span>
@@ -140,18 +137,18 @@ export function HeroSection() {
       <WebGLGradientBackground />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center">
-        {/* Profile photo — right side with soft wash */}
+        {/* Profile photo — right side, full section height with soft wash */}
         <motion.div
-          className="pointer-events-none absolute -right-6 top-1/2 hidden h-[50vh] w-[40vw] max-w-[400px] -translate-y-1/2 opacity-60 md:block"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 0.5, x: 0 }}
+          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-[35vw] max-w-[420px] opacity-50 md:block"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 0.45, x: 0 }}
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE }}
         >
           <div
             className="relative h-full w-full"
             style={{
-              maskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 70%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 40%, black 70%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
             }}
           >
             <Image
@@ -159,8 +156,8 @@ export function HeroSection() {
               alt={contact.name}
               fill
               priority
-              className="object-cover object-center"
-              sizes="400px"
+              className="object-cover object-top"
+              sizes="420px"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
           </div>
@@ -193,7 +190,7 @@ export function HeroSection() {
         >
           <p 
             className="font-mono text-xs tracking-wide text-muted-foreground/80"
-            style={{ fontFamily: "'Bitcount', var(--font-mono), monospace", fontWeight: 100 }}
+            style={{ fontFamily: "'Bitcount', var(--font-mono), monospace", fontWeight: 300 }}
           >
             <span className="text-foreground font-semibold">M.Sc. UX Designer</span>
             <span className="mx-2 text-muted-foreground/40">|</span>

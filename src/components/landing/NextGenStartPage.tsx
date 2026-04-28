@@ -54,9 +54,7 @@ export function NextGenStartPage() {
 
       {/* 2. Client Logos — Full width */}
       <div className="pb-8">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <ClientLogos />
-        </div>
+        <ClientLogos />
       </div>
 
       {/* 3. Featured Projects — Full width */}
@@ -65,19 +63,28 @@ export function NextGenStartPage() {
       {/* 4. Kontrast Festival — Light emphasis */}
       <KontrastBanner />
 
-      {/* 5. Staggered text marquee */}
-      <TextMarqueeSection />
+      {/* 5. Marquee — Motion */}
+      <TextMarqueeSection
+        words={['MOTION', 'PROJECTS', 'SYSTEMS', 'DESIGN', 'PRODUCT', 'STRATEGY', 'SHIP', 'BUILD']}
+        speed={30}
+      />
 
       {/* 6. Motion Portfolio — Light */}
       <MotionPortfolioSection />
 
-      {/* 6. Tech Stack — Compact */}
-      <TechStackSection />
-
-      {/* 7. About — Dark */}
+      {/* 7. About — White */}
       <AboutSection />
 
-      {/* 8. Experience Timeline — Dark */}
+      {/* 8. Marquee — Behind the Screens */}
+      <TextMarqueeSection
+        words={['BEHIND THE SCREENS', 'UX DESIGN', 'SCRUM MASTER', 'FREELANCE', 'ENTERPRISE', 'AUTOMATION']}
+        speed={35}
+      />
+
+      {/* 9. Tech Stack — White */}
+      <TechStackSection />
+
+      {/* 10. Experience Timeline */}
       <motion.section
         className="scroll-mt-24 space-y-16 py-20 md:py-28"
         initial={{ opacity: 0, y: 20 }}

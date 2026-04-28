@@ -103,14 +103,14 @@ function ClientLogoItem({ logo }: { logo: ClientLogo }) {
 
 export function ClientLogos() {
   return (
-    <section className="space-y-4">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
+    <section className="space-y-6">
+      <p className="px-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70 sm:px-6 md:px-8">
         Brands &amp; Clients
       </p>
 
-      <div className="relative overflow-hidden rounded-xl bg-muted/30 py-5 dark:bg-black/20">
-        <div className="animate-marquee flex items-center gap-12 px-6">
-          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
+      <div className="relative w-full overflow-hidden bg-muted/30 py-6 dark:bg-black/20">
+        <div className="animate-marquee flex items-center gap-16 px-6 md:gap-20">
+          {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
             <ClientLogoItem key={i} logo={logo} />
           ))}
         </div>

@@ -3,23 +3,18 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-const MARQUEE_WORDS = [
-  'Behind the Screens',
-  'Motion',
-  'Projects',
-  'Design',
-  'Systems',
-  'Product',
-  'Strategy',
-  'Ship',
-];
+interface TextMarqueeSectionProps {
+  words: string[];
+  reverse?: boolean;
+  speed?: number;
+}
 
-function MarqueeRow({ reverse = false, speed = 20 }: { reverse?: boolean; speed?: number }) {
-  const words = [...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS];
+function MarqueeRow({ words, reverse = false, speed = 20 }: { words: string[]; reverse?: boolean; speed?: number }) {
+  const allWords = [...words, ...words, ...words, ...words];
   return (
     <div className="flex overflow-hidden whitespace-nowrap">
       <motion.div
-        className="flex shrink-0 gap-8 py-2"
+        className="flex shrink-0 gap-8 py-2 md:gap-12"
         animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
         transition={{
           duration: speed,
@@ -27,10 +22,10 @@ function MarqueeRow({ reverse = false, speed = 20 }: { reverse?: boolean; speed?
           ease: 'linear',
         }}
       >
-        {words.map((word, i) => (
+        {allWords.map((word, i) => (
           <span
             key={`${word}-${i}`}
-            className="flex items-center gap-8 font-display text-4xl font-bold tracking-tighter text-foreground/10 sm:text-5xl md:text-6xl"
+            className="flex items-center gap-8 font-display text-3xl font-bold uppercase tracking-tighter text-foreground/10 sm:text-4xl md:text-5xl md:gap-12"
           >
             {word}
             <span className="inline-block h-2 w-2 rounded-full bg-primary/30" />
@@ -41,16 +36,16 @@ function MarqueeRow({ reverse = false, speed = 20 }: { reverse?: boolean; speed?
   );
 }
 
-export function TextMarqueeSection() {
+export function TextMarqueeSection({ words, speed = 25 }: TextMarqueeSectionProps) {
   const reduceMotion = useReducedMotion();
 
   if (reduceMotion) return null;
 
   return (
-    <section className="overflow-hidden border-y border-border/30 bg-background py-6 md:py-8">
-      <MarqueeRow speed={30} />
-      <MarqueeRow reverse speed={25} />
-      <MarqueeRow speed={35} />
+    <section className="overflow-hidden border-y border-border/30 bg-background py-4 md:py-6">
+      <MarqueeRow words={words} speed={speed} />
+      <MarqueeRow words={words} reverse speed={speed * 0.8} />
+      <MarqueeRow words={words} speed={speed * 1.2} />
     </section>
   );
 }
