@@ -21,8 +21,21 @@ export const contact = {
   profileImage: '/profile.jpg',
 } as const;
 
+export interface ExperienceEntry {
+  id: string;
+  company: string;
+  headline: string;
+  subline: string;
+  period: string;
+  location: string;
+  logoId: BrandLogoId;
+  logoAlt: string;
+  summary: string;
+  bullets: readonly string[];
+}
+
 /** Landing Experience section — row layout with optional /logos/*.png assets */
-export const experienceTimelineDetailed = [
+export const experienceTimelineDetailed: readonly ExperienceEntry[] = [
   {
     id: '8020-eco',
     company: '8020.eco',
@@ -30,7 +43,7 @@ export const experienceTimelineDetailed = [
     subline: '8020.eco · Management Consulting',
     period: 'Jul 2022 – Oct 2025',
     location: 'Ingolstadt · Hybrid',
-    logoId: 'eco8020' satisfies BrandLogoId,
+    logoId: 'eco8020',
     logoAlt: '8020.eco logo',
     summary:
       'Embedded across multiple parallel project tracks. Primary role as Scrum-driven Product Designer on a long-running enterprise engagement, plus Motion Design Lead and web delivery on two further tracks.',
@@ -48,7 +61,7 @@ export const experienceTimelineDetailed = [
     subline: 'Untitled-ux · Independent Practice',
     period: 'Feb 2020 – Present',
     location: 'Augsburg / Munich',
-    logoId: 'untitledUx' satisfies BrandLogoId,
+    logoId: 'untitledUx',
     logoAlt: 'Untitled-ux logo',
     summary:
       'Independent practice focused on performance marketing, motion design, brand identities, and end-to-end UX work for founders and early-stage clients.',
@@ -65,7 +78,7 @@ export const experienceTimelineDetailed = [
     subline: 'Leadership & Operations',
     period: '2021 – 2024',
     location: 'Augsburg',
-    logoId: 'kontrastFestival' satisfies BrandLogoId,
+    logoId: 'kontrastFestival',
     logoAlt: 'Kontrast Festival logo',
     summary:
       'Co-founded and scaled a regional cultural festival from zero to 3,000+ attendees. Responsible for all operations, team management, and digital and physical experience design.',
@@ -81,7 +94,7 @@ export const experienceTimelineDetailed = [
     subline: 'smartpatient (Digital Health)',
     period: 'Aug 2016 – Jan 2017',
     location: 'Munich',
-    logoId: 'smartpatient' satisfies BrandLogoId,
+    logoId: 'smartpatient',
     logoAlt: 'smartpatient logo',
     summary: 'Early practical experience in user-centered product development for a sensitive health application.',
     bullets: [
@@ -90,4 +103,4 @@ export const experienceTimelineDetailed = [
       'Content strategy and UI design, including infographics',
     ],
   },
-] as const;
+];

@@ -78,11 +78,6 @@ export function HeroSection() {
 
   const currentLine = HEADLINE_LINES[lineIndex];
 
-  const cycleLine = useCallback(() => {
-    setPhase('typing');
-    setLineIndex((prev) => (prev + 1) % HEADLINE_LINES.length);
-  }, []);
-
   const cycleStyle = useCallback(() => {
     setIsFlipping(true);
     setTimeout(() => {

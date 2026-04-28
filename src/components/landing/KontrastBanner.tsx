@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Film } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { EASE, DUR } from '@/lib/motion';
 import { getProjectBySlug, getProjectCoverImage } from '@/content/portfolio';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';

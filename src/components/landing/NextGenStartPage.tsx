@@ -1,7 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Mail, ExternalLink } from 'lucide-react';
 import { contact } from '@/content/home';

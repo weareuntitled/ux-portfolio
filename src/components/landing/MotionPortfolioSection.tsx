@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Film, Play, ExternalLink } from 'lucide-react';
+import { Film, Play, ExternalLink } from 'lucide-react';
 import { EASE, DUR } from '@/lib/motion';
 
 const MOTION_PORTFOLIO_URL = 'https://daniels-portfolio-b20cfa.webflow.io/';
