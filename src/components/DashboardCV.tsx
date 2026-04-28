@@ -374,7 +374,7 @@ function DashboardCVImpl({
 
               <section className="min-w-0 space-y-6 p-4">
                 {showHeader && (
-                  <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-2 sm:px-0">
                     <div>
                       <Breadcrumbs items={breadcrumbs} />
                       {variant !== 'project' && (
