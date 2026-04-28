@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Play, PlayCircle } from 'lucide-react';
 
 import DashboardCV from '@/components/DashboardCV';
 import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/motion';
@@ -54,6 +56,92 @@ const CLIENT_LOGOS: ClientLogo[] = [
 // ---------------------------------------------------------------------------
 // Sub-components
 // ---------------------------------------------------------------------------
+
+function ShowreelCard({ reel }: { reel: typeof SHOWREELS[0] }) {
+  const [imageError, setImageError] = useState(false);
+  const [currentThumbnail, setCurrentThumbnail] = useState(0);
+  
+  // YouTube thumbnail fallbacks - try multiple resolutions
+  const thumbnailOptions = [
+    `https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`, // 1280x720 (best quality)
+    `https://img.youtube.com/vi/${reel.youtubeId}/hqdefault.jpg`,     // 480x360 (high quality)
+    `https://img.youtube.com/vi/${reel.youtubeId}/mqdefault.jpg`,     // 320x180 (medium quality)
+    `https://img.youtube.com/vi/${reel.youtubeId}/default.jpg`,       // 120x90 (default)
+  ];
+  
+  const handleImageError = useCallback(() => {
+    if (currentThumbnail < thumbnailOptions.length - 1) {
+      setCurrentThumbnail(prev => prev + 1);
+    } else {
+      setImageError(true);
+    }
+  }, [currentThumbnail, thumbnailOptions.length]);
+  
+  const handleImageLoad = useCallback(() => {
+    setImageError(false);
+  }, []);
+
+  return (
+    <motion.div
+      variants={fadeUpVariant(0)}
+      className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+    >
+      <Link 
+        href={`https://www.youtube.com/watch?v=${reel.youtubeId}`} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block"
+      >
+        <div className="relative aspect-video w-full overflow-hidden bg-muted/40">
+          {!imageError ? (
+            <Image
+              src={thumbnailOptions[currentThumbnail]}
+              alt={reel.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              onError={handleImageError}
+              onLoad={handleImageLoad}
+              unoptimized={shouldUnoptimizeImage(thumbnailOptions[currentThumbnail])}
+            />
+          ) : (
+            // Fallback when all thumbnails fail
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted/60 to-muted/80">
+              <div className="text-center">
+                <PlayCircle className="mx-auto h-12 w-12 text-muted-foreground/60" />
+                <p className="mt-2 text-xs text-muted-foreground/80">Video Preview</p>
+              </div>
+            </div>
+          )}
+          
+          {/* Overlay gradient */}
+          <div className="pointer-events-none absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/10" />
+          
+          {/* Play button */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-100 transition-opacity duration-500 group-hover:opacity-80">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all group-hover:scale-110 group-hover:bg-white/30">
+              <Play className="ml-1 h-6 w-6 fill-white text-white" />
+            </div>
+          </div>
+          
+          {/* Hover effect overlay */}
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+            <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
+          </div>
+        </div>
+
+        {/* Title overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 py-4">
+          <p className="text-sm font-medium text-white">{reel.title}</p>
+          {reel.subtitle && (
+            <p className="mt-1 text-xs text-white/70">{reel.subtitle}</p>
+          )}
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
 
 function AudiRings() {
   // 4 interlocked rings — proper Audi proportions
@@ -214,43 +302,17 @@ export default function MotionPage() {
             <h2 className="text-4xl font-black tracking-tight leading-none">Featured Work</h2>
           </motion.div>
 
-          {/* Full-width horizontal scroll gallery with YouTube thumbnails */}
-          <motion.div variants={fadeUpVariant(0.1)} className="relative">
-            <div className="flex gap-6 overflow-x-auto pb-4 no-scrollbar">
-              {SHOWREELS.map((reel, i) => (
-                <div
-                  key={i}
-                  className="relative aspect-video w-[85vw] sm:w-[70vw] lg:w-[60vw] xl:w-[50vw] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] shadow-[0_4px_12px_rgba(0,0,0,0.5),0_1px_2px_rgba(255,255,255,0.1)]"
-                >
-                  <Image
-                    src={`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`}
-                    alt={reel.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 60vw, 50vw"
-                    unoptimized={shouldUnoptimizeImage(`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`)}
-                  />
-                  {/* Play button overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/40">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/30">
-                      <svg className="ml-1 h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  {/* Title overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 py-4">
-                    <p className="text-sm font-medium text-white">{reel.title}</p>
-                    {reel.subtitle && (
-                      <p className="mt-1 text-xs text-white/70">{reel.subtitle}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Scroll hint */}
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent" />
+          {/* Card-style grid with video previews */}
+          <motion.div
+            variants={staggerVariant(STAGGER.md)}
+            initial="hidden"
+            whileInView="show"
+            viewport={VP}
+            className="grid gap-6 sm:grid-cols-2"
+          >
+            {SHOWREELS.map((reel) => (
+              <ShowreelCard key={reel.slug} reel={reel} />
+            ))}
           </motion.div>
         </motion.section>
 

@@ -86,34 +86,42 @@ function FeaturedProjectSection({ slug, title, outcome }: { slug: string; title:
         </Link>
       </motion.div>
 
-      {/* Right: Full-width horizontal scroll gallery */}
+      {/* Right: Card-style gallery grid */}
       <motion.div
-        className="relative"
+        className="space-y-4"
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
       >
-        <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-          {project.galleryUrls.map((src, i) => (
-            <div
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {project.galleryUrls.slice(0, 6).map((src, i) => (
+            <motion.div
               key={i}
-              className="relative aspect-[4/3] w-[85vw] sm:w-[70vw] lg:w-[50vw] xl:w-[40vw] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] shadow-[0_4px_12px_rgba(0,0,0,0.5),0_1px_2px_rgba(255,255,255,0.1)]"
+              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE, delay: Math.min(i * 0.03, 0.25) }}
             >
-              <Image
-                src={src}
-                alt={`${title} — Screen ${i + 1}`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 50vw, 40vw"
-                unoptimized={shouldUnoptimizeImage(src)}
-              />
-            </div>
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src={src}
+                  alt={`${title} — Screen ${i + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  unoptimized={shouldUnoptimizeImage(src)}
+                />
+                
+                {/* Hover effect overlay */}
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+                  <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
-        
-        {/* Scroll hint */}
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent" />
       </motion.div>
     </div>
   );

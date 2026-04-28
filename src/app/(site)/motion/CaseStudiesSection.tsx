@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Play, Lock, ArrowRight } from 'lucide-react';
+import { Play, Lock, ArrowRight, PlayCircle } from 'lucide-react';
 
 import { fadeUpVariant, staggerVariant, VP, STAGGER } from '@/lib/motion';
 import { MOTION_PROJECTS, type MotionProject } from '@/content/motion-projects';
+import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 // ---------------------------------------------------------------------------
 // Data
@@ -44,9 +46,32 @@ const PROJECT_CARDS: ProjectCard[] = MOTION_PROJECTS.map(toCard);
 
 function ProjectCard({ slug, label, title, description, video, youtubeThumb, nda }: ProjectCard) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [imageError, setImageError] = useState(false);
+  const [currentThumbnail, setCurrentThumbnail] = useState(0);
+  
   const handleEnter = useCallback(() => ref.current?.play().catch(() => {}), []);
   const handleLeave = useCallback(() => {
     if (ref.current) { ref.current.pause(); ref.current.currentTime = 0; }
+  }, []);
+
+  // YouTube thumbnail fallbacks
+  const thumbnailOptions = youtubeThumb ? [
+    `https://img.youtube.com/vi/${youtubeThumb}/maxresdefault.jpg`,
+    `https://img.youtube.com/vi/${youtubeThumb}/hqdefault.jpg`,
+    `https://img.youtube.com/vi/${youtubeThumb}/mqdefault.jpg`,
+    `https://img.youtube.com/vi/${youtubeThumb}/default.jpg`,
+  ] : [];
+  
+  const handleImageError = useCallback(() => {
+    if (currentThumbnail < thumbnailOptions.length - 1) {
+      setCurrentThumbnail(prev => prev + 1);
+    } else {
+      setImageError(true);
+    }
+  }, [currentThumbnail, thumbnailOptions.length]);
+  
+  const handleImageLoad = useCallback(() => {
+    setImageError(false);
   }, []);
 
   return (
@@ -63,12 +88,26 @@ function ProjectCard({ slug, label, title, description, video, youtubeThumb, nda
         >
           {youtubeThumb ? (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://img.youtube.com/vi/${youtubeThumb}/maxresdefault.jpg`}
-                alt={title}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
+              {!imageError && thumbnailOptions[currentThumbnail] ? (
+                <Image
+                  src={thumbnailOptions[currentThumbnail]}
+                  alt={title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  onError={handleImageError}
+                  onLoad={handleImageLoad}
+                  unoptimized={shouldUnoptimizeImage(thumbnailOptions[currentThumbnail])}
+                />
+              ) : (
+                // Fallback when all YouTube thumbnails fail
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted/60 to-muted/80">
+                  <div className="text-center">
+                    <PlayCircle className="mx-auto h-8 w-8 text-muted-foreground/60" />
+                    <p className="mt-1 text-xs text-muted-foreground/80">Video</p>
+                  </div>
+                </div>
+              )}
               <div className="pointer-events-none absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/10" />
             </>
           ) : (
