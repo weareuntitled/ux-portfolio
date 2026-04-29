@@ -14,19 +14,21 @@ export function Breadcrumbs({ items, rightSlot }: Props) {
       <nav
         className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground"
         aria-label="Breadcrumb"
+        style={{ fontFamily: "'Bitcount', var(--font-mono), monospace", fontWeight: 400, fontStyle: 'italic' }}
       >
         {items.map((item, i) => (
-          <span key={i} className="flex items-center gap-1">
-            {i > 0 && <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />}
+          <span key={i} className="flex items-center gap-1 text-xs sm:text-[11px]">
+            {i > 0 && <ChevronRight className="h-3 w-3 shrink-0 text-foreground/30" aria-hidden />}
             {item.href != null ? (
               <Link
                 href={item.href}
-                className="hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+                className="text-foreground/50 transition-colors hover:text-foreground hover:no-underline"
+                style={{ fontStyle: 'normal' }}
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="text-foreground">{item.label}</span>
+              <span className="text-foreground/70" style={{ fontStyle: 'normal' }}>{item.label}</span>
             )}
           </span>
         ))}
