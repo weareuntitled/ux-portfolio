@@ -112,6 +112,16 @@ return (
             )}
             <h1 className="text-3xl font-bold leading-[1.1] tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl">
               {project.title}
+              {project.prototypeButtonLabel && project.links?.find(l => l.href?.startsWith('/prototypes')) && (
+                <a
+                  href={project.links?.find(l => l.href?.startsWith('/prototypes'))?.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-4 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  {project.prototypeButtonLabel}
+                </a>
+              )}
             </h1>
             {project.subtitle && (
               <p className="mt-2 max-w-2xl text-base leading-snug text-foreground/70">{project.subtitle}</p>
@@ -300,21 +310,7 @@ return (
           </motion.section>
         )}
 
-        {/* ── Prototype iframe ─────────────────────────────────────────── */}
-        {project.prototypeIframeUrl && (
-          <section className="mt-16">
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Live prototype</p>
-            <div className="relative aspect-video w-full overflow-hidden">
-              <iframe
-                className="absolute inset-0 h-full w-full"
-                src={project.prototypeIframeUrl}
-                title={`${project.title} prototype`}
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms"
-              />
-            </div>
-          </section>
-        )}
+        
 
         {/* ── Project navigation ───────────────────────────────────────── */}
         {(prev || next) && (
