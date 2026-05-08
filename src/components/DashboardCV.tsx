@@ -296,7 +296,7 @@ function DashboardCVImpl({
   onSearchChange,
   navProjects,
   breadcrumbs = [{ label: 'Daniel Peters', href: '/' }],
-  pageTitle = 'Dashboard',
+  pageTitle = '',
   variant = 'default',
   rightRail,
   headerRight,
@@ -320,8 +320,9 @@ function DashboardCVImpl({
     localStorage.setItem('sidebar-open', String(sidebarOpen));
   }, [sidebarOpen]);
 
-  const showHeader = variant !== 'landing';
+  const showHeader = variant !== 'landing' && variant !== 'project';
   const isFullWidth = variant === 'landing' || variant === 'fullwidth';
+  const showSidebar = false; // Sidebar disabled for cleaner interface
 
   return (
       <div className="min-h-screen text-foreground">
@@ -338,24 +339,27 @@ function DashboardCVImpl({
         </ul>
       </nav>
       <div className={cn("theme-container flex flex-1 flex-col", !isFullWidth && "md:container md:py-6")}>
-        <div className={cn("flex flex-col overflow-hidden border-border bg-background/75", !isFullWidth && "md:rounded-xl md:border md:border-white/10")}>
+        <div className={cn("flex flex-col overflow-hidden", !isFullWidth && "md:rounded-xl md:border md:border-white/10")}>
           <div
             className={cn(
               "grid min-h-screen w-full items-start transition-all duration-300",
               isFullWidth ? "max-w-none" : "mx-auto max-w-[1400px]",
-              sidebarOpen ? "md:grid-cols-[16rem_1fr]" : "md:grid-cols-[0fr_1fr]"
+              showSidebar ? (sidebarOpen ? "md:grid-cols-[16rem_1fr]" : "md:grid-cols-[0fr_1fr]") : "grid-cols-1 max-w-full"
             )}
           >
-            <aside
+<aside
               className={cn(
-                'sticky top-0 hidden h-screen flex-col border-r border-white/5 bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar transition-all duration-300 md:flex',
-                !sidebarOpen && 'w-0 overflow-hidden p-0 opacity-0'
+                'sticky top-0 h-screen flex-col border-r border-white/5 bg-sidebar p-5 text-sidebar-foreground overflow-y-auto no-scrollbar transition-all duration-300',
+                !sidebarOpen && 'w-0 overflow-hidden p-0 opacity-0',
+                !showSidebar && 'hidden',
+                showSidebar && 'md:flex',
+                !showSidebar && 'md:hidden'
               )}
             >
-              {sidebarOpen && <SidebarContent navProjects={navProjects} />}
+              {sidebarOpen && showSidebar && <SidebarContent navProjects={navProjects} />}
             </aside>
 
-            <main className="flex min-w-0 flex-col">
+            <main className={cn("flex min-w-0 flex-col", variant !== 'project' && "pt-[56px] md:pt-[64px]")}>
               {/* Mobile Header */}
               <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-background/95 p-4 backdrop-blur md:hidden">
                 <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -377,7 +381,7 @@ function DashboardCVImpl({
                   <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="px-4 sm:px-0">
                       <Breadcrumbs items={breadcrumbs} />
-                      {variant !== 'project' && (
+                      {pageTitle && (
                         <h1 className="mt-1 text-xl font-light tracking-tight text-foreground/60 sm:text-2xl">{pageTitle}</h1>
                       )}
                     </div>
@@ -400,11 +404,11 @@ function DashboardCVImpl({
 
                 {rightRail ? (
                   <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start">
-                    <div className="min-w-0 px-4 sm:px-0">{children}</div>
+                    <div className="min-w-0 px-4 sm:px-6 lg:px-8">{children}</div>
                     <aside className="lg:sticky lg:top-8">{rightRail}</aside>
                   </div>
                 ) : (
-                  <div className="px-4 sm:px-0">{children}</div>
+                  <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                 )}
               </section>
             </main>

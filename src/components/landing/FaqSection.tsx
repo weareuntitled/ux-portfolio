@@ -96,7 +96,7 @@ function FaqItemRow({ item, reduceMotion }: { item: FaqItem; reduceMotion: boole
           {item.number}
         </span>
         <span
-          className="flex-1 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-primary"
+          className="flex-1 text-base font-semibold tracking-tight text-foreground transition-colors duration-150 group-hover:text-primary"
           style={{ color: isOpen ? 'hsl(var(--primary))' : undefined }}
         >
           {item.question}

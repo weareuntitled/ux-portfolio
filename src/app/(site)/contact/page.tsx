@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { ArrowUpRight, Mail } from 'lucide-react';
-import { DashboardCV } from '@/components/DashboardCV';
+import { PageLayout } from '@/components/PageLayout';
 import { ContactWebGLBackground } from '@/components/contact/ContactWebGLBackground';
 import { Card, CardContent } from '@/components/ui/card';
 import { contact } from '@/content/home';
@@ -19,13 +19,11 @@ export default async function ContactPage() {
   const navProjects = await getProjectsForNav({ draftMode: draft.isEnabled });
 
   return (
-    <DashboardCV
-      navProjects={navProjects}
+    <PageLayout
       breadcrumbs={[
         { label: 'Daniel Peters', href: '/' },
         { label: 'Contact' },
       ]}
-      pageTitle="Contact"
     >
       <div className="relative -mx-1 min-h-[min(72vh,760px)] overflow-hidden rounded-3xl border border-border/50 shadow-sm sm:-mx-2">
         <ContactWebGLBackground />
@@ -109,6 +107,6 @@ export default async function ContactPage() {
           </p>
         </section>
       </div>
-    </DashboardCV>
+    </PageLayout>
   );
 }

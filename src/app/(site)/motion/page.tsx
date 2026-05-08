@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Play, PlayCircle, ChevronRight } from 'lucide-react';
 
-import DashboardCV from '@/components/DashboardCV';
+import { PageLayout } from '@/components/PageLayout';
 import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/motion';
 import CaseStudiesSection from './CaseStudiesSection';
 import { FaqSection } from '@/components/landing/FaqSection';
@@ -84,7 +84,7 @@ function ShowreelCard({ reel }: { reel: typeof SHOWREELS[0] }) {
   return (
     <motion.div
       variants={fadeUpVariant(0)}
-      className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+      className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl transition-transform duration-400 ease-card-hover hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
     >
       <Link 
         href={`https://www.youtube.com/watch?v=${reel.youtubeId}`} 
@@ -214,19 +214,14 @@ export default function MotionPage() {
   ];
 
   return (
-    <DashboardCV variant="fullwidth" breadcrumbs={breadcrumbs} showSearch={false}>
+    <PageLayout breadcrumbs={breadcrumbs}>
       <div className="space-y-16 pb-16 px-4 sm:px-6">
 
-        {/* Page header — title + breadcrumbs */}
+        {/* Page header — title */}
         <div className="space-y-3 pt-4">
           <h1 className="text-3xl font-light tracking-tight text-foreground sm:text-4xl">
             Motion Work
           </h1>
-          <nav className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Daniel Peters</Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-foreground">Motion</span>
-          </nav>
         </div>
 
         {/* ------------------------------------------------------------------ */}
@@ -336,6 +331,6 @@ export default function MotionPage() {
         <FaqSection />
 
       </div>
-    </DashboardCV>
+    </PageLayout>
   );
 }

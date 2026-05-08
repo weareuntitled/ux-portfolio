@@ -20,9 +20,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', 'Arial', 'Helvetica', 'sans-serif'],
-        display: ['var(--font-display)', 'var(--font-sans)', 'Arial', 'Helvetica', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Manrope', 'var(--font-sans)', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        bitcount: ['Bitcount', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -58,11 +59,38 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        surface: {
+          1: "hsl(var(--surface-1))",
+          2: "hsl(var(--surface-2))",
+          3: "hsl(var(--surface-3))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      spacing: {
+        '4xs': '0.125rem',
+        '3xs': '0.25rem',
+        '2xs': '0.375rem',
+        xs: '0.5rem',
+        sm: '0.75rem',
+        md: '1rem',
+        lg: '1.25rem',
+        xl: '1.5rem',
+        '2xl': '2rem',
+        '3xl': '2.5rem',
+        '4xl': '3rem',
+        '5xl': '4rem',
+        '6xl': '5rem',
+      },
+      boxShadow: {
+        'layer-1': '0 1px 2px hsl(var(--shadow-color) / 0.08), 0 1px 3px hsl(var(--shadow-color) / 0.06)',
+        'layer-2': '0 2px 4px hsl(var(--shadow-color) / 0.08), 0 4px 8px hsl(var(--shadow-color) / 0.06)',
+        'layer-3': '0 4px 8px hsl(var(--shadow-color) / 0.08), 0 8px 16px hsl(var(--shadow-color) / 0.06)',
+        'layer-4': '0 8px 16px hsl(var(--shadow-color) / 0.08), 0 16px 32px hsl(var(--shadow-color) / 0.06)',
+        'glow': '0 0 20px hsl(var(--ring) / 0.3)',
       },
       keyframes: {
         "accordion-down": {
@@ -77,6 +105,20 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      transitionTimingFunction: {
+        'ease-out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'ease-in-out-quint': 'cubic-bezier(0.32, 0, 0.67, 0)',
+        'spring': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        'card-hover': 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+      },
+      transitionDuration: {
+        'instant': '100ms',
+        'fast': '200ms',
+        'normal': '300ms',
+        'slow': '500ms',
+        'deliberate': '700ms',
+        '400': '400ms',
       },
     },
   },

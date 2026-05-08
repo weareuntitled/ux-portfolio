@@ -129,7 +129,7 @@ export function HeroSection() {
   }, [cycleWord, reduceMotion]);
 
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-4 md:px-8 pt-20 pb-8 text-center">
+    <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-4 md:px-8 pt-12 pb-8 text-center">
       {/* WebGL animated gradient background */}
       <WebGLGradientBackground />
 

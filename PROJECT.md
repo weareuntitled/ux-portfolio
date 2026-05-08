@@ -153,4 +153,32 @@ BASE_URL=https://portfolio.untitled-ux.de
 - Dual `TextMarqueeSection` instances (ALL CAPS) before Motion and before About
 - Education restyled as accordion matching Experience timeline
 - Removed all `<!-- -->` HTML comment pre-titles from section headers
+
+## Fragile Areas / Anti-Patterns
+
+### DefaultProjectTemplate Gallery Section
+**Pattern:** Conditional rendering with `{condition && (...)}`
+
+The gallery section (`DefaultProjectTemplate.tsx`) uses:
+```tsx
+{galleryThumbs.length > 0 && (
+  <section>
+    <div>Header</div>
+    <ScrollLockGallery />  {/* REQUIRED - images won't render without this */}
+  </section>
+)}
+```
+
+**Gotcha:** The `<ScrollLockGallery>` component is the ONLY element that renders images. Removing it leaves only the header visible while the condition still evaluates true.
+
+**Anti-pattern rule:** When editing any `{condition && (...)}` block, always check:
+1. Is the condition truthy? (check in devtools)
+2. Is there inner content that actually does the work?
+
+### Motion Wrapper Opacity Bug
+**Pattern:** Framer Motion `motion.section` with initial opacity:0
+
+**Gotcha:** If the motion component's `animate` prop never fires (e.g., reduced motion enabled, or component unmounted before viewport), content remains `opacity: 0` and is invisible but present in DOM.
+
+**Fix:** Removed motion wrapper from gallery section - images render without animation for now.
 - **Design coherence fixes:** thicker SVG strikethrough (`strokeWidth="2.5"`), subtler hero photo (`opacity: 0.18`, `blur-[2px]`, pushed further right), seamless hero→logos transition (removed `pb-8` wrapper), project cards at `w-[90%] max-w-6xl` (~80% visual width), `M.Sc. UX Designer` in normal font weight

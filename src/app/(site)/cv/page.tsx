@@ -2,7 +2,7 @@
 import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
 
 import { CvBrandLogo } from '@/components/cv/CvBrandLogo';
-import { DashboardCV } from '@/components/DashboardCV';
+import { PageLayout } from '@/components/PageLayout';
 import { CvDownloadButton } from '@/components/CvDownloadButton';
 import { contact } from '@/content/home';
 import cvCopy from '@/content/cv-copy.json';
@@ -23,13 +23,11 @@ export default async function CVPage() {
   const navProjects = await getProjectsForNav({ draftMode: isDraft });
 
   return (
-    <DashboardCV
-      navProjects={navProjects}
+    <PageLayout
       breadcrumbs={[
         { label: 'Daniel Peters', href: '/' },
         { label: 'CV' },
       ]}
-      pageTitle="CV"
     >
       <div className="space-y-8">
         {/* Hero Card */}
@@ -157,6 +155,6 @@ export default async function CVPage() {
           </div>
         </section>
       </div>
-    </DashboardCV>
+    </PageLayout>
   );
 }

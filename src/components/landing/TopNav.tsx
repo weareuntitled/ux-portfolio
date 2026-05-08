@@ -25,9 +25,9 @@ export function TopNav() {
                 href={item.href}
                 className={cn(
                   'relative px-2.5 py-1.5 text-xs font-medium transition-colors md:px-3 md:text-sm',
-                  item.accent && !isActive && 'text-primary hover:text-primary/80',
-                  !item.accent && isActive && 'text-foreground',
-                  !item.accent && !isActive && 'text-muted-foreground hover:text-foreground'
+                  isActive && 'text-foreground',
+                  !isActive && item.accent && 'text-primary hover:text-primary/80',
+                  !isActive && !item.accent && 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 {isActive && (

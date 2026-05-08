@@ -60,8 +60,8 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
         href={`/projects/${project.slug}`}
         className={cn(
           'group block overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl',
-          'transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]',
-          'hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]'
+          'transition-all duration-400 ease-card-hover',
+          'hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]'
         )}
       >
         <div className="relative aspect-video w-full overflow-hidden bg-muted">
@@ -70,7 +70,7 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
               src={cover}
               alt={`${project.title} cover`}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              className="object-cover transition-transform duration-400 ease-card-hover group-hover:scale-[1.03]"
               sizes="(max-width: 1024px) 100vw, 50vw"
               unoptimized={shouldUnoptimizeImage(cover)}
             />
@@ -80,7 +80,7 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
             </div>
           )}
 
-          <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-400 ease-card-hover group-hover:opacity-100">
             <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
             <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
           </div>
@@ -93,7 +93,7 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
             {project.year ? <span className="ml-auto font-normal tracking-normal">{project.year}</span> : null}
           </div>
 
-          <h3 className="mt-2 text-base font-semibold tracking-tight">{project.title}</h3>
+          <h3 className="mt-2 text-base font-semibold tracking-[-0.04em]">{project.title}</h3>
           {project.subtitle ? <p className="mt-1 text-sm text-muted-foreground">{project.subtitle}</p> : null}
           {project.oneLiner ? <p className="mt-2 text-sm text-muted-foreground">{project.oneLiner}</p> : null}
         </div>

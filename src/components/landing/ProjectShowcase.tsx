@@ -35,7 +35,7 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
     >
       <Link
         href={`/projects/${project.slug}`}
-        className="group relative block w-full overflow-hidden rounded-2xl border border-border/50 bg-card"
+        className="group relative block w-full overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] transition-all duration-400 ease-card-hover hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)_!important]"
       >
         {/* Full-width image */}
         <div className="relative aspect-[21/9] w-full overflow-hidden sm:aspect-[2.4/1]">
@@ -45,7 +45,7 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
               alt={`${project.title} cover`}
               fill
               quality={80}
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              className="object-cover transition-transform duration-400 ease-card-hover group-hover:scale-[1.03]"
               sizes="100vw"
               unoptimized={shouldUnoptimizeImage(cover)}
             />
@@ -62,11 +62,11 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
           <div className="flex items-end justify-between gap-4">
             <div className="max-w-3xl">
               {/* Category badge — hidden on mobile */}
-              <span className="mb-1 hidden rounded-full border border-border/50 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm sm:mb-2 sm:inline-block">
+              <span className="mb-1 hidden rounded-full border border-white/5 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm sm:mb-2 sm:inline-block">
                 {project.category}
               </span>
 
-              <h3 className="font-display text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-xl md:text-2xl lg:text-3xl">
+              <h3 className="font-display text-lg font-bold tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary sm:text-xl md:text-2xl lg:text-3xl">
                 {project.title}
               </h3>
 
@@ -77,13 +77,13 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
 
               {/* Outcomes / deliverables */}
               {outcome && (
-                <p className="mt-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 sm:mt-2 sm:text-[10px]">
+                <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-primary/80 sm:mt-2 sm:text-[10px]">
                   {outcome}
                 </p>
               )}
             </div>
             <div className="hidden shrink-0 sm:flex">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border/50 bg-background/80 backdrop-blur-sm transition-colors group-hover:border-primary/50 group-hover:bg-primary/10 md:h-12 md:w-12">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/5 bg-background/80 backdrop-blur-sm transition-colors group-hover:border-primary/50 group-hover:bg-primary/10 md:h-12 md:w-12">
                 <ArrowUpRight className="h-4 w-4 text-foreground transition-colors group-hover:text-primary md:h-5 md:w-5" />
               </div>
             </div>

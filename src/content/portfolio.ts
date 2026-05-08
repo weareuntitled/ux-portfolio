@@ -222,6 +222,7 @@ export const portfolio: PortfolioSource = {
     outcomes: ['Consolidated six months of fragmented input into one coherent flow.', 'Reusable modular patterns for holidays, overtime, and diagnostic workflows.'],
     tags: ['enterprise', 'diagnostics'],
     links: [{ label: 'Live prototype', href: '/prototypes/ffp' }],
+    prototypeIframeUrl: '/prototypes/ffp/diagnose',
     prototypeButtonLabel: 'Explore prototype',
     outcomeHighlight: { value: '1', label: 'Story', description: "Aligned the diagnostic UI with the expert's mental model.", icon: 'MousePointerClick' },
     portfolioKit: ffpKit,

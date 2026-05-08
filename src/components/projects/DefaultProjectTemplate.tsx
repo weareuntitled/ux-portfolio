@@ -8,6 +8,7 @@ import { EASE, DUR, VP } from '@/lib/motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import DashboardCV from '@/components/DashboardCV';
 import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
 import { getProjectCoverImage, getAdjacentProjects } from '@/content/portfolio';
@@ -61,15 +62,13 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
     { label: project.title, href: `/projects/${project.slug}` },
   ];
 
-  return (
+return (
     <DashboardCV
       variant="project"
       breadcrumbs={breadcrumbs}
       pageTitle={project.title}
       showSearch={false}
     >
-      <div>
-
         {/* ── Hero: full-bleed image, title overlaid at bottom ─────────── */}
         <motion.section
           initial={reduce ? false : { opacity: 0 }}
@@ -94,6 +93,11 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
 
           {/* Gradient: fade image into background at bottom */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+
+          {/* Breadcrumbs overlay — top-left */}
+          <div className="absolute top-20 left-6 md:left-10 z-10 rounded-lg border border-white/5 bg-background/80 px-3 py-2 backdrop-blur-md">
+            <Breadcrumbs items={breadcrumbs} />
+          </div>
 
           {/* Title overlay — bottom-left */}
           <div className="absolute bottom-0 left-0 right-0 px-6 pb-8 md:px-10 md:pb-10">
@@ -245,21 +249,22 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           </div>
         )}
 
-        {/* ── Gallery: ScrollLock full-bleed band ─────────────────────── */}
+        {/* ═══════════════════════════════════════════════════════════════════
+          GALLERY SECTION — WARNING: Do NOT simplify/remove the inner
+          ScrollLockGallery component. It is the ONLY content that renders
+          the gallery images. Removing it leaves only the header visible.
+          If you need to debug, check galleryThumbs.length > 0 is truthy first.
+        ═══════════════════════════════════════════════════════════════════ */}
         {galleryThumbs.length > 0 && (
-          <motion.section
-            initial={reduce ? false : { opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VP}
-            transition={{ duration: DUR.md, ease: EASE }}
-            className="-mx-4 mt-20 bg-muted/10 px-4 py-14 md:-mx-8 md:px-8 md:py-16"
-          >
+          <section className="-mx-4 mt-20 bg-muted/10 px-4 py-14 md:-mx-8 md:px-8 md:py-16">
+            {/* Header */}
             <div className="mx-auto max-w-7xl mb-8 flex items-end justify-between">
               <div>
                 <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-primary">Gallery</p>
-                <h2 className="text-xl font-semibold leading-tight tracking-tight text-foreground">Selected Screens</h2>
+                <h2 className="text-xl font-semibold leading-tight tracking-[-0.04em] text-foreground">Selected Screens</h2>
               </div>
             </div>
+            {/* Gallery Content - REQUIRED for images to render */}
             <div className="min-h-[400vh]">
               <ScrollLockGallery
                 slides={galleryThumbs.map((src, i): ScrollLockSlide => ({
@@ -268,7 +273,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                 }))}
               />
             </div>
-          </motion.section>
+          </section>
         )}
 
         {/* ── Process diagram ──────────────────────────────────────────── */}
@@ -283,7 +288,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             <p className="mb-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
               {project.processDiagramLabel ?? 'Process architecture'}
             </p>
-            <div className="overflow-hidden rounded-xl border border-white/5 bg-muted/20 p-2">
+            <div className="overflow-hidden">
               <Image
                 src={project.processDiagramUrl}
                 alt={project.processDiagramLabel ?? `${project.title} process`}
@@ -301,7 +306,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
         {project.prototypeIframeUrl && (
           <section className="mt-16">
             <p className="mb-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Live prototype</p>
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/5 bg-muted">
+            <div className="relative aspect-video w-full overflow-hidden">
               <iframe
                 className="absolute inset-0 h-full w-full"
                 src={project.prototypeIframeUrl}
@@ -342,7 +347,6 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           </nav>
         )}
 
-      </div>
-    </DashboardCV>
+      </DashboardCV>
   );
 }

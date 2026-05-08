@@ -6,12 +6,14 @@ import { Inter, Manrope, IBM_Plex_Mono } from 'next/font/google';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
+  weight: ['300', '400', '500', '600'],
   display: 'swap',
 });
 
 const manrope = Manrope({
   subsets: ['latin'],
   variable: '--font-display',
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
