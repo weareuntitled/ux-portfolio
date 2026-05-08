@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { motion, useTransform, useMotionValue, type MotionValue } from 'framer-motion';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 export interface ScrollLockSlide {
@@ -15,18 +15,17 @@ interface ScrollLockGalleryProps {
   slides: ScrollLockSlide[];
 }
 
-// ---------------------------------------------------------------------------
-// Sub-components — each calls hooks at their own top level
-// ---------------------------------------------------------------------------
-
-function SlideItem({ slide, slideIndex, i }: { slide: ScrollLockSlide; slideIndex: MotionValue<number>; i: number }) {
-  const opacity = useTransform(slideIndex, [i - 0.5, i, i + 0.5], [0, 1, 0]);
-  const scale = useTransform(slideIndex, [i - 0.3, i, i + 0.3], [0.95, 1, 0.95]);
+function SlideItem({ slide, scrollProgress, totalSlides, i }: { slide: ScrollLockSlide; scrollProgress: number; totalSlides: number; i: number }) {
+  const activeSlide = Math.floor(scrollProgress * totalSlides);
+  const isActive = activeSlide === i;
+  const opacity = isActive ? 1 : 0;
+  const scale = isActive ? 1 : 0.95;
 
   return (
     <motion.div
       className="absolute inset-0 flex items-center justify-center px-8"
-      style={{ opacity, scale }}
+      animate={{ opacity, scale }}
+      transition={{ duration: 0.3 }}
     >
       <div className="relative aspect-[4/3] w-full max-w-6xl overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] shadow-[0_4px_12px_rgba(0,0,0,0.5),0_1px_2px_rgba(255,255,255,0.1)]">
         <Image
@@ -50,36 +49,101 @@ function SlideItem({ slide, slideIndex, i }: { slide: ScrollLockSlide; slideInde
   );
 }
 
-function DotItem({ slideIndex, i }: { slideIndex: MotionValue<number>; i: number }) {
-  const isActive = useTransform(slideIndex, [i - 0.3, i, i + 0.3], [0, 1, 0]);
-  const bgColor = useTransform(
-    isActive,
-    [0, 1],
-    ['rgba(255,255,255,0.2)', 'hsl(var(--primary))']
-  );
+function DotItem({ scrollProgress, totalSlides, i }: { scrollProgress: number; totalSlides: number; i: number }) {
+  const activeSlide = Math.floor(scrollProgress * totalSlides);
+  const isActive = activeSlide === i;
 
-  return <motion.div className="h-2 w-2 rounded-full" style={{ backgroundColor: bgColor }} />;
+  return (
+    <div
+      className={`h-2 w-2 rounded-full transition-colors duration-200 ${
+        isActive ? 'bg-primary' : 'bg-white/20'
+      }`}
+    />
+  );
 }
 
-// ---------------------------------------------------------------------------
-// Main component
-// ---------------------------------------------------------------------------
+function ScrollControls({ totalSlides, scrollProgress, onSlideClick }: { totalSlides: number; scrollProgress: number; onSlideClick: (i: number) => void }) {
+  const activeSlide = Math.floor(scrollProgress * totalSlides);
+
+  return (
+    <>
+      {/* Progress dots — right side vertical pill */}
+      <div className="absolute right-8 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-2 rounded-full border border-white/5 bg-black/40 px-2 py-3 backdrop-blur-md">
+        {Array.from({ length: totalSlides }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => onSlideClick(i)}
+            className={`h-2 w-2 rounded-full transition-colors duration-200 ${
+              activeSlide === i ? 'bg-primary' : 'bg-white/20 hover:bg-white/40'
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Scroll indicator at bottom center (first slide only) */}
+      {activeSlide === 0 && (
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: scrollProgress > 0.05 ? 0 : 1 }}
+        >
+          <div className="flex flex-col items-center gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Scroll</span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="h-6 w-0.5 rounded-full bg-white/20"
+            />
+          </div>
+        </motion.div>
+      )}
+    </>
+  );
+}
 
 export function ScrollLockGallery({ slides }: ScrollLockGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-  const slideIndex = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, Math.max(0, slides.length - 1)]
-  );
+    const handleScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const containerHeight = container.offsetHeight;
 
-  const scrollIndicatorOpacity = useTransform(slideIndex, [0, 0.5], [1, 0]);
+      const start = 0;
+      const end = containerHeight - windowHeight;
+      const current = -rect.top;
+
+      const progress = Math.max(0, Math.min(1, (current - start) / (end - start)));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSlideClick = (i: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const windowHeight = window.innerHeight;
+    const containerHeight = container.offsetHeight;
+    const end = containerHeight - windowHeight;
+    const targetProgress = i / Math.max(1, slides.length - 1);
+    const targetScroll = targetProgress * end;
+
+    window.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <>
@@ -109,36 +173,16 @@ export function ScrollLockGallery({ slides }: ScrollLockGalleryProps) {
         <div
           ref={containerRef}
           className="relative hidden md:block"
-          style={{ height: `${slides.length * 100}vh` }}
+          style={{ height: `${Math.max(slides.length, 2) * 100}vh` }}
         >
           <div className="sticky top-0 h-screen w-full overflow-hidden">
             <div className="relative h-full w-full">
               {slides.map((slide, i) => (
-                <SlideItem key={i} slide={slide} slideIndex={slideIndex} i={i} />
+                <SlideItem key={i} slide={slide} scrollProgress={scrollProgress} totalSlides={slides.length} i={i} />
               ))}
             </div>
 
-            {/* Progress dots — right side vertical pill */}
-            <div className="absolute right-8 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-2 rounded-full border border-white/5 bg-black/40 px-2 py-3 backdrop-blur-md">
-              {slides.map((_, i) => (
-                <DotItem key={i} slideIndex={slideIndex} i={i} />
-              ))}
-            </div>
-
-            {/* Scroll indicator at bottom center (first slide only) */}
-            <motion.div
-              className="absolute bottom-8 left-1/2 -translate-x-1/2"
-              style={{ opacity: scrollIndicatorOpacity }}
-            >
-              <div className="flex flex-col items-center gap-2">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Scroll</span>
-                <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="h-6 w-0.5 rounded-full bg-white/20"
-                />
-              </div>
-            </motion.div>
+            <ScrollControls totalSlides={slides.length} scrollProgress={scrollProgress} onSlideClick={handleSlideClick} />
           </div>
         </div>
       )}
