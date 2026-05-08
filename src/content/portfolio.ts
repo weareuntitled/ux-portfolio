@@ -176,6 +176,8 @@ export const portfolio: PortfolioSource = {
       description: 'Stopped data destruction in the OEM platform inheritance tree.',
       icon: 'Zap',
     },
+    processDiagramUrl: resolveProjectAssetUrl('/projects/automation_process.png'),
+    processDiagramLabel: 'SAP automation — process architecture',
     caseStudy: caseStudyAutomation,
   },
 

@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  web:
+    image: ghcr.io/weareuntitled/ux-portfolio:latest
+    container_name: ux-portfolio
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
