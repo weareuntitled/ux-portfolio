@@ -10,7 +10,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import DashboardCV from '@/components/DashboardCV';
-import { ScrollLockGallery, type ScrollLockSlide } from '@/components/ui/ScrollLockGallery';
+import { SimpleGallery } from '@/components/ui/SimpleGallery';
 import { getProjectCoverImage, getAdjacentProjects } from '@/content/portfolio';
 import { KontrastPostsBento } from '@/components/kontrast/KontrastPostsBento';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
@@ -264,15 +264,13 @@ return (
                 <h2 className="text-xl font-semibold leading-tight tracking-[-0.04em] text-foreground">Selected Screens</h2>
               </div>
             </div>
-            {/* Gallery Content - REQUIRED for images to render */}
-            <div className="min-h-[400vh]">
-              <ScrollLockGallery
-                slides={galleryThumbs.map((src, i): ScrollLockSlide => ({
-                  src,
-                  label: `${project.title} — Screen ${i + 1}`,
-                }))}
-              />
-            </div>
+            {/* Gallery Content */}
+            <SimpleGallery
+              slides={galleryThumbs.map((src, i) => ({
+                src,
+                label: `Screen ${i + 1}`,
+              }))}
+            />
           </section>
         )}
 
