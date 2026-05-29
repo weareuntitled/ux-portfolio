@@ -253,15 +253,14 @@ export function NextGenStartPage() {
         </div>
       </section>
 
-      {/* 4. AI Side Project — Tracklistify test app band */}
+      {/* 4. AI Side Project — Tracklistify set curation banner */}
       {tracklistify?.accountRequestEndpoint && (
-        <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6">
-          <AccountRequestBand
-            variant="compact"
-            endpoint={tracklistify.accountRequestEndpoint}
-            className="mb-6"
-          />
-        </div>
+        <AccountRequestBand
+          variant="compact"
+          endpoint={tracklistify.accountRequestEndpoint}
+          coverUrl={getProjectCoverImage(tracklistify) ?? undefined}
+          projectUrl={`/projects/${tracklistify.slug}`}
+        />
       )}
 
       {/* 5. Kontrast Festival — Light emphasis */}
