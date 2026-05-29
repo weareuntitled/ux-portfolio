@@ -13,6 +13,7 @@ import DashboardCV from '@/components/DashboardCV';
 import { SimpleGallery } from '@/components/ui/SimpleGallery';
 import { getProjectCoverImage, getAdjacentProjects } from '@/content/portfolio';
 import { KontrastPostsBento } from '@/components/kontrast/KontrastPostsBento';
+import { AccountRequestBand } from '@/components/project/AccountRequestBand';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 type DefaultProject = {
@@ -36,6 +37,7 @@ type DefaultProject = {
   impactCards?: { label: string; value: string }[];
   links?: { label: string; href: string }[];
   prototypeButtonLabel?: string;
+  accountRequestEndpoint?: string;
   processDiagramUrl?: string | null;
   processDiagramLabel?: string;
 };
@@ -171,6 +173,15 @@ return (
             </>
           ) : null}
         </motion.div>
+
+        {/* ── AI Test App Account Request Band ──────────────────────────── */}
+        {project.accountRequestEndpoint && (
+          <AccountRequestBand
+            variant="full"
+            endpoint={project.accountRequestEndpoint}
+            className="mt-12"
+          />
+        )}
 
         {/* ── Narrative: centered single column ───────────────────────── */}
         <motion.article

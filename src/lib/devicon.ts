@@ -58,7 +58,7 @@ export const TECH_STACK: TechCategory[] = [
     title: 'Animation / 3D',
     items: [
       { name: 'Blender', slug: 'blender', level: 'Intermediate', variant: 'original' },
-      { name: 'ComfyUI', iconUrl: 'https://cdn.simpleicons.org/comfyui/white', level: 'Intermediate' },
+      { name: 'ComfyUI', level: 'Intermediate' },
       { name: 'After Effects', slug: 'aftereffects', level: 'Advanced', variant: 'plain' },
       { name: 'Premiere', slug: 'premierepro', level: 'Advanced', variant: 'plain' },
       { name: 'Unity', slug: 'unity', level: 'Basic', variant: 'original' },

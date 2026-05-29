@@ -379,6 +379,7 @@ export const portfolio: PortfolioSource = {
     prototypeIframeUrl:
       'https://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
     prototypeButtonLabel: 'Open Tracklistify',
+    accountRequestEndpoint: 'https://tracklistify.untitled-ux.de/api/auth/account-request',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
     caseStudy: { summary: 'AI DJ set analysis.' },
   },

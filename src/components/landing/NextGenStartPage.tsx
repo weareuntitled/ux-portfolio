@@ -12,7 +12,8 @@ import { ClientLogos } from '@/components/landing/ClientLogos';
 import { KontrastBanner } from '@/components/landing/KontrastBanner';
 import { AboutToolsSection } from '@/components/landing/AboutToolsSection';
 import { TextMarqueeSection } from '@/components/landing/TextMarqueeSection';
-import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
+import { AccountRequestBand } from '@/components/project/AccountRequestBand';
+import { getAllProjects, getProjectCoverImage, getProjectBySlug } from '@/content/portfolio';
 import type { PortfolioProject } from '@/content/portfolio.types';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
 import { cn } from '@/lib/utils';
@@ -209,6 +210,7 @@ export function NextGenStartPage() {
   const reduceMotion = useReducedMotion();
   const allProjects = getAllProjects();
   const enterpriseProjects = allProjects.filter(p => ENTERPRISE_SLUGS.includes(p.slug));
+  const tracklistify = getProjectBySlug('tracklistify');
 
   return (
     <main className="flex min-w-0 flex-1 flex-col">
@@ -251,13 +253,23 @@ export function NextGenStartPage() {
         </div>
       </section>
 
-      {/* 4. Kontrast Festival — Light emphasis */}
+      {/* 4. AI Side Project — Tracklistify test app band */}
+      {tracklistify?.accountRequestEndpoint && (
+        <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6">
+          <AccountRequestBand
+            variant="compact"
+            endpoint={tracklistify.accountRequestEndpoint}
+            className="mb-6"
+          />
+        </div>
+      )}
+
+      {/* 5. Kontrast Festival — Light emphasis */}
       <KontrastBanner />
 
-      {/* 5. Marquee — Motion */}
+      {/* 6. Marquee — Motion */}
       <TextMarqueeSection
         words={['MOTION', 'PROJECTS', 'SYSTEMS', 'DESIGN', 'PRODUCT', 'STRATEGY', 'SHIP', 'BUILD']}
-        speed={30}
       />
 
       {/* 6. About + Tools — Inverse dark */}

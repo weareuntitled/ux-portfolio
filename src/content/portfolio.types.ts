@@ -77,6 +77,9 @@ export type Project = {
     document?: { label: string; href: string };
   };
   tags?: string[];
+
+  // NEU: Account Request für Self-Service Zugang (z.B. Tracklistify)
+  accountRequestEndpoint?: string;
   
   // NEU: YouTube Support für Motion Design
   youtubeUrl?: string;
