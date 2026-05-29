@@ -404,11 +404,11 @@ function DashboardCVImpl({
 
                 {rightRail ? (
                   <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start">
-                    <div className="min-w-0 px-4 sm:px-6 lg:px-8">{children}</div>
+                    <div className={cn('min-w-0', !isFullWidth && 'px-4 sm:px-6 lg:px-8')}>{children}</div>
                     <aside className="lg:sticky lg:top-8">{rightRail}</aside>
                   </div>
                 ) : (
-                  <div className="px-4 sm:px-6 lg:px-8">{children}</div>
+                  <div className={cn(!isFullWidth && 'px-4 sm:px-6 lg:px-8')}>{children}</div>
                 )}
               </section>
             </main>
