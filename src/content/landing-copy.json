@@ -2,7 +2,7 @@
   "hero": {
     "chips": ["Product Design", "Agile Delivery", "Design Strategy"],
     "availableTooltip": "Open to Product Designer, UX Consultant & Design Lead roles.",
-    "description": "I'm a Product Designer and Certified Scrum Master. That combination is rare, and it's what lets me bridge Design and Engineering without losing either side. I turn complex requirements into structured, shippable product. Teams move faster. The right thing gets built."
+    "description": "AI-Native Product Designer. Exploring what happens when design meets AI — building interfaces, orchestrating agents, shipping products. Certified Scrum Master with real sprint experience. I bridge Design and Engineering without losing either side."
   },
   "stats": [
     { "icon": "Package", "badge": "Focus", "k": "Complex Systems", "v": "3", "d": "Diagnostic & compliance tools" },
@@ -17,7 +17,8 @@
       { "icon": "Box", "title": "Strategic Thinking & Concepting", "body": "I start by finding where the real problem actually is. That means asking uncomfortable questions, assessing risks early, and resisting the urge to jump to solutions. Once the picture is clear, I guide clients in the right direction with empathy, structured processes, and Scrum as the delivery backbone. And when we're heading for a wall, I say so.", "img": "/images/capabilities/thinking.jpg" },
       { "icon": "Users", "title": "UX & Research", "body": "Talk to users, find the gaps, turn findings into requirements. I run testing at every stage so the design keeps getting sharper as the project moves forward.", "img": "/images/capabilities/delivery.jpg" },
       { "icon": "Zap", "title": "Agile Delivery & Scrum", "body": "Certified Scrum Master with real sprint experience. I facilitate ceremonies, write developer-ready specs, and keep design and engineering moving in the same direction.", "img": "/images/capabilities/tools.jpg" },
-      { "icon": "Workflow", "title": "Process & Complexity", "body": "Some problems are messy by nature. I map how things actually work, find where the bloat is, and restructure it into something people can use without a manual.", "img": "/images/capabilities/process.jpg" }
+      { "icon": "Workflow", "title": "Process & Complexity", "body": "Some problems are messy by nature. I map how things actually work, find where the bloat is, and restructure it into something people can use without a manual.", "img": "/images/capabilities/process.jpg" },
+      { "icon": "Sparkles", "title": "AI-Augmented Workflows", "body": "I integrate AI where it matters: agentic coding for prototypes, AI-driven visual generation, and automated content extraction. So teams spend time on decisions, not repetition.", "img": "/images/capabilities/tools.jpg" }
     ]
   },
   "leadership": {

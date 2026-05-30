@@ -7,11 +7,13 @@ import { EASE, DUR } from '@/lib/motion';
 import { WebGLGradientBackground } from './WebGLGradientBackground';
 import { contact } from '@/content/home';
 
-const COMPLEXITY_WORDS = [
-  { label: 'Complexity' },
-  { label: 'Mess' },
-  { label: 'Friction' },
-  { label: 'Fragmentation' },
+const FLIP_WORDS = [
+  { label: 'AI' },
+  { label: 'Agents' },
+  { label: 'Motion' },
+  { label: 'Code' },
+  { label: 'Systems' },
+  { label: 'Users' },
 ];
 
 function HandDrawnStrikethrough({ isVisible }: { isVisible: boolean }) {
@@ -47,7 +49,7 @@ function FlipWord3D({
   isFlipping,
   showStrikethrough,
 }: {
-  word: (typeof COMPLEXITY_WORDS)[0];
+  word: (typeof FLIP_WORDS)[0];
   isFlipping: boolean;
   showStrikethrough: boolean;
 }) {
@@ -77,7 +79,7 @@ export function HeroSection() {
   const [isFlipping, setIsFlipping] = useState(false);
   const [showStrikethrough, setShowStrikethrough] = useState(true);
 
-  const currentWord = COMPLEXITY_WORDS[wordIndex];
+  const currentWord = FLIP_WORDS[wordIndex];
 
   const cycleWord = useCallback(() => {
     setShowStrikethrough(false);
@@ -87,7 +89,7 @@ export function HeroSection() {
         setWordIndex((prev) => {
           let next;
           do {
-            next = Math.floor(Math.random() * COMPLEXITY_WORDS.length);
+            next = Math.floor(Math.random() * FLIP_WORDS.length);
           } while (next === prev);
           return next;
         });
@@ -117,39 +119,30 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
-        {/* Profile photo — subtle, right side */}
+        {/* Profile photo — clean circular avatar top-right */}
         <motion.div
-          className="pointer-events-none absolute right-0 top-0 bottom-0 hidden w-[30vw] max-w-[400px] translate-x-1/3 md:block"
-          initial={{ opacity: 0, x: 40 }}
+          className="pointer-events-none absolute right-6 top-6 md:right-10 md:top-10"
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{
-            opacity: 0.22,
-            x: 0,
-            y: [0, -6, 0, 3, 0],
+            opacity: 0.85,
+            scale: 1,
+            y: [0, -4, 0, 2, 0],
           }}
           transition={{
-            opacity: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
-            x: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.4, ease: EASE },
+            opacity: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.3, ease: EASE },
+            scale: { duration: reduceMotion ? 0 : DUR.lg, delay: 0.3, ease: EASE },
             y: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
-          <div
-            className="relative h-full w-full"
-            style={{
-              maskImage:
-                'radial-gradient(ellipse at center, black 0%, black 35%, transparent 100%)',
-              WebkitMaskImage:
-                'radial-gradient(ellipse at center, black 0%, black 35%, transparent 100%)',
-            }}
-          >
+          <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-border/30 bg-muted shadow-lg md:h-28 md:w-28">
             <Image
               src={contact.profileImage}
               alt={contact.name}
               fill
               priority
-              className="object-cover object-top opacity-80"
-              sizes="400px"
+              className="object-cover object-top"
+              sizes="112px"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
           </div>
         </motion.div>
 
@@ -194,7 +187,7 @@ export function HeroSection() {
             className="text-[10vw] leading-[0.9] font-bold tracking-[-0.04em] text-foreground sm:text-[7vw] md:text-[6vw] lg:text-[5.5vw]"
             style={{ fontFamily: 'var(--font-display), var(--font-sans), sans-serif' }}
           >
-            <span className="block">Solving</span>
+            <span className="block">Design meets</span>
             <span className="block" style={{ perspective: '1000px' }}>
               <FlipWord3D
                 word={currentWord}
@@ -202,7 +195,7 @@ export function HeroSection() {
                 showStrikethrough={showStrikethrough}
               />
             </span>
-            <span className="block text-primary">with Structure.</span>
+            <span className="block text-primary">Curiosity meets Craft.</span>
           </h1>
         </motion.div>
 
@@ -214,11 +207,12 @@ export function HeroSection() {
           transition={{ duration: reduceMotion ? 0 : DUR.md, delay: reduceMotion ? 0 : 0.4, ease: EASE }}
         >
           <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-            <span className="font-medium text-foreground/80">Product Designer</span> with AI
-            expertise. Designing interfaces, systems, and workflows for enterprise teams.{' '}
-            <span className="font-medium text-foreground/80">UX Designer</span> ·{' '}
+            <span className="font-medium text-foreground/80">AI-Native Product Designer</span>.
+            Exploring what happens when design meets AI — building interfaces, orchestrating
+            agents, shipping products.{' '}
             <span className="font-medium text-foreground/80">Certified Scrum Master</span> ·{' '}
-            <span className="font-medium text-foreground/80">Motion</span>.
+            <span className="font-medium text-foreground/80">Motion</span> ·{' '}
+            <span className="font-medium text-foreground/80">UX</span>.
           </p>
         </motion.div>
       </div>

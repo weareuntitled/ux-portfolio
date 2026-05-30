@@ -6,11 +6,11 @@
 import type { BrandLogoId } from '@/lib/brand-logos';
 
 export const identityName = 'Daniel Peters';
-export const identityRolePrimary = 'UX & Product Design Consultant';
+export const identityRolePrimary = 'AI-Native Product Designer';
 export const identityRoleSecondary =
-  'Product Design · Agile Delivery · Design Strategy | Certified Scrum Master';
+  'AI-Native Design · Agile Delivery · Motion | Certified Scrum Master';
 export const identityRole = identityRolePrimary;
-export const identitySubtitle = 'Product Design · Agile Delivery · Design Strategy';
+export const identitySubtitle = 'AI-Native Design · Agile Delivery · Motion';
 
 export const contact = {
   name: 'Daniel Peters',
