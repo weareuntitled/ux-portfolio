@@ -27,11 +27,14 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
   title: {
-    default: 'Daniel Peters — UX & Product Design Consultant',
+    default: 'Daniel Peters — AI-Native Product Designer',
     template: '%s | Daniel Peters',
   },
   description:
-    'UX & Product Design Consultant for enterprise SaaS, workflow automation, and SAP. M.Sc. UX Design.',
+    'AI-Native Product Designer & UX Consultant. Enterprise SaaS, workflow automation, AI agents, and motion design. Certified Scrum Master.',
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

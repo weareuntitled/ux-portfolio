@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
@@ -5,6 +6,11 @@ import { ContactWebGLBackground } from '@/components/contact/ContactWebGLBackgro
 import { Card, CardContent } from '@/components/ui/card';
 import { contact } from '@/content/home';
 import { getProjectsForNav } from '@/lib/cms/projects-nav';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Get in touch with Daniel Peters — AI-Native Product Designer & UX Consultant.',
+};
 
 export default async function ContactPage() {
   const draft = await draftMode();

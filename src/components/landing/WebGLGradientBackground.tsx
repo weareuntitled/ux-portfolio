@@ -149,7 +149,8 @@ export function WebGLGradientBackground() {
 
     function draw() {
       if (!gl) return;
-      const t = (performance.now() - start) / 1000;
+      let t = (performance.now() - start) / 1000;
+      t = t % 300;
       gl.uniform1f(uTime, t);
       gl.uniform2f(uRes, canvas!.width, canvas!.height);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -160,9 +161,22 @@ export function WebGLGradientBackground() {
     window.addEventListener('resize', resize);
     raf = requestAnimationFrame(draw);
 
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      cancelAnimationFrame(raf);
+    };
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    canvas.addEventListener('webglcontextrestored', () => {
+      raf = requestAnimationFrame(draw);
+    });
+
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', () => {
+        raf = requestAnimationFrame(draw);
+      });
       gl.deleteProgram(prog);
       gl.deleteBuffer(buf);
     };

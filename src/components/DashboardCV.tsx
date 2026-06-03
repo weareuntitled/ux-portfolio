@@ -240,9 +240,14 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-border bg-muted">
           <Image src={contact.profileImage} alt="" fill className="object-cover" sizes="40px" />
         </div>
-        <div className="min-w-0">
-          <p className="font-semibold text-foreground">{identityName}</p>
-          <p className="text-xs font-medium text-foreground/90">{identityRole}</p>
+        <div className="min-w-0 flex items-center gap-2">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-primary/20 bg-primary/5">
+            <span className="text-[10px] font-bold text-primary">DP</span>
+          </div>
+          <div>
+            <p className="font-semibold text-foreground">{identityName}</p>
+            <p className="text-xs font-medium text-foreground/90">{identityRole}</p>
+          </div>
         </div>
       </div>
 
