@@ -222,7 +222,6 @@ export const portfolio: PortfolioSource = {
     outcomes: ['Consolidated six months of fragmented input into one coherent flow.', 'Reusable modular patterns for holidays, overtime, and diagnostic workflows.'],
     tags: ['enterprise', 'diagnostics'],
     links: [{ label: 'Live prototype', href: '/prototypes/ffp' }],
-    prototypeIframeUrl: '/prototypes/ffp/diagnose',
     prototypeButtonLabel: 'Explore prototype',
     outcomeHighlight: { value: '1', label: 'Story', description: "Aligned the diagnostic UI with the expert's mental model.", icon: 'MousePointerClick' },
     portfolioKit: ffpKit,
@@ -379,7 +378,6 @@ export const portfolio: PortfolioSource = {
     prototypeIframeUrl:
       'https://tracklistify.untitled-ux.de/?ro=eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo',
     prototypeButtonLabel: 'Open Tracklistify',
-    accountRequestEndpoint: 'https://tracklistify.untitled-ux.de/api/auth/account-request',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
     caseStudy: { summary: 'AI DJ set analysis.' },
   },
@@ -563,6 +561,146 @@ export const portfolio: PortfolioSource = {
     outcomeHighlight: { value: '4yr', label: 'Archive', description: 'A deep-dive into the written documentation of projects that established my multidisciplinary design foundation.', icon: 'FolderKanban' },
     caseStudy: { summary: 'Written documentation of foundational design studies.' },
   },
+
+  'gswin-erp-migration': {
+    id: '22',
+    slug: 'gswin-erp-migration',
+    title: 'GSwin ERP Migration',
+    subtitle: 'Lean AI Migration.',
+    navTitle: 'GSwin ERP',
+    oneLiner:
+      'A legacy Handwerks-ERP with 135 isolated databases consolidated into a custom web-based system in 7 days for €200 of AI tokens.',
+    category: 'Enterprise',
+    year: '2026',
+    client: 'Peters GmbH Spenglerei (Handwerksbetrieb)',
+    roles: ['Solo Full-Stack Developer', 'AI Workflow Architect'],
+    teamSize: 'Solo',
+    ribbonLabel: 'Lean AI Migration',
+    ermAnimation: { beforeCount: 135, afterCount: 1, label: 'Database consolidation' },
+    timelineDonut: {
+      segments: [
+        { label: 'Daten-Migration', value: 2, color: '#0ea5e9' },
+        { label: 'Backend (FastAPI)', value: 2, color: '#10b981' },
+        { label: 'Frontend (Next.js)', value: 2, color: '#a855f7' },
+        { label: 'Hosting & DevOps', value: 1, color: '#f59e0b' },
+      ],
+    },
+    context:
+      'Peters GmbH is a small Handwerksbetrieb (Spenglerei / Dachdecker) running on GSwin/GuWin — a specialized but technically outdated craft-trade ERP. The legacy system had grown organically into 135 isolated databases, all inconsistently linked, with no web access and constant friction in daily operations.',
+    problem:
+      'GSwin/GuWin was no longer maintainable. The Handwerks-ERP market offered no realistic alternative: competitor systems are too overloaded, too expensive, and migrating from one craft-ERP to another is technically near-impossible. Off-the-shelf solutions were out of the question.',
+    solution:
+      'Built a custom, lean web-based ERP from scratch in 7 days using a 6-step AI-driven workflow. The data from all 135 isolated GSwin databases was consolidated into a single clean PostgreSQL ERM, exposed via a FastAPI backend, and rendered in a modern Next.js frontend. The whole thing was scaffolded and migrated using opencode (anomalyco/opencode) as router, Claude (Anthropic) API as the strong model, and Figma-to-Code (Anima) for rapid frontend assembly.',
+    description:
+      'A complete legacy-to-modern ERP rewrite for a German Handwerksbetrieb. The project demonstrates what a focused AI-driven workflow can deliver in the Handwerk segment: where off-the-shelf craft ERPs are over-engineered and cost-prohibitive, a custom, lean system that does exactly what the business needs is now feasible in days instead of months — and at a fraction of the cost.',
+    outcomes: [
+      '135 isolated GSwin databases consolidated into one clean PostgreSQL ERM.',
+      'Full rewrite shipped in 7 days with €200 of Claude API tokens.',
+      'Modern, plattformunabhängiges Web-ERP (Desktop & Laptop, hosted on Hostinger).',
+      'AI-Workflow (opencode + Claude) accelerated a multi-month project to a single sprint.',
+      'Foundation laid for upcoming AI/automation features (payment matching, dynamic pricer, voice-to-quote).',
+    ],
+    metrics: [
+      'Entwicklungszeit: 7 Tage',
+      'KI-Token-Kosten: €200 (Anthropic API)',
+      'Datenbanken: 135 → 1',
+      'Plattform: Web (Hostinger)',
+    ],
+    highlights: [
+      'Volle Migration in 7 Tagen',
+      'Nur €200 KI-Token-Kosten',
+      'Solo-Entwicklung mit AI-Workflow',
+      '135 isolierte DBs → 1 zentrales ERM',
+    ],
+    tags: ['erp', 'handwerk', 'ai', 'migration', 'nextjs', 'fastapi', 'postgresql', 'opencode', 'claude'],
+    moodImageUrl: resolveProjectAssetUrl('/projects/gswin-erp-migration_hero.png'),
+    galleryUrls: getGallery('gswin-erp-migration'),
+    impactCards: [
+      { label: 'Entwicklungszeit', value: '7 Tage' },
+      { label: 'KI-Token-Kosten', value: '€200' },
+      { label: 'Datenbanken', value: '135 → 1' },
+    ],
+    outcomeHighlight: {
+      value: 'Lean AI',
+      label: 'Migration',
+      description: 'Volle Legacy-ERP-Migration in 7 Tagen mit €200 KI-Token-Kosten – solo, mit AI-Workflow.',
+      icon: 'Zap',
+    },
+    links: [
+      { label: 'Case study', href: '/projects/gswin-erp-migration' },
+    ],
+    caseStudy: {
+      summary:
+        'Ein Handwerks-ERP (GSwin/GuWin) mit 135 isolierten Datenbanken wurde in 7 Tagen mit einem AI-Driven-Workflow in ein maßgeschneidertes, schlankes Web-ERP migriert.',
+      contextWhyMattered:
+        'Peters GmbH ist ein Handwerksbetrieb (Spenglerei/Dachdecker). Die Legacy-Software GSwin/GuWin ist ein spezialisiertes, aber technisch hoffnungslos veraltetes Handwerks-ERP. Konkurrenz-ERPs sind zu überladen, zu teuer oder technisch nicht migrierbar — eine Migration zu einem anderen Standard-Handwerks-ERP wäre unmöglich oder unverhältnismäßig teuer. Eine Eigenentwicklung war die einzige realistische Option.',
+      realProblem:
+        'Das Legacy-System stützte sich auf 135 isolierte, historisch gewachsene Datenbanken mit inkonsistenten Verknüpfungen. Kein Web-Zugriff, ständige Reibung im täglichen Arbeitsablauf, kein moderner Tech-Stack. Tägliche Schmerzpunkte: Datenduplikate, Suchzeiten, fehlende Mobilität, keine plattformunabhängige Nutzung.',
+      constraints:
+        'Die Daten durften das interne Netz nicht verlassen — die Migration musste lokal laufen. Keine Standard-Handwerks-ERP-Alternative am Markt verfügbar. Kunde brauchte eine schnelle, schlanke Lösung ohne überladene Features. Solo-Umsetzung, kein Team.',
+      myRole:
+        'Alleiniger Entwickler über alle Schichten: 2h Discovery vor Ort, Entity-Modellierung, Daten-Migration, Backend (FastAPI), Frontend (Next.js + Figma-to-Code), Hosting (Hostinger), DevOps.',
+      approach:
+        '1) 2h Discovery beim Kunden — Live-Beobachtung der täglichen Arbeit mit GSwin, Notizen zu genutzten vs. ungenutzten Funktionen. 2) Prozesse niedergezeichnet, ERM entwickelt, Beziehungen der 135 alten DBs aufgelöst. 3) Paper-Sketches → Google Stitch → Figma, Kunden-Freigabe. 4) Migration lokal gestartet (Datenschutz), Template-Frontend vorbereitet. 5) 6-Schritte-AI-Workflow pro Feature: Plan → AI Alignment → Handoff → Test/Dev → Review → Cleanup. 6) Figma-to-Code (Anima) für Frontend-Befüllung, Backend (PDF) als schwierigster Teil. 7) Hosting auf Hostinger, Absicherung.',
+      solutionConcept:
+        'Ein schlankes, modernes Web-ERP auf Basis von Next.js (Frontend) + FastAPI (Backend) + PostgreSQL (konsolidiertes ERM). Komplette Toolchain: opencode (anomalyco/opencode CLI) als Router, Claude (Anthropic) API als starkes Modell, Figma-to-Code (Anima) für die schnelle Frontend-Befüllung aus dem freigegebenen Design. Gehostet auf Hostinger, plattformunabhängig nutzbar.',
+      outcome:
+        '7 Tage Entwicklungszeit. €200 KI-Token-Kosten (Anthropic API). 135 isolierte Datenbanken zu einem zentralen PostgreSQL-ERM konsolidiert. Komplett neues, modernes Web-Interface, sicher gehostet auf Hostinger. Nahtlose Nutzung auf Desktop und Laptop — der Arbeitsalltag der Geschäftsführung ist messbar erleichtert. Fundament für die nächsten Iterationen (Payment-Matching, dynamischer Preiskalkulator, KI-Voice-to-Quote) ist gelegt.',
+      whatILearned:
+        'Selbst wenn ich kein Backend- oder Frontend-Entwickler bin – mit den Programmier-Basics und den richtigen Workflows sind unglaubliche Migrationen möglich. Es braucht nur etwas Mut und Pragmatismus. Im Handwerk sind Standard-ERPs überteuert und hoffnungslos überladen. KI ist kein Hype. Geschäftsmodelle, für die man früher 50.000 € verlangen konnte, sind heute mit den richtigen Tools für einen Bruchteil umsetzbar. Wer das ignoriert, wird fundamental gefährdet.',
+      insightAuthor: 'Daniel Peters',
+    },
+    portfolioKit: {
+      beforeAfter: {
+        oldImg: resolveProjectAssetUrl('/projects/gswin-erp-migration_legacy-guwin.jpg'),
+        newImg: resolveProjectAssetUrl('/projects/gswin-erp-migration_hero.png'),
+      },
+      technicalSpecs: [
+        { title: 'Frontend', body: 'React / Next.js — modern, plattformunabhängig, mobil-tauglich.' },
+        { title: 'Backend', body: 'FastAPI (Python) — schnelle API, PDF-Generierung, Auth.' },
+        { title: 'Datenbank', body: 'PostgreSQL — konsolidiertes ERM aus 135 Legacy-DBs.' },
+        { title: 'Hosting', body: 'Hostinger — sicher abgeschirmt, Cross-Device-Zugriff.' },
+        { title: 'AI-Toolchain', body: 'Claude (Anthropic) API + opencode (anomalyco/opencode CLI) als Router.' },
+        { title: 'Design', body: 'Figma + Anima-Plugin (Figma-to-Code) für schnelles Frontend-Templating.' },
+      ],
+      processSteps: [
+        { number: '1', title: 'Discovery', desc: '2h vor Ort beim Kunden — Live-Beobachtung & Notizen.', icon: 'ClipboardList' },
+        { number: '2', title: 'ERM', desc: 'Prozesse modelliert, 135 DBs zu einer konsolidierten Struktur.', icon: 'GitBranch' },
+        { number: '3', title: 'Prototyping', desc: 'Paper-Sketches → Google Stitch → Figma, Kunden-Freigabe.', icon: 'Sparkles' },
+        { number: '4', title: 'AI-Workflow', desc: '6-Schritte-Zyklus: Plan → AI Alignment → Handoff → Test/Dev → Review → Cleanup.', icon: 'Workflow' },
+        { number: '5', title: 'Frontend', desc: 'Figma-to-Code (Anima) + Next.js-Integration.', icon: 'Layout' },
+        { number: '6', title: 'Backend', desc: 'FastAPI + PDF-Generierung, schwierigster Teil.', icon: 'Server' },
+        { number: '7', title: 'Hosting', desc: 'Hostinger-Deployment, Absicherung, Cross-Device-Test.', icon: 'Cloud' },
+      ],
+      featureItems: [
+        {
+          icon: 'CreditCard',
+          title: 'Automatisierter Zahlungseingang',
+          desc: 'KI-gestützter Abgleich eingehender Zahlungen mit offenen Rechnungen.',
+          problem: 'Manuelles Zuordnen von Zahlungseingängen kostet täglich Zeit.',
+          solution: 'Automatisierter Matching-Algorithmus basierend auf dem konsolidierten ERM.',
+          impact: 'Manuelle Zuordnung entfällt — Skalierung des Tagesgeschäfts ohne Mehraufwand.',
+        },
+        {
+          icon: 'Calculator',
+          title: 'Dynamischer Preiskalkulator',
+          desc: 'Flexible, regelbasierte Preisberechnung für Spenglerarbeiten.',
+          problem: 'Aktuelle Preise sind statisch in Vorlagen, Anpassungen sind manuell.',
+          solution: 'Parametrischer Kalkulator, der Material, Aufwand und Margen dynamisch kombiniert.',
+          impact: 'Schnellere, konsistentere Angebote — weniger Fehler, bessere Margen.',
+        },
+        {
+          icon: 'Mic',
+          title: 'KI-Spracheingabe (Voice-to-Quote)',
+          desc: 'Vollautomatische Angebotserstellung per Spracheingabe.',
+          problem: 'Angebote werden manuell getippt — das kostet Zeit im Akquise-Alltag.',
+          solution: 'KI-Transkription + Strukturierung + Generierung ins ERP per Sprachbefehl.',
+          impact: 'Vom Diktat direkt ins fertige Angebot — Radikale Beschleunigung der Akquise.',
+        },
+      ],
+      insightAuthor: 'Daniel Peters',
+    },
+  },
 };
 
 type ProjectsCopyMap = Record<string, Partial<Project>>;
@@ -582,6 +720,11 @@ export type PortfolioProject = (Project & {
   portfolioKit?: PortfolioKitData;
   kovon?: KovonConfig;
   youtubeUrl?: string;
+  ribbonLabel?: string;
+  ermAnimation?: { beforeCount: number; afterCount: number; label?: string };
+  timelineDonut?: {
+    segments: { label: string; value: number; color: string }[];
+  };
 });
 
 type PortfolioIndex = Record<string, PortfolioProject>;

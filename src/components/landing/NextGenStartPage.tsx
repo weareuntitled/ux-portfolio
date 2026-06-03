@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Film, FolderKanban, ArrowUpRight, Mail, Phone } from 'lucide-react';
+import { Film, FolderKanban, ArrowUpRight, Mail, Phone, Sparkles, Star, FileText } from 'lucide-react';
 import { EASE, DUR } from '@/lib/motion';
 
 import { HeroSection } from '@/components/landing/HeroSection';
@@ -44,6 +44,10 @@ const EducationSection = dynamic(
 
 // Enterprise projects to show on homepage
 const ENTERPRISE_SLUGS = ['kovon', 'ffp-dashboard', 'automation', 'emission-compliance'];
+
+const gswinFeatured = getProjectBySlug('gswin-erp-migration');
+const gswinFeaturedCover = gswinFeatured ? getProjectCoverImage(gswinFeatured) : null;
+const ENTERPRISE_SHOW_SLUGS = ENTERPRISE_SLUGS.filter(s => s !== 'gswin-erp-migration');
 
 function ProjectCard({ project }: { project: PortfolioProject }) {
   const reduceMotion = useReducedMotion();
@@ -246,6 +250,69 @@ export function NextGenStartPage() {
 
           {/* Project thumbnails grid */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {gswinFeatured && (
+              <motion.div
+                className="sm:col-span-2 lg:col-span-4"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
+              >
+                <Link
+                  href={`/projects/${gswinFeatured.slug}`}
+                  className="group block h-full cursor-pointer rounded-xl ring-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-0 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-primary/40">
+                    <div className="relative aspect-[2.4/1] w-full bg-muted">
+                      {gswinFeaturedCover ? (
+                        <Image
+                          src={gswinFeaturedCover}
+                          alt={`${gswinFeatured.title} cover`}
+                          fill
+                          quality={75}
+                          fetchPriority="low"
+                          sizes="(max-width: 1280px) 100vw, 1024px"
+                          className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
+                          unoptimized={shouldUnoptimizeImage(gswinFeaturedCover)}
+                        />
+                      ) : (
+                        <div className="flex h-full min-h-[140px] items-center justify-center bg-gradient-to-br from-muted via-muted/90 to-muted/70">
+                          <FileText className="h-12 w-12 text-muted-foreground/50" strokeWidth={1.5} />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                          {gswinFeatured.category} · {gswinFeatured.year}
+                        </p>
+                        {gswinFeatured.ribbonLabel && (
+                          <span className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/15 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-primary">
+                            <Sparkles className="h-3 w-3" />
+                            {gswinFeatured.ribbonLabel}
+                          </span>
+                        )}
+                        <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
+                          <Star className="h-3 w-3 fill-current" />
+                          Featured
+                        </span>
+                      </div>
+                      <h3 className="mb-1 text-2xl font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">{gswinFeatured.title}</h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{gswinFeatured.oneLiner}</p>
+                      {gswinFeatured.impactCards && gswinFeatured.impactCards.length > 0 && (
+                        <div className="mt-4 flex flex-wrap gap-3 border-t border-border/40 pt-3">
+                          {gswinFeatured.impactCards.slice(0, 3).map((card) => (
+                            <div key={card.label} className="flex flex-col">
+                              <span className="font-mono text-lg font-semibold tabular-nums text-primary">{card.value}</span>
+                              <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70">{card.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                </Link>
+              </motion.div>
+            )}
             {enterpriseProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}

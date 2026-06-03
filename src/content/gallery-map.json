@@ -190,6 +190,18 @@
   "fixundfertig": [
     "/projects/fixundfertig_hero.jpg"
   ],
+  "gswin-erp-migration": [
+    "/projects/gswin-erp-migration_gallery_01_dashboard.png",
+    "/projects/gswin-erp-migration_gallery_02_angebote.png",
+    "/projects/gswin-erp-migration_gallery_03_rechnungen.png",
+    "/projects/gswin-erp-migration_gallery_04_rechnungen-detail.png",
+    "/projects/gswin-erp-migration_gallery_05_stammdaten.png",
+    "/projects/gswin-erp-migration_gallery_06_stammdaten-detail.png",
+    "/projects/gswin-erp-migration_gallery_07_storno.png",
+    "/projects/gswin-erp-migration_gallery_08_invoice-form.png",
+    "/projects/gswin-erp-migration_hero.png",
+    "/projects/gswin-erp-migration_legacy-guwin.jpg"
+  ],
   "kontrast-festival": [
     "/projects/kontrast-festival_gallery_01_dup01.png",
     "/projects/kontrast-festival_gallery_01.png",
