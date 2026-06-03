@@ -71,6 +71,12 @@
     "oneLiner": "Redesigned brand identity and built an SEO-optimized WordPress site for a local specialty contractor, focused on driving regional enquiries.",
     "category": "Web"
   },
+  "job-hunter": {
+    "title": "Job Hunter",
+    "navTitle": "Job Hunter",
+    "subtitle": "Autonomous Application Agent.",
+    "oneLiner": "Built a fully autonomous AI agent that scrapes, scores, and generates personalized applications — all controlled via Telegram."
+  },
   "aidelsburger": {
     "title": "Aidelsburger",
     "subtitle": "Scalable Corporate Identity.",

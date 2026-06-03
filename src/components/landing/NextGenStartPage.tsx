@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Film, FolderKanban, ArrowUpRight, Mail, Phone, Sparkles, Star, FileText } from 'lucide-react';
+import { Film, FolderKanban, ArrowUpRight, Mail, Phone, Sparkles, Star, FileText, Zap } from 'lucide-react';
 import { EASE, DUR } from '@/lib/motion';
 
 import { HeroSection } from '@/components/landing/HeroSection';
@@ -20,6 +20,8 @@ import { contact } from '@/content/home';
 
 const gswinFeatured = getProjectBySlug('gswin-erp-migration');
 const gswinFeaturedCover = gswinFeatured ? getProjectCoverImage(gswinFeatured) : null;
+
+const jobHunter = getProjectBySlug('job-hunter');
 
 const ENTERPRISE_SLUGS = ['kovon', 'ffp-dashboard', 'automation', 'emission-compliance'];
 
@@ -198,7 +200,64 @@ export function NextGenStartPage() {
       {/* 2. Client Logos — Full width, seamless from hero */}
       <ClientLogos />
 
-      {/* 3. Selected Work — Enterprise project thumbnails */}
+      {/* 3. Job Hunter Band — Side Project Hero-Strip */}
+      {jobHunter && (
+        <section className="py-12 md:py-16">
+          <div className="w-full px-4 sm:px-6">
+            <Link
+              href={`/projects/${jobHunter.slug}`}
+              className="group block overflow-hidden rounded-2xl border border-border/50 bg-card shadow-sm transition-all duration-300 hover:border-primary/40 hover:shadow-lg"
+            >
+              <div className="relative h-[220px] md:h-[260px]">
+                <Image
+                  src="/projects/job-hunter_hero.jpg"
+                  alt="Job Hunter"
+                  fill
+                  className="object-cover opacity-80 transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
+                  sizes="(max-width: 1280px) 100vw, 1400px"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/30" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <div className="mb-2 flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/15 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-primary">
+                      <Zap className="h-3 w-3" />
+                      AI Automation
+                    </span>
+                    <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
+                      Side Project · 2026
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary md:text-3xl">
+                    Job Hunter
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground/80">
+                    Autonomous Application Agent.
+                  </p>
+                  <div className="mt-4 flex flex-wrap items-center gap-6">
+                    {jobHunter.impactCards?.slice(0, 3).map((card) => (
+                      <div key={card.label} className="flex flex-col">
+                        <span className="font-mono text-xl font-semibold tabular-nums text-primary md:text-2xl">
+                          {card.value}
+                        </span>
+                        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
+                          {card.label}
+                        </span>
+                      </div>
+                    ))}
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-xs font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+                      How it works
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* 4. Selected Work — Enterprise project thumbnails */}
       <section className="py-20 md:py-28">
         <div className="w-full px-4 sm:px-6">
           {/* Section header */}
@@ -294,7 +353,7 @@ export function NextGenStartPage() {
         </div>
       </section>
 
-      {/* 4. AI Side Project — Tracklistify set curation banner */}
+      {/* 5. AI Side Project — Tracklistify set curation banner */}
       {tracklistify?.accountRequestEndpoint && (
         <AccountRequestBand
           variant="compact"
@@ -304,18 +363,18 @@ export function NextGenStartPage() {
         />
       )}
 
-      {/* 5. Kontrast Festival — Light emphasis */}
+      {/* 6. Kontrast Festival — Light emphasis */}
       <KontrastBanner />
 
-      {/* 6. Marquee — Motion */}
+      {/* 7. Marquee — Motion */}
       <TextMarqueeSection
         words={['MOTION', 'PROJECTS', 'SYSTEMS', 'DESIGN', 'PRODUCT', 'STRATEGY', 'SHIP', 'BUILD']}
       />
 
-      {/* 6. About + Tools — Inverse dark */}
+      {/* 8. About + Tools — Inverse dark */}
       <AboutToolsSection />
 
-      {/* 7. Contact Footer */}
+      {/* 9. Contact Footer */}
       <ContactFooterSection />
     </main>
   );

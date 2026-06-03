@@ -2,7 +2,7 @@
  * Non-Enterprise projects — src/content/portfolio-creative.ts
  * Phase 3 refactoring: extracted from portfolio.ts
  * Projects: 8020-portfolio, 3dprojects, architektur-ai, tracklistify, fixundfertig,
- *   samani-rebranding, kontrast-festival, deinespanndecke, aidelsburger, arbeitsprobe2022
+ *   job-hunter, samani-rebranding, kontrast-festival, deinespanndecke, aidelsburger, arbeitsprobe2022
  * #schema:
  * {
  *   type: "data",
@@ -20,6 +20,30 @@ const caseStudyArchViz = {
     'Designed and implemented a local pipeline that pairs rough 3D modeling with AI-driven style generation so variants can be explored without full manual repaint.',
   solutionConcept:
     'Reduced processing time from about 3 days to about 3 hours per variant—roughly a 24× speed increase—while keeping the workflow on local tooling.',
+};
+
+const caseStudyJobHunter = {
+  summary:
+    'Built a fully autonomous AI agent that scrapes job postings, scores them by fit, and generates personalized application packages — all controlled via Telegram.',
+  contextWhyMattered:
+    'Job hunting is notoriously time-intensive. Modern application portals (ATS) rarely expose end-to-end automation via email or API. Customizing CVs, writing cover letters, and manually uploading documents for each role creates a repetitive administrative bottleneck that drains energy better spent on actual work.',
+  realProblem:
+    'Before this system, every application required 2+ hours of manual work: scanning job boards, copy-pasting requirements into a terminal script to patch LaTeX templates, adjusting bullet points, rewriting cover letters, and rendering PDFs. The process was fragile, error-prone, and fundamentally unscalable — applying to more than a handful of positions per week was impractical.',
+  constraints:
+    'Corporate ATS platforms (Stepstone, LinkedIn Easy Apply, company career portals) do not offer open APIs for submitting applications. 100% end-to-end automation is blocked by design. The system had to operate within this reality: automate everything upstream of the final manual upload.',
+  myRole:
+    'Sole architect and developer across the entire stack: Python bot framework (aiogram), LLM integration (OpenAI / Anthropic), job scraping pipeline (Jobspy), LaTeX rendering (Tectonic), SQLite persistence, Telegram UX.',
+  approach:
+    '1) Built a Telegram bot as the control plane — no heavy web app, just inline keyboards and 1-click approvals for speed. 2) Integrated Jobspy to scrape Stepstone, LinkedIn, and other boards. 3) Created a two-stage scoring pipeline: keyword match filter (score 0–10) followed by LLM-based semantic evaluation. 4) Maintained a pool of 43 competence bullets covering every conceivable project/tech/domain; the system dynamically selects the 8–12 most relevant ones per role. 5) An LLM writes the cover letter, auto-detecting the posting language (DE/EN) and matching tone. 6) A Tectonic LaTeX pipeline renders the final personalized CV + cover letter as a single polished PDF.',
+  solutionConcept:
+    'A Python-based autonomous agent, controlled via Telegram messenger. The user issues a single command (/apply) and receives curated, scored opportunities. One tap triggers the full generation pipeline. Within minutes, a perfectly tailored PDF lands back in the Telegram chat — ready for manual upload.',
+  outcome:
+    'Time-to-Apply dropped from 2 hours to under 20 minutes per position. Average weekly savings: 8 hours of repetitive work. At full throughput, the system generates 4+ highly personalized applications per week. Quality benchmarks at 90–95% of a painstakingly manual application, delivered in a fraction of the time.',
+  whatILearned:
+    'Chasing 100% automation is a trap when the platform layer doesn\'t cooperate. The real leverage is at the boundary: automate the hard parts (search, evaluation, generation), and accept the last mile of manual upload as a tax you happily pay. The product mindset — optimize for throughput and quality per unit effort — beats perfectionism every time.',
+  insightAuthor: 'Daniel Peters',
+  whatToShowVisually:
+    'System architecture diagram; Telegram chat screenshots showing the /apply flow; a comparison of old vs. new time-to-apply.',
 };
 
 const TOKEN = 'eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo';
@@ -132,6 +156,7 @@ export const portfolioCreative: PortfolioSource = {
     prototypeIframeUrl: `https://tracklistify.untitled-ux.de/?ro=${TOKEN}`,
     prototypeButtonLabel: 'Open Tracklistify',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
+    accountRequestEndpoint: '/api/request-access/tracklistify',
     caseStudy: { summary: 'AI DJ set analysis.' },
   },
 
@@ -159,6 +184,68 @@ export const portfolioCreative: PortfolioSource = {
     prototypeButtonLabel: 'Open Fix und Fertig',
     outcomeHighlight: { value: 'OCR', label: 'Intake', description: 'Ended manual receipt copying via custom engine.', icon: 'Scan' },
     caseStudy: { summary: 'Personal admin automation.' },
+  },
+
+  'job-hunter': {
+    id: '23',
+    slug: 'job-hunter',
+    title: 'Job Hunter',
+    subtitle: 'Autonomous Application Agent.',
+    oneLiner: 'Built a fully autonomous AI agent that scrapes job postings, scores them by fit, and generates personalized application packages — all controlled via Telegram.',
+    category: 'Side',
+    year: '2026',
+    moodImageUrl: getPreviewImage('job-hunter'),
+    galleryUrls: getGallery('job-hunter'),
+    roles: ['AI Workflow Architect', 'Solo Developer'],
+    teamSize: 'Solo',
+    ribbonLabel: 'AI Automation',
+    problem:
+      'Job hunting is notoriously time-intensive. Modern ATS portals rarely expose APIs for end-to-end automation. Customizing CVs, rewriting cover letters, and manually rendering LaTeX PDFs for each application creates a repetitive bottleneck that makes scaling beyond a handful of applications per week impractical.',
+    solution:
+      'Built an autonomous Telegram-controlled agent that scrapes jobs (Jobspy), scores them by keyword fit (0–10), dynamically selects 8–12 of 43 competence bullets, and uses an LLM to write a language-aware cover letter. A Tectonic LaTeX pipeline renders the final personalized PDF. User reviews and approves via 1-click Telegram interactions.',
+    description:
+      'A Python-based autonomous application agent that eliminates the terminal-CDE grind of manual job applications. The bot handles the entire heavy-lifting pipeline — scraping, scoring, bullet selection, cover letter generation, and PDF rendering — while the user retains a lightweight manual upload step where ATS platforms close the loop. The result: time-to-apply dropped from 2 hours to under 20 minutes.',
+    outcomes: [
+      'Time-to-apply collapsed from ~2 hours to ≤20 minutes per position.',
+      'Average 8 hours of repetitive work saved per week.',
+      'Throughput of 4+ highly personalized applications per week.',
+      'Quality at 90–95% of a fully manual application — at a fraction of the time cost.',
+    ],
+    tags: ['ai', 'automation', 'python', 'telegram', 'llm', 'latex', 'job-hunting'],
+    processDiagramUrl: '/projects/job-hunter_architecture.jpg',
+    processDiagramLabel: 'System Architecture',
+    impactCards: [
+      { label: 'Time-to-Apply', value: '≤20 min' },
+      { label: 'Saved / Week', value: '8 h' },
+      { label: 'Output / Week', value: '4+' },
+    ],
+    outcomeHighlight: {
+      value: '≤20 min',
+      label: 'Per Application',
+      description: 'From 2 hours of manual terminal-CDE work to a Telegram 1-click approval flow.',
+      icon: 'Zap',
+    },
+    caseStudy: caseStudyJobHunter,
+    portfolioKit: {
+      technicalSpecs: [
+        { title: 'Bot Framework', body: 'aiogram (Python) — lightweight async Telegram bot with inline keyboard UX for 1-click approvals.' },
+        { title: 'Job Scraping', body: 'Jobspy — unified scraping layer for Stepstone, LinkedIn, and other boards.' },
+        { title: 'LLM Integration', body: 'OpenAI / Anthropic API — two-stage scoring (keyword + semantic) and language-aware cover letter generation.' },
+        { title: 'Competence Pool', body: '43 curated bullet points covering projects, technologies, and domain expertise; dynamic 8–12 selection per role.' },
+        { title: 'PDF Rendering', body: 'Tectonic (modern LaTeX engine) — fully automated CV + cover letter generation as polished PDF.' },
+        { title: 'Persistence', body: 'SQLite — lightweight session state, scoring history, and generation cache.' },
+        { title: 'Control Plane', body: 'Telegram Messenger — no web app, no dashboard; just inline keyboards and direct message commands.' },
+      ],
+      processSteps: [
+        { number: '1', title: 'Scrape', desc: 'Jobspy searches Stepstone, LinkedIn, and career portals for matching roles.', icon: 'ClipboardList' },
+        { number: '2', title: 'Score', desc: 'Two-stage pipeline: keyword filter (0–10) followed by LLM semantic evaluation.', icon: 'Zap' },
+        { number: '3', title: 'Select', desc: 'System picks 8–12 of 43 competence bullets most relevant to the role.', icon: 'Sparkles' },
+        { number: '4', title: 'Generate', desc: 'LLM writes cover letter with auto-detected language (DE/EN) and tone match.', icon: 'Workflow' },
+        { number: '5', title: 'Render', desc: 'Tectonic LaTeX pipeline produces a polished, personalized PDF.', icon: 'Layout' },
+        { number: '6', title: 'Approve', desc: 'User receives PDF in Telegram, reviews, and manually uploads to ATS portal.', icon: 'Server' },
+      ],
+      insightAuthor: 'Daniel Peters',
+    },
   },
 
   'samani-rebranding': {
