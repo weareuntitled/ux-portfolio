@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Play, PlayCircle, ChevronRight } from 'lucide-react';
+import { Play, PlayCircle } from 'lucide-react';
 
 import { PageLayout } from '@/components/PageLayout';
 import { EASE, DUR, VP, STAGGER, fadeUpVariant, staggerVariant } from '@/lib/motion';

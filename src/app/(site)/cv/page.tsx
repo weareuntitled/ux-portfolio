@@ -20,7 +20,7 @@ export const revalidate = 300;
 export default async function CVPage() {
   const draft = await draftMode();
   const isDraft = draft.isEnabled;
-  const navProjects = await getProjectsForNav({ draftMode: isDraft });
+  await getProjectsForNav({ draftMode: isDraft });
 
   return (
     <PageLayout

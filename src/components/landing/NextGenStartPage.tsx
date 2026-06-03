@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -19,35 +18,10 @@ import { shouldUnoptimizeImage } from '@/lib/project-assets';
 import { cn } from '@/lib/utils';
 import { contact } from '@/content/home';
 
-/** Below-fold sections: separate JS chunks + defer parse on slow connections */
-function BelowFoldSkeleton() {
-  return (
-    <div
-      className="min-h-[200px] animate-pulse rounded-2xl border border-white/5 bg-muted/20"
-      aria-hidden
-    />
-  );
-}
-
-const ExperienceTimelineSection = dynamic(
-  () =>
-    import('@/components/landing/ExperienceTimelineSection').then((m) => ({
-      default: m.ExperienceTimelineSection,
-    })),
-  { loading: () => <BelowFoldSkeleton /> },
-);
-
-const EducationSection = dynamic(
-  () => import('@/components/landing/EducationSection').then((m) => ({ default: m.EducationSection })),
-  { loading: () => <BelowFoldSkeleton /> },
-);
-
-// Enterprise projects to show on homepage
-const ENTERPRISE_SLUGS = ['kovon', 'ffp-dashboard', 'automation', 'emission-compliance'];
-
 const gswinFeatured = getProjectBySlug('gswin-erp-migration');
 const gswinFeaturedCover = gswinFeatured ? getProjectCoverImage(gswinFeatured) : null;
-const ENTERPRISE_SHOW_SLUGS = ENTERPRISE_SLUGS.filter(s => s !== 'gswin-erp-migration');
+
+const ENTERPRISE_SLUGS = ['kovon', 'ffp-dashboard', 'automation', 'emission-compliance'];
 
 function ProjectCard({ project }: { project: PortfolioProject }) {
   const reduceMotion = useReducedMotion();
@@ -300,7 +274,7 @@ export function NextGenStartPage() {
                       <p className="text-sm leading-relaxed text-muted-foreground">{gswinFeatured.oneLiner}</p>
                       {gswinFeatured.impactCards && gswinFeatured.impactCards.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-3 border-t border-border/40 pt-3">
-                          {gswinFeatured.impactCards.slice(0, 3).map((card) => (
+                          {gswinFeatured.impactCards.slice(0, 3).map((card: { label: string; value: string }) => (
                             <div key={card.label} className="flex flex-col">
                               <span className="font-mono text-lg font-semibold tabular-nums text-primary">{card.value}</span>
                               <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70">{card.label}</span>

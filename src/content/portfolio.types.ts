@@ -188,6 +188,11 @@ export type PortfolioProject = Project & {
   caseStudy?: CaseStudySections;
   portfolioKit?: PortfolioKitData;
   kovon?: KovonConfig;
+  ribbonLabel?: string;
+  ermAnimation?: { beforeCount: number; afterCount: number; label?: string };
+  timelineDonut?: {
+    segments: { label: string; value: number; color: string }[];
+  };
 };
 
 export type PortfolioSource = Record<string, PortfolioProject>;

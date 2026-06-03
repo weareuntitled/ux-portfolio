@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { motion, useTransform, useMotionValue, type MotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
 
 export interface ScrollLockSlide {
@@ -46,19 +46,6 @@ function SlideItem({ slide, scrollProgress, totalSlides, i }: { slide: ScrollLoc
         )}
       </div>
     </motion.div>
-  );
-}
-
-function DotItem({ scrollProgress, totalSlides, i }: { scrollProgress: number; totalSlides: number; i: number }) {
-  const activeSlide = Math.floor(scrollProgress * totalSlides);
-  const isActive = activeSlide === i;
-
-  return (
-    <div
-      className={`h-2 w-2 rounded-full transition-colors duration-200 ${
-        isActive ? 'bg-primary' : 'bg-white/20'
-      }`}
-    />
   );
 }
 

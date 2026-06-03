@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
@@ -7,16 +6,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { contact } from '@/content/home';
 import { getProjectsForNav } from '@/lib/cms/projects-nav';
 
-export const metadata: Metadata = {
-  title: 'Contact | Daniel Peters',
-  description: 'Contact Daniel Peters for product design, UX strategy, and enterprise workflows.',
-};
-
-export const revalidate = 300;
-
 export default async function ContactPage() {
   const draft = await draftMode();
-  const navProjects = await getProjectsForNav({ draftMode: draft.isEnabled });
+  await getProjectsForNav({ draftMode: draft.isEnabled });
 
   return (
     <PageLayout
