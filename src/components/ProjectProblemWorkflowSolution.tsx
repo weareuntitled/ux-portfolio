@@ -90,7 +90,7 @@ export function ProjectProblemWorkflowSolution({ project }: Props) {
       {solutionContent && (
         <article className="rounded-xl border border-border bg-card p-6">
           <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <Lightbulb className="h-5 w-5" aria-hidden />
             </div>
             <h2 className="font-semibold text-foreground">Solution</h2>

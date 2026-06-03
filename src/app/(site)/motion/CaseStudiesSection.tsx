@@ -83,7 +83,7 @@ function ProjectCard({ slug, label, title, description, video, youtubeThumb, nda
     <motion.div variants={fadeUpVariant(0)}>
       <Link
         href={`/motion/${slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-background/40 backdrop-blur-2xl transition-transform duration-400 ease-card-hover hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-background/40 backdrop-blur-2xl transition-transform duration-400 ease-card-hover hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_hsl(var(--shadow-color)/0.15)]"
       >
         {/* Thumbnail */}
         <div

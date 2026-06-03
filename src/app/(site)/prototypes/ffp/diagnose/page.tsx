@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 function getTrendIcon(trend: ActivityFFP["trend"]) {
   if (trend === "up")
-    return <TrendingUp className="h-3.5 w-3.5 text-green-500" />;
+    return <TrendingUp className="h-3.5 w-3.5 text-primary" />;
   if (trend === "down")
     return <TrendingDown className="h-3.5 w-3.5 text-destructive" />;
   return <Minus className="h-3.5 w-3.5 text-muted-foreground" />;
@@ -136,7 +136,7 @@ export default function DiagnosePage() {
                               <span
                                 className={cn(
                                   "font-semibold",
-                                  ffp.trend === "up" && "text-green-600 dark:text-green-400",
+                                  ffp.trend === "up" && "text-primary",
                                   ffp.trend === "down" && "text-destructive",
                                   ffp.trend === "stable" && "text-muted-foreground"
                                 )}

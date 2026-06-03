@@ -14,14 +14,14 @@ type EnterpriseSideNavProps = {
 
 export function EnterpriseSideNav({ items }: EnterpriseSideNavProps) {
   return (
-    <aside className="flex w-16 flex-col items-center gap-2 border-r bg-white py-3">
+    <aside className="flex w-16 flex-col items-center gap-2 border-r bg-background py-3">
       {items.map((item) => {
         const Icon = item.icon;
         return (
           <Link
             key={item.label}
             href={item.href}
-            className={`rounded-lg p-2 ${item.active ? 'bg-blue-50 text-blue-600' : 'text-slate-500 hover:bg-slate-100'}`}
+            className={`rounded-lg p-2 ${item.active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'}`}
             aria-label={item.label}
             title={item.label}
           >

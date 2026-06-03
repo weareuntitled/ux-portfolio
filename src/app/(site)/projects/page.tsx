@@ -69,7 +69,7 @@ export default function ProjectsPage() {
                 placeholder="Search projects..."
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                className="h-10 w-full rounded-full border border-white/5 bg-[#0f0f12] pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary/30 focus:outline-none"
+                className="h-10 w-full rounded-full border border-border/10 bg-card pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary/30 focus:outline-none"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function ProjectsPage() {
           {/* Mobile filter toggle */}
           <div className="mb-4 flex items-center gap-3 lg:hidden">
             <Sheet>
-              <SheetTrigger className="inline-flex items-center gap-2 rounded-lg border border-white/5 bg-[#0f0f12] px-3 py-2 text-sm text-foreground">
+              <SheetTrigger className="inline-flex items-center gap-2 rounded-lg border border-border/10 bg-card px-3 py-2 text-sm text-foreground">
                 <SlidersHorizontal className="h-4 w-4" />
                 Filter
               </SheetTrigger>
@@ -168,9 +168,9 @@ export default function ProjectsPage() {
                       <Link
                         href={`/projects/${p.slug}`}
                         className={cn(
-                          'group block overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl',
+                          'group block overflow-hidden rounded-2xl border border-border/10 bg-card backdrop-blur-2xl',
                           'transition-all duration-400 ease-card-hover',
-                          'hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]'
+                          'hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_hsl(var(--shadow-color)/0.15)]'
                         )}
                       >
                         <div className="relative aspect-video w-full overflow-hidden bg-muted">
@@ -195,7 +195,7 @@ export default function ProjectsPage() {
                           </div>
 
                           {p.slug === 'kontrast-festival' ? (
-                            <div className="absolute bottom-2 left-2 rounded-md border border-white/5 bg-black/45 p-1.5 shadow-sm backdrop-blur-sm">
+                            <div className="absolute bottom-2 left-2 rounded-md border border-border/10 bg-black/45 p-1.5 shadow-sm backdrop-blur-sm">
                               <BrandLogoMark
                                 id="kontrastFestival"
                                 label="Kontrast Festival"

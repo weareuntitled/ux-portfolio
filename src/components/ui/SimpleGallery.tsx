@@ -106,7 +106,7 @@ export function SimpleGallery({ slides }: SimpleGalleryProps) {
             <button
               key={i}
               onClick={() => openLightbox(i)}
-              className="group relative aspect-[4/3] w-[80vw] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#0f0f12] md:w-[45vw] lg:w-[600px]"
+              className="group relative aspect-[4/3] w-[80vw] shrink-0 overflow-hidden rounded-xl border border-border/10 bg-card md:w-[45vw] lg:w-[600px]"
             >
               <Image
                 src={slide.src}

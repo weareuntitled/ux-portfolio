@@ -27,7 +27,7 @@ function SlideItem({ slide, scrollProgress, totalSlides, i }: { slide: ScrollLoc
       animate={{ opacity, scale }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative aspect-[4/3] w-full max-w-6xl overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] shadow-[0_4px_12px_rgba(0,0,0,0.5),0_1px_2px_rgba(255,255,255,0.1)]">
+      <div className="relative aspect-[4/3] w-full max-w-6xl overflow-hidden rounded-2xl border border-border/10 bg-card shadow-[0_4px_12px_hsl(var(--shadow-color)/0.2),0_1px_2px_hsl(var(--foreground)/0.1)]">
         <Image
           src={slide.src}
           alt={slide.caption ?? `Slide ${i + 1}`}

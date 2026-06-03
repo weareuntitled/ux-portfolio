@@ -53,7 +53,7 @@ export function FFPDetailPanel({ ffp, isOpen, onClose }: FFPDetailPanelProps) {
               <span className="text-xs font-mono text-muted-foreground">
                 {ffp.id}
               </span>
-              <span className="text-xs px-2 py-1 bg-green-900/30 text-green-300 rounded">
+              <span className="text-xs px-2 py-1 bg-primary/30 text-primary rounded">
                 {ffp.status}
               </span>
             </div>

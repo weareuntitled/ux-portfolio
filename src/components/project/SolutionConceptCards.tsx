@@ -25,10 +25,10 @@ export function SolutionConceptCards({ title, subtitle, items, className = '' }:
   return (
     <section className={`w-full space-y-8 py-8 ${className}`}>
       <div className="mb-8 flex flex-col gap-2">
-        <h2 className="text-3xl font-semibold tracking-tight text-zinc-100">
+        <h2 className="text-3xl font-semibold tracking-tight text-foreground">
           {title}
         </h2>
-        <p className="text-zinc-400">{subtitle}</p>
+        <p className="text-muted-foreground">{subtitle}</p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -37,9 +37,9 @@ export function SolutionConceptCards({ title, subtitle, items, className = '' }:
           return (
             <div
               key={item.title}
-              className="group flex flex-col items-start gap-6 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 transition-all hover:border-primary/50 hover:bg-zinc-900/60 sm:flex-row"
+              className="group flex flex-col items-start gap-6 rounded-2xl border border-border/40 bg-card/60 p-6 transition-all hover:border-primary/50 hover:bg-card/80 sm:flex-row"
             >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 shadow-sm transition-all group-hover:scale-105 group-hover:border-primary/50">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-card shadow-sm transition-all group-hover:scale-105 group-hover:border-primary/50">
                 <Icon
                   className="h-6 w-6 text-primary"
                   strokeWidth={2}
@@ -47,10 +47,10 @@ export function SolutionConceptCards({ title, subtitle, items, className = '' }:
                 />
               </div>
               <div className="flex flex-col gap-2 pt-1">
-                <h3 className="text-lg font-semibold text-zinc-100 transition-colors group-hover:text-primary">
+                <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
                   {item.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>
               </div>

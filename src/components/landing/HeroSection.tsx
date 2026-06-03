@@ -134,7 +134,7 @@ export function HeroSection() {
             y: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
-          <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-border/30 bg-muted shadow-lg md:h-28 md:w-28">
+          <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-border/30 bg-muted shadow-lg ring-1 ring-primary/20 md:h-28 md:w-28">
             <Image
               src={contact.profileImage}
               alt={contact.name}
@@ -187,8 +187,15 @@ export function HeroSection() {
             className="text-[10vw] leading-[0.9] font-bold tracking-[-0.04em] text-foreground sm:text-[7vw] md:text-[6vw] lg:text-[5.5vw]"
             style={{ fontFamily: 'var(--font-display), var(--font-sans), sans-serif' }}
           >
-            <span className="block">Design meets</span>
-            <span className="block" style={{ perspective: '1000px' }}>
+            <span className="block font-normal text-foreground/70">Design meets</span>
+            <span className="relative block" style={{ perspective: '1000px' }}>
+              <span
+                className="pointer-events-none absolute -top-4 left-1/2 h-[calc(100%+2rem)] w-[140%] -translate-x-1/2 rounded-full blur-2xl"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at center, hsl(var(--primary) / 0.18) 0%, hsl(var(--primary) / 0.05) 45%, transparent 70%)',
+                }}
+              />
               <FlipWord3D
                 word={currentWord}
                 isFlipping={isFlipping}

@@ -57,10 +57,10 @@ const sectionAccent: Record<keyof CaseStudySections, string> = {
   constraints: 'border-l-destructive/70',
   myRole: 'border-l-primary',
   approach: 'border-l-primary',
-  solutionConcept: 'border-l-emerald-500/80',
-  outcome: 'border-l-emerald-500/80',
-  whatILearned: 'border-l-amber-500/80',
-  whatToShowVisually: 'border-l-emerald-500/80',
+  solutionConcept: 'border-l-primary/80',
+  outcome: 'border-l-primary/80',
+  whatILearned: 'border-l-chart-4/80',
+  whatToShowVisually: 'border-l-primary/80',
   insightAuthor: 'border-l-muted-foreground/50',
 };
 

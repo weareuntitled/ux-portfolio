@@ -93,12 +93,12 @@ export function AutomationProjectContent() {
     <div className="space-y-24">
       {/* Quote */}
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150 fill-mode-both">
-          <blockquote className="border-l-4 border-primary bg-primary/5 p-8 italic text-lg text-zinc-200">
+          <blockquote className="border-l-4 border-primary bg-primary/5 p-8 italic text-lg text-foreground/90">
             &ldquo;Operator pushes a part (e.g. new brake component) → K-level
             drops across the chain. Support uses bot-set IDs to find wrongly
             reset items and restores them. The bot saves manual checks and
             reduces the risk of an assembly line stop.&rdquo;
-            <footer className="mt-4 not-italic text-sm text-zinc-500">
+            <footer className="mt-4 not-italic text-sm text-muted-foreground">
               — Project Core Logic
             </footer>
           </blockquote>

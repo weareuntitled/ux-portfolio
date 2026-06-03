@@ -11,7 +11,7 @@ interface GlassCardProps {
 }
 
 const cardClassName =
-  "group relative flex h-44 cursor-pointer items-center justify-center rounded-2xl border border-foreground/[0.06] bg-background/50 shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] ring-1 ring-foreground/[0.03] backdrop-blur-xl transition-all hover:bg-background/70 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]";
+  "group relative flex h-44 cursor-pointer items-center justify-center rounded-2xl border border-foreground/[0.06] bg-background/50 shadow-[0_2px_16px_-4px_hsl(var(--shadow-color)/0.08)] ring-1 ring-foreground/[0.03] backdrop-blur-xl transition-all hover:bg-background/70 hover:shadow-[0_4px_20px_-4px_hsl(var(--shadow-color)/0.12)]";
 
 function GlassCard({ icon, title, starred, badge, href }: GlassCardProps) {
   const content = (
@@ -40,7 +40,7 @@ export function WorkflowCards() {
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
         <Link
           href="/prototypes/ffp/fingerprints"
-          className="group relative flex h-44 cursor-pointer items-center justify-center rounded-2xl border-2 border-primary bg-background/50 shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] backdrop-blur-xl transition-all hover:bg-primary/[0.04] hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
+          className="group relative flex h-44 cursor-pointer items-center justify-center rounded-2xl border-2 border-primary bg-background/50 shadow-[0_2px_16px_-4px_hsl(var(--shadow-color)/0.08)] backdrop-blur-xl transition-all hover:bg-primary/[0.04] hover:shadow-[0_4px_20px_-4px_hsl(var(--shadow-color)/0.12)]"
         >
           <Star className="absolute left-3 top-3 h-4 w-4 fill-accent text-accent" aria-label="Favorisiert" />
           <span className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-primary">

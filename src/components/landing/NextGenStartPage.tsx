@@ -40,9 +40,9 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
       <Link
         href={`/projects/${project.slug}`}
         className={cn(
-          'group block overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] backdrop-blur-2xl',
+          'group block overflow-hidden rounded-2xl border border-white/5 bg-card backdrop-blur-2xl',
           'transition-all duration-400 ease-card-hover',
-          'hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]'
+          'hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_hsl(var(--shadow-color)/0.15)]'
         )}
       >
         <div className="relative aspect-video w-full overflow-hidden bg-muted">
@@ -87,9 +87,9 @@ function ContactFooterSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-[#0f0f12]">
+    <section className="relative overflow-hidden bg-card">
       {/* Inner padding container */}
-      <div className="mx-auto max-w-2xl py-20 px-4 text-white md:py-28 md:px-6">
+      <div className="mx-auto max-w-2xl py-20 px-4 text-foreground md:py-28 md:px-6">
         {/* Gradient wash */}
         <div className="pointer-events-none absolute inset-0 opacity-50">
           <div className="absolute -left-32 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary/20 blur-[120px]" />
@@ -126,7 +126,7 @@ function ContactFooterSection() {
         </motion.div>
 
         <motion.h2
-          className="mb-4 text-3xl font-bold tracking-tight text-white md:text-4xl"
+          className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -136,7 +136,7 @@ function ContactFooterSection() {
         </motion.h2>
 
         <motion.p
-          className="mb-8 text-base leading-relaxed text-white/60"
+          className="mb-8 text-base leading-relaxed text-muted-foreground"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -154,12 +154,12 @@ function ContactFooterSection() {
         >
           <a
             href={`mailto:${contact.email}`}
-            className="group mx-auto inline-flex items-center gap-2 text-lg font-medium text-white transition-colors hover:text-primary"
+            className="group mx-auto inline-flex items-center gap-2 text-lg font-medium text-foreground transition-colors hover:text-primary"
           >
             {contact.email}
             <ArrowUpRight className="h-4 w-4 opacity-50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
           </a>
-          <div className="flex items-center justify-center gap-6 text-sm text-white/50">
+          <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <a href={`tel:${contact.phone}`} className="flex items-center gap-1.5 transition-colors hover:text-white">
               <Phone className="h-3.5 w-3.5" /> {contact.phone}
             </a>

@@ -87,7 +87,7 @@ export default function ExpertiseSectionMotion() {
         >
           <div
             className="pointer-events-none absolute inset-x-4 top-2 h-2/3"
-            style={{ filter: 'brightness(1.6) saturate(1.5) drop-shadow(0 0 12px rgba(130,210,50,0.5))' }}
+            style={{ filter: 'brightness(1.6) saturate(1.5) drop-shadow(0 0 12px hsl(var(--primary)/0.45))' }}
           >
             <OffsetLottie
               animationData={explainerData}
@@ -118,7 +118,7 @@ export default function ExpertiseSectionMotion() {
         >
           <div
             className="pointer-events-none absolute inset-x-0 top-0 flex justify-center opacity-65"
-            style={{ filter: 'brightness(1.6) saturate(1.5) drop-shadow(0 0 10px rgba(130,210,50,0.45))' }}
+            style={{ filter: 'brightness(1.6) saturate(1.5) drop-shadow(0 0 10px hsl(var(--primary)/0.4))' }}
           >
             <div className="w-32">
               <OffsetLottie animationData={threeDData} speed={0.75} startFrame={12} />
@@ -145,7 +145,7 @@ export default function ExpertiseSectionMotion() {
         >
           <div
             className="pointer-events-none absolute inset-x-0 top-0 flex justify-center opacity-70"
-            style={{ filter: 'brightness(1.5) saturate(1.4) drop-shadow(0 0 10px rgba(130,210,50,0.45))' }}
+            style={{ filter: 'brightness(1.5) saturate(1.4) drop-shadow(0 0 10px hsl(var(--primary)/0.4))' }}
           >
             <div className="w-28">
               <OffsetLottie animationData={pitchData} speed={1.15} startFrame={36} />
@@ -174,7 +174,7 @@ export default function ExpertiseSectionMotion() {
           <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
             <div
               className="w-36 opacity-90"
-              style={{ filter: 'brightness(1.3) saturate(1.2) drop-shadow(0 0 10px rgba(130,210,50,0.45))' }}
+              style={{ filter: 'brightness(1.3) saturate(1.2) drop-shadow(0 0 10px hsl(var(--primary)/0.4))' }}
             >
               <OffsetLottie animationData={adBannerData} targetDuration={5.2} startFrame={0} />
             </div>
@@ -200,7 +200,7 @@ export default function ExpertiseSectionMotion() {
         >
           <div
             className="pointer-events-none absolute inset-x-0 top-0 flex justify-center opacity-70"
-            style={{ filter: 'brightness(1.6) saturate(1.5) drop-shadow(0 0 12px rgba(130,210,50,0.5))' }}
+            style={{ filter: 'brightness(1.6) saturate(1.5) drop-shadow(0 0 12px hsl(var(--primary)/0.45))' }}
           >
             <div className="w-36">
               <OffsetLottie animationData={aiData} speed={1.2} startFrame={30} />

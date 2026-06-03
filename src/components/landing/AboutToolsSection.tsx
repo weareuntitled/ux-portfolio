@@ -8,7 +8,7 @@ import { TECH_STACK, deviconUrl, type TechItem } from '@/lib/devicon';
 
 function Highlight({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-sm bg-white/10 px-1 py-0.5 text-white transition-colors hover:bg-white/20">
+    <span className="rounded-sm bg-foreground/10 px-1 py-0.5 text-foreground transition-colors hover:bg-foreground/20">
       {children}
     </span>
   );
@@ -20,7 +20,7 @@ function TechItemPill({ item, index }: { item: TechItem; index: number }) {
 
   return (
     <motion.div
-      className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 transition-colors hover:border-primary/30 hover:bg-white/10"
+      className="group flex items-center gap-2 rounded-full border border-foreground/10 bg-foreground/5 px-3 py-1.5 transition-colors hover:border-primary/30 hover:bg-foreground/10"
       initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30px' }}
@@ -36,7 +36,7 @@ function TechItemPill({ item, index }: { item: TechItem; index: number }) {
           unoptimized
         />
       </div>
-      <span className="text-xs font-medium text-white/80">{item.name}</span>
+      <span className="text-xs font-medium text-foreground/80">{item.name}</span>
     </motion.div>
   );
 }
@@ -45,11 +45,11 @@ export function AboutToolsSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="bg-[#0f0f12] py-20 text-white md:py-28">
+    <section className="bg-card py-20 text-foreground md:py-28">
       <div className="mx-auto max-w-7xl px-6 text-center">
         {/* Title */}
         <motion.h2
-          className="mb-10 font-display text-3xl font-bold tracking-tight text-white md:text-4xl"
+          className="mb-10 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -66,7 +66,7 @@ export function AboutToolsSection() {
           viewport={{ once: true }}
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.1, ease: EASE }}
         >
-          <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border border-white/5 bg-muted ring-2 ring-primary/20 md:h-28 md:w-28">
+          <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border border-border/20 bg-muted ring-2 ring-primary/20 md:h-28 md:w-28">
             <Image
               src={contact.profileImage}
               alt={contact.name}
@@ -80,7 +80,7 @@ export function AboutToolsSection() {
         {/* Content split */}
         <div className="grid gap-8 text-left md:grid-cols-2 md:text-center">
           <motion.div
-            className="space-y-4 text-base leading-relaxed text-white/70"
+            className="space-y-4 text-base leading-relaxed text-foreground/70"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -96,7 +96,7 @@ export function AboutToolsSection() {
           </motion.div>
 
           <motion.div
-            className="space-y-4 text-base leading-relaxed text-white/70"
+            className="space-y-4 text-base leading-relaxed text-foreground/70"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -115,7 +115,7 @@ export function AboutToolsSection() {
         {/* Tools */}
         <div className="mt-16 text-left">
           <motion.h3
-            className="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-white/40"
+            className="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground/60"
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -126,7 +126,7 @@ export function AboutToolsSection() {
           {TECH_STACK.map((category, catIndex) => (
             <div key={category.title} className={catIndex > 0 ? 'mt-6' : ''}>
               <motion.h4
-                className="mb-3 text-sm font-semibold tracking-wide text-white/60"
+                className="mb-3 text-sm font-semibold tracking-wide text-foreground/60"
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

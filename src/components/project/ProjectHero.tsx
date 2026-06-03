@@ -84,14 +84,14 @@ export function ProjectHero({
             {/* Apple-like overlays: soft top haze + strong bottom for text */}
             <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/70" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/35 to-transparent" />
-            <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_20%_25%,rgba(255,255,255,0.06),transparent_60%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(700px_400px_at_30%_20%,rgba(132,204,22,0.18),transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_20%_25%,hsl(var(--foreground)/0.06),transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(700px_400px_at_30%_20%,hsl(var(--primary)/0.18),transparent_60%)]" />
           </>
         ) : (
           <>
             {/* No cover fallback: still premium */}
             <div className="absolute inset-0 bg-gradient-to-br from-muted via-muted/90 to-muted/70" />
-            <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_25%_20%,rgba(132,204,22,0.16),transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_25%_20%,hsl(var(--primary)/0.16),transparent_60%)]" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/25 to-transparent" />
           </>
         )}

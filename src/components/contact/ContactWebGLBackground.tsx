@@ -75,13 +75,13 @@ void main() {
   
   // Define colors for light mode
   vec3 lightBg = vec3(0.98, 0.98, 0.98); // background
-  vec3 lightAccent1 = vec3(0.88, 0.96, 0.75); // soft lime
-  vec3 lightAccent2 = vec3(0.72, 0.90, 0.33); // primary lime
-  
+  vec3 lightAccent1 = vec3(0.80, 0.90, 1.0); // soft blue
+  vec3 lightAccent2 = vec3(0.55, 0.75, 1.0); // sky blue
+
   // Define colors for dark mode
-  vec3 darkBg = vec3(0.067, 0.075, 0.094); // dark charcoal
-  vec3 darkAccent1 = vec3(0.12, 0.22, 0.12); // dark green
-  vec3 darkAccent2 = vec3(0.42, 0.83, 0.07); // primary lime
+  vec3 darkBg = vec3(0.04, 0.06, 0.12); // deep navy
+  vec3 darkAccent1 = vec3(0.08, 0.14, 0.25); // dark blue
+  vec3 darkAccent2 = vec3(0.20, 0.50, 0.90); // bright blue
   
   vec3 bg = mix(lightBg, darkBg, u_dark);
   vec3 c1 = mix(lightAccent1, darkAccent1, u_dark);

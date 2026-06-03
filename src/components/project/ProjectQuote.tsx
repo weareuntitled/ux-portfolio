@@ -19,10 +19,10 @@ export function ProjectQuote({ quote, footer, className }: ProjectQuoteProps) {
         className
       )}
     >
-      <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
+      <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-foreground/90">
         &ldquo;{quote}&rdquo;
         {footer ? (
-          <footer className="mt-4 text-sm not-italic text-zinc-500">{footer}</footer>
+          <footer className="mt-4 text-sm not-italic text-muted-foreground">{footer}</footer>
         ) : null}
       </blockquote>
     </div>

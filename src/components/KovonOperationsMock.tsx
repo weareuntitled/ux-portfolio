@@ -122,7 +122,7 @@ export function KovonOperationsMock() {
                 <button
                   key={chip}
                   onClick={() => setCompetence(chip)}
-                  className={`rounded-full border px-3 py-1 text-sm ${active ? 'border-blue-600 bg-blue-50 text-blue-700' : 'bg-white'}`}
+                  className={`rounded-full border px-3 py-1 text-sm ${active ? 'border-primary bg-primary/10 text-primary' : 'bg-background'}`}
                   aria-pressed={active}
                 >
                   {chip}
@@ -171,17 +171,17 @@ export function KovonOperationsMock() {
           </div>
         </div>
 
-        <aside className="rounded-lg border bg-slate-50 p-3">
+        <aside className="rounded-lg border bg-muted/50 p-3">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="font-medium">Mentions</h3>
-            <span className="rounded-full bg-blue-600 px-2 py-0.5 text-xs text-white">{unreadMentions} unread</span>
+            <span className="rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">{unreadMentions} unread</span>
           </div>
           <div className="h-52 space-y-2 overflow-y-auto pr-1">
             {mentionSeed.map((mention) => (
-              <article key={mention.id} className="rounded-md border bg-white p-2 text-sm">
+              <article key={mention.id} className="rounded-md border bg-background p-2 text-sm">
                 <p className="font-medium">{mention.author}</p>
-                <p className="text-slate-600">{mention.text}</p>
-                {mention.unread ? <p className="mt-1 text-xs text-blue-700">• unread</p> : null}
+                <p className="text-muted-foreground">{mention.text}</p>
+                {mention.unread ? <p className="mt-1 text-xs text-primary">• unread</p> : null}
               </article>
             ))}
           </div>

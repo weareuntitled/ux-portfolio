@@ -242,20 +242,20 @@ function ErmConsolidation({ beforeCount, afterCount }: { beforeCount: number; af
         {/* AFTER — single ERM */}
         <div className="flex flex-col gap-3">
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">After</p>
-          <div className="relative flex h-48 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-3">
+          <div className="relative flex h-48 items-center justify-center rounded-lg border border-primary/30 bg-primary/5 p-3">
             <motion.div
               initial={reduce ? false : { opacity: 0, scale: 0.6 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={VP}
               transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
-              className="grid h-32 w-32 place-items-center rounded-full border-2 border-emerald-500/50 bg-emerald-500/10"
+              className="grid h-32 w-32 place-items-center rounded-full border-2 border-primary/50 bg-primary/10"
             >
               <div className="text-center">
-                <Database className="mx-auto h-6 w-6 text-emerald-600" />
-                <div className="mt-1 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-400">ERM</div>
+                <Database className="mx-auto h-6 w-6 text-primary" />
+                <div className="mt-1 font-mono text-xs font-semibold text-primary-foreground dark:text-primary">ERM</div>
               </div>
             </motion.div>
-            <div className="absolute right-2 top-2 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
+            <div className="absolute right-2 top-2 rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-primary-foreground dark:text-primary">
               {afterCount} DB
             </div>
           </div>
@@ -662,8 +662,8 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                 transition={{ duration: DUR.md, ease: EASE }}
                 className="border-t border-border/40 pt-12"
               >
-                <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-amber-500">What I Learned</p>
-                <blockquote className="border-l-2 border-amber-500/80 pl-6 text-lg font-light italic leading-relaxed text-foreground/90">
+                <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-chart-4">What I Learned</p>
+                <blockquote className="border-l-2 border-chart-4/80 pl-6 text-lg font-light italic leading-relaxed text-foreground/90">
                   {project.caseStudy.whatILearned}
                 </blockquote>
                 {project.caseStudy.insightAuthor && (
@@ -774,7 +774,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
                       <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary/15 text-primary">
                         <Icon className="h-4 w-4" />
                       </span>
-                      <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-amber-600">Coming next</span>
+                      <span className="rounded-full border border-chart-4/30 bg-chart-4/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-chart-4">Coming next</span>
                     </div>
                     <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
                     <p className="text-sm leading-relaxed text-muted-foreground">{item.desc}</p>

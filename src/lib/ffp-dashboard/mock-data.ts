@@ -259,8 +259,8 @@ export const mockFFPs: FFP[] = [
 export const statusColors: Record<string, string> = {
   Electrical:
     "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
-  Gearbox: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300",
-  Factory: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
+  Gearbox: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
+  Factory: "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300",
   HV: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
   Mechanical:
     "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300",

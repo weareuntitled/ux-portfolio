@@ -60,17 +60,17 @@ const FFP_METHODOLOGY_STEPS = [
 export function FfpHeroStats() {
   return (
     <div className="grid grid-cols-1 gap-4 pt-6 sm:grid-cols-3">
-      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+      <div className="flex flex-col gap-1 rounded-xl border border-border/40 bg-card/60 p-5">
         <span className="text-2xl font-mono font-bold text-primary">1:1</span>
-        <span className="text-xs font-medium text-zinc-400">Correlation Latency</span>
+        <span className="text-xs font-medium text-muted-foreground">Correlation Latency</span>
       </div>
-      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+      <div className="flex flex-col gap-1 rounded-xl border border-border/40 bg-card/60 p-5">
         <span className="text-2xl font-mono font-bold text-primary">Eliminated</span>
-        <span className="text-xs font-medium text-zinc-400">Merge Bottlenecks</span>
+        <span className="text-xs font-medium text-muted-foreground">Merge Bottlenecks</span>
       </div>
-      <div className="flex flex-col gap-1 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5">
+      <div className="flex flex-col gap-1 rounded-xl border border-border/40 bg-card/60 p-5">
         <span className="text-2xl font-mono font-bold text-primary">Adaptive</span>
-        <span className="text-xs font-medium text-zinc-400">Beginner to Expert UI</span>
+        <span className="text-xs font-medium text-muted-foreground">Beginner to Expert UI</span>
       </div>
     </div>
   );
@@ -86,12 +86,12 @@ export function FfpProjectContent({ project, hideScreenshots }: FfpProjectConten
     <div className="space-y-24">
       {/* Quote */}
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-zinc-200">
+        <blockquote className="border-l-4 border-primary bg-primary/5 p-8 text-lg italic text-foreground/90">
           &quot;Finding similarities in massive tables was a nightmare. The UI never surfaced the right
           context, creating a massive bottleneck. When we showed them the new GitHub-style merge flow,
           it clicked instantly. It finally fit their mental model.&quot;
           <footer className="mt-4 flex items-center gap-2 text-sm font-medium not-italic text-zinc-500">
-            <span className="h-px w-4 bg-zinc-600" />
+            <span className="h-px w-4 bg-border" />
             The Breakthrough Moment
           </footer>
         </blockquote>
@@ -106,7 +106,7 @@ export function FfpProjectContent({ project, hideScreenshots }: FfpProjectConten
 
       {/* Screenshot (optional) */}
       {!hideScreenshots && (
-        <section className="overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+        <section className="overflow-hidden rounded-2xl border border-border/30 shadow-2xl">
           <BrowserMockup
             src={project?.galleryUrls?.[0] ?? '/projects/ffp_gallery_01.png'}
             alt="FFP Dashboard"
@@ -120,15 +120,15 @@ export function FfpProjectContent({ project, hideScreenshots }: FfpProjectConten
 
       {/* Experience the Dashboard CTA */}
       <section className="space-y-12 py-12">
-        <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-zinc-900/50 p-1 shadow-[0_0_40px_-15px_rgba(var(--primary),0.2)]">
-          <div className="relative flex flex-col items-center rounded-[22px] border border-zinc-800/80 bg-zinc-950 p-10 text-center sm:p-16">
+        <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-card/80 p-1 shadow-[0_0_40px_-15px_hsl(var(--primary)/0.15)]">
+          <div className="relative flex flex-col items-center rounded-[22px] border border-border/40 bg-card p-10 text-center sm:p-16">
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 shadow-inner">
               <LayoutDashboard className="h-10 w-10 text-primary" strokeWidth={1.5} aria-hidden />
             </div>
-            <h3 className="mb-4 text-3xl font-bold tracking-tight text-zinc-100">
+            <h3 className="mb-4 text-3xl font-bold tracking-tight text-foreground">
               Experience the Dashboard
             </h3>
-            <p className="mb-8 max-w-lg leading-relaxed text-zinc-400">
+            <p className="mb-8 max-w-lg leading-relaxed text-muted-foreground">
               Words only go so far. Explore the interactive prototype to see the symptom-first navigation
               and GitHub-style merge flow in action.
             </p>

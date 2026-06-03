@@ -27,8 +27,8 @@ export function NewsSidebar() {
               <span className="font-medium text-foreground">{item.date}</span>
               {item.isNew && (
                 <span className="flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                  <span className="text-[10px] font-semibold text-green-600">NEW FFP</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span className="text-[10px] font-semibold text-primary">NEW FFP</span>
                 </span>
               )}
             </div>

@@ -198,15 +198,15 @@ export function BrowserMockup({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: EASE }}
       className={cn(
-        'group relative overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)]',
+        'group relative overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_hsl(var(--shadow-color)/0.15)]',
         className
       )}
     >
       <div className="flex h-8 items-center gap-2 border-b border-border bg-muted/50 px-4">
         <div className="flex gap-1.5">
-          <div className="h-3 w-3 rounded-full bg-red-500/20" />
-          <div className="h-3 w-3 rounded-full bg-yellow-500/20" />
-          <div className="h-3 w-3 rounded-full bg-green-500/20" />
+          <div className="h-3 w-3 rounded-full bg-destructive/20" />
+          <div className="h-3 w-3 rounded-full bg-chart-4/20" />
+          <div className="h-3 w-3 rounded-full bg-primary/20" />
         </div>
         <div className="ml-4 flex h-5 max-w-[33%] items-center truncate rounded px-2 font-mono text-[10px] text-muted-foreground">
           {displayUrl}
@@ -540,7 +540,7 @@ export function ProcessStep({
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-primary/10 font-bold text-sm text-primary">
           {number}
         </div>
-        {!isLast && <div className="my-2 h-full w-px bg-zinc-800" />}
+        {!isLast && <div className="my-2 h-full w-px bg-border" />}
       </div>
       <div className="pb-12">
         <h4 className="mb-2 flex items-center gap-2 text-lg font-medium text-foreground">

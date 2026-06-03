@@ -22,7 +22,7 @@ export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view', i
     <>
       <button
         onClick={() => setOpen(true)}
-        className={`rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-ring ${
           iconOnly ? 'px-2 py-2' : 'px-3 py-2'
         }`}
         aria-haspopup="dialog"
@@ -39,7 +39,7 @@ export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view', i
 
       {open ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true">
-          <div className={`w-full rounded-lg bg-white shadow-xl dark:bg-card ${fullscreen ? 'h-full max-w-none' : 'max-w-4xl'}`}>
+          <div className={`w-full rounded-lg bg-background shadow-xl dark:bg-card ${fullscreen ? 'h-full max-w-none' : 'max-w-4xl'}`}>
             {showPrototype ? (
               <div className="h-full min-h-[80vh]">
                 <PrototypeShell

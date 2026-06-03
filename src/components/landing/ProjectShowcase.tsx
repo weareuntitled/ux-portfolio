@@ -35,7 +35,7 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
     >
       <Link
         href={`/projects/${project.slug}`}
-        className="group relative block w-full overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] transition-all duration-400 ease-card-hover hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)_!important]"
+        className="group relative block w-full overflow-hidden rounded-2xl border border-white/5 bg-card transition-all duration-400 ease-card-hover hover:border-primary/40 hover:translate-y-[-4px] hover:scale-[1.01] hover:shadow-[0_20px_40px_hsl(var(--shadow-color)/0.15)_!important]"
       >
         {/* Full-width image */}
         <div className="relative aspect-[21/9] w-full overflow-hidden sm:aspect-[2.4/1]">

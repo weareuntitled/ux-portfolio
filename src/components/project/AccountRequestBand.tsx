@@ -182,7 +182,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
                 )}
 
                 {state === 'error' && errorMsg && (
-                  <p className="mt-2 flex items-start gap-1.5 rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 text-sm text-red-400">
+                  <p className="mt-2 flex items-start gap-1.5 rounded-lg border border-destructive/20 bg-destructive/5 p-2.5 text-sm text-destructive">
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {errorMsg}
                   </p>
                 )}
@@ -219,7 +219,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_300px_at_25%_50%,rgba(132,204,22,0.08),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_300px_at_25%_50%,hsl(var(--primary)/0.08),transparent_60%)]" />
       <div className="relative grid gap-6 p-6 md:grid-cols-2 md:gap-8 md:p-8">
         {/* Left: AI context */}
         <div className="flex flex-col justify-center gap-3">
@@ -302,7 +302,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
               </button>
 
               {state === 'error' && errorMsg && (
-                <p className="flex items-start gap-1.5 rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-sm text-red-400">
+                <p className="flex items-start gap-1.5 rounded-lg border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive">
                   <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {errorMsg}
                 </p>
               )}

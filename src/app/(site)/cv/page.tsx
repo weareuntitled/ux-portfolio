@@ -31,7 +31,7 @@ export default async function CVPage() {
     >
       <div className="space-y-8">
         {/* Hero Card */}
-        <section className="overflow-hidden rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+        <section className="overflow-hidden rounded-2xl border border-border/10 bg-card p-6 sm:p-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
@@ -75,7 +75,7 @@ export default async function CVPage() {
         </section>
 
         {/* Core Competencies Card */}
-        <section className="rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+        <section className="rounded-2xl border border-border/10 bg-card p-6 sm:p-8">
           <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
             Core Competencies
           </p>
@@ -83,7 +83,7 @@ export default async function CVPage() {
             {cvCopy.coreCompetencies.map((skill) => (
               <span
                 key={skill}
-                className="rounded-full border border-white/5 bg-white/5 px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:border-primary/20 hover:text-primary"
+                className="rounded-full border border-border/10 bg-foreground/5 px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:border-primary/20 hover:text-primary"
               >
                 {skill}
               </span>
@@ -92,7 +92,7 @@ export default async function CVPage() {
         </section>
 
         {/* Experience Card */}
-        <section className="rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+        <section className="rounded-2xl border border-border/10 bg-card p-6 sm:p-8">
           <p className="mb-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
             {cvCopy.professionalExperienceTitle}
           </p>
@@ -104,7 +104,7 @@ export default async function CVPage() {
             {cvCopy.experience.map((entry) => (
               <article key={`${entry.title}-${entry.period}`} className="relative pb-10 pl-6">
                 {/* Timeline dot */}
-                <div className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-2 border-primary/40 bg-[#0f0f12]" />
+                <div className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-2 border-primary/40 bg-card" />
 
                 <header className="mb-3">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
@@ -129,7 +129,7 @@ export default async function CVPage() {
         </section>
 
         {/* Education Card */}
-        <section className="rounded-2xl border border-white/5 bg-[#0f0f12] p-6 sm:p-8">
+        <section className="rounded-2xl border border-border/10 bg-card p-6 sm:p-8">
           <p className="mb-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
             {cvCopy.educationTitle}
           </p>

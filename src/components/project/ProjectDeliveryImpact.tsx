@@ -34,7 +34,7 @@ export function ProjectDeliveryImpact({
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Delivery</h2>
           {deliveryItems.length ? (
-            <ul className="space-y-2 text-sm text-zinc-300">
+            <ul className="space-y-2 text-sm text-foreground/80">
               {deliveryItems.map((item) => (
                 <li key={item} className="leading-relaxed">
                   {item}
@@ -47,7 +47,7 @@ export function ProjectDeliveryImpact({
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Impact</h2>
           {impactItems.length ? (
-            <ul className="space-y-2 text-sm text-zinc-300">
+            <ul className="space-y-2 text-sm text-foreground/80">
               {impactItems.map((item) => (
                 <li key={item} className="leading-relaxed">
                   {item}
@@ -64,7 +64,7 @@ export function ProjectDeliveryImpact({
           {outcomeItems.length ? (
             <div className="space-y-4">
               <h3 className="text-base font-semibold tracking-tight text-foreground">Outcomes</h3>
-              <ul className="space-y-2 text-sm text-zinc-300">
+              <ul className="space-y-2 text-sm text-foreground/80">
                 {outcomeItems.map((item) => (
                   <li key={item} className="leading-relaxed">
                     {item}
@@ -77,7 +77,7 @@ export function ProjectDeliveryImpact({
           {highlightItems.length ? (
             <div className="space-y-4">
               <h3 className="text-base font-semibold tracking-tight text-foreground">Highlights</h3>
-              <ul className="space-y-2 text-sm text-zinc-300">
+              <ul className="space-y-2 text-sm text-foreground/80">
                 {highlightItems.map((item) => (
                   <li key={item} className="leading-relaxed">
                     {item}
@@ -93,7 +93,7 @@ export function ProjectDeliveryImpact({
       {learnedItems.length ? (
         <div className="space-y-4">
           <h3 className="text-base font-semibold tracking-tight text-foreground">Learnings</h3>
-          <ul className="space-y-2 text-sm text-zinc-300">
+          <ul className="space-y-2 text-sm text-foreground/80">
             {learnedItems.map((item) => (
               <li key={item} className="leading-relaxed">
                 {item}
@@ -107,7 +107,7 @@ export function ProjectDeliveryImpact({
         <div>
           <a
             href={document.href}
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground hover:bg-muted"
           >
             {document.label ?? 'Open document'}
           </a>

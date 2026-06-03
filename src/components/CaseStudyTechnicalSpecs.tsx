@@ -21,7 +21,7 @@ export function CaseStudyTechnicalSpecs({ slug, className }: Props) {
   return (
     <section
       className={cn(
-        'border-t border-neutral-900 bg-[#0a0a0a] py-20',
+        'border-t border-border bg-card py-20',
         className
       )}
     >

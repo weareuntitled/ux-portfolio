@@ -63,14 +63,14 @@ export function FFPTable({
                         {ffp.percentChange > 0 ? (
                           <TrendingUp className="w-4 h-4 text-destructive" />
                         ) : (
-                          <TrendingDown className="w-4 h-4 text-green-500" />
+                          <TrendingDown className="w-4 h-4 text-primary" />
                         )}
                         <span
                           className={cn(
                             "font-mono text-xs",
                             ffp.percentChange > 0
                               ? "text-destructive"
-                              : "text-green-500"
+                              : "text-primary"
                           )}
                         >
                           {ffp.percentChange > 0 ? "+" : ""}

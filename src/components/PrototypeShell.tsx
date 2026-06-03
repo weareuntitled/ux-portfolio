@@ -14,10 +14,10 @@ export function PrototypeShell({ project, onBack, onToggleFullscreen, isFullscre
 
   return (
     <div className="flex h-full flex-col">
-      <header className="flex items-center justify-between border-b bg-white p-3">
+      <header className="flex items-center justify-between border-b bg-background p-3">
         <div className="flex items-center gap-2">
           <button
-            className="rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             onClick={onBack}
             aria-label="Back to project details"
           >
@@ -31,12 +31,12 @@ export function PrototypeShell({ project, onBack, onToggleFullscreen, isFullscre
             target="_blank"
             rel="noreferrer"
             aria-disabled={!project.prototype?.figmaFileUrl}
-            className="rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 aria-disabled:pointer-events-none aria-disabled:opacity-50"
+            className="rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring aria-disabled:pointer-events-none aria-disabled:opacity-50"
           >
             Open in Figma
           </a>
           <button
-            className="rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             onClick={onToggleFullscreen}
             aria-pressed={isFullscreen}
           >
@@ -45,15 +45,15 @@ export function PrototypeShell({ project, onBack, onToggleFullscreen, isFullscre
         </div>
       </header>
 
-      <div className="flex flex-wrap gap-2 border-b bg-slate-50 p-3">
+      <div className="flex flex-wrap gap-2 border-b bg-muted p-3">
         {project.prototype?.hints?.map((hint) => (
-          <span key={hint} className="rounded-full bg-slate-200 px-3 py-1 text-xs" role="note">
+          <span key={hint} className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground" role="note">
             {hint}
           </span>
         ))}
       </div>
 
-      <main className="flex-1 bg-slate-100">
+      <main className="flex-1 bg-background">
         {hasPrototype ? (
           <iframe
             title={`${project.title} prototype`}
@@ -62,7 +62,7 @@ export function PrototypeShell({ project, onBack, onToggleFullscreen, isFullscre
             allowFullScreen
           />
         ) : (
-          <div className="flex h-full items-center justify-center p-6 text-center text-slate-600">
+          <div className="flex h-full items-center justify-center p-6 text-center text-muted-foreground">
             Prototype available on request.
           </div>
         )}

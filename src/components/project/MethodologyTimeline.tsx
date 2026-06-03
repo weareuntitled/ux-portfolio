@@ -24,14 +24,14 @@ export function MethodologyTimeline({ title, steps, className = '' }: Props) {
   return (
     <section className={`max-w-3xl space-y-12 py-8 ${className}`}>
       <div className="flex flex-col gap-2">
-        <h2 className="text-3xl font-semibold tracking-tight text-zinc-100">
+        <h2 className="text-3xl font-semibold tracking-tight text-foreground">
           {title}
         </h2>
       </div>
 
       <div className="relative pl-4 sm:pl-6">
         <div
-          className="absolute left-[27px] top-4 bottom-4 w-px bg-zinc-800 sm:left-[35px]"
+          className="absolute left-[27px] top-4 bottom-4 w-px bg-muted sm:left-[35px]"
           aria-hidden
         />
         <div className="space-y-10">
@@ -41,10 +41,10 @@ export function MethodologyTimeline({ title, steps, className = '' }: Props) {
               className="relative flex items-start gap-6"
             >
               <div
-                className={`absolute -left-4 flex h-7 w-7 items-center justify-center rounded-full border-4 border-zinc-950 text-[10px] font-bold sm:-left-3.5 sm:h-9 sm:w-9 sm:text-xs ${
+                className={`absolute -left-4 flex h-7 w-7 items-center justify-center rounded-full border-4 border-border text-[10px] font-bold sm:-left-3.5 sm:h-9 sm:w-9 sm:text-xs ${
                   step.highlight
                     ? 'bg-primary/20 text-primary shadow-[0_0_15px_rgba(var(--primary),0.4)]'
-                    : 'bg-zinc-800 text-zinc-300'
+                    : 'bg-muted text-foreground/80'
                 }`}
               >
                 {step.number}
@@ -52,12 +52,12 @@ export function MethodologyTimeline({ title, steps, className = '' }: Props) {
               <div className="ml-8 pt-1 sm:ml-10 sm:pt-1.5">
                 <h4
                   className={`text-lg font-semibold ${
-                    step.highlight ? 'text-primary' : 'text-zinc-200'
+                    step.highlight ? 'text-primary' : 'text-foreground/90'
                   }`}
                 >
                   {step.title}
                 </h4>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
               </div>

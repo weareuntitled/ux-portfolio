@@ -91,7 +91,7 @@ export function CaseStudyHero({ project, heroTagline }: Props) {
         transition={{ duration: reduce ? 0 : DUR.xl, delay: reduce ? 0 : 0.2, ease: EASE }}
       >
         <MacBookFrame>
-          <div className="relative flex h-full w-full items-center justify-center bg-[#111]">
+          <div className="relative flex h-full w-full items-center justify-center bg-card">
             {moodUrl ? (
               <Image
                 src={moodUrl}

@@ -12,7 +12,7 @@ export function MacBookFrame({ children }: Props) {
   return (
     <div className="relative mx-auto w-full max-w-5xl">
       {/* Lid */}
-      <div className="relative rounded-[2rem] bg-[#0d0d0d] p-3 shadow-2xl ring-1 ring-white/10">
+      <div className="relative rounded-[2rem] bg-card p-3 shadow-2xl ring-1 ring-white/10">
         {/* Notch */}
         <div className="absolute left-1/2 top-0 h-4 w-32 -translate-x-1/2 rounded-b-xl bg-black" />
         {/* Screen */}
@@ -26,8 +26,8 @@ export function MacBookFrame({ children }: Props) {
         </div>
       </div>
       {/* Base */}
-      <div className="relative -mt-1 mx-auto h-4 w-[95%] max-w-[95%] rounded-b-xl bg-[#1a1a1a] shadow-lg">
-        <div className="absolute left-1/2 top-0 h-1 w-24 -translate-x-1/2 rounded-b-md bg-[#2a2a2a]" />
+      <div className="relative -mt-1 mx-auto h-4 w-[95%] max-w-[95%] rounded-b-xl bg-surface-2 shadow-lg">
+        <div className="absolute left-1/2 top-0 h-1 w-24 -translate-x-1/2 rounded-b-md bg-surface-3" />
       </div>
     </div>
   );
