@@ -22,14 +22,14 @@ const FFP_PROTOTYPE_PATH = '/prototypes/ffp';
  * Wraps portfolio pages in a themed shell.
  * - Admin (/admin): passthrough — no wrapper, Payload CSS stays untouched.
  * - FFP prototype: always light.
- * - All other pages: user preference (default dark), persisted to localStorage.
+ * - All other pages: user preference (default light), persisted to localStorage.
  */
 export function AppThemeWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith(ADMIN_PATH);
   const isFfpPrototype = pathname?.startsWith(FFP_PROTOTYPE_PATH);
 
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
 
   // Hydrate from localStorage on first render (skip for FFP which is always light)
   useEffect(() => {

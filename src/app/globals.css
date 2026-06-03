@@ -87,92 +87,92 @@ body {
 }
 
 @layer base {
-  /* Design Tokens — Blue palette
+  /* Design Tokens — Light blue palette (default)
      Primary: sky blue #3399FF (actions) | Accent: vivid blue (highlights)
-     Surfaces: cool blue-grey layered depth | Shadows: color-matched */
+     Surfaces: airy blue-tinted whites, soft layered depth */
   :root {
-    --background: 210 25% 98%;
-    --foreground: 215 25% 14%;
-    --card: 210 20% 97%;
-    --card-foreground: 215 25% 14%;
-    --popover: 210 25% 98%;
-    --popover-foreground: 215 25% 14%;
-    --primary: 205 85% 60%;
-    --primary-foreground: 205 80% 14%;
-    --secondary: 210 20% 93%;
-    --secondary-foreground: 215 25% 14%;
-    --muted: 210 15% 94%;
-    --muted-foreground: 215 12% 46%;
-    --accent: 220 70% 50%;
+    --background: 210 30% 99%;
+    --foreground: 215 18% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 18% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 18% 20%;
+    --primary: 205 85% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 25% 96%;
+    --secondary-foreground: 215 18% 20%;
+    --muted: 210 20% 97%;
+    --muted-foreground: 215 12% 50%;
+    --accent: 220 70% 52%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 215 15% 88%;
-    --input: 215 15% 88%;
-    --ring: 205 85% 60%;
-    --chart-1: 205 85% 60%;
-    --chart-2: 220 70% 50%;
-    --chart-3: 195 80% 45%;
-    --chart-4: 235 65% 55%;
-    --chart-5: 180 60% 40%;
-    --chart-6: 320 75% 55%;
-    --chart-7: 45 95% 55%;
-    --chart-8: 160 70% 45%;
-    --radius: 0.5rem;
-    --surface-1: 210 18% 96%;
-    --surface-2: 210 15% 94%;
-    --surface-3: 210 12% 92%;
-    --shadow-color: 215 15% 40%;
-    --sidebar-background: 210 20% 97%;
-    --sidebar-foreground: 215 25% 14%;
-    --sidebar-primary: 205 85% 60%;
-    --sidebar-primary-foreground: 205 80% 14%;
-    --sidebar-accent: 220 70% 50%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 215 15% 88%;
-    --sidebar-ring: 205 85% 60%;
-  }
-  /* Dark mode: Deep navy + bright blue accent */
-  .dark {
-    --background: 220 30% 8%;
-    --foreground: 210 15% 95%;
-    --card: 220 25% 10%;
-    --card-foreground: 210 15% 95%;
-    --popover: 220 25% 10%;
-    --popover-foreground: 210 15% 95%;
-    --primary: 205 85% 60%;
-    --primary-foreground: 220 30% 8%;
-    --secondary: 220 15% 16%;
-    --secondary-foreground: 210 15% 95%;
-    --muted: 220 12% 18%;
-    --muted-foreground: 215 10% 60%;
-    --accent: 220 75% 55%;
-    --accent-foreground: 220 30% 8%;
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 12% 20%;
-    --input: 220 12% 20%;
-    --ring: 205 85% 60%;
-    --chart-1: 205 85% 60%;
-    --chart-2: 220 70% 50%;
-    --chart-3: 195 80% 50%;
-    --chart-4: 235 65% 60%;
+    --destructive: 0 70% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 18% 92%;
+    --input: 215 18% 92%;
+    --ring: 205 85% 58%;
+    --chart-1: 205 85% 58%;
+    --chart-2: 220 70% 52%;
+    --chart-3: 195 80% 48%;
+    --chart-4: 235 65% 58%;
     --chart-5: 180 60% 45%;
-    --chart-6: 320 75% 60%;
+    --chart-6: 320 75% 58%;
     --chart-7: 45 95% 55%;
-    --chart-8: 160 70% 50%;
-    --surface-1: 220 20% 10%;
-    --surface-2: 220 18% 12%;
-    --surface-3: 220 15% 14%;
-    --shadow-color: 220 30% 2%;
-    --sidebar-background: 220 25% 10%;
-    --sidebar-foreground: 210 15% 95%;
-    --sidebar-primary: 205 85% 60%;
-    --sidebar-primary-foreground: 220 30% 8%;
-    --sidebar-accent: 220 75% 55%;
-    --sidebar-accent-foreground: 220 30% 8%;
-    --sidebar-border: 220 12% 20%;
-    --sidebar-ring: 205 85% 60%;
+    --chart-8: 160 70% 48%;
+    --radius: 0.5rem;
+    --surface-1: 210 25% 98%;
+    --surface-2: 210 20% 96%;
+    --surface-3: 210 15% 94%;
+    --shadow-color: 215 25% 55%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 18% 20%;
+    --sidebar-primary: 205 85% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 70% 52%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 18% 92%;
+    --sidebar-ring: 205 85% 58%;
+  }
+  /* Dark mode: Soft navy, less stark than pure black */
+  .dark {
+    --background: 220 20% 14%;
+    --foreground: 210 20% 96%;
+    --card: 220 18% 18%;
+    --card-foreground: 210 20% 96%;
+    --popover: 220 18% 18%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 205 85% 62%;
+    --primary-foreground: 220 20% 14%;
+    --secondary: 220 15% 22%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 220 12% 24%;
+    --muted-foreground: 215 12% 65%;
+    --accent: 220 75% 60%;
+    --accent-foreground: 220 20% 14%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 12% 26%;
+    --input: 220 12% 26%;
+    --ring: 205 85% 62%;
+    --chart-1: 205 85% 62%;
+    --chart-2: 220 70% 58%;
+    --chart-3: 195 80% 55%;
+    --chart-4: 235 65% 65%;
+    --chart-5: 180 60% 50%;
+    --chart-6: 320 75% 65%;
+    --chart-7: 45 95% 58%;
+    --chart-8: 160 70% 55%;
+    --surface-1: 220 18% 16%;
+    --surface-2: 220 16% 20%;
+    --surface-3: 220 14% 24%;
+    --shadow-color: 220 30% 4%;
+    --sidebar-background: 220 18% 18%;
+    --sidebar-foreground: 210 20% 96%;
+    --sidebar-primary: 205 85% 62%;
+    --sidebar-primary-foreground: 220 20% 14%;
+    --sidebar-accent: 220 75% 60%;
+    --sidebar-accent-foreground: 220 20% 14%;
+    --sidebar-border: 220 12% 26%;
+    --sidebar-ring: 205 85% 62%;
   }
 }
 
@@ -246,13 +246,13 @@ body {
 
   /* Light mode: barely-visible mesh, gentle blue tint — no dark overlay */
   .portfolio-shell.light::before {
-    opacity: 0.08;
+    opacity: 0.04;
     filter: invert(1) hue-rotate(180deg);
   }
   .portfolio-shell.light::after {
     background:
-      radial-gradient(circle at top right, hsl(var(--primary) / 0.07), transparent 55%),
-      radial-gradient(circle at bottom left, hsl(var(--muted-foreground) / 0.04), transparent 60%);
+      radial-gradient(circle at top right, hsl(var(--primary) / 0.06), transparent 55%),
+      radial-gradient(circle at bottom left, hsl(var(--muted-foreground) / 0.025), transparent 60%);
   }
 }
 

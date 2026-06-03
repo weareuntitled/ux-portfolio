@@ -38,10 +38,10 @@ void main() {
   float n2 = noise(uv * 3.0 - t * 0.7 + vec2(100.0));
   float n3 = noise(uv * 1.5 + t * 0.3 + vec2(200.0));
 
-  vec3 c1 = vec3(0.02, 0.04, 0.10);
-  vec3 c2 = vec3(0.04, 0.07, 0.14);
-  vec3 c3 = vec3(0.03, 0.06, 0.12);
-  vec3 c4 = vec3(0.06, 0.10, 0.18);
+  vec3 c1 = vec3(0.05, 0.07, 0.13);
+  vec3 c2 = vec3(0.08, 0.11, 0.18);
+  vec3 c3 = vec3(0.06, 0.09, 0.16);
+  vec3 c4 = vec3(0.10, 0.14, 0.22);
 
   vec3 col = mix(c1, c2, n1);
   col = mix(col, c3, n2 * 0.5);
@@ -82,10 +82,10 @@ void main() {
   float n2 = noise(uv * 3.0 - t * 0.7 + vec2(100.0));
   float n3 = noise(uv * 1.5 + t * 0.3 + vec2(200.0));
 
-  vec3 c1 = vec3(0.96, 0.97, 0.99);
-  vec3 c2 = vec3(0.92, 0.95, 0.99);
-  vec3 c3 = vec3(0.88, 0.92, 0.98);
-  vec3 c4 = vec3(0.94, 0.96, 1.0);
+  vec3 c1 = vec3(0.98, 0.99, 1.0);
+  vec3 c2 = vec3(0.94, 0.97, 1.0);
+  vec3 c3 = vec3(0.90, 0.95, 1.0);
+  vec3 c4 = vec3(0.96, 0.98, 1.0);
 
   vec3 col = mix(c1, c2, n1);
   col = mix(col, c3, n2 * 0.4);
