@@ -211,7 +211,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
   return (
     <motion.section
       className={cn(
-        'relative overflow-hidden rounded-2xl border border-border/40 bg-card/40 backdrop-blur-sm',
+        'relative overflow-hidden rounded-2xl border border-foreground/10 bg-foreground p-6 text-background shadow-sm md:p-10',
         className
       )}
       initial={reduceMotion ? false : { opacity: 0, y: 12 }}
@@ -219,43 +219,47 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_300px_at_25%_50%,hsl(var(--primary)/0.08),transparent_60%)]" />
-      <div className="relative grid gap-6 p-6 md:grid-cols-2 md:gap-8 md:p-8">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_300px_at_20%_30%,hsl(var(--primary)/0.18),transparent_60%)]" />
+      <div className="relative grid gap-8 md:grid-cols-2 md:gap-12">
         {/* Left: AI context */}
-        <div className="flex flex-col justify-center gap-3">
+        <div className="flex flex-col justify-center gap-4">
           <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-              <Sparkles className="h-4 w-4 text-primary" />
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <Sparkles className="h-4 w-4" />
             </span>
             <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-primary">
-              AI Test App
+              AI Test App · Early Access
             </span>
           </div>
-          <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-            DIGGR Studio
+          <h3 className="text-2xl font-bold leading-tight tracking-tight text-background md:text-3xl">
+            Get access to <span className="text-primary">DIGGR Studio</span>
           </h3>
-          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-            Meine persönliche Test-App für KI-gestützte DJ-Set Analyse. Extrahiert automatisch Tracklists aus
-            Mixes — powered by AI Audio Processing.
+          <p className="max-w-md text-sm leading-relaxed text-background/70 md:text-base">
+            My personal tool for AI-assisted DJ-set analysis. It ingests mixes from SoundCloud and YouTube and
+            extracts structured tracklists — drop a link, get a verified setlist.
           </p>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-            <span>Indie Developer</span>
-            <span className="text-border">·</span>
-            <span>Side Project 2026</span>
-            <span className="text-border">·</span>
-            <span>AI + Audio</span>
+          <div className="flex flex-wrap gap-2 pt-1">
+            <span className="rounded-full border border-background/15 bg-background/10 px-3 py-1 text-xs font-medium text-background">
+              SoundCloud + YouTube
+            </span>
+            <span className="rounded-full border border-background/15 bg-background/10 px-3 py-1 text-xs font-medium text-background">
+              AI Track Extraction
+            </span>
+            <span className="rounded-full border border-background/15 bg-background/10 px-3 py-1 text-xs font-medium text-background">
+              Indie Dev · 2026
+            </span>
           </div>
         </div>
 
         {/* Right: Form */}
         <div className="flex flex-col justify-center">
           {state === 'success' ? (
-            <div className="flex flex-col items-start gap-3 rounded-xl border border-primary/20 bg-primary/5 p-5">
+            <div className="flex flex-col items-start gap-3 rounded-xl border border-primary/40 bg-primary/15 p-5">
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-primary">Anfrage gesendet!</span>
+                <span className="font-semibold text-background">Anfrage gesendet!</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-background/70">
                 Prüf dein Postfach — du bekommst eine E-Mail mit Zugangsdaten, sobald die Anfrage
                 bestätigt wurde.
               </p>
@@ -270,7 +274,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={state === 'submitting'}
-                  className="h-11 w-full rounded-lg border border-border/60 bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20 disabled:opacity-50"
+                  className="h-12 w-full rounded-lg border border-background/15 bg-background/10 px-4 text-sm text-background placeholder:text-background/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/40 disabled:opacity-50"
                 />
               </div>
               <div>
@@ -280,13 +284,13 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={state === 'submitting'}
-                  className="h-11 w-full rounded-lg border border-border/60 bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20 disabled:opacity-50"
+                  className="h-12 w-full rounded-lg border border-background/15 bg-background/10 px-4 text-sm text-background placeholder:text-background/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/40 disabled:opacity-50"
                 />
               </div>
               <button
                 type="submit"
                 disabled={state === 'submitting'}
-                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 disabled:opacity-50"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 disabled:opacity-50"
               >
                 {state === 'submitting' ? (
                   <>
@@ -302,12 +306,12 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
               </button>
 
               {state === 'error' && errorMsg && (
-                <p className="flex items-start gap-1.5 rounded-lg border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive">
+                <p className="flex items-start gap-1.5 rounded-lg border border-red-300/30 bg-red-500/15 p-3 text-sm text-red-200">
                   <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {errorMsg}
                 </p>
               )}
 
-              <p className="text-center text-[11px] text-muted-foreground/60">
+              <p className="pt-1 text-center text-[11px] text-background/50">
                 Deine Daten werden nur für den Zugang verwendet. Kein Spam.
               </p>
             </form>

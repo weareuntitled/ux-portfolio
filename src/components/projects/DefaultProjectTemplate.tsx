@@ -404,7 +404,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: DUR.lg, ease: EASE }}
-          className="relative -mx-4 -mt-4 overflow-hidden md:-mx-8 md:-mt-8"
+          className="relative -mx-4 overflow-hidden md:-mx-8"
           style={{ height: 'clamp(260px, 38vw, 480px)' }}
         >
           {heroCover ? (
