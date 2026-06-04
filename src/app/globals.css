@@ -366,23 +366,10 @@ body {
     overflow-x: hidden;
   }
 
-  /* Portfolio-only: mesh and overlay so admin panel is not affected */
+  /* Portfolio-only: shell for admin panel isolation */
   .portfolio-shell {
     position: relative;
     min-height: 100vh;
-  }
-
-  .portfolio-shell::before {
-    content: '';
-    position: fixed;
-    inset: -10%;
-    z-index: -10;
-    background-image: url('/mesh-bg.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 1;
-    filter: none;
   }
 
   .portfolio-shell::after {
@@ -396,11 +383,7 @@ body {
       radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
   }
 
-  /* Light mode: barely-visible mesh, gentle blue tint — no dark overlay */
-  .portfolio-shell.light::before {
-    opacity: 0.04;
-    filter: invert(1) hue-rotate(180deg);
-  }
+  /* Light mode: no dark overlay */
   .portfolio-shell.light::after {
     background:
       radial-gradient(circle at top right, rgba(0, 0, 0, 0.04), transparent 55%),
