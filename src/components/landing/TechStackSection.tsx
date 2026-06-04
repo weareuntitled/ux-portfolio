@@ -23,7 +23,7 @@ function TechItemPill({ item, index }: { item: TechItem; index: number }) {
           alt={item.name}
           width={16}
           height={16}
-          className="object-contain brightness-0 opacity-70 transition-opacity group-hover:opacity-100 dark:invert"
+          className="object-contain brightness-0 opacity-70 transition-opacity group-hover:opacity-100"
           unoptimized
         />
       </div>

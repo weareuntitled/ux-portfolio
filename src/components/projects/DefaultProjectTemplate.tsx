@@ -256,10 +256,10 @@ function ErmConsolidation({ beforeCount, afterCount }: { beforeCount: number; af
             >
               <div className="text-center">
                 <Database className="mx-auto h-6 w-6 text-primary" />
-                <div className="mt-1 font-mono text-xs font-semibold text-primary-foreground dark:text-primary">ERM</div>
+                <div className="mt-1 font-mono text-xs font-semibold text-primary">ERM</div>
               </div>
             </motion.div>
-            <div className="absolute right-2 top-2 rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-primary-foreground dark:text-primary">
+            <div className="absolute right-2 top-2 rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-primary">
               {afterCount} DB
             </div>
           </div>

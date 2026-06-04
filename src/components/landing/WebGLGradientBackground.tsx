@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import { usePortfolioTheme } from '@/components/AppThemeWrapper';
 
 const VERT = `
 attribute vec2 position;
@@ -10,51 +9,7 @@ void main() {
 }
 `;
 
-const FRAG_DARK = `
-precision mediump float;
-uniform float u_time;
-uniform vec2 u_resolution;
-
-float hash(vec2 p) {
-  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-}
-
-float noise(vec2 p) {
-  vec2 i = floor(p);
-  vec2 f = fract(p);
-  f = f * f * (3.0 - 2.0 * f);
-  float a = hash(i);
-  float b = hash(i + vec2(1.0, 0.0));
-  float c = hash(i + vec2(0.0, 1.0));
-  float d = hash(i + vec2(1.0, 1.0));
-  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-}
-
-void main() {
-  vec2 uv = gl_FragCoord.xy / u_resolution;
-  float t = u_time * 0.05;
-
-  float n1 = noise(uv * 2.5 + t);
-  float n2 = noise(uv * 3.0 - t * 0.7 + vec2(100.0));
-  float n3 = noise(uv * 1.5 + t * 0.3 + vec2(200.0));
-
-  vec3 c1 = vec3(0.05, 0.07, 0.13);
-  vec3 c2 = vec3(0.08, 0.11, 0.18);
-  vec3 c3 = vec3(0.06, 0.09, 0.16);
-  vec3 c4 = vec3(0.10, 0.14, 0.22);
-
-  vec3 col = mix(c1, c2, n1);
-  col = mix(col, c3, n2 * 0.5);
-  col = mix(col, c4, n3 * 0.3);
-
-  float vig = 1.0 - dot(uv - 0.5, uv - 0.5) * 1.2;
-  col *= clamp(vig, 0.0, 1.0);
-
-  gl_FragColor = vec4(col, 1.0);
-}
-`;
-
-const FRAG_LIGHT = `
+const FRAG = `
 precision mediump float;
 uniform float u_time;
 uniform vec2 u_resolution;
@@ -100,7 +55,6 @@ void main() {
 
 export function WebGLGradientBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme } = usePortfolioTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -116,11 +70,9 @@ export function WebGLGradientBackground() {
       return s;
     }
 
-    const fragSrc = theme === 'light' ? FRAG_LIGHT : FRAG_DARK;
-
     const prog = gl.createProgram()!;
     gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
     gl.linkProgram(prog);
     gl.useProgram(prog);
 
@@ -180,7 +132,7 @@ export function WebGLGradientBackground() {
       gl.deleteProgram(prog);
       gl.deleteBuffer(buf);
     };
-  }, [theme]);
+  }, []);
 
   return (
     <canvas

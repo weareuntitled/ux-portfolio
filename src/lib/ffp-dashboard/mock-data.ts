@@ -257,13 +257,10 @@ export const mockFFPs: FFP[] = [
 ];
 
 export const statusColors: Record<string, string> = {
-  Electrical:
-    "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
-  Gearbox: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
-  Factory: "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300",
-  HV: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
-  Mechanical:
-    "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300",
-  "Customer Satisfaction":
-    "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300",
+  Electrical: "bg-blue-100 text-blue-800",
+  Gearbox: "bg-blue-100 text-blue-800",
+  Factory: "bg-sky-100 text-sky-800",
+  HV: "bg-blue-100 text-blue-800",
+  Mechanical: "bg-amber-100 text-amber-800",
+  "Customer Satisfaction": "bg-orange-100 text-orange-800",
 };

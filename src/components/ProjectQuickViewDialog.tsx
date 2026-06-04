@@ -39,7 +39,7 @@ export function ProjectQuickViewDialog({ project, triggerLabel = 'Quick view', i
 
       {open ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true">
-          <div className={`w-full rounded-lg bg-background shadow-xl dark:bg-card ${fullscreen ? 'h-full max-w-none' : 'max-w-4xl'}`}>
+          <div className={`w-full rounded-lg bg-background shadow-xl ${fullscreen ? 'h-full max-w-none' : 'max-w-4xl'}`}>
             {showPrototype ? (
               <div className="h-full min-h-[80vh]">
                 <PrototypeShell

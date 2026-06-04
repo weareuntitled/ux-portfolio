@@ -26,10 +26,10 @@ export default async function ContactPage() {
       <div className="relative -mx-1 min-h-[min(72vh,760px)] overflow-hidden rounded-3xl border border-border/50 shadow-sm sm:-mx-2">
         <ContactWebGLBackground />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/85 dark:from-background/30 dark:to-background/90"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/85"
           aria-hidden
         />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-overlay dark:opacity-[0.2]">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-overlay">
           <div
             className="h-full w-full"
             style={{
@@ -52,7 +52,7 @@ export default async function ContactPage() {
             </p>
           </header>
 
-          <Card className="border-white/5 bg-card/75 shadow-md backdrop-blur-xl dark:border-white/5 dark:bg-card/55">
+          <Card className="border-white/5 bg-card/75 shadow-md backdrop-blur-xl">
             <CardContent className="space-y-6 p-7 sm:p-8">
               <div className="flex items-start gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">

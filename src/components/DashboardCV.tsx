@@ -29,7 +29,6 @@ import { cn } from '@/lib/utils';
 
 import { contact, identityName, identityRole } from '@/content/home';
 import uiCopy from '@/content/ui-copy.json';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { getAllProjects, getProjectCoverImage } from '@/content/portfolio';
 import type { NavProjectWithImage } from '@/lib/cms/projects-nav';
 import { MOTION_PROJECTS } from '@/content/motion-projects';
@@ -289,8 +288,8 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
           <Mail className="h-4 w-4" /> {contact.email}
         </a>
         <div className="mt-4 flex items-center justify-between">
-          <span className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground/50">Appearance</span>
-          <ThemeToggle />
+          <span className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground/50">Theme</span>
+          <span className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground/70">Light</span>
         </div>
       </div>
     </div>

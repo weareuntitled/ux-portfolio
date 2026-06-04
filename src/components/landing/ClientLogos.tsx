@@ -87,8 +87,7 @@ function ClientLogoItem({ logo }: { logo: ClientLogo }) {
         height={logo.heightPx}
         className={cn(
           'w-auto object-contain',
-          !logo.filter && 'brightness-0 dark:invert',
-          logo.filter === 'invert(1)' && 'dark:invert'
+          !logo.filter && 'brightness-0'
         )}
         style={{ height: logo.heightPx }}
         unoptimized

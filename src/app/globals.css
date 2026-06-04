@@ -284,48 +284,6 @@ body {
     --sidebar-border: 215 18% 92%;
     --sidebar-ring: 205 85% 58%;
   }
-  /* Dark mode: Soft navy, less stark than pure black */
-  .dark {
-    --background: 220 20% 14%;
-    --foreground: 210 20% 96%;
-    --card: 220 18% 18%;
-    --card-foreground: 210 20% 96%;
-    --popover: 220 18% 18%;
-    --popover-foreground: 210 20% 96%;
-    --primary: 205 85% 62%;
-    --primary-foreground: 220 20% 14%;
-    --secondary: 220 15% 22%;
-    --secondary-foreground: 210 20% 96%;
-    --muted: 220 12% 24%;
-    --muted-foreground: 215 12% 65%;
-    --accent: 220 75% 60%;
-    --accent-foreground: 220 20% 14%;
-    --destructive: 0 65% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 12% 26%;
-    --input: 220 12% 26%;
-    --ring: 205 85% 62%;
-    --chart-1: 205 85% 62%;
-    --chart-2: 220 70% 58%;
-    --chart-3: 195 80% 55%;
-    --chart-4: 235 65% 65%;
-    --chart-5: 180 60% 50%;
-    --chart-6: 320 75% 65%;
-    --chart-7: 45 95% 58%;
-    --chart-8: 160 70% 55%;
-    --surface-1: 220 18% 16%;
-    --surface-2: 220 16% 20%;
-    --surface-3: 220 14% 24%;
-    --shadow-color: 220 30% 4%;
-    --sidebar-background: 220 18% 18%;
-    --sidebar-foreground: 210 20% 96%;
-    --sidebar-primary: 205 85% 62%;
-    --sidebar-primary-foreground: 220 20% 14%;
-    --sidebar-accent: 220 75% 60%;
-    --sidebar-accent-foreground: 220 20% 14%;
-    --sidebar-border: 220 12% 26%;
-    --sidebar-ring: 205 85% 62%;
-  }
 }
 
 @layer base {
