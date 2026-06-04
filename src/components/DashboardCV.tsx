@@ -374,11 +374,11 @@ function DashboardCVImpl({
 
               <section className="min-w-0 space-y-6 p-0">
                 {variant === 'project' && breadcrumbs?.length ? (
-                  <div className="flex items-center justify-between px-4 pt-4 sm:px-0 sm:pt-6">
+                  <div className="relative z-10 flex items-center justify-between border-b border-border/40 bg-background/95 px-4 py-3 backdrop-blur-sm sm:px-0 sm:py-4">
                     <Breadcrumbs items={breadcrumbs} />
                     <Link
                       href="/projects"
-                      className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground transition-colors hover:border-foreground hover:text-foreground"
                     >
                       <ArrowLeft className="h-3 w-3" />
                       Back to projects

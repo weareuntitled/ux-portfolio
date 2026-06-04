@@ -78,7 +78,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
                 <>
                   <Image
                     src={coverUrl}
-                    alt="Tracklistify Studio"
+                    alt="DIGGR Studio"
                     fill
                     quality={80}
                     className="object-cover"
@@ -91,7 +91,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
                       Set Curation · SC &amp; YT
                     </p>
                     <h3 className="font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
-                      Tracklistify Studio
+                      DIGGR Studio
                     </h3>
                   </div>
                 </>
@@ -116,12 +116,12 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
               </div>
 
               <h2 className="font-display text-3xl font-bold tracking-tight text-black md:text-4xl">
-                Tracklistify <span className="text-black">Studio</span>
+                DIGGR <span className="text-black">Studio</span>
               </h2>
 
               <p className="mt-4 max-w-lg text-base leading-relaxed text-neutral-600">
                 DJ-Sets in Tracklisten verwandeln. Zieh dir Mixe von <strong className="text-black">SoundCloud</strong> und{' '}
-                <strong className="text-black">YouTube</strong>, und Tracklistify extrahiert per AI die einzelnen
+                <strong className="text-black">YouTube</strong>, und DIGGR extrahiert per AI die einzelnen
                 Tracks — präzise, automatisch, kuratiert.
               </p>
 
@@ -232,7 +232,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
             </span>
           </div>
           <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-            Tracklistify Studio
+            DIGGR Studio
           </h3>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
             Meine persönliche Test-App für KI-gestützte DJ-Set Analyse. Extrahiert automatisch Tracklists aus

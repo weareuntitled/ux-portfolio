@@ -104,6 +104,15 @@
     "/projects/deinespanndecke_gallery_03_reflection.jpg",
     "/projects/deinespanndecke_site_desktop.png"
   ],
+  "diggr": [
+    "/projects/diggr_gallery_01.png",
+    "/projects/diggr_gallery_02.png",
+    "/projects/diggr_gallery_03.png",
+    "/projects/diggr_gallery_04.png",
+    "/projects/diggr_gallery_05.png",
+    "/projects/diggr_gallery_06.png",
+    "/projects/diggr_hero.png"
+  ],
   "emission-compliance": [
     "/projects/emission-compliance_gallery_01_dup01.png",
     "/projects/emission-compliance_gallery_01.png",
@@ -275,8 +284,5 @@
     "/projects/samani-rebranding_gallery_03.png",
     "/projects/samani-rebranding_gallery_04_dup01.jpg",
     "/projects/samani-rebranding_gallery_04.jpg"
-  ],
-  "tracklistify": [
-    "/projects/tracklistify_hero.jpg"
   ]
 }

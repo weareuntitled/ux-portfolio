@@ -352,7 +352,7 @@ function TimelineDonut({
 // ---------------------------------------------------------------------------
 /**
  * Default project detail page template. Used by every project that does not
- * have a custom template (e.g. Kontrast, GSwin, Tracklistify). Renders:
+ * have a custom template (e.g. Kontrast, GSwin, DIGGR). Renders:
  *   - Full-bleed hero (image, or empty-state strip when project is image-light)
  *   - AccountRequestBand slot for projects with accountRequestEndpoint
  *   - Meta + narrative grid
@@ -497,7 +497,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
         )}
 
         {/* ── Account Request Band — for projects with access-request flow ──
-            e.g. Tracklistify. Slot anchors at #request-access so the home card
+            e.g. DIGGR. Slot anchors at #request-access so the home card
             chip can deep-link here. */}
         {project.accountRequestEndpoint && (
           <div id="request-access" className="mt-12 scroll-mt-24">

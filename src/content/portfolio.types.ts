@@ -94,7 +94,7 @@ export type Project = {
   };
   tags?: string[];
 
-  // NEU: Account Request für Self-Service Zugang (z.B. Tracklistify)
+  // NEU: Account Request für Self-Service Zugang (z.B. DIGGR)
   accountRequestEndpoint?: string;
   
   // NEU: YouTube Support für Motion Design

@@ -1,13 +1,13 @@
 /**
  * Side / creative / branding / web / motion projects — src/content/portfolio-creative.ts
  * Phase 3 refactoring: extracted from portfolio.ts
- * Projects: 8020-portfolio, 3dprojects, architektur-ai, tracklistify, fixundfertig,
+ * Projects: 8020-portfolio, 3dprojects, architektur-ai, diggr, fixundfertig,
  *   job-hunter, samani-rebranding, kontrast-festival, deinespanndecke, aidelsburger, arbeitsprobe2022
  *
  * Taxonomy (plan §2.1, handoff 2026-06-04):
  *   8020-portfolio                                  → 'Strategy & Process'
  *   3dprojects                                      → 'Motion & 3D'
- *   architektur-ai, tracklistify, fixundfertig,
+ *   architektur-ai, diggr, fixundfertig,
  *     job-hunter                                    → 'Product Design'
  *   samani-rebranding, kontrast-festival,
  *     aidelsburger                                  → 'Visual & Branding'
@@ -143,31 +143,31 @@ export const portfolioCreative: PortfolioSource = {
     caseStudy: caseStudyArchViz,
   },
 
-  tracklistify: {
+  diggr: {
     id: '4',
-    slug: 'tracklistify',
-    title: 'Tracklistify Studio',
-    subtitle: 'AI tracklist extraction for DJ sets.',
-    oneLiner: 'Indie tool: AI audio analysis turns raw DJ sets from SoundCloud and YouTube into structured tracklists.',
+    slug: 'diggr',
+    title: 'DIGGR Studio',
+    subtitle: 'AI-powered DJ set curation and tracklist extraction.',
+    oneLiner: 'Indie tool: an AI audio app that turns raw DJ sets from SoundCloud and YouTube into structured, verified tracklists.',
     category: 'Product Design',
     year: '2026',
-    moodImageUrl: getPreviewImage('tracklistify'),
-    galleryUrls: getGallery('tracklistify'),
+    moodImageUrl: getPreviewImage('diggr'),
+    galleryUrls: getGallery('diggr'),
     roles: ['Indie Developer'],
     problem:
-      'DJs and curators often work from long recordings where track IDs are unclear; manual tracklisting is slow and error-prone.',
+      'DJs and curators work from long recordings where track IDs are unclear; manual tracklisting is slow and error-prone.',
     solution:
       'Built an AI-assisted pipeline that ingests raw sets and proposes structured track lists editors can verify and export.',
     description:
-      'An indie developer side-project focused on AI-driven DJ set analysis. Tracklistify Studio turns raw audio sets into actionable, accurate tracklists through advanced AI extraction, streamlining the workflow for music professionals.',
+      'DIGGR Studio is an indie developer side-project focused on AI-driven DJ set curation. It turns raw audio sets into actionable, accurate tracklists through automated extraction, streamlining the workflow for music professionals and serious listeners.',
     outcomes: ['Reduced manual listening loops for set documentation.', 'Prototype validates extraction quality on real-world recordings.'],
     tags: ['ai', 'audio', 'side-project'],
     links: [{ label: 'Live demo', href: `https://tracklistify.untitled-ux.de/?ro=${TOKEN}` }],
     prototypeIframeUrl: `https://tracklistify.untitled-ux.de/?ro=${TOKEN}`,
-    prototypeButtonLabel: 'Open Tracklistify',
+    prototypeButtonLabel: 'Open DIGGR',
     outcomeHighlight: { value: 'AI', label: 'Analysis', description: 'Automated identification to streamline curation.', icon: 'Sparkles' },
-    accountRequestEndpoint: '/api/request-access/tracklistify',
-    caseStudy: { summary: 'AI DJ set analysis.' },
+    accountRequestEndpoint: '/api/request-access/diggr',
+    caseStudy: { summary: 'AI DJ set analysis and curation.' },
   },
 
   fixundfertig: {

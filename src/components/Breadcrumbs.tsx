@@ -20,7 +20,7 @@ export function Breadcrumbs({ items, rightSlot }: Props) {
           {item.href != null ? (
             <Link
               href={item.href}
-              className="text-foreground/50 transition-colors hover:text-foreground hover:no-underline"
+              className="text-foreground/70 transition-colors hover:text-foreground hover:no-underline"
             >
               {item.label}
             </Link>

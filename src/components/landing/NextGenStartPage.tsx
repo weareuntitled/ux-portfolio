@@ -20,8 +20,8 @@ import { contact } from '@/content/home';
 
 const gswinFeatured = getProjectBySlug('gswin-erp-migration');
 const gswinFeaturedCover = gswinFeatured ? getProjectCoverImage(gswinFeatured) : null;
-const tracklistifyFeatured = getProjectBySlug('tracklistify');
-const tracklistifyFeaturedCover = tracklistifyFeatured ? getProjectCoverImage(tracklistifyFeatured) : null;
+const diggrFeatured = getProjectBySlug('diggr');
+const diggrFeaturedCover = diggrFeatured ? getProjectCoverImage(diggrFeatured) : null;
 
 const jobHunter = getProjectBySlug('job-hunter');
 
@@ -435,13 +435,13 @@ export function NextGenStartPage() {
             </Link>
           </motion.div>
 
-          {/* Project thumbnails grid — 2 featured (Gswin + Tracklistify), then enterprise projects */}
+          {/* Project thumbnails grid — 2 featured (Gswin + DIGGR), then enterprise projects */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {gswinFeatured && (
               <FeaturedCard project={gswinFeatured} cover={gswinFeaturedCover} index={0} />
             )}
-            {tracklistifyFeatured && (
-              <FeaturedCard project={tracklistifyFeatured} cover={tracklistifyFeaturedCover} index={1} />
+            {diggrFeatured && (
+              <FeaturedCard project={diggrFeatured} cover={diggrFeaturedCover} index={1} />
             )}
             {enterpriseProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
@@ -450,7 +450,7 @@ export function NextGenStartPage() {
         </div>
       </section>
 
-      {/* 5. Tracklistify — access request band lives on the detail page now. */}
+      {/* 5. DIGGR — access request band lives on the detail page now. */}
 
       {/* 6. Kontrast Festival — Light emphasis */}
       <KontrastBanner />

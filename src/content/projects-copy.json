@@ -44,9 +44,9 @@
     "subtitle": "From Proof of Concept to Enterprise ROI.",
     "oneLiner": "Defined an AI adoption roadmap across 500+ business processes, designing a hybrid RAG architecture with validated ROI for enterprise handover."
   },
-  "tracklistify": {
-    "title": "Tracklistify Studio",
-    "subtitle": "AI-Driven Audio Analysis.",
+  "diggr": {
+    "title": "DIGGR Studio",
+    "subtitle": "AI-Driven Audio Curation.",
     "oneLiner": "Built a personal tool that uses AI audio analysis to extract accurate tracklists from raw DJ sets."
   },
   "fixundfertig": {
