@@ -321,7 +321,7 @@ export const portfolioEnterprise: PortfolioSource = {
     portfolioKit: {
       beforeAfter: {
         oldImg: '/projects/gswin-erp-migration_legacy-guwin.jpg',
-        newImg: '/projects/gswin-erp-migration_hero.png',
+        newImg: '/projects/gswin-erp-migration_hero.jpg',
       },
       technicalSpecs: [
         { title: 'Frontend', body: 'React / Next.js — modern, plattformunabhängig, mobil-tauglich.' },
