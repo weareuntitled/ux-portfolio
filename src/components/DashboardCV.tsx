@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo, useState, useEffect } from 'react';
 import {
+  ArrowLeft,
   Bot,
   Box,
   Fingerprint,
@@ -372,6 +373,18 @@ function DashboardCVImpl({
               </div>
 
               <section className="min-w-0 space-y-6 p-0">
+                {variant === 'project' && breadcrumbs?.length ? (
+                  <div className="flex items-center justify-between px-4 pt-4 sm:px-0 sm:pt-6">
+                    <Breadcrumbs items={breadcrumbs} />
+                    <Link
+                      href="/projects"
+                      className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <ArrowLeft className="h-3 w-3" />
+                      Back to projects
+                    </Link>
+                  </div>
+                ) : null}
                 {showHeader && (
                   <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="px-4 sm:px-0">
