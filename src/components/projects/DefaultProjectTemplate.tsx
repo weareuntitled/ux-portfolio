@@ -30,6 +30,7 @@ import {
 
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import DashboardCV from '@/components/DashboardCV';
+import { AccountRequestBand } from '@/components/project/AccountRequestBand';
 import { getProjectCoverImage, getAdjacentProjects } from '@/content/portfolio';
 import { KontrastPostsBento } from '@/components/kontrast/KontrastPostsBento';
 import { shouldUnoptimizeImage } from '@/lib/project-assets';
@@ -53,6 +54,7 @@ type DefaultProject = {
   tags?: string[];
   galleryUrls?: string[];
   moodImageUrl?: string | null;
+  youtubeUrl?: string;
   category?: string;
   impactCards?: { label: string; value: string }[];
   links?: { label: string; href: string }[];
@@ -76,6 +78,8 @@ type DefaultProject = {
   timelineDonut?: {
     segments: { label: string; value: number; color: string }[];
   };
+  outcomeHighlight?: { value: string; label: string; description: string; icon: string };
+  accountRequestEndpoint?: string;
 };
 
 const processIconMap: Record<string, LucideIcon> = {
@@ -346,8 +350,29 @@ function TimelineDonut({
 // ---------------------------------------------------------------------------
 // Main template
 // ---------------------------------------------------------------------------
+/**
+ * Default project detail page template. Used by every project that does not
+ * have a custom template (e.g. Kontrast, GSwin, Tracklistify). Renders:
+ *   - Full-bleed hero (image, or empty-state strip when project is image-light)
+ *   - AccountRequestBand slot for projects with accountRequestEndpoint
+ *   - Meta + narrative grid
+ *   - Impact cards, gallery, related projects
+ * #schema:
+ * {
+ *   type: "component",
+ *   args: "project: DefaultProject",
+ *   returns: "JSX.Element",
+ *   module: "DefaultProjectTemplate.tsx"
+ * }
+ */
 export default function DefaultProjectTemplate({ project }: { project: DefaultProject }) {
-  const heroCover = getProjectCoverImage(project);
+  const heroCoverRaw = getProjectCoverImage(project);
+  const useEmptyStateHero =
+    !project.moodImageUrl &&
+    !project.youtubeUrl &&
+    !project.processDiagramUrl &&
+    (project.galleryUrls?.length ?? 0) < 3;
+  const heroCover = useEmptyStateHero ? null : heroCoverRaw;
   const galleryThumbs =
     project.galleryUrls?.filter((u) => {
       const low = u.toLowerCase();
@@ -426,6 +451,64 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             )}
           </div>
         </motion.section>
+
+        {/* ── Empty-state hero strip — for image-light projects (e.g. SAP Automation).
+            Promotes impactCards + outcomeHighlight as the visual anchor. ────── */}
+        {useEmptyStateHero && project.outcomeHighlight && (
+          <motion.section
+            initial={reduce ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: DUR.md, ease: EASE, delay: 0.08 }}
+            className="mt-12 rounded-2xl border border-border/40 bg-card/50 px-8 py-10"
+          >
+            {project.outcomeHighlight && (
+              <div className="mb-8 flex items-center gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <Sparkles className="h-5 w-5" />
+                </span>
+                <div>
+                  <span className="font-mono text-lg font-bold tracking-tight text-foreground">
+                    {project.outcomeHighlight.value}
+                  </span>
+                  <span className="ml-2 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-primary">
+                    {project.outcomeHighlight.label}
+                  </span>
+                  <p className="text-sm text-muted-foreground">{project.outcomeHighlight.description}</p>
+                </div>
+              </div>
+            )}
+            {project.impactCards && project.impactCards.length > 0 && (
+              <div className="grid gap-6 sm:grid-cols-3">
+                {project.impactCards.slice(0, 3).map((card, i) => (
+                  <motion.div
+                    key={card.label}
+                    initial={reduce ? false : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: DUR.md, ease: EASE, delay: 0.1 + i * 0.06 }}
+                    className="flex flex-col"
+                  >
+                    <span className="text-4xl font-light tracking-tighter text-primary md:text-5xl">{card.value}</span>
+                    <span className="mt-1 text-[11px] font-medium uppercase tracking-widest text-muted-foreground/70">{card.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </motion.section>
+        )}
+
+        {/* ── Account Request Band — for projects with access-request flow ──
+            e.g. Tracklistify. Slot anchors at #request-access so the home card
+            chip can deep-link here. */}
+        {project.accountRequestEndpoint && (
+          <div id="request-access" className="mt-12 scroll-mt-24">
+            <AccountRequestBand
+              variant="full"
+              endpoint={project.accountRequestEndpoint}
+              coverUrl={getProjectCoverImage(project) ?? undefined}
+              projectUrl={`/projects/${project.slug}`}
+            />
+          </div>
+        )}
 
         {/* ── Main grid: meta left (3) + narrative right (9) ───────────── */}
         <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-20">

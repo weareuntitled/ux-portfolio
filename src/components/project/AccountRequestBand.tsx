@@ -66,7 +66,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
             {/* Left: Visual (layout variation from KontrastBanner) */}
             <motion.div
               className={cn(
-                'relative overflow-hidden rounded-2xl border border-border/50 bg-muted',
+                'relative overflow-hidden rounded-lg border border-neutral-300 bg-neutral-100',
                 hasVisual ? 'aspect-video' : 'hidden md:block'
               )}
               initial={reduceMotion ? false : { opacity: 0, x: -20 }}
@@ -96,7 +96,7 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
                   </div>
                 </>
               ) : (
-                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-muted" />
+                <div className="h-full w-full bg-gradient-to-br from-neutral-200 to-neutral-100" />
               )}
             </motion.div>
 
@@ -108,32 +108,32 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
               transition={{ duration: reduceMotion ? 0 : DUR.md, delay: 0.1, ease: EASE }}
             >
               {/* Badge */}
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-primary">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/20 bg-white px-3 py-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-black" />
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-black">
                   AI Set Curation
                 </span>
               </div>
 
-              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                Tracklistify <span className="text-primary">Studio</span>
+              <h2 className="font-display text-3xl font-bold tracking-tight text-black md:text-4xl">
+                Tracklistify <span className="text-black">Studio</span>
               </h2>
 
-              <p className="mt-4 max-w-lg text-base leading-relaxed text-muted-foreground">
-                DJ-Sets in Tracklisten verwandeln. Zieh dir Mixe von <strong className="text-foreground">SoundCloud</strong> und{' '}
-                <strong className="text-foreground">YouTube</strong>, und Tracklistify extrahiert per AI die einzelnen
+              <p className="mt-4 max-w-lg text-base leading-relaxed text-neutral-600">
+                DJ-Sets in Tracklisten verwandeln. Zieh dir Mixe von <strong className="text-black">SoundCloud</strong> und{' '}
+                <strong className="text-black">YouTube</strong>, und Tracklistify extrahiert per AI die einzelnen
                 Tracks — präzise, automatisch, kuratiert.
               </p>
 
               {/* Feature chips */}
               <div className="mt-6 flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/5 bg-card/60 px-3 py-1 text-xs font-medium text-foreground">
+                <span className="rounded-full border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-black">
                   SoundCloud & YouTube
                 </span>
-                <span className="rounded-full border border-white/5 bg-card/60 px-3 py-1 text-xs font-medium text-foreground">
+                <span className="rounded-full border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-black">
                   AI Track Extraction
                 </span>
-                <span className="rounded-full border border-white/5 bg-card/60 px-3 py-1 text-xs font-medium text-foreground">
+                <span className="rounded-full border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-black">
                   Side Project 2026
                 </span>
               </div>

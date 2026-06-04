@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { EASE, DUR } from '@/lib/motion';
-import { contact } from '@/content/home';
 import { TECH_STACK, deviconUrl, type TechItem } from '@/lib/devicon';
 
 function Highlight({ children }: { children: React.ReactNode }) {
@@ -20,23 +19,23 @@ function TechItemPill({ item, index }: { item: TechItem; index: number }) {
 
   return (
     <motion.div
-      className="group flex items-center gap-2 rounded-full border border-foreground/10 bg-foreground/5 px-3 py-1.5 transition-colors hover:border-primary/30 hover:bg-foreground/10"
+      className="group flex items-center gap-2 rounded-full border border-foreground/15 bg-white px-3 py-1.5 transition-colors hover:border-black hover:shadow-sm"
       initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: reduceMotion ? 0 : DUR.sm, delay: index * 0.03, ease: EASE }}
     >
-      <div className="relative flex h-4 w-4 items-center justify-center">
+      <div className="relative flex h-5 w-5 items-center justify-center">
         <Image
           src={iconUrl}
           alt={item.name}
-          width={16}
-          height={16}
-          className="object-contain brightness-0 opacity-70 transition-opacity group-hover:opacity-100 invert"
+          width={20}
+          height={20}
+          className="object-contain opacity-90 transition-opacity group-hover:opacity-100"
           unoptimized
         />
       </div>
-      <span className="text-xs font-medium text-foreground/80">{item.name}</span>
+      <span className="text-xs font-medium text-foreground">{item.name}</span>
     </motion.div>
   );
 }
@@ -45,37 +44,29 @@ export function AboutToolsSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="bg-card py-20 text-foreground md:py-28">
+    <section className="bg-white py-20 text-foreground md:py-28">
       <div className="mx-auto max-w-7xl px-6 text-center">
         {/* Title */}
         <motion.h2
-          className="mb-10 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl"
+          className="mb-6 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
         >
-          Behind the <span className="text-primary">Screens</span>
+          Behind the <span className="text-accent">Screens</span>
         </motion.h2>
 
-        {/* Photo centered */}
-        <motion.div
-          className="mx-auto mb-10"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+        {/* Big-font manifesto — replaces the profile image, single point of contact only */}
+        <motion.p
+          className="mx-auto mb-14 max-w-5xl font-display text-[10vw] font-extrabold leading-[0.95] tracking-[-0.04em] text-foreground md:text-[6.5vw] lg:text-[5.5vw]"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: reduceMotion ? 0 : DUR.lg, delay: 0.1, ease: EASE }}
         >
-          <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border border-border/20 bg-muted ring-2 ring-primary/20 md:h-28 md:w-28">
-            <Image
-              src={contact.profileImage}
-              alt={contact.name}
-              fill
-              className="object-cover"
-              sizes="112px"
-            />
-          </div>
-        </motion.div>
+          Design <span className="text-accent">×</span> Engineering <span className="text-accent">×</span> Strategy.
+        </motion.p>
 
         {/* Content split */}
         <div className="grid gap-8 text-left md:grid-cols-2 md:text-center">
@@ -88,10 +79,10 @@ export function AboutToolsSection() {
           >
             <p>
               I&apos;m a <Highlight>Product Designer</Highlight> and{' '}
-              <Highlight>Certified Scrum Master</Highlight> running my own freelance practice,{' '}
-              <Highlight>Untitled-ux</Highlight>. I bridge design and engineering — from Figma prototypes to production-ready specs. I{' '}
-              <Highlight>run sprints</Highlight>, <Highlight>ship fast</Highlight>, and{' '}
-              <Highlight>solve real problems</Highlight> for enterprise teams.
+              <Highlight>Certified Scrum Master</Highlight> who runs{' '}
+              <Highlight>Untitled-ux</Highlight>, my own freelance practice.
+              I take work from Figma to production-ready specs. Sprints,{' '}
+              shipping, real problems — that&apos;s my day-to-day for enterprise teams.
             </p>
           </motion.div>
 
@@ -103,11 +94,8 @@ export function AboutToolsSection() {
             transition={{ duration: reduceMotion ? 0 : DUR.md, delay: 0.2, ease: EASE }}
           >
             <p>
-              I enjoy <Highlight>collaborating with developers</Highlight>,{' '}
-              <Highlight>simplifying complex workflows</Highlight>, and{' '}
-              <Highlight>transforming messy requirements</Highlight> into structured, shippable products. Currently focused on{' '}
-              <Highlight>enterprise SaaS</Highlight>, <Highlight>workflow automation</Highlight>, and{' '}
-              <Highlight>SAP-adjacent tools</Highlight> — while taking on select freelance projects through Untitled-ux.
+              I like working alongside <Highlight>developers</Highlight>. Together we untangle <Highlight>messy requirements</Highlight> until they become something shippable.
+              Lately that means <Highlight>enterprise SaaS</Highlight>, <Highlight>workflow automation</Highlight>, and <Highlight>SAP-adjacent tools</Highlight> — plus freelance projects through Untitled-ux.
             </p>
           </motion.div>
         </div>

@@ -1,6 +1,22 @@
 /**
  * Single source of truth types for portfolio data.
  * Used by portfolio.ts and consumers (payload, pages, components).
+ *
+ * Project taxonomy (`category` field) is a 6-role badge system mapped 1:1
+ * to the user's CV variants in `master_profile.md`:
+ *   - 'UX/UI Design'        → UX/UI Designer (DE)
+ *   - 'Product Design'      → Product Designer (DE) — AI-native variant
+ *   - 'Strategy & Process'  → Product Owner (DE) + General (DE)
+ *   - 'Visual & Branding'   → Visual & Graphic Design (DE)
+ *   - 'Web & CMS'           → Web & CMS (DE)
+ *   - 'Motion & 3D'         → Motion & Digital Production (DE)
+ *   - 'Archive'             → low-status filter only
+ * #schema:
+ * {
+ *   type: "types",
+ *   exports: ["Project", "PortfolioProject", "PortfolioSource", "..."],
+ *   module: "portfolio.types.ts"
+ * }
  */
 
 export type ProjectLink = {
@@ -38,7 +54,7 @@ export type Project = {
   subtitle?: string;
   roleLine?: string;
   oneLiner: string;
-  category: 'Enterprise' | 'Side' | 'Branding' | 'Motion' | 'Web' | 'Archive';
+  category: 'UX/UI Design' | 'Product Design' | 'Strategy & Process' | 'Visual & Branding' | 'Web & CMS' | 'Motion & 3D' | 'Archive';
   year: string;
   client?: string;
   roles?: string[];

@@ -1,11 +1,12 @@
 import type { PortfolioProject } from '@/content/portfolio';
 
 export type ProjectCategory =
-  | 'Enterprise'
-  | 'Side'
-  | 'Branding'
-  | 'Motion'
-  | 'Web'
+  | 'UX/UI Design'
+  | 'Product Design'
+  | 'Strategy & Process'
+  | 'Visual & Branding'
+  | 'Web & CMS'
+  | 'Motion & 3D'
   | 'Archive';
 
 export type CmsProject = {

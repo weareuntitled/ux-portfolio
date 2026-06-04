@@ -36,7 +36,7 @@ html {
 }
 
 .animate-marquee {
-  animation: marquee 28s linear infinite;
+  animation: marquee var(--marquee-duration, 60s) linear infinite;
   display: flex;
   width: max-content;
 }
@@ -44,6 +44,158 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation-play-state: paused;
+  }
+}
+
+/* Hero — Liquid-Burn gradient sweep inside the contrast(50) container. */
+@keyframes liquid-gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-liquid-gradient {
+  animation: liquid-gradient 12s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-liquid-gradient {
+    animation: none !important;
+  }
+}
+
+/* Hero — Prismatic halo sweep behind the rotating word. */
+@keyframes prismatic-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-prismatic-shift {
+  animation: prismatic-shift 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-prismatic-shift {
+    animation: none !important;
+  }
+}
+
+/* ============================================================================
+   GPU PROMOTION — animated burn layers get their own compositor layer
+   This avoids full re-paints when transforms change.
+   Applied to: burn ghosts, melt layers, prismatic outlines
+   ============================================================================ */
+.animate-prismatic-shift,
+.animate-burn-glitch-1,
+.animate-burn-glitch-2,
+.animate-burn-glitch-3,
+.animate-hero-intro {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-prismatic-shift,
+  .animate-burn-glitch-1,
+  .animate-burn-glitch-2,
+  .animate-burn-glitch-3 {
+    will-change: auto;
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   HERO INTRO ANIMATION — black screen, white circle scales up, then inverts
+   ============================================================================
+   duration  900ms total (compressed for snappier intro)
+   0%    scale 0   — invisible dot
+   65%   scale 1   — full screen white
+   80%   scale 1   — hold
+   100%  scale 1 opacity 0 — fade out
+   ============================================================================ */
+@keyframes hero-intro-circle {
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 1; }
+  65%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  80%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+}
+
+.animate-hero-intro {
+  animation: hero-intro-circle 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-intro {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* ============================================================================
+   BURN GLITCH ANIMATION CONTROLS — smooth ease-in-out offset movement
+   ============================================================================
+   burn-glitch-1/2/3  — three independent glitch keyframes, each moves the
+                        element between subtle offsets.
+   amplitude          — peak offset in px per keyframe step.
+                        0.8-2px = subtle organic, 3-4px = visible jitter.
+   duration           — animation length per loop.
+                        6-8s = slow liquid, 3-4s = nervous glitch.
+   easing             — `ease-in-out` for smooth, `steps(1)` for staccato.
+   ============================================================================ */
+
+/* Burn ghost glitch — smooth ease-in-out offsets, organic liquid feel */
+@keyframes burn-glitch-1 {
+  0%, 100% { transform: translate(0, 0); }
+  16%      { transform: translate(1.5px, -0.8px); }
+  33%      { transform: translate(-0.8px, 1.5px); }
+  50%      { transform: translate(2px, 0); }
+  66%      { transform: translate(-1.5px, -1.5px); }
+  83%      { transform: translate(0.8px, 2px); }
+}
+
+@keyframes burn-glitch-2 {
+  0%, 100% { transform: translate(0, 0); }
+  14%      { transform: translate(-2px, 0.8px); }
+  30%      { transform: translate(1.5px, 1.5px); }
+  48%      { transform: translate(-1px, -2px); }
+  64%      { transform: translate(2px, 0); }
+  82%      { transform: translate(-1.5px, 1.5px); }
+}
+
+@keyframes burn-glitch-3 {
+  0%, 100% { transform: translate(0, 0); }
+  18%      { transform: translate(0.8px, 1.5px); }
+  36%      { transform: translate(-2px, -0.8px); }
+  54%      { transform: translate(1.5px, 2px); }
+  72%      { transform: translate(-1.5px, -0.8px); }
+  90%      { transform: translate(2px, 0.8px); }
+}
+
+.animate-burn-glitch-1 { animation: burn-glitch-1 6.5s ease-in-out infinite; }
+.animate-burn-glitch-2 { animation: burn-glitch-2 7.3s ease-in-out infinite; }
+.animate-burn-glitch-3 { animation: burn-glitch-3 8.1s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-burn-glitch-1, .animate-burn-glitch-2, .animate-burn-glitch-3 {
+    animation: none !important;
+  }
+}
+
+/* Hero — Subtle breathing scale for the center lens */
+@keyframes lens-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+
+.animate-lens-breathe {
+  animation: lens-breathe 5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lens-breathe {
+    animation: none !important;
   }
 }
 
@@ -87,36 +239,36 @@ body {
 }
 
 @layer base {
-  /* Design Tokens — Light blue palette (default)
-     Primary: sky blue #3399FF (actions) | Accent: vivid blue (highlights)
-     Surfaces: airy blue-tinted whites, soft layered depth */
+  /* Design Tokens — pure black & white with a single blue accent
+     Primary: black (actions) | Accent: blue (highlights only — not buttons, not bg)
+     Surfaces: pure white */
   :root {
-    --background: 210 30% 99%;
-    --foreground: 215 18% 20%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 215 18% 20%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 215 18% 20%;
-    --primary: 205 85% 58%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 25% 96%;
-    --secondary-foreground: 215 18% 20%;
-    --muted: 210 20% 97%;
-    --muted-foreground: 215 12% 50%;
-    --accent: 220 70% 52%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 97%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 215 90% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 52%;
     --destructive-foreground: 0 0% 100%;
-    --border: 215 18% 92%;
-    --input: 215 18% 92%;
-    --ring: 205 85% 58%;
-    --chart-1: 205 85% 58%;
-    --chart-2: 220 70% 52%;
-    --chart-3: 195 80% 48%;
-    --chart-4: 235 65% 58%;
-    --chart-5: 180 60% 45%;
-    --chart-6: 320 75% 58%;
-    --chart-7: 45 95% 55%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
+    --chart-1: 0 0% 0%;
+    --chart-2: 0 0% 20%;
+    --chart-3: 0 0% 40%;
+    --chart-4: 0 0% 60%;
+    --chart-5: 0 0% 80%;
+    --chart-6: 215 90% 48%;
+    --chart-7: 0 0% 50%;
     --chart-8: 160 70% 48%;
     --radius: 0.5rem;
     --surface-1: 210 25% 98%;
@@ -251,8 +403,8 @@ body {
   }
   .portfolio-shell.light::after {
     background:
-      radial-gradient(circle at top right, hsl(var(--primary) / 0.06), transparent 55%),
-      radial-gradient(circle at bottom left, hsl(var(--muted-foreground) / 0.025), transparent 60%);
+      radial-gradient(circle at top right, rgba(0, 0, 0, 0.04), transparent 55%),
+      radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.02), transparent 60%);
   }
 }
 
@@ -294,15 +446,4 @@ body {
 
 /* The motion now comes from animations inside mesh-bg.svg itself */
 
-/* Trust Ticker marquee */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
+

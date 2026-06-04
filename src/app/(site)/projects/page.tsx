@@ -4,7 +4,19 @@ import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Search, Film, Layers3, FolderKanban, SlidersHorizontal } from 'lucide-react';
+import {
+  Search,
+  Film,
+  Layers3,
+  FolderKanban,
+  SlidersHorizontal,
+  Layout,
+  Box,
+  Workflow,
+  Sparkles,
+  Globe,
+  type LucideIcon,
+} from 'lucide-react';
 
 import { BrandLogoMark } from '@/components/brand/BrandLogoMark';
 import { PageLayout } from '@/components/PageLayout';
@@ -15,15 +27,37 @@ import { cn } from '@/lib/utils';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const CATEGORIES = [
+/**
+ * Filter sidebar taxonomy — 6 role badges + Archive.
+ * Maps 1:1 to `Project['category']` in `src/content/portfolio.types.ts`
+ * and to CV variants in `master_profile.md`.
+ * #schema:
+ * {
+ *   type: "constant",
+ *   exports: ["CATEGORIES", "CATEGORY_ICON"],
+ *   module: "projects/page.tsx"
+ * }
+ */
+const CATEGORIES: ReadonlyArray<{ label: string; value: string }> = [
   { label: 'All', value: 'all' },
-  { label: 'Enterprise', value: 'Enterprise' },
-  { label: 'Motion', value: 'Motion' },
-  { label: 'Branding', value: 'Branding' },
-  { label: 'Web', value: 'Web' },
-  { label: 'Side', value: 'Side' },
+  { label: 'UX/UI Design', value: 'UX/UI Design' },
+  { label: 'Product Design', value: 'Product Design' },
+  { label: 'Strategy & Process', value: 'Strategy & Process' },
+  { label: 'Visual & Branding', value: 'Visual & Branding' },
+  { label: 'Web & CMS', value: 'Web & CMS' },
+  { label: 'Motion & 3D', value: 'Motion & 3D' },
   { label: 'Archive', value: 'Archive' },
 ];
+
+const CATEGORY_ICON: Record<string, LucideIcon> = {
+  'UX/UI Design': Layout,
+  'Product Design': Box,
+  'Strategy & Process': Workflow,
+  'Visual & Branding': Sparkles,
+  'Web & CMS': Globe,
+  'Motion & 3D': Film,
+  'Archive': FolderKanban,
+};
 
 export default function ProjectsPage() {
   const [q, setQ] = useState('');
@@ -154,8 +188,7 @@ export default function ProjectsPage() {
             ) : (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((p, idx) => {
-                  const isMotion = p.category === 'Motion';
-                  const Icon = isMotion ? Film : FolderKanban;
+                  const Icon = CATEGORY_ICON[p.category] ?? FolderKanban;
                   const cover = getProjectCoverImage(p);
 
                   return (

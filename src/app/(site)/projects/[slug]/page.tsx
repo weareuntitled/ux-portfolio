@@ -29,7 +29,7 @@ export default async function ProjectPage({
 
   if (!project) notFound();
 
-  if (project.category === 'Motion') {
+  if (project.category === 'Motion & 3D') {
     return <MotionProjectTemplate project={project} />;
   }
 

@@ -1,7 +1,12 @@
 /**
- * Enterprise projects — src/content/portfolio-enterprise.ts
+ * Enterprise / professional projects — src/content/portfolio-enterprise.ts
  * Phase 3 refactoring: extracted from portfolio.ts
  * Projects: kovon, automation, emission-compliance, ffp-dashboard, strategic-ai-consulting, gswin-erp-migration
+ *
+ * Taxonomy (plan §2.1 + grill 2026-06-04):
+ *   emission-compliance, ffp-dashboard → 'UX/UI Design'
+ *   kovon, automation, strategic-ai-consulting → 'Strategy & Process'
+ *   gswin-erp-migration                        → 'Product Design'
  * #schema:
  * {
  *   type: "data",
@@ -83,9 +88,9 @@ export const portfolioEnterprise: PortfolioSource = {
     slug: 'kovon',
     title: 'KoVoN COP Pilot',
     navTitle: 'KoVoN COP pilot',
-    subtitle: 'Ending Audit-Panic through Conformity of Production.',
-    oneLiner: 'Angular pilot that replaced fragmented Excel silos with a transparent compliance hub.',
-    category: 'Enterprise',
+    subtitle: 'Compliance hub that replaced fragmented Excel tracking with one auditable source of truth.',
+    oneLiner: 'Replaced fragmented Excel tracking with a centralized compliance hub, giving 200+ users full audit visibility across vehicle part documentation.',
+    category: 'Strategy & Process',
     year: '2022 - 2024',
     client: 'Automotive (Group)',
     moodImageUrl: getPreviewImage('kovon'),
@@ -110,12 +115,12 @@ export const portfolioEnterprise: PortfolioSource = {
     slug: 'automation',
     title: 'SAP Automation',
     navTitle: 'SAP automation',
-    subtitle: 'Stopping "Malicious Overwrites".',
-    oneLiner: 'Restored data integrity by blocking faulty platform overwrites via automated routines.',
-    category: 'Enterprise',
+    subtitle: 'Stop faulty overwrites in the SAP platform tree. End manual rework.',
+    oneLiner: 'Built a 37-page PDD and shipped an automated routine that stopped faulty overwrites in the OEM platform tree, saving 10 experts ~4 hours each per week.',
+    category: 'Strategy & Process',
     year: '2024',
     client: 'Automotive (Group)',
-    moodImageUrl: getPreviewImage('automation'),
+    moodImageUrl: null,
     galleryUrls: getGallery('automation'),
     roles: ['Automation Manager', 'Process Analyst'],
     problem:
@@ -144,9 +149,9 @@ export const portfolioEnterprise: PortfolioSource = {
     id: '8',
     slug: 'emission-compliance',
     title: 'Emission Dashboard',
-    subtitle: 'Scan Speed for critical breaches.',
-    oneLiner: 'High-speed reporting dashboard using visual encoding to surface breaches in cluttered data.',
-    category: 'Enterprise',
+    subtitle: 'Dashboard that flags breaches in dense compliance tables.',
+    oneLiner: 'Dashboard with visual encoding and adjustable thresholds, so experts spot breaches in dense compliance tables in seconds.',
+    category: 'UX/UI Design',
     year: '2024',
     moodImageUrl: getPreviewImage('emission-compliance'),
     galleryUrls: getGallery('emission-compliance'),
@@ -167,9 +172,9 @@ export const portfolioEnterprise: PortfolioSource = {
     id: '7',
     slug: 'ffp-dashboard',
     title: 'FFP Dashboard',
-    subtitle: 'Expert Diagnostic Workflow.',
+    subtitle: 'Diagnostic workflow restructured from symptom-first triage to root-cause analysis.',
     oneLiner: 'Reshaping diagnostics from symptom-first triage to root cause synthesis.',
-    category: 'Enterprise',
+    category: 'UX/UI Design',
     year: '2024',
     moodImageUrl: getPreviewImage('ffp-dashboard'),
     galleryUrls: getGallery('ffp-dashboard'),
@@ -194,10 +199,10 @@ export const portfolioEnterprise: PortfolioSource = {
     slug: 'strategic-ai-consulting',
     title: 'Strategic AI Advisory',
     navTitle: 'Strategic AI',
-    subtitle: 'From POC to Automated Architecture & ROI.',
+    subtitle: 'AI strategy from POC to validated architecture: 500+ processes, hybrid RAG, Power Automate ingestion.',
     oneLiner:
       'End-to-end AI strategy consulting for 500+ processes: prioritization, hybrid RAG architecture, Power Automate ingestion, ROI validation, and Copilot as the primary interface.',
-    category: 'Enterprise',
+    category: 'Strategy & Process',
     year: '2025',
     moodImageUrl: getPreviewImage('strategic-ai-consulting'),
     galleryUrls: getGallery('strategic-ai-consulting'),
@@ -231,11 +236,11 @@ export const portfolioEnterprise: PortfolioSource = {
     id: '22',
     slug: 'gswin-erp-migration',
     title: 'GSwin ERP Migration',
-    subtitle: 'Lean AI Migration.',
+    subtitle: '135 legacy craft-trade databases consolidated into one web ERP, shipped in 7 days for €200 of tokens.',
     navTitle: 'GSwin ERP',
     oneLiner:
       'A legacy Handwerks-ERP with 135 isolated databases consolidated into a custom web-based system in 7 days for €200 of AI tokens.',
-    category: 'Enterprise',
+    category: 'Product Design',
     year: '2026',
     client: 'Peters GmbH Spenglerei (Handwerksbetrieb)',
     roles: ['Solo Full-Stack Developer', 'AI Workflow Architect'],

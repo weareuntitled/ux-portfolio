@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EASE, DUR } from '@/lib/motion';
+import { TopNav } from '@/components/landing/TopNav';
 
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -113,21 +114,22 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
           (p.youtubeId
             ? `https://img.youtube.com/vi/${p.youtubeId}/mqdefault.jpg`
             : null),
-        category: 'Motion' as const,
+        category: 'Motion & 3D' as const,
         href: `/motion/${p.slug}`,
       })),
     []
   );
 
-  const { enterprise, motionProjects, branding, web, side, archive } = useMemo(() => {
-    const enterprise = navProjects.filter((p) => p.category === 'Enterprise');
-    const portfolioMotion = navProjects.filter((p) => p.category === 'Motion');
-    const motionProjects = [...portfolioMotion, ...motionPageProjects];
-    const branding = navProjects.filter((p) => p.category === 'Branding');
-    const web = navProjects.filter((p) => p.category === 'Web');
-    const side = navProjects.filter((p) => p.category === 'Side');
+  const { uxUiDesign, productDesign, strategyProcess, visualBranding, webCms, motion3d, archive } = useMemo(() => {
+    const uxUiDesign = navProjects.filter((p) => p.category === 'UX/UI Design');
+    const productDesign = navProjects.filter((p) => p.category === 'Product Design');
+    const strategyProcess = navProjects.filter((p) => p.category === 'Strategy & Process');
+    const visualBranding = navProjects.filter((p) => p.category === 'Visual & Branding');
+    const webCms = navProjects.filter((p) => p.category === 'Web & CMS');
+    const portfolioMotion3d = navProjects.filter((p) => p.category === 'Motion & 3D');
+    const motion3d = [...portfolioMotion3d, ...motionPageProjects];
     const archive = navProjects.filter((p) => p.category === 'Archive');
-    return { enterprise, motionProjects, branding, web, side, archive };
+    return { uxUiDesign, productDesign, strategyProcess, visualBranding, webCms, motion3d, archive };
   }, [navProjects, motionPageProjects]);
 
   const vItem = {
@@ -271,7 +273,7 @@ function SidebarContent({ navProjects: navProjectsProp }: { navProjects?: NavPro
         })}
 
         <>
-            <ProjectSection title="All Projects" items={[...enterprise, ...motionProjects, ...branding, ...web, ...side, ...archive]} />
+            <ProjectSection title="All Projects" items={[...uxUiDesign, ...productDesign, ...strategyProcess, ...visualBranding, ...webCms, ...motion3d, ...archive]} />
           </>
         </nav>
 
@@ -331,18 +333,7 @@ function DashboardCVImpl({
 
   return (
       <div className="min-h-screen text-foreground">
-      {/* Top Navigation — right side */}
-      <nav
-        className="fixed top-0 right-0 z-50 px-4 py-3 md:px-6 md:py-4"
-      >
-        <ul className="flex items-center gap-1 rounded-full border border-border/50 bg-background/80 px-2 py-1.5 backdrop-blur-md md:gap-1 md:border-none md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none">
-          <li><Link href="/" className="relative px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:px-3 md:text-sm">Home</Link></li>
-          <li><Link href="/projects" className="relative px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:text-primary/80 md:px-3 md:text-sm">Works</Link></li>
-          <li><Link href="/motion" className="relative px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:px-3 md:text-sm">Motion</Link></li>
-          <li><Link href="/cv" className="relative px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:px-3 md:text-sm">CV</Link></li>
-          <li><Link href="/contact" className="ml-1 inline-flex items-center rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow transition-transform hover:scale-105 md:ml-2 md:px-4 md:text-sm">Contact</Link></li>
-        </ul>
-      </nav>
+      <TopNav />
       <div className={cn("theme-container flex flex-1 flex-col", !isFullWidth && "md:container md:py-6")}>
         <div className={cn("flex flex-col overflow-hidden", !isFullWidth && "md:rounded-xl md:border md:border-white/10")}>
           <div
