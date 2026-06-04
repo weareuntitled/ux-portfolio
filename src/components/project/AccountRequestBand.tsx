@@ -219,20 +219,20 @@ export function AccountRequestBand({ variant, endpoint, className, coverUrl, pro
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: reduceMotion ? 0 : DUR.md, ease: EASE }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_300px_at_20%_30%,hsl(var(--primary)/0.18),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_300px_at_20%_30%,hsl(var(--accent)/0.25),transparent_60%)]" />
       <div className="relative grid gap-8 md:grid-cols-2 md:gap-12">
         {/* Left: AI context */}
         <div className="flex flex-col justify-center gap-4">
           <div className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
               <Sparkles className="h-4 w-4" />
             </span>
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-primary">
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-accent">
               AI Test App · Early Access
             </span>
           </div>
           <h3 className="text-2xl font-bold leading-tight tracking-tight text-background md:text-3xl">
-            Get access to <span className="text-primary">DIGGR Studio</span>
+            Get access to <span className="text-accent">DIGGR Studio</span>
           </h3>
           <p className="max-w-md text-sm leading-relaxed text-background/70 md:text-base">
             My personal tool for AI-assisted DJ-set analysis. It ingests mixes from SoundCloud and YouTube and
