@@ -355,7 +355,7 @@ function DashboardCVImpl({
               {sidebarOpen && showSidebar && <SidebarContent navProjects={navProjects} />}
             </aside>
 
-            <main className={cn("flex min-w-0 flex-col", variant !== 'project' && "pt-[56px] md:pt-[64px]")}>
+            <main className={cn("flex min-w-0 flex-col", variant !== 'project' && "pt-[56px] md:pt-[64px]", variant === 'project' && "pt-[56px] md:pt-[64px]")}>
               {/* Mobile Header */}
               <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-background/95 p-4 backdrop-blur md:hidden">
                 <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -374,11 +374,11 @@ function DashboardCVImpl({
 
               <section className="min-w-0 space-y-6 p-0">
                 {variant === 'project' && breadcrumbs?.length ? (
-                  <div className="relative z-10 flex items-center justify-between border-b border-border/40 bg-background/95 px-4 py-3 backdrop-blur-sm sm:px-0 sm:py-4">
+                  <div className="sticky top-[56px] z-30 flex items-center justify-between border-b border-border bg-background/95 px-4 py-3.5 backdrop-blur-sm sm:px-0 sm:top-[64px] sm:py-4 md:px-0">
                     <Breadcrumbs items={breadcrumbs} />
                     <Link
                       href="/projects"
-                      className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground transition-colors hover:border-foreground hover:text-foreground"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-foreground/30 bg-background px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background sm:text-xs"
                     >
                       <ArrowLeft className="h-3 w-3" />
                       Back to projects
