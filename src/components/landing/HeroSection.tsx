@@ -172,6 +172,129 @@ const OUTLINE = 60;
 const VISUAL_Y = '65%';
 
 // ---------------------------------------------------------------------------
+// HeroErrorBoundary — catches render-time throws (SVG filter parse failures,
+// framer-motion crashes, browser-specific filter/mix-blend bugs) so a single
+// broken child doesn't blank the page. Falls back to a text-only hero.
+// #schema:
+// {
+//   type: "component",
+//   module: "HeroSection.tsx"
+// }
+// ---------------------------------------------------------------------------
+
+class HeroErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  state: { hasError: boolean } = { hasError: false };
+
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo): void {
+    if (typeof console !== 'undefined') {
+      console.error('[HeroSection] Error caught by boundary:', error, info);
+    }
+  }
+
+  render(): React.ReactNode {
+    if (this.state.hasError) return <HeroFallback />;
+    return this.props.children;
+  }
+}
+
+/**
+ * Text-only hero used when the ErrorBoundary catches a throw from the
+ * decorated section. No framer-motion, no SVG filter, no JS state — just
+ * the static copy on the same bg color so the page is never blank.
+ * #schema:
+ * {
+ *   type: "component",
+ *   returns: "JSX.Element",
+ *   module: "HeroSection.tsx"
+ * }
+ */
+function HeroFallback(): React.JSX.Element {
+  return (
+    <section
+      className="relative flex min-h-screen flex-col justify-start px-6 pt-16 pb-8 text-left md:px-12 md:pt-20 md:pb-12"
+      style={{ backgroundColor: 'rgb(195, 205, 210)' }}
+    >
+      <div className="relative z-30 mx-auto w-full max-w-6xl">
+        <p className="mb-1 font-mono text-xs font-medium uppercase tracking-[0.22em] text-black">
+          Hey! I&apos;m
+        </p>
+        <h1 className="font-display text-[9vw] leading-[0.92] font-extrabold tracking-[-0.045em] text-black sm:text-[6.5vw] md:text-[5.5vw] lg:text-[4.8vw]">
+          Daniel Peters,
+        </h1>
+        <p className="mt-1.5 font-mono text-xs font-medium uppercase tracking-[0.22em] text-black">
+          livin&apos; in augsburg.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * One-shot FPS watchdog. After the intro animation settles (~3s), samples
+ * 2s of frames. If the average drops below 30fps, downgrades via
+ * `onDowngrade` so the user gets the lite path instead of a janky hero.
+ * Runs at most once per mount, cleans up its own RAF + timeout.
+ * #schema:
+ * {
+ *   type: "function",
+ *   args: "tier: HeroTier, reduceMotion: boolean, onDowngrade: () => void",
+ *   module: "HeroSection.tsx"
+ * }
+ */
+function useFpsWatchdog(
+  tier: HeroTier,
+  reduceMotion: boolean,
+  onDowngrade: () => void,
+): void {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (tier !== 'heavy') return;
+    if (reduceMotion) return;
+
+    let raf = 0;
+    let frameCount = 0;
+    let startTime = 0;
+    let measuring = true;
+
+    const startTimeout = window.setTimeout(() => {
+      startTime = performance.now();
+
+      const tick = (now: number): void => {
+        if (!measuring) return;
+        frameCount++;
+        if (now - startTime < 2000) {
+          raf = window.requestAnimationFrame(tick);
+          return;
+        }
+        const fps = (frameCount * 1000) / (now - startTime);
+        measuring = false;
+        if (fps < 30) {
+          if (typeof console !== 'undefined') {
+            console.warn(`[HeroSection] FPS ${fps.toFixed(1)} below 30, downgrading to lite`);
+          }
+          onDowngrade();
+        }
+      };
+
+      raf = window.requestAnimationFrame(tick);
+    }, 3000);
+
+    return () => {
+      measuring = false;
+      cancelAnimationFrame(raf);
+      clearTimeout(startTimeout);
+    };
+  }, [tier, reduceMotion, onDowngrade]);
+}
+
+// ---------------------------------------------------------------------------
 // HeroGooeyFilterDef — inline SVG filter primitive chain for the mobile
 // metaball merge. Hidden off-screen via inline style so it never takes
 // layout space; the filter id is referenced by CSS `filter: url(#hero-gooey)`
@@ -913,19 +1036,26 @@ type HeroTier = 'heavy' | 'lite';
 function detectHeroTier(): HeroTier {
   if (typeof window === 'undefined') return 'heavy';
 
-  const nav = navigator as Navigator & { deviceMemory?: number };
-  if (typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2) return 'lite';
-  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return 'lite';
+  try {
+    const nav = navigator as Navigator & { deviceMemory?: number };
+    if (typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2) return 'lite';
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return 'lite';
 
-  const ua = navigator.userAgent;
-  const iosMatch = ua.match(/OS (\d+)_/);
-  if (iosMatch && parseInt(iosMatch[1], 10) < 16) return 'lite';
+    const ua = navigator.userAgent;
+    const iosMatch = ua.match(/OS (\d+)_/);
+    if (iosMatch && parseInt(iosMatch[1], 10) < 16) return 'lite';
 
-  const coarse = window.matchMedia('(pointer: coarse)').matches;
-  const smallScreen = window.matchMedia('(max-width: 480px)').matches;
-  if (coarse && smallScreen) return 'lite';
+    const coarse = window.matchMedia('(pointer: coarse)').matches;
+    const smallScreen = window.matchMedia('(max-width: 480px)').matches;
+    if (coarse && smallScreen) return 'lite';
 
-  return 'heavy';
+    return 'heavy';
+  } catch (e) {
+    if (typeof console !== 'undefined') {
+      console.warn('[HeroSection] detectHeroTier failed, defaulting to heavy:', e);
+    }
+    return 'heavy';
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -940,6 +1070,11 @@ function detectHeroTier(): HeroTier {
  *   (default) and a lite fallback (no blur, no mix-blend, no satellite
  *   blobs) for devices that can't hold 60fps with the filter chain.
  *   `reduceMotion` short-circuits the intro and snaps to the final state.
+ * - Error handling: `HeroErrorBoundary` catches render-time throws (SVG
+ *   filter parse failures, framer-motion crashes) and renders a static
+ *   `HeroFallback` so the page is never blank. `useFpsWatchdog` downgrades
+ *   heavy→lite one-shot if measured FPS drops below 30 after the intro.
+ *   `detectHeroTier` is wrapped in try/catch and falls back to 'heavy'.
  * #schema:
  * {
  *   type: "component",
@@ -963,6 +1098,11 @@ export function HeroSection(): React.JSX.Element {
   useEffect(() => {
     setHeroTier(detectHeroTier());
   }, []);
+
+  // One-shot FPS watchdog: if the heavy filter chain can't hold 30fps after
+  // the intro settles, downgrade to lite so the user doesn't sit on a janky
+  // hero. No-op when already on lite, under reduce-motion, or during SSR.
+  useFpsWatchdog(heroTier, reduceMotion === true, () => setHeroTier('lite'));
 
   // Force scroll to top on mount — without this, the browser keeps the last scroll
   // position from the previous page (e.g. /projects), which makes the hero appear scrolled.
@@ -1026,7 +1166,7 @@ export function HeroSection(): React.JSX.Element {
   const flipDur = reduceMotion ? 0 : 1.2;
 
   return (
-    <>
+    <HeroErrorBoundary>
       <HeroGooeyFilterDef />
       <motion.section
       className="relative flex min-h-screen flex-col justify-start px-6 pt-16 pb-8 text-left md:px-12 md:pt-20 md:pb-12"
@@ -1182,6 +1322,6 @@ export function HeroSection(): React.JSX.Element {
         </motion.p>
       </motion.div>
     </motion.section>
-    </>
+    </HeroErrorBoundary>
   );
 }

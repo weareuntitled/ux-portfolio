@@ -12,6 +12,16 @@ import { test, expect } from '@playwright/test';
  */
 
 test('mobile hero has the ghost-bleed-gooey + chromatic structure', async ({ page }) => {
+  // Mock a low-end device so detectHeroTier() picks the lite branch.
+  // (Desktop Chrome has a fine pointer, so the pointer:coarse signal
+  // never fires — deviceMemory<=2 is the reliable trigger in CI.)
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'deviceMemory', {
+      value: 1,
+      configurable: true,
+    });
+  });
+
   await page.setViewportSize({ width: 390, height: 844 }); // iPhone 12
   await page.goto('/');
 
