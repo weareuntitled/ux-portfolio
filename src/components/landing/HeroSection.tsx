@@ -195,7 +195,7 @@ function HeroGooeyFilterDef(): React.JSX.Element {
     <svg
       aria-hidden
       focusable="false"
-      style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
+      style={{ position: 'absolute', width: 0, height: 0 }}
     >
       <filter id="hero-gooey">
         <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
@@ -406,17 +406,22 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-1/2"
-          data-hero-gooey-parent=""
           style={{
             top: CENTER_CIRCLE.top,
             width: centerSize,
             height: centerSize,
             transform: 'translate(-50%, -50%)',
-            filter: 'url(#hero-gooey)',
             opacity: centerVisible ? 1 : 0,
             transition: 'opacity 0.5s ease',
           }}
         >
+          {/* Inner wrapper: scoped gooey filter, separated from the
+              transform above to avoid compositor edge cases. */}
+          <div
+            data-hero-gooey-parent=""
+            className="absolute inset-0"
+            style={{ filter: 'url(#hero-gooey)' }}
+          >
           {/* Ghost A — primary conic ghost, prismatic shift + glitch-1 */}
           <div
             data-ghost-layer=""
@@ -482,6 +487,7 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
           />
         </div>
       </div>
+    </div>
     );
   }
 
@@ -644,10 +650,14 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
 /**
  * Lens-marquee for the center circle.
  * - Icons start in the center, slide to the sides, and fade out at the edges (horizontal linear mask).
- * - The whole lens breathes (subtle scale 1 → 1.035 → 1 over 5s).
+ * - The whole lens breathes (subtle scale 1 → 1.035 → 1 over 5s) on the lite branch.
  * - The marquee is clipped to a circle via `overflow-hidden rounded-full` so there's no
- *   ugly top/bottom crop from a radial mask.
- * - Icons are way bigger (h-72 w-72 = 288px) with prismatic text-clip and a soft blue burn halo.
+ *   ugly top/bottom crop from a radial mask (lite only).
+ * - Icons are way bigger (h-96 w-96 = 384px on heavy, h-16 w-16 on lite) with prismatic
+ *   text-clip and a soft blue burn halo.
+ * - Cycle easing: `marquee-eased` keyframe (ease-out → ease-in) makes the marquee
+ *   fast at the cycle boundaries and slow in the middle. 60s base duration
+ *   so the easing reads as motion, not stutter.
  * #schema:
  * {
  *   type: "component",
@@ -655,7 +665,6 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
  * }
  */
 function IconTicker({ stage = 0, lite = false }: { stage?: number; lite?: boolean }) {
-  const [isHovered, setIsHovered] = useState(false);
   // Only show icons AFTER circles are fully visible (stage 4, which fires 600ms after stage 3).
   // Black icons need the white interior to be visible, AND the circles need to be settled
   // so the icons merge with a stable visual context, not a moving one.
@@ -736,14 +745,12 @@ function IconTicker({ stage = 0, lite = false }: { stage?: number; lite?: boolea
         opacity: visible ? 1 : 0,
         transition: 'opacity 0.8s ease',
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="animate-marquee items-center"
+        className="animate-marquee-eased items-center"
         style={{
           gap: '56px',
-          animationDuration: isHovered ? '180s' : '90s',
+          animationDuration: '60s',
           filter:
             'drop-shadow(0 0 6px rgba(0,0,0,0.55)) ' +
             'drop-shadow(0 0 16px rgba(0,0,0,0.35)) ' +
@@ -873,12 +880,66 @@ function PrismaticWord({ word }: { word: HeroWord }) {
 // HeroSection
 // ---------------------------------------------------------------------------
 
+type HeroTier = 'heavy' | 'lite';
+
+/**
+ * Decides whether the heavy (desktop) hero version can run on this device,
+ * or if the lite fallback must kick in to stay under the GPU budget.
+ *
+ * The heavy version stacks: `contrast(110)` on the section, `mix-blend: darken`
+ * + `blur(28px)` melt layers, `blur(10-14px)` on the prismatic ring + white
+ * interior, `mix-blend: multiply` RGB ghosts, an SVG `<filter>` (feGaussianBlur
+ * + feColorMatrix) on the center circle, and a 30-cell icon marquee with
+ * 4-stack drop-shadows. That's a lot for a phone GPU.
+ *
+ * Detection layers (any match → lite):
+ * 1. `navigator.deviceMemory ≤ 2` — Chromium reports this on Android/Chrome.
+ * 2. `navigator.hardwareConcurrency ≤ 2` — last-resort low-CPU signal.
+ * 3. iOS major version < 16 — A11/A12/A13 phones ship with iOS 16 only as
+ *    a stretch; iOS 15 and below is the realistic floor for those chips and
+ *    Safari there struggles with stacked `filter` + `mix-blend-mode`.
+ * 4. Coarse pointer + viewport ≤ 480px — small phone, touch-first.
+ *
+ * Returns 'heavy' if none of those match (capable desktop, modern flagship
+ * phone, modern iPad).
+ * #schema:
+ * {
+ *   type: "function",
+ *   args: "",
+ *   returns: "HeroTier",
+ *   module: "HeroSection.tsx"
+ * }
+ */
+function detectHeroTier(): HeroTier {
+  if (typeof window === 'undefined') return 'heavy';
+
+  const nav = navigator as Navigator & { deviceMemory?: number };
+  if (typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2) return 'lite';
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return 'lite';
+
+  const ua = navigator.userAgent;
+  const iosMatch = ua.match(/OS (\d+)_/);
+  if (iosMatch && parseInt(iosMatch[1], 10) < 16) return 'lite';
+
+  const coarse = window.matchMedia('(pointer: coarse)').matches;
+  const smallScreen = window.matchMedia('(max-width: 480px)').matches;
+  if (coarse && smallScreen) return 'lite';
+
+  return 'heavy';
+}
+
+// ---------------------------------------------------------------------------
+
 /**
  * Editorial hero in the style of mattahrens.design.
  * - Section bg animates from black → white on mount.
- * - 3 dark burny circles (left/center/right) inside a contrast(48) container.
+ * - 3 dark burny circles (left/center/right) inside a contrast(110) container.
  * - Font is at top of section, not vertically centered (decision #3).
  * - Zoom lens marquee inside the center white circle.
+ * - Tiered rendering: `heroTier` decides between the full heavy version
+ *   (default) and a lite fallback (no blur, no mix-blend, no satellite
+ *   blobs) for devices that can't hold 60fps with the filter chain.
+ *   `reduceMotion` short-circuits the intro and snaps to the final state.
  * #schema:
  * {
  *   type: "component",
@@ -895,14 +956,12 @@ export function HeroSection(): React.JSX.Element {
   const [showContent, setShowContent] = useState(false);
   // 0=hidden, 1=single filled center, 2=three filled, 3=outlined, 4=icons appear
   const [circleStage, setCircleStage] = useState(0);
+  // Default 'heavy' so SSR + first client paint are identical. Detection runs
+  // in a useEffect after mount and degrades to 'lite' on low-end devices.
+  const [heroTier, setHeroTier] = useState<HeroTier>('heavy');
 
-  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 767px)');
-    setIsMobile(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
+    setHeroTier(detectHeroTier());
   }, []);
 
   // Force scroll to top on mount — without this, the browser keeps the last scroll
@@ -932,7 +991,7 @@ export function HeroSection(): React.JSX.Element {
 
   useEffect(() => {
     if (reduceMotion) {
-      setBgColor('#fff');
+      setBgColor('rgb(195, 205, 210)');
       setTextColor('#000');
       setShowContent(true);
       setCircleStage(4);
@@ -946,7 +1005,7 @@ export function HeroSection(): React.JSX.Element {
     // 1600ms — three filled circles
     // 2000ms — outlined circles (end state)
     // 2400ms — icons appear AFTER circles are done
-    const t1 = setTimeout(() => setBgColor('#fff'), 700);
+    const t1 = setTimeout(() => setBgColor('rgb(195, 205, 210)'), 700);
     const t2 = setTimeout(() => setTextColor('#000'), 900);
     const t3 = setTimeout(() => setShowContent(true), 1100);
     const t4 = setTimeout(() => setCircleStage(1), 1200);
@@ -967,7 +1026,9 @@ export function HeroSection(): React.JSX.Element {
   const flipDur = reduceMotion ? 0 : 1.2;
 
   return (
-    <motion.section
+    <>
+      <HeroGooeyFilterDef />
+      <motion.section
       className="relative flex min-h-screen flex-col justify-start px-6 pt-16 pb-8 text-left md:px-12 md:pt-20 md:pb-12"
       style={{
         backgroundColor: bgColor,
@@ -979,7 +1040,6 @@ export function HeroSection(): React.JSX.Element {
         transition: `background-color ${flipDur}s cubic-bezier(0.16, 1, 0.3, 1), color ${flipDur}s cubic-bezier(0.16, 1, 0.3, 1)`,
       }}
     >
-      <HeroGooeyFilterDef />
       {/* Intro: white circle scales up from center, then fades. Only shows during intro.
           Size is 120vmax — covers the hero without extending the body to cause scroll. */}
       {!showContent && (
@@ -989,17 +1049,17 @@ export function HeroSection(): React.JSX.Element {
         />
       )}
 
-      {/* Heavy decorative layers (burn circles + icon marquee). Mobile gets a
-          lite version (no blur, no mix-blend, no infinite animations) that
-          preserves the visual identity without exceeding Safari iOS's GPU budget. */}
+      {/* Heavy decorative layers (burn circles + icon marquee). The lite
+          branch kicks in on devices that can't hold 60fps with the filter
+          chain (see `detectHeroTier` above). */}
       <motion.div
         initial={false}
         animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 0.6, ease: EASE }}
         className="contents"
       >
-        <BurnCircles stage={circleStage} lite={isMobile} />
-        <IconTicker stage={circleStage} lite={isMobile} />
+        <BurnCircles stage={circleStage} lite={heroTier === 'lite'} />
+        <IconTicker stage={circleStage} lite={heroTier === 'lite'} />
       </motion.div>
 
       <div
@@ -1122,5 +1182,6 @@ export function HeroSection(): React.JSX.Element {
         </motion.p>
       </motion.div>
     </motion.section>
+    </>
   );
 }

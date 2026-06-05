@@ -47,6 +47,29 @@ html {
   }
 }
 
+/* Hero — Marquee with cycle easing: fast at the boundaries, slow in the
+   middle of the cycle. The per-stop animation-timing-function applies
+   *between* keyframes, so 0→50% uses ease-out (decelerates into the
+   middle) and 50→100% uses ease-in (accelerates out of it). */
+@keyframes marquee-eased {
+  0%   { transform: translateX(0);     animation-timing-function: ease-out; }
+  50%  { transform: translateX(-25%);  animation-timing-function: ease-in;  }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-eased {
+  animation: marquee-eased 60s linear infinite;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-eased {
+    animation: none !important;
+  }
+}
+
 /* Hero — Liquid-Burn gradient sweep inside the contrast(50) container. */
 @keyframes liquid-gradient {
   0%   { background-position: 0% 50%; }
