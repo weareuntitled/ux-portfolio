@@ -56,8 +56,6 @@ const caseStudyJobHunter = {
     'System architecture diagram; Telegram chat screenshots showing the /apply flow; a comparison of old vs. new time-to-apply.',
 };
 
-const TOKEN = 'eyJtb2RlIjoicmVhZF9vbmx5IiwiY3JlYXRlZF9ieV91c2VyX2lkIjoiNWRjZGUxYzQtMzNiZC00MDUwLTljN2QtZTM5ZTllYmZiZjllIn0.acKavQ.jMiw-NeJlLSYQ3qts2fMWL7DDoo';
-
 export const portfolioCreative: PortfolioSource = {
   '8020-portfolio': {
     id: '16',
