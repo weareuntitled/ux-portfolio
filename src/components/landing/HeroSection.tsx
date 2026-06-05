@@ -1013,18 +1013,22 @@ type HeroTier = 'heavy' | 'lite';
  * + `blur(28px)` melt layers, `blur(10-14px)` on the prismatic ring + white
  * interior, `mix-blend: multiply` RGB ghosts, an SVG `<filter>` (feGaussianBlur
  * + feColorMatrix) on the center circle, and a 30-cell icon marquee with
- * 4-stack drop-shadows. That's a lot for a phone GPU.
+ * 4-stack drop-shadows. The 560px center circle and 384px icons are sized
+ * for ≥1080px viewports — on smaller widths they overflow and black layers
+ * get swallowed by the contrast/blend chain, leaving only the blue/red RGB
+ * ghosts visible.
  *
- * Detection layers (any match → lite):
- * 1. `navigator.deviceMemory ≤ 2` — Chromium reports this on Android/Chrome.
- * 2. `navigator.hardwareConcurrency ≤ 2` — last-resort low-CPU signal.
- * 3. iOS major version < 16 — A11/A12/A13 phones ship with iOS 16 only as
+ * Detection layers (any match → lite, first hit wins):
+ * 1. Viewport ≤ 1079px — primary trigger. Covers phones in portrait,
+ *    phones in landscape, small tablets, and desktop browsers in
+ *    DevTools mobile emulation (where `pointer: coarse` is false).
+ * 2. `navigator.deviceMemory ≤ 2` — Chromium reports this on Android/Chrome.
+ * 3. `navigator.hardwareConcurrency ≤ 2` — last-resort low-CPU signal.
+ * 4. iOS major version < 16 — A11/A12/A13 phones ship with iOS 16 only as
  *    a stretch; iOS 15 and below is the realistic floor for those chips and
  *    Safari there struggles with stacked `filter` + `mix-blend-mode`.
- * 4. Coarse pointer + viewport ≤ 480px — small phone, touch-first.
  *
- * Returns 'heavy' if none of those match (capable desktop, modern flagship
- * phone, modern iPad).
+ * Returns 'heavy' if none match (desktop ≥1080px, capable device).
  * #schema:
  * {
  *   type: "function",
@@ -1037,6 +1041,13 @@ function detectHeroTier(): HeroTier {
   if (typeof window === 'undefined') return 'heavy';
 
   try {
+    // Primary: viewport. Anything < 1080px gets lite — the heavy version's
+    // 560px center circle and 384px icons are designed for 1400px+ and
+    // overflow badly on smaller viewports, with black layers getting
+    // swallowed by contrast(110) + mix-blend: darken.
+    const smallViewport = window.matchMedia('(max-width: 1079px)').matches;
+    if (smallViewport) return 'lite';
+
     const nav = navigator as Navigator & { deviceMemory?: number };
     if (typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2) return 'lite';
     if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return 'lite';
@@ -1044,10 +1055,6 @@ function detectHeroTier(): HeroTier {
     const ua = navigator.userAgent;
     const iosMatch = ua.match(/OS (\d+)_/);
     if (iosMatch && parseInt(iosMatch[1], 10) < 16) return 'lite';
-
-    const coarse = window.matchMedia('(pointer: coarse)').matches;
-    const smallScreen = window.matchMedia('(max-width: 480px)').matches;
-    if (coarse && smallScreen) return 'lite';
 
     return 'heavy';
   } catch (e) {
