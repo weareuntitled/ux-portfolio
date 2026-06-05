@@ -692,9 +692,32 @@ function IconTicker({ stage = 0, lite = false }: { stage?: number; lite?: boolea
         >
           {[...TICKER_ICONS, ...TICKER_ICONS].map((Icon, i) => (
             <div key={i} data-icon-cell={i} className="relative shrink-0">
+              {/* RGB red — top-left offset, no blur, no mix-blend */}
+              <div
+                data-rgb-ghost="red"
+                className="absolute inset-0"
+                style={{ transform: `translate(${RGB_DIRS.red.dx * 2}px, ${RGB_DIRS.red.dy * 2}px)` }}
+              >
+                <Icon
+                  className="h-16 w-16"
+                  style={{ color: RGB_DIRS.red.color, opacity: 0.5 }}
+                />
+              </div>
+              {/* RGB blue — bottom-right offset, no blur, no mix-blend */}
+              <div
+                data-rgb-ghost="blue"
+                className="absolute inset-0"
+                style={{ transform: `translate(${RGB_DIRS.blue.dx * 2}px, ${RGB_DIRS.blue.dy * 2}px)` }}
+              >
+                <Icon
+                  className="h-16 w-16"
+                  style={{ color: RGB_DIRS.blue.color, opacity: 0.5 }}
+                />
+              </div>
+              {/* Main icon — solid black, watermark opacity, on top of the RGB split */}
               <Icon
                 data-icon-main=""
-                className="h-16 w-16 text-black"
+                className="relative h-16 w-16 text-black"
                 style={{ opacity: 0.2 }}
               />
             </div>
