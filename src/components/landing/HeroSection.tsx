@@ -177,6 +177,48 @@ const OUTLINE = 60;
 const VISUAL_Y = '65%';
 
 // ---------------------------------------------------------------------------
+// HeroGooeyFilterDef — inline SVG filter primitive chain for the mobile
+// metaball merge. Hidden off-screen via inline style so it never takes
+// layout space; the filter id is referenced by CSS `filter: url(#hero-gooey)`
+// from a scoped parent in the mobile `lite` branch.
+// ---------------------------------------------------------------------------
+
+/**
+ * Off-screen SVG <filter> definition that produces a metaball merge:
+ * 1. `feGaussianBlur` softens the source alpha edges.
+ * 2. `feColorMatrix` with `α' = 9·α − 4` clamps low-alpha regions to 0
+ *    and saturates the interior, so adjacent blurred shapes merge into
+ *    a single hard-edged blob where their alphas sum past the threshold.
+ * #schema:
+ * {
+ *   type: "component",
+ *   module: "HeroSection.tsx"
+ * }
+ */
+function HeroGooeyFilterDef(): React.JSX.Element {
+  return (
+    <svg
+      aria-hidden
+      focusable="false"
+      style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
+    >
+      <filter id="hero-gooey">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 9 -4"
+          result="goo"
+        />
+      </filter>
+    </svg>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // BurnCircles — 3 outlined circles, white center, burny prism corners
 // ---------------------------------------------------------------------------
 
@@ -219,6 +261,7 @@ function BurnCircle({
   right,
   stage,
   splitOffset = 0,
+  lite = false,
 }: {
   size: number;
   top: string;
@@ -226,6 +269,7 @@ function BurnCircle({
   right?: string;
   stage: number;
   splitOffset?: number;
+  lite?: boolean;
 }) {
   const isSide = left !== undefined || right !== undefined;
   const isVisible = isSide ? stage >= 2 : stage >= 1;
@@ -245,6 +289,42 @@ function BurnCircle({
   const ringMask = `radial-gradient(circle, transparent ${size / 2 - OUTLINE}px, black ${size / 2 - OUTLINE + 5}px)`;
   const fullMask = 'radial-gradient(circle, black 0%, black 100%)';
   const activeMask = isOutlined ? ringMask : fullMask;
+
+  // Mobile lite: one CSS-animated ghost layer + outline + white interior.
+  // No blur, no mix-blend, no mask, no JS state machine, no framer-motion.
+  // Pure CSS @keyframes prismatic-shift on a single element.
+  if (lite) {
+    return (
+      <div
+        className="absolute"
+        style={{
+          ...positionStyle,
+          opacity: splitOpacity,
+          transform: splitTransform,
+          transition: 'opacity 0.5s ease, transform 0.7s ease',
+        }}
+      >
+        {/* One ghost layer with CSS-only prismatic sweep, no blur, no blend */}
+        <div
+          className="absolute inset-0 rounded-full animate-prismatic-shift"
+          style={{
+            background: PRISM_CONIC,
+            opacity: 0.4,
+          }}
+        />
+        {/* Outline (solid, no animation) */}
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            border: '1px solid #000',
+            background: isOutlined ? '#fff' : 'transparent',
+            opacity: isOutlined ? 1 : 0.85,
+            transition: 'opacity 0.4s ease, background 0.4s ease',
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -316,12 +396,52 @@ function BurnCircle({
   );
 }
 
-function BurnCircles({ stage }: { stage: number }) {
+function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean }) {
   const isOutlined = stage >= 3;
   const centerVisible = stage >= 1;
   const ringMask = `radial-gradient(circle, transparent ${CENTER_CIRCLE.size / 2 - OUTLINE}px, black ${CENTER_CIRCLE.size / 2 - OUTLINE + 5}px)`;
   const fullMask = 'radial-gradient(circle, black 0%, black 100%)';
   const activeMask = isOutlined ? ringMask : fullMask;
+
+  // Mobile lite: one CSS-animated ghost + outline + white interior.
+  // No satellite blobs, no melt layers, no RGB ghosts, no glass glare.
+  if (lite) {
+    const centerSize = 240;
+    return (
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute left-1/2"
+          style={{
+            top: CENTER_CIRCLE.top,
+            width: centerSize,
+            height: centerSize,
+            transform: 'translate(-50%, -50%)',
+            opacity: centerVisible ? 1 : 0,
+            transition: 'opacity 0.5s ease',
+          }}
+        >
+          {/* One ghost layer, CSS-only prismatic-shift, no blur, no blend */}
+          <div
+            className="absolute inset-0 rounded-full animate-prismatic-shift"
+            style={{
+              background: PRISM_CONIC,
+              opacity: 0.4,
+            }}
+          />
+          {/* Outline + white interior */}
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{
+              border: '1px solid #000',
+              background: isOutlined ? '#fff' : 'transparent',
+              opacity: isOutlined ? 1 : 0.85,
+              transition: 'opacity 0.4s ease, background 0.4s ease',
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pointer-events-none absolute inset-0">
@@ -492,12 +612,33 @@ function BurnCircles({ stage }: { stage: number }) {
  *   module: "HeroSection.tsx"
  * }
  */
-function IconTicker({ stage = 0 }: { stage?: number }) {
+function IconTicker({ stage = 0, lite = false }: { stage?: number; lite?: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
   // Only show icons AFTER circles are fully visible (stage 4, which fires 600ms after stage 3).
   // Black icons need the white interior to be visible, AND the circles need to be settled
   // so the icons merge with a stable visual context, not a moving one.
   const visible = stage >= 4;
+
+  // Mobile lite: a single static row of 12 small icons. No marquee, no blur,
+  // no ghost layers. Just plain SVG icons behind the text as a watermark.
+  if (lite) {
+    return (
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 z-10 flex items-center justify-center gap-3 opacity-[0.08]"
+        style={{
+          top: VISUAL_Y,
+          transform: 'translateY(-50%)',
+          opacity: visible ? 0.08 : 0,
+          transition: 'opacity 0.6s ease',
+        }}
+      >
+        {TICKER_ICONS.map((Icon, i) => (
+          <Icon key={i} className="h-6 w-6 text-black" />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -669,6 +810,15 @@ export function HeroSection(): React.JSX.Element {
   // 0=hidden, 1=single filled center, 2=three filled, 3=outlined, 4=icons appear
   const [circleStage, setCircleStage] = useState(0);
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
   // Force scroll to top on mount — without this, the browser keeps the last scroll
   // position from the previous page (e.g. /projects), which makes the hero appear scrolled.
   useLayoutEffect(() => {
@@ -743,6 +893,7 @@ export function HeroSection(): React.JSX.Element {
         transition: `background-color ${flipDur}s cubic-bezier(0.16, 1, 0.3, 1), color ${flipDur}s cubic-bezier(0.16, 1, 0.3, 1)`,
       }}
     >
+      <HeroGooeyFilterDef />
       {/* Intro: white circle scales up from center, then fades. Only shows during intro.
           Size is 120vmax — covers the hero without extending the body to cause scroll. */}
       {!showContent && (
@@ -752,15 +903,17 @@ export function HeroSection(): React.JSX.Element {
         />
       )}
 
-      {/* Content fades in after the intro. */}
+      {/* Heavy decorative layers (burn circles + icon marquee). Mobile gets a
+          lite version (no blur, no mix-blend, no infinite animations) that
+          preserves the visual identity without exceeding Safari iOS's GPU budget. */}
       <motion.div
         initial={false}
         animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 0.6, ease: EASE }}
         className="contents"
       >
-        <BurnCircles stage={circleStage} />
-        <IconTicker stage={circleStage} />
+        <BurnCircles stage={circleStage} lite={isMobile} />
+        <IconTicker stage={circleStage} lite={isMobile} />
       </motion.div>
 
       <div
