@@ -411,11 +411,13 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-1/2"
+          data-hero-gooey-parent=""
           style={{
             top: CENTER_CIRCLE.top,
             width: centerSize,
             height: centerSize,
             transform: 'translate(-50%, -50%)',
+            filter: 'url(#hero-gooey)',
             opacity: centerVisible ? 1 : 0,
             transition: 'opacity 0.5s ease',
           }}
