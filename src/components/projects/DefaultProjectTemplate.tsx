@@ -129,15 +129,14 @@ function LightboxGallery({ urls, title }: { urls: string[]; title: string }) {
   if (!urls?.length) return null;
 
   return (
-    <>
+      <>
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {urls.map((src, i) => (
           <motion.button
             key={src}
             type="button"
-            initial={reduce ? false : { opacity: 0, y: 14, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={VP}
+            initial={reduce ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.md, ease: EASE, delay: Math.min(i * STAGGER.sm, 0.3) }}
             className="group relative overflow-hidden rounded-md bg-muted text-left transition-transform duration-500 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             onClick={() => setActiveIndex(i)}
@@ -656,7 +655,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
             ) : null}
 
             {/* ── Case Study: Context, Constraints, Role, Approach (long-form) ── */}
-            {project.caseStudy && (
+            {project.caseStudy && (project.caseStudy.contextWhyMattered || project.caseStudy.constraints || project.caseStudy.myRole || project.caseStudy.approach) && (
               <div className="space-y-12 border-t border-border/40 pt-12">
                 {project.caseStudy.contextWhyMattered && (
                   <div>
@@ -884,8 +883,7 @@ export default function DefaultProjectTemplate({ project }: { project: DefaultPr
         {galleryThumbs.length > 0 && (
           <motion.section
             initial={reduce ? false : { opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VP}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.md, ease: EASE }}
             className="-mx-4 mt-16 bg-muted/20 px-4 py-14 md:-mx-8 md:px-8 md:py-16"
           >
