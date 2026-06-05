@@ -422,12 +422,33 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
             transition: 'opacity 0.5s ease',
           }}
         >
-          {/* One ghost layer, CSS-only prismatic-shift, no blur, no blend */}
+          {/* Ghost A — primary conic ghost, prismatic shift + glitch-1 */}
           <div
-            className="absolute inset-0 rounded-full animate-prismatic-shift"
+            data-ghost-layer=""
+            className="absolute inset-0 rounded-full animate-prismatic-shift animate-burn-glitch-1"
             style={{
               background: PRISM_CONIC,
-              opacity: 0.4,
+              opacity: 0.6,
+            }}
+          />
+          {/* Ghost B — offset (-3px, 4px), glitch-2, lower opacity */}
+          <div
+            data-ghost-layer=""
+            className="absolute inset-0 rounded-full animate-prismatic-shift animate-burn-glitch-2"
+            style={{
+              background: PRISM_CONIC,
+              transform: 'translate(-3px, 4px)',
+              opacity: 0.45,
+            }}
+          />
+          {/* Ghost C — offset (4px, -2px), glitch-3, lowest opacity */}
+          <div
+            data-ghost-layer=""
+            className="absolute inset-0 rounded-full animate-prismatic-shift animate-burn-glitch-3"
+            style={{
+              background: PRISM_CONIC,
+              transform: 'translate(4px, -2px)',
+              opacity: 0.3,
             }}
           />
           {/* Outline + white interior */}
