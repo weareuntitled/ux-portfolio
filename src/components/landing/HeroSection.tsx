@@ -461,6 +461,30 @@ function BurnCircles({ stage, lite = false }: { stage: number; lite?: boolean })
               transition: 'opacity 0.4s ease, background 0.4s ease',
             }}
           />
+          {/* RGB chromatic split — red TL, blue BR, light blur, no mix-blend.
+              Sits inside the white interior so the tint lands on a clean white. */}
+          <div
+            data-rgb-ghost="red"
+            className="absolute rounded-full animate-burn-glitch-1"
+            style={{
+              inset: `${OUTLINE + 8}px`,
+              background: RGB_DIRS.red.color,
+              filter: 'blur(2px)',
+              transform: `translate(${RGB_DIRS.red.dx * 1.5}px, ${RGB_DIRS.red.dy * 1.5}px)`,
+              opacity: 0.3,
+            }}
+          />
+          <div
+            data-rgb-ghost="blue"
+            className="absolute rounded-full animate-burn-glitch-2"
+            style={{
+              inset: `${OUTLINE + 8}px`,
+              background: RGB_DIRS.blue.color,
+              filter: 'blur(2px)',
+              transform: `translate(${RGB_DIRS.blue.dx * 1.5}px, ${RGB_DIRS.blue.dy * 1.5}px)`,
+              opacity: 0.55,
+            }}
+          />
         </div>
       </div>
     );
