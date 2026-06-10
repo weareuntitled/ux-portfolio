@@ -1,0 +1,140 @@
+/* ============================================================================
+   HERO — marquee eased (fast at cycle boundaries, slow in the middle)
+   ============================================================================ */
+@keyframes marquee-eased {
+  0%   { transform: translateX(0);     animation-timing-function: ease-out; }
+  50%  { transform: translateX(-25%);  animation-timing-function: ease-in;  }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-eased {
+  animation: marquee-eased 60s linear infinite;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-eased {
+    animation: none !important;
+  }
+}
+
+/* ============================================================================
+   HERO — prismatic halo sweep
+   ============================================================================ */
+@keyframes prismatic-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-prismatic-shift {
+  animation: prismatic-shift 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-prismatic-shift {
+    animation: none !important;
+  }
+}
+
+/* GPU PROMOTION — animated burn layers get their own compositor layer */
+.animate-prismatic-shift,
+.animate-burn-glitch-1,
+.animate-burn-glitch-2,
+.animate-burn-glitch-3,
+.animate-hero-intro {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-prismatic-shift,
+  .animate-burn-glitch-1,
+  .animate-burn-glitch-2,
+  .animate-burn-glitch-3 {
+    will-change: auto;
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   HERO INTRO — white circle scales up, then fades out
+   ============================================================================ */
+@keyframes hero-intro-circle {
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 1; }
+  65%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  80%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+}
+
+.animate-hero-intro {
+  animation: hero-intro-circle 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-intro {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* ============================================================================
+   BURN GLITCH — 3 independent smooth ease-in-out offset keyframes
+   ============================================================================ */
+@keyframes burn-glitch-1 {
+  0%, 100% { transform: translate(0, 0); }
+  16%      { transform: translate(1.5px, -0.8px); }
+  33%      { transform: translate(-0.8px, 1.5px); }
+  50%      { transform: translate(2px, 0); }
+  66%      { transform: translate(-1.5px, -1.5px); }
+  83%      { transform: translate(0.8px, 2px); }
+}
+
+@keyframes burn-glitch-2 {
+  0%, 100% { transform: translate(0, 0); }
+  14%      { transform: translate(-2px, 0.8px); }
+  30%      { transform: translate(1.5px, 1.5px); }
+  48%      { transform: translate(-1px, -2px); }
+  64%      { transform: translate(2px, 0); }
+  82%      { transform: translate(-1.5px, 1.5px); }
+}
+
+@keyframes burn-glitch-3 {
+  0%, 100% { transform: translate(0, 0); }
+  18%      { transform: translate(0.8px, 1.5px); }
+  36%      { transform: translate(-2px, -0.8px); }
+  54%      { transform: translate(1.5px, 2px); }
+  72%      { transform: translate(-1.5px, -0.8px); }
+  90%      { transform: translate(2px, 0.8px); }
+}
+
+.animate-burn-glitch-1 { animation: burn-glitch-1 6.5s ease-in-out infinite; }
+.animate-burn-glitch-2 { animation: burn-glitch-2 7.3s ease-in-out infinite; }
+.animate-burn-glitch-3 { animation: burn-glitch-3 8.1s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-burn-glitch-1, .animate-burn-glitch-2, .animate-burn-glitch-3 {
+    animation: none !important;
+  }
+}
+
+/* ============================================================================
+   HERO LENS — subtle breathing scale for the center lens
+   ============================================================================ */
+@keyframes lens-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+
+.animate-lens-breathe {
+  animation: lens-breathe 5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lens-breathe {
+    animation: none !important;
+  }
+}
